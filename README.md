@@ -1,6 +1,6 @@
 <div align='center'>
 <h1>Celeris Web</h1>
-<img src='docs/README.assets/logo.webp' alt='celeris-web - free and open-source front-end development framework' width='344'/>
+<img src='https://img2.imgtp.com/2024/04/19/KCFvm76R.png' alt='celeris-web - free and open-source front-end development framework' width='344'/>
 </div>
 
 ## 简介
