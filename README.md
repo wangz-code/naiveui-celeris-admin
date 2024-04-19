@@ -1,9 +1,9 @@
 <div align='center'>
-<h1>Celeris Web</h1>
-<div style="display:flex;">
-    <img src='https://img2.imgtp.com/2024/04/19/bHPnSuvL.png' alt='celeris-web - free and open-source front-end development framework' width='90%'/>
-    <img src='https://img2.imgtp.com/2024/04/19/KCFvm76R.png' alt='celeris-web - free and open-source front-end development framework' width='200'  height='200'/>
-
+    <h1>Celeris Web</h1>
+    <div>
+        <img style="border:1px #f6f6f6 solid" src='https://img2.imgtp.com/2024/04/19/bHPnSuvL.png' alt='celeris-web' width='100%'/>
+        <img src='https://img2.imgtp.com/2024/04/19/KCFvm76R.png' alt='celeris-web' width='200'  height='200'/>
+    </div>
 </div>
 
 ## 简介
