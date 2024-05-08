@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CAAppLogo: typeof import('@celeris/components')['CAAppLogo']
-    CAAppNaiveUIProvider: typeof import('@celeris/components')['CAAppNaiveUIProvider']
     CACharts: typeof import('@celeris/components')['CACharts']
     CAIcon: typeof import('@celeris/components')['CAIcon']
     NAlert: typeof import('@celeris/ca-components')['NAlert']
@@ -61,7 +60,10 @@ declare module 'vue' {
     NStep: typeof import('@celeris/ca-components')['NStep']
     NSteps: typeof import('@celeris/ca-components')['NSteps']
     NSwitch: typeof import('@celeris/ca-components')['NSwitch']
+    NTab: typeof import('@celeris/ca-components')['NTab']
     NTable: typeof import('@celeris/ca-components')['NTable']
+    NTabPane: typeof import('@celeris/ca-components')['NTabPane']
+    NTabs: typeof import('@celeris/ca-components')['NTabs']
     NText: typeof import('@celeris/ca-components')['NText']
     NTime: typeof import('@celeris/ca-components')['NTime']
     NTooltip: typeof import('@celeris/ca-components')['NTooltip']

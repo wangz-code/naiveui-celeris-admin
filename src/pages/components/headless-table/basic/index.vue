@@ -31,9 +31,13 @@ const columns = [
     footer: props => props.column.id,
   }),
 ];
+const test:ChatGPTDemoTableRow[] = []
+    for (let i = 0; i < 10; i++) {
+      test.push(chatGPTDemoTestData[0])
+    }
 const table = useVueTable({
   get data() {
-    return chatGPTDemoTestData;
+    return test;
   },
   debugAll: true,
   columns,
