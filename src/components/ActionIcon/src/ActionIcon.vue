@@ -7,14 +7,14 @@ withDefaults(
 		icon: string;
 		transparent?: boolean; // 是否设置背景透明
 		size?: number; // 按钮大小
-		component?: Component; // 图标组件
+		component?: Component | String; // 图标组件
 	}>(),
 	{
 		tooltipText: undefined,
 		icon: "i-mdi-alert",
 		transparent: false, // 是否设置背景透明
 		size: 16, // 按钮大小
-		component:undefined, // 图标组件
+		component: undefined, // 图标组件
 	}
 );
 </script>
