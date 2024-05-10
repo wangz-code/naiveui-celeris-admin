@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RoleConstants } from "@celeris/constants";
 import CurrentPermissionMode from "../CurrentPermissionMode.vue";
-import { useUserStore } from "~/store/modules/user";
+import { useUserStore } from "@/store/modules/user";
 
 const userStore = useUserStore();
 const { isBackendPermissionMode, refreshMenu } = useAppPermission();

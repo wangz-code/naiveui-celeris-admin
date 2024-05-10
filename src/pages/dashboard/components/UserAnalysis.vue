@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UserAnalysisItem from "~/pages/dashboard/components/UserAnalysisItem.vue";
+import UserAnalysisItem from "@/pages/dashboard/components/UserAnalysisItem.vue";
 </script>
 
 <template>

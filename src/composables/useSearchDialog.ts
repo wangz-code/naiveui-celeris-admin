@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { isWindows } from "~/utils";
+import { isWindows } from "@/utils";
 
 const listener = ref();
 export function useSearchDialog() {

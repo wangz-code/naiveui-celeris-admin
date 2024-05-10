@@ -2,7 +2,7 @@
  * 用于监听路由变化，改变菜单和标签页的状态。不需要监控路由，因为路由状态变化受页面渲染时间影响，会有延迟
  */
 
-import { getRawRoute, mitt } from "~/utils";
+import { getRawRoute, mitt } from "@/utils";
 import type { RouteLocationNormalized } from "vue-router";
 
 const emitter = mitt();

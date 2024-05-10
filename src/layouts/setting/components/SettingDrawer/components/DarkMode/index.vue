@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useThemeSetting } from "~/composables";
-import { SettingMenu } from "~/layouts/setting/components/SettingDrawer/components";
+import { useThemeSetting } from "@/composables";
+import { SettingMenu } from "@/layouts/setting/components/SettingDrawer/components";
 
 defineOptions({ name: "DarkMode" });
 

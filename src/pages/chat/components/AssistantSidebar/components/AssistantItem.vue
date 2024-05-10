@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Assistant } from "~/pages/chat/components/AssistantSidebar/types";
+import type { Assistant } from "@/pages/chat/components/AssistantSidebar/types";
 
 defineProps({
   assistant: {

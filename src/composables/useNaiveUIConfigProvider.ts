@@ -1,6 +1,6 @@
 import { dateZhCN, zhCN } from "naive-ui";
-import { useAppSetting, useThemeSetting } from "~/composables/setting";
-import { designNamespace, designPrefixCls } from "~/setting/designSetting";
+import { useAppSetting, useThemeSetting } from "@/composables/setting";
+import { designNamespace, designPrefixCls } from "@/setting/designSetting";
 
 // Naive UI Config Provider
 export function useNaiveUIConfigProvider() {

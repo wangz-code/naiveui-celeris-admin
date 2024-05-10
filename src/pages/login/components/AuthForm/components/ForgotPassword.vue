@@ -11,7 +11,7 @@ import {
   NInput,
   useMessage,
 } from "naive-ui";
-import type { ForgotPasswordFromType } from "~/pages/login/types";
+import type { ForgotPasswordFromType } from "@/pages/login/types";
 
 const { t } = useI18n();
 const formRef = ref<FormInst | null>(null);

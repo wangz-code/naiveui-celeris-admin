@@ -2,10 +2,10 @@
 import { NButton, NDivider } from "naive-ui";
 import { computed, onBeforeMount, ref } from "vue";
 import { RouterTransitionConstants } from "@celeris/constants";
-import SignIn from "~/pages/login/components/AuthForm/components/SignIn.vue";
-import SignUp from "~/pages/login/components/AuthForm/components/SignUp.vue";
-import ForgotPassword from "~/pages/login/components/AuthForm/components/ForgotPassword.vue";
-import type { AuthFormType } from "~/pages/login/types";
+import SignIn from "@/pages/login/components/AuthForm/components/SignIn.vue";
+import SignUp from "@/pages/login/components/AuthForm/components/SignUp.vue";
+import ForgotPassword from "@/pages/login/components/AuthForm/components/ForgotPassword.vue";
+import type { AuthFormType } from "@/pages/login/types";
 
 const props = defineProps<{
   type?: AuthFormType;
@@ -36,7 +36,7 @@ onBeforeMount(() => {
 
 <template>
   <div class="auth-form-wrap w-full ">
-    <CAAppLogo class="mb-4" display-title />
+    <AppLogo class="mb-4" display-title />
     <div class="title mb-4 text-3xl font-bold">
       {{ title }}
     </div>

@@ -1,7 +1,8 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
 import { RoleConstants } from "@celeris/constants";
-import { LAYOUT, getParentLayout } from "~/router/constant";
+import { LAYOUT, getParentLayout } from "@/router/constant";
+import { LockSquare } from "@vicons/tabler";
 
 const permission: RouteRecordRaw = {
   path: "/permission",
@@ -10,7 +11,7 @@ const permission: RouteRecordRaw = {
   redirect: "/permission/frontend/page",
   meta: {
     title: "routes.permission.permission",
-    icon: "i-mdi-security",
+    icon: LockSquare,
     orderNo: 15,
   },
 
@@ -27,7 +28,7 @@ const permission: RouteRecordRaw = {
         {
           path: "page",
           name: "FrontPageAuth",
-          component: () => import("~/pages/permission/frontend/index.vue"),
+          component: () => import("@/pages/permission/frontend/index.vue"),
           meta: {
             title: "routes.permission.pageAuth",
           },
@@ -35,7 +36,7 @@ const permission: RouteRecordRaw = {
         {
           path: "button-permission",
           name: "FrontButtonAuth",
-          component: () => import("~/pages/permission/frontend/ButtonPermission.vue"),
+          component: () => import("@/pages/permission/frontend/ButtonPermission.vue"),
           meta: {
             title: "routes.permission.buttonAuth",
           },
@@ -43,7 +44,7 @@ const permission: RouteRecordRaw = {
         {
           path: "auth-pageA",
           name: "FrontAuthPageA",
-          component: () => import("~/pages/permission/frontend/AuthPageA.vue"),
+          component: () => import("@/pages/permission/frontend/AuthPageA.vue"),
           meta: {
             title: "routes.permission.authPageA",
             allowedRoles: [RoleConstants.ADMIN],
@@ -52,7 +53,7 @@ const permission: RouteRecordRaw = {
         {
           path: "auth-pageB",
           name: "FrontAuthPageB",
-          component: () => import("~/pages/permission/frontend/AuthPageB.vue"),
+          component: () => import("@/pages/permission/frontend/AuthPageB.vue"),
           meta: {
             title: "routes.permission.authPageB",
             allowedRoles: [RoleConstants.USER],
@@ -72,7 +73,7 @@ const permission: RouteRecordRaw = {
         {
           path: "page",
           name: "BackAuthPage",
-          component: () => import("~/pages/permission/backend/index.vue"),
+          component: () => import("@/pages/permission/backend/index.vue"),
           meta: {
             title: "routes.permission.pageAuth",
           },
@@ -80,7 +81,7 @@ const permission: RouteRecordRaw = {
         {
           path: "button-permission",
           name: "BackButtonAuth",
-          component: () => import("~/pages/permission/backend/ButtonPermission.vue"),
+          component: () => import("@/pages/permission/backend/ButtonPermission.vue"),
           meta: {
             title: "routes.permission.buttonAuth",
           },

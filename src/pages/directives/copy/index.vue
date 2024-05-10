@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
+import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 defineOptions({
   name: "Copy",

@@ -1,4 +1,4 @@
-import type { Assistant } from "~/pages/chat/components/AssistantSidebar/types";
+import type { Assistant } from "@/pages/chat/components/AssistantSidebar/types";
 
 export const fakeAssistants: Assistant[] = [
   {

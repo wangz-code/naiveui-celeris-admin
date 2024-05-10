@@ -13,8 +13,8 @@ import {
   useMessage,
 } from "naive-ui";
 
-import { useUserStore } from "~/store/modules/user";
-import type { SignUpFromType } from "~/pages/login/types";
+import { useUserStore } from "@/store/modules/user";
+import type { SignUpFromType } from "@/pages/login/types";
 
 const { t } = useI18n();
 

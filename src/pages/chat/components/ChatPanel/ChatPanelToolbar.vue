@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { RendererElement, RendererNode, VNode } from "vue";
-import { renderIcon } from "@celeris/components";
-import type { ChatContextInjectionKey } from "~/pages/chat/chatContext";
-import { chatContextInjectionKey } from "~/pages/chat/chatContext";
-import ActionIcon from "~/component/ActionIcon/src/ActionIcon.vue";
+import { renderIcon } from "@/components/Iconx";
+import type { ChatContextInjectionKey } from "@/pages/chat/chatContext";
+import { chatContextInjectionKey } from "@/pages/chat/chatContext";
+import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
 
 const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
 const TrashIcon = "carbon:trash-can";

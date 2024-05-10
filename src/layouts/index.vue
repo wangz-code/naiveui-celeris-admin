@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Header from "./header/index.vue";
 import Content from "./content/index.vue";
-import SearchDialog from "~/component/SearchDialog/src/SearchDialog.vue";
-import SidebarLayout from "~/layouts/sidebar/index.vue";
+import SearchDialog from "@/components/SearchDialog/src/SearchDialog.vue";
+import SidebarLayout from "@/layouts/sidebar/index.vue";
 
 defineOptions({
   name: "Layout",

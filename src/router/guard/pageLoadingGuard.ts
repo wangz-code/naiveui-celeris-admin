@@ -1,6 +1,6 @@
 import type { Router } from "vue-router";
-import { useAppStoreWithOut } from "~/store/modules/app";
-import { useUserStoreWithOut } from "~/store/modules/user";
+import { useAppStoreWithOut } from "@/store/modules/app";
+import { useUserStoreWithOut } from "@/store/modules/user";
 
 export function createPageLoadingGuard(router: Router) {
   const userStore = useUserStoreWithOut();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { UserInfo } from "@celeris/types";
-import { ToolTipper } from "~/component/ActionIcon";
-import { useUserStore } from "~/store/modules/user";
+import { ToolTipper } from "@/components/ActionIcon";
+import { useUserStore } from "@/store/modules/user";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -30,7 +30,7 @@ function handleLogout() {
   <NPopover trigger="click" :show-arrow="false">
     <template #trigger>
       <ToolTipper :tooltip-text="t('layouts.userInfo.userInformation')">
-        <NEl tag="div" class="btn-icon rounded-3xl p-2 pr-2 justify-between h-12 w-24 bg-[var(--action-color)] hover:bg-[var(--hover-color)]">
+        <NEl tag="div" class="btn-icon rounded-3xl p-1 pr-2 justify-between w-24 bg-[var(--action-color)] hover:bg-[var(--hover-color)]">
           <div class="flex flex-row">
             <div class="flex-1 flex items-center justify-center">
               <NAvatar round :src="userInfo?.avatarUrl" />

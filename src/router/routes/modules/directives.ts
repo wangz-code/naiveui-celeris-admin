@@ -1,6 +1,8 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
-import { LAYOUT } from "~/router/constant";
+import { LAYOUT } from "@/router/constant";
+import { CopyOutline } from "@vicons/ionicons5";
+import { Backhoe, DropCircle } from "@vicons/tabler";
 
 const directive: RouteRecordRaw = {
   path: "/directive",
@@ -9,25 +11,25 @@ const directive: RouteRecordRaw = {
   redirect: "/directive/copy",
   meta: {
     title: "routes.directives.directives",
-    icon: "i-mingcute-plugin-2-line",
+    icon: Backhoe,
   },
   children: [
     {
       path: "ripple",
       name: "Ripple",
-      component: () => import("~/pages/directives/ripple/index.vue"),
+      component: () => import("@/pages/directives/ripple/index.vue"),
       meta: {
         title: "routes.directives.ripple",
-        icon: "material-symbols:ripples",
+        icon: DropCircle,
       },
     },
     {
       path: "copy",
       name: "Copy",
-      component: () => import("~/pages/directives/copy/index.vue"),
+      component: () => import("@/pages/directives/copy/index.vue"),
       meta: {
         title: "routes.directives.copy",
-        icon: "material-symbols:content-copy-outline",
+        icon: CopyOutline,
       },
     },
   ],

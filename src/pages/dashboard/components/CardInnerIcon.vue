@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, toRefs } from "vue";
-import { useThemeVars } from "@celeris/ca-components";
+import { useThemeVars } from "naive-ui";
 
 const defaultProps = withDefaults(
   defineProps<{

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { presetPrimaryColors } from "~/utils";
+import { presetPrimaryColors } from "@/utils";
 import { ColorCheckbox } from "./components";
 
 const { getThemeColor, setThemeColor } = useThemeSetting();

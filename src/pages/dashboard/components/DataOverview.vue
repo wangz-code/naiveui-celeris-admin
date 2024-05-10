@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LineSeriesOption } from "echarts";
 import type { ToolTipFormatterParams } from "../../../../types/echarts";
-import { queryDataOverview } from "~/apis/internal/dashboard";
+import { queryDataOverview } from "@/apis/internal/dashboard";
 
 function tooltipItemsHtmlString(items: ToolTipFormatterParams[]) {
   return items

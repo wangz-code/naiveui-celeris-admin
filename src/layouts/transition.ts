@@ -1,5 +1,5 @@
 import type { RouteLocationNormalizedLoaded } from "vue-router";
-import { useTransitionSetting } from "~/composables";
+import { useTransitionSetting } from "@/composables";
 
 interface Context {
   route: RouteLocationNormalizedLoaded;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useHeaderSetting } from "~/composables";
-import { ActionIcon } from "~/component/ActionIcon";
+import { useHeaderSetting } from "@/composables";
+import { ActionIcon } from "@/components/ActionIcon";
+import { Settings } from "@vicons/ionicons5";
 
 const { toggleShouldShowSettingDrawer } = useHeaderSetting();
 const { t } = useI18n();
@@ -8,7 +9,7 @@ const { t } = useI18n();
 
 <template>
   <ActionIcon
-    :tooltip-text="t('layouts.header.openSettingDrawer')" icon="i-tabler-settings"
+    :tooltip-text="t('layouts.header.openSettingDrawer')" :component="Settings"
     @click="toggleShouldShowSettingDrawer"
   />
 </template>

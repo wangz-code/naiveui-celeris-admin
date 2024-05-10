@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useThemeVars } from "@celeris/ca-components";
-import { isNil } from "~/utils";
+import { useThemeVars } from "naive-ui";
+import { isNil } from "@/utils";
 import type { ToolTipFormatterParams } from "../../../../types/echarts";
-import { DataInsightCard } from "~/component/Card";
-import CardInnerIcon from "~/pages/dashboard/components/CardInnerIcon.vue";
-import { queryUserAnalysisData } from "~/apis/internal/dashboard";
+import { DataInsightCard } from "@/components/Card";
+import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
+import { queryUserAnalysisData } from "@/apis/internal/dashboard";
 
 const props = defineProps({
   title: {
@@ -125,3 +125,4 @@ fetchData({ quota: props.quota });
 <style scoped>
 
 </style>
+@/components/Card

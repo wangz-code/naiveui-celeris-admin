@@ -1,7 +1,7 @@
 import { PageConstants } from "@celeris/constants";
-import { loadRoutesFromModules } from "~/utils";
+import { loadRoutesFromModules } from "@/utils";
 import type { RouteRecordRaw } from "vue-router";
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "~/router/routes/basic";
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@/router/routes/basic";
 
 const modules = import.meta.glob<{ default: any }>("./modules/**/*.ts", { eager: true });
 const routeModuleList: RouteRecordRaw[] = loadRoutesFromModules(modules);
@@ -21,7 +21,7 @@ export const RootRoute: RouteRecordRaw = {
 export const LoginRoute: RouteRecordRaw = {
   path: PageConstants.BASE_LOGIN,
   name: "Login",
-  component: () => import("~/pages/login/index.vue"),
+  component: () => import("@/pages/login/index.vue"),
   meta: {
     title: "Login",
   },

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { createColumnHelper, getCoreRowModel, useVueTable } from "@tanstack/vue-table";
 
-import { AppTable } from "~/component/AppTable";
-import type { ChatGPTDemoTableRow } from "~/pages/components/headless-table/basic/data";
-import { chatGPTDemoTestData } from "~/pages/components/headless-table/basic/data";
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
+import { AppTable } from "@/components/AppTable";
+import type { ChatGPTDemoTableRow } from "@/pages/components/headless-table/basic/data";
+import { chatGPTDemoTestData } from "@/pages/components/headless-table/basic/data";
+import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 defineOptions({
   name: "HeadlessTableBasic",
@@ -56,3 +56,4 @@ const table = useVueTable({
 <style scoped>
 
 </style>
+@/components/AppTable

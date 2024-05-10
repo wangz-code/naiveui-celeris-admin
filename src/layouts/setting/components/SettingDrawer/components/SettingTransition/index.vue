@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterTransitionConstants } from "@celeris/constants";
-import { SettingMenu } from "~/layouts/setting/components/SettingDrawer/components";
-import { useTransitionSetting } from "~/composables";
+import { SettingMenu } from "@/layouts/setting/components/SettingDrawer/components";
+import { useTransitionSetting } from "@/composables";
 
 const { t } = useI18n();
 const {

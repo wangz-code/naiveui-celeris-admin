@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThemeVars } from "@celeris/ca-components";
+import { useThemeVars } from "naive-ui";
 
 const themeVariables = useThemeVars();
 const { chartOption } = useChartOption((isDark: boolean) => {

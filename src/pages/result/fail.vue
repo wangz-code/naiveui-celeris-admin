@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PageConstants } from "@celeris/constants";
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
+import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 const router = useRouter();
 const { t } = useI18n();

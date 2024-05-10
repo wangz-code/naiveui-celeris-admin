@@ -28,7 +28,7 @@ export async function createApplicationViteConfig(command: "build" | "serve", mo
     resolve: {
       alias: {
         "vue-i18n": "vue-i18n/dist/vue-i18n.esm-bundler.js",
-        "~/": `${pathResolve("src")}/`,
+        "@/": `${pathResolve("src")}/`,
       },
     },
     server: {
@@ -54,7 +54,7 @@ export async function createApplicationViteConfig(command: "build" | "serve", mo
           manualChunks: {
             vue: ["vue", "pinia", "vue-router"],
             echarts: ["echarts", "vue-echarts"],
-            celerisComponents: ["@celeris/components", "@celeris/ca-components"],
+            celerisComponents: ["@/components/Iconx", "naive-ui"],
           },
         },
       },

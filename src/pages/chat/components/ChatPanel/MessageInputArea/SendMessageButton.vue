@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ActionIcon from "~/component/ActionIcon/src/ActionIcon.vue";
+import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
 </script>
 
 <template>

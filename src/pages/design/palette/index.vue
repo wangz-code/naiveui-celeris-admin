@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { presetPrimaryColors } from "~/utils";
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
-import ColorPalette from "~/pages/design/palette/components/ColorPalette.vue";
+import { presetPrimaryColors } from "@/utils";
+import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
+import ColorPalette from "@/pages/design/palette/components/ColorPalette.vue";
 
 defineOptions({
   name: "PalettePage",

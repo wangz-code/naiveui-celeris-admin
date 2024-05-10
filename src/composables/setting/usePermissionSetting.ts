@@ -1,12 +1,12 @@
 import type { RoleConstants } from "@celeris/constants";
 import { PermissionModeConstants } from "@celeris/constants";
-import { intersection, isArray } from "~/utils";
+import { intersection, isArray } from "@/utils";
 import type { RouteRecordRaw } from "vue-router";
-import { resetRouter, router } from "~/router";
-import { DEFAULT_PROJECT_SETTING } from "~/setting/projectSetting";
-import { useAppStoreWithOut } from "~/store/modules/app";
-import { usePermissionStoreWithOut } from "~/store/modules/permission";
-import { useUserStoreWithOut } from "~/store/modules/user";
+import { resetRouter, router } from "@/router";
+import { DEFAULT_PROJECT_SETTING } from "@/setting/projectSetting";
+import { useAppStoreWithOut } from "@/store/modules/app";
+import { usePermissionStoreWithOut } from "@/store/modules/permission";
+import { useUserStoreWithOut } from "@/store/modules/user";
 
 export function useAppPermission() {
   const userStore = useUserStoreWithOut();

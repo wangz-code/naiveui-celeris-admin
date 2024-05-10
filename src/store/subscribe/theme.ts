@@ -4,11 +4,11 @@ import {
   generateColorPalettes,
   isColor,
   setCssVariable,
-} from "~/utils";
+} from "@/utils";
 import { effectScope, onScopeDispose, watch } from "vue";
 import type { GlobalThemeOverrides } from "naive-ui";
 import { kebabCase } from "lodash-es";
-import { useDesignStore } from "~/store/modules/design";
+import { useDesignStore } from "@/store/modules/design";
 
 /**
  * 订阅NaiveUI自定义主题的变化

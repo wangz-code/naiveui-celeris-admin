@@ -3,8 +3,8 @@ import { isGreaterOrEqual2xl, isSmallerOrEqualXl } from "@celeris/hooks";
 import ChatHistorySidebar from "./ChatHistorySidebar/index.vue";
 import ChatPanel from "./ChatPanel/index.vue";
 import AssistantSidebar from "./AssistantSidebar/index.vue";
-import { chatContextInjectionKey } from "~/pages/chat/chatContext";
-import { defaultAssistant } from "~/pages/chat/data";
+import { chatContextInjectionKey } from "@/pages/chat/chatContext";
+import { defaultAssistant } from "@/pages/chat/data";
 
 provide(chatContextInjectionKey, {
   selectedAssistantRef: ref(defaultAssistant),

@@ -1,8 +1,9 @@
 <script setup>
 import { useI18n } from "vue-i18n";
-import { isNil } from "~/utils";
-import { renderIcon } from "@celeris/components";
-import { getCurrentParent } from "~/router/menus";
+import { isNil } from "@/utils";
+import { renderIcon } from "@/components/Iconx";
+import { getCurrentParent } from "@/router/menus";
+import { HomeOutline } from "@vicons/ionicons5";
 
 defineOptions({
   name: "LayoutBreadcrumb",
@@ -51,19 +52,19 @@ function selectDropdown(key) {
 <template>
   <NBreadcrumb class="breadcrumb">
     <NBreadcrumbItem @click="navigateTo({ path: '/' })">
-      <CAIcon icon="tabler:home" :size="16" />
+      <Iconx :component="HomeOutline" :size="16" />
     </NBreadcrumbItem>
     <TransitionGroup name="breadcrumbAnimation">
       <template v-for="breadcrumb in breadcrumbs" :key="breadcrumb.path">
         <NBreadcrumbItem>
           <NDropdown v-if="breadcrumb.children" :options="breadcrumb.options" @select="selectDropdown">
             <span>
-              <CAIcon v-if="breadcrumb.icon" :icon="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-4px text-16px" />
+              <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-4px text-16px" />
               <span>{{ localize(breadcrumb.name) }}</span>
             </span>
           </NDropdown>
           <template v-else>
-            <CAIcon v-if="breadcrumb.icon" :icon="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-2" />
+            <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-2" />
             <span>{{ localize(breadcrumb.name) }}</span>
           </template>
         </NBreadcrumbItem>

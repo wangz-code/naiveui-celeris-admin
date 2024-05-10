@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
+import { SearchOutline } from "@vicons/ionicons5";
+import { SearchOutline as SearchOutlineSvg, SafeIcon } from "@/components/Iconx/svgs";
 
 defineOptions({
 	name: "Chat",
@@ -10,6 +11,9 @@ defineOptions({
 	<PageWrapper>
 		<n-card title="卡片"> 卡片内容 </n-card>
 		<n-card title="按钮组">
+			<!-- <Iconx size="30" :component="SafeIcon" />
+			<Iconx size="60" :component="SearchOutlineSvg" />
+			<Iconx size="60" :component="SearchOutline" /> -->
 			<n-space>
 				<n-button>Default</n-button>
 				<n-button type="tertiary"> Tertiary </n-button>
@@ -23,5 +27,4 @@ defineOptions({
 		</n-card>
 	</PageWrapper>
 </template>
-
 <style scoped></style>

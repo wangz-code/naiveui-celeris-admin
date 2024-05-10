@@ -7,10 +7,10 @@ import {
   isHttpUrl,
   loadMenusFromModules,
   transformMenuModule,
-} from "~/utils";
+} from "@/utils";
 import type { RouteRecordNormalized } from "vue-router";
-import { router } from "~/router";
-import { usePermissionStore } from "~/store/modules/permission";
+import { router } from "@/router";
+import { usePermissionStore } from "@/store/modules/permission";
 
 const { isBackendPermissionMode, isRolePermissionMode, isRouteMappingPermissionMode } = useAppPermission();
 

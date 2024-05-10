@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { isWhiteColor } from "~/utils";
+import { isWhiteColor } from "@/utils";
 
 defineOptions({
   name: "ColorCheckbox",

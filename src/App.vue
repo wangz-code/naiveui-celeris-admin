@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useNaiveUIConfigProvider } from "~/composables";
-import { subscribeStore } from "~/store/subscribe";
+import { useNaiveUIConfigProvider } from "@/composables";
+import { subscribeStore } from "@/store/subscribe";
 
 /**
  * Subscribe to the store.

@@ -1,6 +1,8 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
-import { LAYOUT } from "~/router/constant";
+import { LAYOUT } from "@/router/constant";
+import { CheckupList } from "@vicons/tabler";
+import { CheckmarkCircleOutline, CloseCircleOutline } from "@vicons/ionicons5";
 
 const result: RouteRecordRaw = {
   path: "/result",
@@ -9,25 +11,25 @@ const result: RouteRecordRaw = {
   redirect: "/result/success",
   meta: {
     title: "routes.result.result",
-    icon: "i-mdi-check-circle",
+    icon: CheckupList,
   },
   children: [
     {
       path: "success",
       name: "ResultSuccess",
-      component: () => import("~/pages/result/success.vue"),
+      component: () => import("@/pages/result/success.vue"),
       meta: {
         title: "routes.result.success",
-        icon: "i-mdi-check-circle",
+        icon: CheckmarkCircleOutline,
       },
     },
     {
       path: "fail",
       name: "ResultFail",
-      component: () => import("~/pages/result/fail.vue"),
+      component: () => import("@/pages/result/fail.vue"),
       meta: {
         title: "routes.result.fail",
-        icon: "i-mdi-close-circle",
+        icon: CloseCircleOutline
       },
     },
   ],

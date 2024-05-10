@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { HttpStatusConstants, PageConstants } from "@celeris/constants";
 import { checkStatus } from "@celeris/request";
-import { getErrorMessage } from "~/utils";
+import { getErrorMessage } from "@/utils";
 
 const props = withDefaults(defineProps<exceptionProps>(), {
   status: HttpStatusConstants.NotFound,

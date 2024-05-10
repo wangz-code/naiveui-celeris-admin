@@ -1,9 +1,9 @@
 import type { RouteRecordRaw, Router } from "vue-router";
 import { PageConstants } from "@celeris/constants";
-import { RootRoute } from "~/router/routes";
-import { PAGE_NOT_FOUND_ROUTE } from "~/router/routes/basic";
-import { usePermissionStoreWithOut } from "~/store/modules/permission";
-import { useUserStoreWithOut } from "~/store/modules/user";
+import { RootRoute } from "@/router/routes";
+import { PAGE_NOT_FOUND_ROUTE } from "@/router/routes/basic";
+import { usePermissionStoreWithOut } from "@/store/modules/permission";
+import { useUserStoreWithOut } from "@/store/modules/user";
 
 const LOGIN_PATH = PageConstants.BASE_LOGIN;
 const ROOT_PATH = RootRoute.path;

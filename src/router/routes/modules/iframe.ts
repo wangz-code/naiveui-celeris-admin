@@ -1,7 +1,10 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
 import { CELERIS_WEB_GITHUB_URL, VITE_DOCS_CN_URL, VITE_DOCS_URL } from "@celeris/constants";
-import { IFRAME, LAYOUT } from "~/router/constant";
+import { IFRAME, LAYOUT } from "@/router/constant";
+import { ViteSvg } from "@/components/Iconx/svgs";
+import { Link } from "@vicons/ionicons5";
+import { BrandGithub } from "@vicons/tabler";
 
 const iframe: RouteRecordRaw = {
   path: "/frame",
@@ -10,7 +13,7 @@ const iframe: RouteRecordRaw = {
   redirect: "/frame/github",
   meta: {
     title: "routes.iframe.iframe",
-    icon: "line-md:external-link",
+    icon: Link,
   },
   children: [
     // 新添加的Vite链接
@@ -20,7 +23,7 @@ const iframe: RouteRecordRaw = {
       component: IFRAME,
       meta: {
         title: "routes.iframe.viteInternal",
-        icon: "i-vscode-icons:file-type-vite",
+        icon: ViteSvg,
         iframeLink: VITE_DOCS_CN_URL, // 内部链接
       },
     },
@@ -30,7 +33,7 @@ const iframe: RouteRecordRaw = {
       component: IFRAME,
       meta: {
         title: "routes.iframe.ViteExternal",
-        icon: "i-vscode-icons:file-type-vite",
+        icon: ViteSvg,
         externalLink: VITE_DOCS_URL, // 外部链接
       },
     },
@@ -40,7 +43,7 @@ const iframe: RouteRecordRaw = {
       component: IFRAME,
       meta: {
         title: "routes.iframe.githubInternal",
-        icon: "line-md:github-loop",
+        icon: BrandGithub,
         iframeLink: CELERIS_WEB_GITHUB_URL,
       },
     },
@@ -50,7 +53,7 @@ const iframe: RouteRecordRaw = {
       component: IFRAME,
       meta: {
         title: "routes.iframe.GitHubExternal",
-        icon: "line-md:github-loop",
+        icon: BrandGithub,
         externalLink: CELERIS_WEB_GITHUB_URL,
       },
     },

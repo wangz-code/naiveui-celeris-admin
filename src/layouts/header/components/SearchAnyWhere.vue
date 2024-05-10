@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Search } from "@vicons/ionicons5";
 import { NText } from "naive-ui";
 
 const { commandIcon, open } = useSearchDialog();
@@ -7,8 +8,8 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <NEl class="flex items-center rounded-2xl h-8 outline-none border-none search-btn" @click="open">
-    <CAIcon name="tabler:search" :size="16" />
+  <NEl class="flex items-center rounded-2xl outline-none border-none rounded-lg h-full search-btn" @click="open">
+    <Iconx :component="Search" :size="16" />
     <span>{{ t('searchDialog.searchPlaceholder') }}</span>
     <NText code class="search-command">
       <span :class="{ win: commandIcon === 'CTRL' }">{{ commandIcon }}</span>
@@ -22,7 +23,7 @@ const { t } = useI18n();
   background-color: var(--action-color);
   gap: 10px;
   cursor: pointer;
-  padding: 4px 5px 4px 10px;
+  padding: 0px 5px 0px 10px;
 }
 .search-btn .search-command span {
   line-height: 0;

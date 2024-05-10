@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import DataCard from "~/component/Card/src/DataCard.vue";
-import CardInnerIcon from "~/pages/dashboard/components/CardInnerIcon.vue";
+import DataCard from "@/components/Card/src/DataCard.vue";
+import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
 </script>
 
 <template>

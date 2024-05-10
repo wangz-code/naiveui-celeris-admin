@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Assistant } from "~/pages/chat/components/AssistantSidebar/types";
-import AssistantItem from "~/pages/chat/components/AssistantSidebar/components/AssistantItem.vue";
-import { type ChatContextInjectionKey, chatContextInjectionKey } from "~/pages/chat/chatContext";
-import { defaultAssistant, fakeAssistants } from "~/pages/chat/data";
+import type { Assistant } from "@/pages/chat/components/AssistantSidebar/types";
+import AssistantItem from "@/pages/chat/components/AssistantSidebar/components/AssistantItem.vue";
+import { type ChatContextInjectionKey, chatContextInjectionKey } from "@/pages/chat/chatContext";
+import { defaultAssistant, fakeAssistants } from "@/pages/chat/data";
 
 const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
 function handleSelectedRole(assistant: Assistant) {

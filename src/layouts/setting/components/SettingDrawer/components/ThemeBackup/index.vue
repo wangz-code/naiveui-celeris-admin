@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDesignStore } from "~/store/modules/design";
+import { useDesignStore } from "@/store/modules/design";
 
 defineOptions({
   name: "ThemeBackup",

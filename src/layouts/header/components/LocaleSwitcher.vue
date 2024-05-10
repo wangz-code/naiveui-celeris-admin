@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { LocalesEngine, languagesNameList, useI18n } from "@celeris/locale";
-import { ActionIcon } from "~/component/ActionIcon";
+import { ActionIcon } from "@/components/ActionIcon";
 
-import { useAppSetting } from "~/composables";
+import { useAppSetting } from "@/composables";
+import { Language } from "@vicons/ionicons5";
 
 const { getLocale, setProjectSetting } = useAppSetting();
 const { locale, availableLocales, t } = useI18n();
@@ -22,7 +23,7 @@ function handleSelect(key: string) {
 
 <template>
   <NDropdown :options="options" trigger="click" :value="getLocale" @select="handleSelect">
-    <ActionIcon :tooltip-text="t('layouts.header.switchLocale')" icon="i-tabler-language" />
+    <ActionIcon :tooltip-text="t('layouts.header.switchLocale')" :component="Language" />
   </NDropdown>
 </template>
 

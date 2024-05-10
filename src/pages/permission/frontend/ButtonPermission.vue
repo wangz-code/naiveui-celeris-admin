@@ -2,8 +2,8 @@
 import { RoleConstants } from "@celeris/constants";
 
 import CurrentPermissionMode from "../CurrentPermissionMode.vue";
-import Authority from "~/component/Authority/src/Authority.vue";
-import { useUserStore } from "~/store/modules/user";
+import Authority from "@/components/Authority/src/Authority.vue";
+import { useUserStore } from "@/store/modules/user";
 
 const { changeRole, hasPermission } = useAppPermission();
 const { t } = useI18n();

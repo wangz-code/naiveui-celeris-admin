@@ -1,10 +1,10 @@
 import type { Router } from "vue-router";
 import { PageConstants } from "@celeris/constants";
-import { removeRouteChangeListener } from "~/router/mitt/routeChange";
-import { useAppStore } from "~/store/modules/app";
-import { usePermissionStore } from "~/store/modules/permission";
-import { useUserStore } from "~/store/modules/user";
-import { useTabsStore } from "~/store/modules/tabs";
+import { removeRouteChangeListener } from "@/router/mitt/routeChange";
+import { useAppStore } from "@/store/modules/app";
+import { usePermissionStore } from "@/store/modules/permission";
+import { useUserStore } from "@/store/modules/user";
+import { useTabsStore } from "@/store/modules/tabs";
 
 export function createStateGuard(router: Router) {
   router.afterEach((to) => {

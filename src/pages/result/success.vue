@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PageConstants } from "@celeris/constants";
-import { formatToDateTime } from "~/utils";
-import PageWrapper from "~/component/PageWrapper/src/PageWrapper.vue";
+import { formatToDateTime } from "@/utils";
+import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 const router = useRouter();
 const { t } = useI18n();

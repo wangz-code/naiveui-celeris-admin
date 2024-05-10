@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useHeaderSetting } from "~/composables";
-import { DarkMode, SettingTransition, ThemeBackup, ThemeColor } from "~/layouts/setting/components/SettingDrawer/components";
+import { useHeaderSetting } from "@/composables";
+import { DarkMode, SettingTransition, ThemeBackup, ThemeColor } from "@/layouts/setting/components/SettingDrawer/components";
 
 defineOptions({
   name: "SettingDrawer",

@@ -5,8 +5,8 @@
  *
  */
 import type { GlobEnvConfig } from "@celeris/types";
-import type { Encryption } from "~/utils";
-import { EncryptionFactory, createStorageName } from "~/utils";
+import type { Encryption } from "@/utils";
+import { EncryptionFactory, createStorageName } from "@/utils";
 import type { Pinia } from "pinia";
 import destr from "destr";
 import { createPersistedState } from "pinia-plugin-persistedstate";
@@ -15,7 +15,7 @@ import {
   SHOULD_ENABLE_STORAGE_ENCRYPTION,
   STORAGE_CIPHER_IV,
   STORAGE_CIPHER_KEY,
-} from "~/setting/encryptionSetting";
+} from "@/setting/encryptionSetting";
 
 const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({ key: STORAGE_CIPHER_KEY, iv: STORAGE_CIPHER_IV });
 

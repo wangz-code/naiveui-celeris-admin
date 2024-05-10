@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
-import { LAYOUT } from "~/router/constant";
+import { LAYOUT } from "@/router/constant";
+import { CircleSquare } from "@vicons/tabler";
 
 const profile: RouteRecordRaw = {
   path: "/profile",
@@ -8,7 +9,7 @@ const profile: RouteRecordRaw = {
   redirect: "/profile/index",
   meta: {
     title: "routes.profile.profile",
-    icon: "tabler:user-square-rounded",
+    icon: CircleSquare,
     orderNumber: -9000,
     shouldHideSubMenuInMenu: true,
     shouldHideInMenu: true,
@@ -17,10 +18,10 @@ const profile: RouteRecordRaw = {
     {
       path: "index",
       name: "Profile",
-      component: () => import("~/pages/profile/index.vue"),
+      component: () => import("@/pages/profile/index.vue"),
       meta: {
         title: "routes.profile.profile",
-        icon: "tabler:user-square-rounded",
+        icon: CircleSquare,
         shouldHideInMenu: true,
       },
     },

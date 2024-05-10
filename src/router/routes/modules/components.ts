@@ -1,6 +1,7 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
-import { LAYOUT } from "~/router/constant";
+import { LAYOUT } from "@/router/constant";
+import { Components, Table } from "@vicons/tabler";
 
 const components: RouteRecordRaw = {
   path: "/components",
@@ -9,7 +10,7 @@ const components: RouteRecordRaw = {
   redirect: "/components/headlessTable/basic",
   meta: {
     title: "routes.components.components",
-    icon: "material-symbols:view-comfy-alt-outline-rounded",
+    icon: Components,
     shouldHideSubMenuInMenu: false,
   },
   children: [
@@ -20,14 +21,14 @@ const components: RouteRecordRaw = {
       redirect: "/components/headlessTable/basic",
       meta: {
         title: "routes.components.headlessTable",
-        icon: "i-mdi-table",
+        icon: Table,
         shouldHideInMenu: false,
       },
       children: [
         {
           path: "basic",
           name: "headlessTableBasic",
-          component: () => import("~/pages/components/headless-table/basic/index.vue"),
+          component: () => import("@/pages/components/headless-table/basic/index.vue"),
           meta: {
             title: "routes.components.headlessTableBasic",
             shouldHideInMenu: false,
@@ -36,7 +37,7 @@ const components: RouteRecordRaw = {
         {
           path: "pagination",
           name: "headlessTablePagination",
-          component: () => import("~/pages/components/headless-table/pagination/index.vue"),
+          component: () => import("@/pages/components/headless-table/pagination/index.vue"),
           meta: {
             title: "routes.components.headlessTablePagination",
             shouldHideInMenu: false,
