@@ -20,9 +20,6 @@ importers:
       '@celeris/request':
         specifier: ^0.0.2
         version: 0.0.2(async-validator@4.2.5)(nprogress@0.2.0)(typescript@5.4.5)
-      '@celeris/styles':
-        specifier: ^0.0.2
-        version: 0.0.2(unocss@0.60.0(postcss@8.4.38)(rollup@4.14.3)(vite@5.2.9(@types/node@20.12.11)(terser@5.30.3)))
       '@formily/core':
         specifier: ^2.3.1
         version: 2.3.1
@@ -47,9 +44,6 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.16.0
         version: 8.16.0(vue@3.4.27(typescript@5.4.5))
-      '@vicons/ionicons5':
-        specifier: ^0.12.0
-        version: 0.12.0
       '@vue/shared':
         specifier: ^3.4.23
         version: 3.4.23
@@ -120,6 +114,9 @@ importers:
       '@celeris/types':
         specifier: ^0.0.2
         version: 0.0.2
+      '@vicons/ionicons5':
+        specifier: ^0.12.0
+        version: 0.12.0
       '@vicons/tabler':
         specifier: ^0.12.0
         version: 0.12.0
@@ -886,11 +883,6 @@ packages:
   '@celeris/request@0.0.2':
     resolution: {integrity: sha512-5rOqNPvRfNw2iqpbCR2e0uwyJEYeZo3C4IYecYYIbDEpLA42QM1LaXbebXMu0LHS5/kz1O509lxLGZSF96OBYQ==}
 
-  '@celeris/styles@0.0.2':
-    resolution: {integrity: sha512-De1mC555B0stKhjCqI2KedOQc8NN48SX3DZQCqd1FeY2psoa3UVOXjDg832LIfyUDdNFavoudewE4x88/HPF1Q==}
-    peerDependencies:
-      unocss: ^0.51.13
-
   '@celeris/types@0.0.2':
     resolution: {integrity: sha512-Ak5GXVYUIc3rvvDLVkJsiInAkrTuDbbI6Tr7lnRzkmBr0JCavGmOr0JtqWQg2dD7qM50oNeKiBe0qOhV+D+LDw==}
 
@@ -1151,9 +1143,6 @@ packages:
   '@kirklin/palette@0.1.1':
     resolution: {integrity: sha512-0Anm4y7CFwkOS/vZEUjmMa1Rmxu/YfKEKXUZbw1lqN0KCN2YoJ4mZs7yJ+6t7UGCiW/Mk7izXEZ6tt7m5VFDiw==}
     engines: {node: '>=16'}
-
-  '@kirklin/reset-css@0.0.3':
-    resolution: {integrity: sha512-EUfxCc0U8iIn4hwhtsOha6uYKul839pyol4Yt5FJtLT8BH/F9MLMkik6KkKHhvInk8nVu4flSsFBGn/OZuu74g==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4703,16 +4692,6 @@ snapshots:
       - typescript
       - universal-cookie
 
-  '@celeris/styles@0.0.2(unocss@0.60.0(postcss@8.4.38)(rollup@4.14.3)(vite@5.2.9(@types/node@20.12.11)(terser@5.30.3)))':
-    dependencies:
-      '@kirklin/reset-css': 0.0.3
-      animate.css: 4.1.1
-      unocss: 0.60.0(postcss@8.4.38)(rollup@4.14.3)(vite@5.2.9(@types/node@20.12.11)(terser@5.30.3))
-      unocss-preset-chinese: 0.3.2(unocss@0.60.0(postcss@8.4.38)(rollup@4.14.3)(vite@5.2.9(@types/node@20.12.11)(terser@5.30.3)))
-      unocss-preset-ease: 0.0.3(unocss@0.60.0(postcss@8.4.38)(rollup@4.14.3)(vite@5.2.9(@types/node@20.12.11)(terser@5.30.3)))
-    transitivePeerDependencies:
-      - '@unocss/nuxt'
-
   '@celeris/types@0.0.2':
     dependencies:
       '@celeris/constants': 0.0.2
@@ -4928,8 +4907,6 @@ snapshots:
   '@kirklin/palette@0.1.1':
     dependencies:
       colord: 2.9.3
-
-  '@kirklin/reset-css@0.0.3': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
