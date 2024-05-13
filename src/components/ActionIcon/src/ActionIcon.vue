@@ -11,7 +11,7 @@ withDefaults(
 	}>(),
 	{
 		tooltipText: undefined,
-		icon: "i-mdi-alert",
+		icon: "",
 		transparent: false, // 是否设置背景透明
 		size: 16, // 按钮大小
 		component: undefined, // 图标组件

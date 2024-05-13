@@ -1,15 +1,16 @@
 // @unocss-include
 import type { MenuModule } from "@celeris/types";
+import { Dashboard } from "@vicons/tabler";
 
 const dashboard: MenuModule = {
   orderNumber: 1,
   menu: {
     path: "/dashboard",
     name: "Dashboard",
-    icon: "i-mdi-monitor-dashboard",
+    icon: Dashboard,
     meta: {
       title: "routes.dashboard.dashboard",
-      icon: "i-mdi-monitor-dashboard",
+      icon: Dashboard,
     },
   },
 };

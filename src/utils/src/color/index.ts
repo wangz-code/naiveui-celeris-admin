@@ -20,7 +20,6 @@ const presetPrimaryColors: Record<string, string> = {
   gray: "#86909c",
   grey: "#86909c",
   black: "#000000",
-  white: "#ffffff",
 };
 
 const presetPalettes: PalettesProps = {};

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useThemeSetting } from "@/composables";
 import { SettingMenu } from "@/layouts/setting/components/SettingDrawer/components";
+import { Checkmark, Moon, Sunny } from "@vicons/ionicons5";
 
 defineOptions({ name: "DarkMode" });
 
@@ -16,20 +17,17 @@ const { t } = useI18n();
     <SettingMenu :label="t('layouts.header.darkMode')">
       <NSwitch :value="getDarkMode" @update:value="setDarkMode">
         <template #checked-icon>
-          <span class="i-line-md-moon-rising-twotone-alt-loop" />
+          <Iconx :component="Moon"></Iconx>
         </template>
         <template #unchecked-icon>
-          <span class="i-line-md-moon-to-sunny-outline-loop-transition" />
+          <Iconx :component="Sunny"></Iconx>
         </template>
       </NSwitch>
     </SettingMenu>
     <SettingMenu :label="t('layouts.header.followSystem')">
       <NSwitch :value="getFollowSystemTheme" @update:value="setFollowSystemTheme">
         <template #checked-icon>
-          <span class="i-material-symbols:brightness-auto-outline-rounded" />
-        </template>
-        <template #unchecked-icon>
-          <span class="i-material-symbols:brightness-empty-outline-rounded" />
+          <Iconx :component="Checkmark"></Iconx>
         </template>
       </NSwitch>
     </SettingMenu>
