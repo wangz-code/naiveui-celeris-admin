@@ -6,9 +6,9 @@
 </div>
 
 ## 简介
-naiveui-celeris-admin 是抽取celeris样式 & 一丢丢改动
+naiveui-celeris-admin 是抽取celeris样式 & 一丢丢改动 拿来就用
 
-## 特点 {...celeris}
+## 特点 {...celeris } https://github.com/kirklin/celeris-web
 改动
 - unplugin-auto-import 自动导入api
 - unplugin-vue-components 自动导入components
