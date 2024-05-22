@@ -8,6 +8,8 @@ import { CanvasRenderer } from "echarts/renderers";
 import { LineChart } from "echarts/charts";
 import { TooltipComponent, GridComponent, GraphicComponent } from "echarts/components";
 import { BrandMessenger, ThumbUp, UserCircle, Copy } from "@vicons/tabler";
+import { responseMock } from "../mockResp";
+
 use([CanvasRenderer, TooltipComponent, GridComponent, GraphicComponent, LineChart]);
 function tooltipItemsHtmlString(items: ToolTipFormatterParams[]) {
 	return items
@@ -203,7 +205,7 @@ const { chartOption } = useChartOption((isDark: boolean) => {
 async function fetchData() {
 	setLoading(true);
 	try {
-		const data = await queryDataOverview();
+		const { data } = await responseMock["data-overview"];
 		xAxis.value = data.xAxis;
 		data.data.forEach((el) => {
 			if (el.name === "用户数") {

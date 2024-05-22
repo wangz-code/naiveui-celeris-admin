@@ -6,6 +6,7 @@ import { DataInsightCard } from "@/components/Card";
 import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
 import { queryUserAnalysisData } from "@/apis/internal/dashboard";
 import VChart from "vue-echarts";
+import { responseMock } from "../mockResp";
 
 const props = defineProps({
 	title: {
@@ -85,7 +86,7 @@ const { chartOption } = useChartOption(() => {
 });
 async function fetchData(params: { quota: string }) {
 	try {
-		const data = await queryUserAnalysisData(params);
+		const { data } = await responseMock["user-analysis-data"];
 		const { chartData: resChartData } = data;
 		count.value = data.count;
 		growth.value = data.growth;
