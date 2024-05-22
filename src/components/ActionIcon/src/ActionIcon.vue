@@ -1,22 +1,21 @@
 <script setup lang="ts">
+import { Component } from "vue";
 import ToolTipper from "./ToolTipper.vue";
 
-withDefaults(
-	defineProps<{
-		tooltipText?: string;
-		icon: string;
-		transparent?: boolean; // 是否设置背景透明
-		size?: number; // 按钮大小
-		component?: Component | String; // 图标组件
-	}>(),
-	{
-		tooltipText: undefined,
-		icon: "",
-		transparent: false, // 是否设置背景透明
-		size: 16, // 按钮大小
-		component: undefined, // 图标组件
-	}
-);
+interface Props {
+	tooltipText?: string;
+	icon: string;
+	transparent?: boolean; // 是否设置背景透明
+	size?: number; // 按钮大小
+	component?: Component | String; // 图标组件
+}
+withDefaults(defineProps<Props>(), {
+	tooltipText: undefined,
+	icon: "",
+	transparent: false, // 是否设置背景透明
+	size: 16, // 按钮大小
+	component: undefined, // 图标组件
+});
 </script>
 
 <template>

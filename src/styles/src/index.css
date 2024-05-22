@@ -11,3 +11,7 @@ html {
 .app-logo{
   height: 59px;
 }
+
+.max-h-context{
+  max-height: calc(100vh - 8rem);
+}

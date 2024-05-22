@@ -10,5 +10,5 @@
 		},
 		"types": ["vite/client","naive-ui/volar"]
 	},
-	"include": ["autoResolver", "src", "mock", "vite.config.ts", "@celeris/types", "types"]
+	"include": ["autoResolver", "src", "mock", "vite.config.ts", "@celeris/types", "types","mock/**/*.ts"]
 }

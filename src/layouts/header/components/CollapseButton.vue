@@ -9,5 +9,5 @@ const { toggleCollapsed, getCollapsed } = useMenuSetting();
 </script>
 
 <template>
-  <ActionIcon :tooltip-text="t('layouts.header.toggleCollapsed')" :component="getCollapsed ? ChevronForwardCircleOutline : ChevronBackCircleOutline" @click="toggleCollapsed()" />
+  <ActionIcon :tooltip-text="t('layouts.header.toggleCollapsed')"  :component="getCollapsed ? ChevronForwardCircleOutline : ChevronBackCircleOutline" @click="toggleCollapsed()" />
 </template>

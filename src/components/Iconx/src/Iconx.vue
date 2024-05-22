@@ -3,11 +3,8 @@ import { isString } from "@/utils";
 import { createVNode } from "vue";
 
 const props = defineProps(["component", "size", "depth", "color"]);
-const component = ref(props.component);
-
-// 如果是svg String 转换成vue组件
-if (isString(props.component)) component.value = createVNode("i", { innerHTML: props.component || "svg??" });
+const renderComp = (comp) => (isString(comp) ? createVNode("i", { innerHTML: comp || "svg??" }) : comp);
 </script>
 <template>
-	<n-icon v-bind="{ ...props, component }"></n-icon>
+	<n-icon v-bind="{ ...props, component: renderComp(component) }"></n-icon>
 </template>

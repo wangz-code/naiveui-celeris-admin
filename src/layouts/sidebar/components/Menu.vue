@@ -9,7 +9,6 @@ import { REDIRECT_NAME } from "@/router/constant";
 import { getMenus } from "@/router/menus";
 import { listenToRouteChange } from "@/router/mitt/routeChange";
 import { usePermissionStore } from "@/store/modules/permission";
-import Iconx from "@/components/Iconx/src/Iconx.vue";
 import { h } from "vue";
 
 defineOptions({

@@ -10,7 +10,7 @@ defineOptions({
 
 <template>
   <PageWrapper>
-    <NScrollbar class="rounded-2xl">
+    <NScrollbar class="max-h-context rounded-2xl">
       <NGrid cols="4" :x-gap="16" :y-gap="16" responsive="screen" item-responsive>
         <NGridItem v-for="(color, name) in presetPrimaryColors" :key="color">
           <NCard>

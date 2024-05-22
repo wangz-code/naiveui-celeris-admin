@@ -8,7 +8,7 @@ defineOptions({
 
 <template>
 	<PageWrapper class="">
-		<NScrollbar class="h-full rounded-2xl">
+		<NScrollbar class="max-h-context rounded-2xl">
 			<NCard>
 				<article class="article font-song chinese chinese-truegray">
 					<h1 class="article__title">中文网页字体排列方案</h1>

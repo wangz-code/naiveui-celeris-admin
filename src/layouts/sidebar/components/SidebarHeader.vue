@@ -10,7 +10,7 @@ const { collapsed } = toRefs(props);
 </script>
 
 <template>
-  <div class="my-auto flex h-16">
+  <div class="my-auto flex">
     <AppLogo :display-title="!collapsed" />
   </div>
 </template>

@@ -6,7 +6,7 @@ const defaultProps = withDefaults(
   defineProps<{
     containerSize?: number;
     iconSize?: number;
-    iconName?: string;
+    iconName?: string|any;
     container?: boolean;
     color?: string;
   }>(),
@@ -25,10 +25,7 @@ const iconFinalSize = computed(() => (container?.value ? iconContainerSize.value
 <template>
   <div class="card-inner-icon flex-center relative" :class="{ boxed: container }">
     <div v-if="container" class="card-inner-icon--bg top-0 left-0 w-full h-full" />
-    <CAIcon v-if="$slots.default" :size="iconFinalSize">
-      <slot />
-    </CAIcon>
-    <CAIcon v-else :size="iconFinalSize" :name="iconName" />
+    <Iconx :size="iconFinalSize" :component="iconName"></Iconx>
   </div>
 </template>
 

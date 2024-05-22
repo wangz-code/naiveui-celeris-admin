@@ -10,7 +10,7 @@ import { createUnoCSSPluginConfig } from "./unocss";
 import { createAutoImportPluginConfig } from "./unpluginAutoImport";
 import { createVueComponentsPluginConfig } from "./unpluginVueComponets";
 import { createVisualizerPluginConfig } from "./visualizer";
-
+import { viteMockServe } from 'vite-plugin-mock'
 /**
  * Configure the Vite plugins.
  *
@@ -60,7 +60,9 @@ export function configVitePlugins(
   // https://github.com/btd/rollup-plugin-visualizer
   viteEnv.VITE_USE_BUILD_ANALYZER && vitePlugins.push(createVisualizerPluginConfig());
 
-
+  // Add vite-plugin-mock
+  // 拦截模拟请求
+  viteEnv.VITE_USE_MOCK && vitePlugins.push(viteMockServe());
 
   return vitePlugins;
 }

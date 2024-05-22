@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DataCard from "@/components/Card/src/DataCard.vue";
 import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
+import { AlertTriangle, Wallet } from "@vicons/tabler";
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
       <!--  API余额监控：使用 "API Balance Monitoring" 来清晰地表达对API余额的追踪和监控。 -->
       <DataCard title="API余额" centered currency="CNY" :val="64">
         <template #icon>
-          <CardInnerIcon icon-name="material-symbols:account-balance-wallet-outline-rounded" container />
+          <CardInnerIcon :icon-name="Wallet" container />
         </template>
       </DataCard>
     </NGridItem>
@@ -17,7 +18,7 @@ import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
       <!--  错误率分析：使用 "Error Rate Analysis" 来表示关注Chatbot互动中的错误率，并进行相应的分析。 -->
       <DataCard title="API错误数" centered :val="32">
         <template #icon>
-          <CardInnerIcon icon-name="tabler:face-id-error" container />
+          <CardInnerIcon :icon-name="AlertTriangle" container />
         </template>
       </DataCard>
     </NGridItem>
