@@ -1,13 +1,11 @@
-import { openWindow } from "@/utils";
-import type { RouteLocationNormalized, Router } from "vue-router";
-import { AxiosCanceler } from "@celeris/request";
-import { createPageLoadingGuard } from "@/router/guard/pageLoadingGuard";
-import NProgress from "@/setting/nprogress";
 import { useTransitionSetting } from "@/composables/setting/useTransitionSetting";
-import { DEFAULT_PROJECT_SETTING } from "@/setting/projectSetting";
+import { createPageLoadingGuard } from "@/router/guard/pageLoadingGuard";
 import { createPermissionGuard } from "@/router/guard/permissionGuard";
 import { createStateGuard } from "@/router/guard/stateGuard";
 import { notifyRouteChange } from "@/router/mitt/routeChange";
+import NProgress from "@/setting/nprogress";
+import { openWindow } from "@/utils";
+import type { RouteLocationNormalized, Router } from "vue-router";
 
 // Don't change the order of creation
 // 不要改变创建的顺序
@@ -60,30 +58,10 @@ export function createPageGuard(router: Router): void {
  * @param router - 路由对象。
  */
 export function createHttpGuard(router: Router) {
-  // 定义一个闭包，用来缓存AxiosCanceler的实例
-  // Define a closure to cache the AxiosCanceler instance
-  let axiosCanceler: AxiosCanceler | null = null;
-  // 定义一个函数，根据项目配置返回是否需要移除所有未完成的HTTP请求的标志，并创建或销毁AxiosCanceler实例
-  // Define a function that returns whether all pending HTTP requests need to be removed according to the project configuration, and creates or destroys the AxiosCanceler instance
-  function shouldCancelAllRequests() {
-    const shouldCancelAllRequests = DEFAULT_PROJECT_SETTING.shouldRemoveAllHttpPending;
-    if (shouldCancelAllRequests && !axiosCanceler) {
-      // 如果需要移除，并且没有AxiosCanceler实例，则创建一个
-      axiosCanceler = new AxiosCanceler();
-    } else if (!shouldCancelAllRequests && axiosCanceler) {
-      // 如果不需要移除，并且有AxiosCanceler实例，则销毁它
-      axiosCanceler = null;
-    }
-    return shouldCancelAllRequests;
-  }
+  
 
   router.beforeEach(() => {
-    // 如果需要移除，则调用AxiosCanceler实例的方法取消所有未完成的请求
-    // If you need to remove, call the AxiosCanceler instance’s method to cancel all pending requests
-    if (shouldCancelAllRequests() && axiosCanceler) {
-      axiosCanceler.removeAllPending();
-    }
-    // 返回true表示允许路由切换
+   
     return true;
   });
 }
