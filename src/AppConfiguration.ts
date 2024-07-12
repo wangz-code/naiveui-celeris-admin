@@ -1,5 +1,5 @@
 import { useAppSetting, useNaiveUIConfigProvider } from "@/composables";
-import { LocalesEngine } from "@celeris/locale";
+import { LocalesEngine } from "@/locale";
 import { createDiscreteApi } from "naive-ui";
 
 function initializeHttpRequest() {
@@ -70,9 +70,12 @@ function initializeI18n() {
 			return [key.slice(10, -5), value.default];
 		})
 	);
+	console.log('initializeI18n log==>',getLocale);
+	console.log('val log==>',getLocale.value);
+	
 	LocalesEngine.initLocales(() => ({
 		locale: getLocale.value,
-		fallbackLocale: "en",
+		fallbackLocale: "zh",
 		messagesHandler: () => {
 			return messages;
 		},

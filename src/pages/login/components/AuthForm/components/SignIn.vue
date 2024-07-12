@@ -15,7 +15,7 @@ const message = useMessage();
 const notification = useNotification();
 
 const loginFormModel: SignInFromType = reactive<SignInFromType>({
-	username: "kirklin",
+	username: "admin",
 	password: "123456",
 });
 const loginRules: FormRules = reactive({

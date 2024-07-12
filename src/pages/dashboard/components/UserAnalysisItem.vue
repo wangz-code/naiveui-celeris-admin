@@ -35,10 +35,10 @@ const themeVariables = useThemeVars();
 const { chartOption } = useChartOption(() => {
 	return {
 		grid: {
-			left: 0,
-			right: 0,
+			left: 5,
+			right: 5,
 			top: 0,
-			bottom: 0,
+			bottom: 15,
 		},
 		xAxis: {
 			type: "category",
@@ -69,7 +69,7 @@ const { chartOption } = useChartOption(() => {
 				...(props.chartType === "bar"
 					? {
 							type: "bar",
-							barWidth: 7,
+							barWidth: 10,
 							barGap: "0",
 					  }
 					: {
@@ -112,8 +112,8 @@ fetchData({ quota: props.quota });
 </script>
 
 <template>
-	<NSpin :show="loading" class="w-full">
-		<DataInsightCard :title="title" :data-count="count" :chart-height="150">
+	<NSpin :show="loading" class="w-full overflow-hidden">
+		<DataInsightCard :title="title" :data-count="count" :chart-height="140">
 			<template #icon>
 				<CardInnerIcon :icon-name="icon" container />
 			</template>

@@ -19,8 +19,7 @@ const Bar = defineComponent((props) => {
 </script>
 
 <template>
-	<PageWrapper>
-		<NScrollbar class="max-h-context rounded-2xl">
+	<PageWrapper use-scrollbar>
 			<n-card title="卡片"> 卡片内容 </n-card>
 			<n-card title="按钮组">
 				<Iconx size="30" :component="SafeIcon" />
@@ -62,7 +61,6 @@ const Bar = defineComponent((props) => {
 				</div>
 				<div></div>
 			</n-card>
-		</NScrollbar>
 	</PageWrapper>
 </template>
 <style scoped></style>

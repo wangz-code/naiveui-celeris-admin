@@ -8,6 +8,7 @@ import { subscribeStore } from "@/store/subscribe";
  */
 subscribeStore();
 const { configProviderProps } = useNaiveUIConfigProvider();
+
 </script>
 
 <template>

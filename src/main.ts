@@ -1,16 +1,16 @@
 import { createApp } from "vue";
 
+import App from "@/App.vue";
+import { initializeConfiguration } from "@/AppConfiguration";
+import { setupVueQuery } from "@/apis";
 import { setupDirectives } from "@/directives";
-import { setupI18n } from "@celeris/locale";
+import { setupI18n } from "@/locale";
+import { setupRouterGuard } from "@/router/guard";
+import "@/styles";
+import "virtual:uno.css";
+import { Iconx } from "./components/Iconx/index";
 import { router, setupRouter } from "./router";
 import { setupStore } from "./store";
-import { setupVueQuery } from "@/apis";
-import { initializeConfiguration } from "@/AppConfiguration";
-import { setupRouterGuard } from "@/router/guard";
-import App from "@/App.vue";
-import "virtual:uno.css";
-import "@/styles";
-import { Iconx } from "./components/Iconx/index";
 
 const app = createApp(App);
 app.use(Iconx);

@@ -26,7 +26,7 @@ export function loginApi(params: LoginParams, errorMessageMode: MessageMode = "d
 			fullName: "Kirk Lin",
 			email: "hi@kirklin.cn",
 			phone: "15912345678",
-			avatarUrl: "https://avatars.githubusercontent.com/u/17453452",
+			avatarUrl: "https://q1.itc.cn/q_70/images03/20240304/b00ebfdfb3ba40b989185a5ae90496e7.jpeg",
 			homePageUrl: "/dashboard/index",
 			roles: ["admin"],
 			token: "adminFakeToken",
@@ -55,11 +55,11 @@ export function userInfoApi(errorMessageMode: MessageMode = "none") {
 	return new Promise((resolve) => {
 		resolve({
 			id: "1",
-			username: "kirklin",
+			username: "kirklin卡特琳",
 			fullName: "Kirk Lin",
 			email: "hi@kirklin.cn",
 			phone: "15912345678",
-			avatarUrl: "https://avatars.githubusercontent.com/u/17453452",
+			avatarUrl: "https://img0.baidu.com/it/u=671112370,873229032&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1720890000&t=3ff2ccb197002749f8fdf7b33c378e88",
 			homePageUrl: "/dashboard/index",
 			roles: ["admin"],
 		});

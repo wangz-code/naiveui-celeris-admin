@@ -58,8 +58,7 @@ function handlePageSizeChange(pageSize: number) {
 </script>
 
 <template>
-  <PageWrapper>
-    <NScrollbar class="rounded-2xl">
+  <PageWrapper use-scrollbar>
       <NCard title="分页表单">
         <NTable :bordered="true" :single-line="false" striped>
           <thead>
@@ -120,7 +119,6 @@ function handlePageSizeChange(pageSize: number) {
           />
         </template>
       </NCard>
-    </NScrollbar>
   </PageWrapper>
 </template>
 

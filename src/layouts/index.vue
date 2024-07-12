@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Header from "./header/index.vue";
 import Content from "./content/index.vue";
+import Footer from "./footer/index.vue";
 import SearchDialog from "@/components/SearchDialog/src/SearchDialog.vue";
 import SidebarLayout from "@/layouts/sidebar/index.vue";
 
@@ -18,13 +19,14 @@ defineOptions({
       <header class="">
         <Header />
       </header>
-      <div
-        class="block flex-1 h-full overflow-x-hidden rounded-2xl pl-0 pr-5 pt-0 pb-6"
-      >
-        <div class="min-h-full h-full w-full rounded-2xl common-bg p-4">
+      <div class="block flex-1 h-full overflow-x-hidden rounded-2xl pl-0 pr-5 pt-0 pb-6">
+        <div class="min-h-full h-full w-full rounded-2xl common-bg">
           <Content />
         </div>
       </div>
+      <footer>
+        <Footer />
+      </footer>
     </div>
     <SearchDialog />
   </NEl>
