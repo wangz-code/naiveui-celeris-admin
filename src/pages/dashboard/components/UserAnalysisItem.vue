@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThemeVars } from "naive-ui";
 import { isNil } from "@/utils";
-import type { ToolTipFormatterParams } from "../../../types/src/echarts";
+import type { ToolTipFormatterParams } from "../../../../types/echarts";
 import { DataInsightCard } from "@/components/Card";
 import CardInnerIcon from "@/pages/dashboard/components/CardInnerIcon.vue";
 import { queryUserAnalysisData } from "@/apis/internal/dashboard";

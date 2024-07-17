@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LineSeriesOption } from "echarts";
-import type { ToolTipFormatterParams } from "../../../types/src/echarts";
+import type { ToolTipFormatterParams } from "../../../../types/echarts";
 import { queryDataOverview } from "@/apis/internal/dashboard";
 import VChart from "vue-echarts";
 import { use } from "echarts/core";

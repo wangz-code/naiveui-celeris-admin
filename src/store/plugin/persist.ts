@@ -4,7 +4,7 @@
  * @link https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
  *
  */
-import type { GlobEnvConfig } from "@/types";
+import type { GlobEnvConfig } from "@celeris/types";
 import type { Encryption } from "@/utils";
 import { EncryptionFactory, createStorageName } from "@/utils";
 import type { Pinia } from "pinia";

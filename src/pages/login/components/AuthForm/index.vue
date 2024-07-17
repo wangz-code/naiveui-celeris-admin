@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { NButton, NDivider } from "naive-ui";
 import { computed, onBeforeMount, ref } from "vue";
-import { RouterTransitionConstants } from "@/constants";
+import { RouterTransitionConstants } from "@celeris/constants";
 import SignIn from "@/pages/login/components/AuthForm/components/SignIn.vue";
 import SignUp from "@/pages/login/components/AuthForm/components/SignUp.vue";
 import ForgotPassword from "@/pages/login/components/AuthForm/components/ForgotPassword.vue";

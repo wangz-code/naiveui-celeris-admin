@@ -2,7 +2,7 @@
 import type { ScrollbarInst } from "naive-ui";
 import { isWindows } from "@/utils";
 import Highlighter from "headless-highlighter";
-import type { Menu } from "@/types";
+import type { Menu } from "@celeris/types";
 import { useSearchDialog } from "@/composables/useSearchDialog";
 import type { SearchGroup, SearchGroupItem, SearchGroups } from "@/components/SearchDialog/src/types";
 import { getShallowMenus } from "@/router/menus";

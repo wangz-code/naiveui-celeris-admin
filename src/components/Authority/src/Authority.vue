@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
-import type { RoleConstants } from "@/constants";
+import type { RoleConstants } from "@celeris/constants";
 import { useAppPermission } from "@/composables";
 
 defineProps({

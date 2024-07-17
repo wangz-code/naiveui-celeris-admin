@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isGreaterOrEqual2xl, isSmallerOrEqualXl } from "@/hooks";
+import { isGreaterOrEqual2xl, isSmallerOrEqualXl } from "@celeris/hooks";
 import ChatHistorySidebar from "./ChatHistorySidebar/index.vue";
 import ChatPanel from "./ChatPanel/index.vue";
 import AssistantSidebar from "./AssistantSidebar/index.vue";

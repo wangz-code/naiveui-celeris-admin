@@ -1,4 +1,4 @@
-import { PageConstants } from "@/constants";
+import { PageConstants } from "@celeris/constants";
 import { loadRoutesFromModules } from "@/utils";
 import type { RouteRecordRaw } from "vue-router";
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@/router/routes/basic";

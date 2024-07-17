@@ -1,4 +1,4 @@
-import type { ButtonColorScene, ColorAction, ColorType, ColorTypeCase, ThemeColor, ThemeConfig } from "@/types";
+import type { ButtonColorScene, ColorAction, ColorType, ColorTypeCase, ThemeColor, ThemeConfig } from "@celeris/types";
 import { deepMerge, generateColorPalettes } from "@/utils";
 import { type GlobalThemeOverrides, commonDark, commonLight } from "naive-ui";
 

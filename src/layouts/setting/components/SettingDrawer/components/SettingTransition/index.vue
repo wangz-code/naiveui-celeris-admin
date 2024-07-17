@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterTransitionConstants } from "@/constants";
+import { RouterTransitionConstants } from "@celeris/constants";
 import { SettingMenu } from "@/layouts/setting/components/SettingDrawer/components";
 import { useTransitionSetting } from "@/composables";
 

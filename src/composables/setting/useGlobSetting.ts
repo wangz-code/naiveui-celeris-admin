@@ -1,4 +1,4 @@
-import type { GlobConfig, GlobEnvConfig } from "@/types";
+import type { GlobConfig, GlobEnvConfig } from "@celeris/types";
 import { getAppGlobalConfig } from "@/utils";
 
 export function useGlobSetting(): Readonly<GlobConfig> {

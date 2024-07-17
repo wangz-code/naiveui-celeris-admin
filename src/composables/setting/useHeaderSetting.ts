@@ -1,4 +1,4 @@
-import type { HeaderSetting } from "@/types";
+import type { HeaderSetting } from "@celeris/types";
 import { useAppStoreWithOut } from "@/store/modules/app";
 
 export function useHeaderSetting() {

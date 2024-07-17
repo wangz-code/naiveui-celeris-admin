@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HttpStatusConstants, PageConstants } from "@/constants";
+import { HttpStatusConstants, PageConstants } from "@celeris/constants";
 import { getErrorMessage } from "@/utils";
 
 const props = withDefaults(defineProps<exceptionProps>(), {

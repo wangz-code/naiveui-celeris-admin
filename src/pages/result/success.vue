@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PageConstants } from "@/constants";
+import { PageConstants } from "@celeris/constants";
 import { formatToDateTime } from "@/utils";
 import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 

@@ -1,4 +1,4 @@
-import type { GlobConfig, GlobEnvConfig } from "@/types";
+import type { GlobConfig, GlobEnvConfig } from "@celeris/types";
 const version = "0.02";
 
 export function getAppGlobalConfig(env: GlobEnvConfig): GlobConfig {

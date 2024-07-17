@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RoleConstants } from "@/constants";
+import { RoleConstants } from "@celeris/constants";
 
 const { t } = useI18n();
 </script>

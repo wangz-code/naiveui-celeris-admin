@@ -1,4 +1,4 @@
-import type { TransitionSetting } from "@/types";
+import type { TransitionSetting } from "@celeris/types";
 import { useAppStoreWithOut } from "@/store/modules/app";
 
 export function useTransitionSetting() {

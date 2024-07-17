@@ -16,6 +16,9 @@
     "preview:dist": "vite preview"
   },
   "dependencies": {
+    "@celeris/constants": "^0.0.2",
+    "@celeris/directives": "^0.0.2",
+    "@celeris/locale": "^0.0.2",
     "@formily/core": "^2.3.1",
     "@formily/vue": "^2.3.1",
     "@kirklin/logger": "^0.0.2",
@@ -52,6 +55,8 @@
     "vue-router": "^4.3.1"
   },
   "devDependencies": {
+    "@celeris/hooks": "^0.0.2",
+    "@celeris/types": "^0.0.2",
     "@vicons/ionicons5": "^0.12.0",
     "@vicons/tabler": "^0.12.0",
     "@vitejs/plugin-vue": "^5.0.4",

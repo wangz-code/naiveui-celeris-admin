@@ -1,11 +1,11 @@
-import type { ProjectSetting } from "@/types";
+import type { ProjectSetting } from "@celeris/types";
 import {
   PermissionCacheTypeConstants,
   PermissionModeConstants,
   RouterTransitionConstants,
   SessionTimeoutProcessingConstants,
   SettingButtonPositionConstants,
-} from "@/constants";
+} from "@celeris/constants";
 
 export const DEFAULT_PROJECT_SETTING: ProjectSetting = {
   // 是否显示配置按钮

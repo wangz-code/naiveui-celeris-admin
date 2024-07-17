@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RouterTransitionConstants } from "@/constants";
+import { RouterTransitionConstants } from "@celeris/constants";
 import { NTag } from "naive-ui";
 import { useI18n } from "vue-i18n";
 import { listenToRouteChange } from "@/router/mitt/routeChange";

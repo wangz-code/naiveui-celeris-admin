@@ -1,4 +1,4 @@
-import type { Menu, MenuModule } from "@/types";
+import type { Menu, MenuModule } from "@celeris/types";
 import { cloneDeep } from "lodash-es";
 import type { RouteRecordRaw } from "vue-router";
 import { loadDataFromModules } from "./moduleHelper";

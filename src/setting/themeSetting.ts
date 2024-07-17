@@ -1,4 +1,4 @@
-import type { ThemeSetting } from "@/types";
+import type { ThemeSetting } from "@celeris/types";
 import { presetPrimaryColors } from "@/utils";
 
 export const DEFAULT_THEME_SETTING: ThemeSetting = {
