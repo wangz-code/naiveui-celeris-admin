@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RoleConstants } from "@celeris/constants";
+import { RoleConstants } from "@/constants";
 
 import CurrentPermissionMode from "../CurrentPermissionMode.vue";
 import Authority from "@/components/Authority/src/Authority.vue";

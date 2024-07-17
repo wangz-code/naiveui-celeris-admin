@@ -1,7 +1,7 @@
-import type { ThemeSetting } from "@celeris/types";
+import type { ThemeSetting } from "@/types";
 import { deepMerge } from "@/utils";
 import { defineStore } from "pinia";
-import { APP_DESIGN_STORE_ID } from "@celeris/constants";
+import { APP_DESIGN_STORE_ID } from "@/constants";
 import type { GlobalTheme, GlobalThemeOverrides } from "naive-ui";
 import { darkTheme, lightTheme } from "naive-ui";
 import { getNaiveUICustomTheme } from "./themeUtils";

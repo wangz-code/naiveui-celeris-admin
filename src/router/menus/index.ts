@@ -1,4 +1,4 @@
-import type { Menu, MenuModule } from "@celeris/types";
+import type { Menu, MenuModule } from "@/types";
 import {
   createPathMatcher,
   filterTree,

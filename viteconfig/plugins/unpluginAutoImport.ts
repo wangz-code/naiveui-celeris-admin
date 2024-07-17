@@ -10,7 +10,7 @@ export function createAutoImportPluginConfig(): PluginOption {
 			"vue-i18n",
 			"@vueuse/core",
 			{
-				"@celeris/hooks": ["useComponentRef", "useLoading", "useMergeState", "useScreen", "useState"],
+				"@/hooks": ["useComponentRef", "useLoading", "useMergeState", "useScreen", "useState"],
 			},
 			{
 				"naive-ui": ["useDialog", "useMessage", "useNotification", "useLoadingBar"],

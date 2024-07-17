@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserInfo } from "@celeris/types";
+import type { UserInfo } from "@/types";
 import { ToolTipper } from "@/components/ActionIcon";
 import { useUserStore } from "@/store/modules/user";
 

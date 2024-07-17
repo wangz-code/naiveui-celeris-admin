@@ -1,6 +1,6 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
-import { RoleConstants } from "@celeris/constants";
+import { RoleConstants } from "@/constants";
 import { LAYOUT, getParentLayout } from "@/router/constant";
 import { LockSquare } from "@vicons/tabler";
 

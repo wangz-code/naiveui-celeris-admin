@@ -8,15 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@celeris/constants':
-        specifier: ^0.0.2
-        version: 0.0.2
-      '@celeris/directives':
-        specifier: ^0.0.2
-        version: 0.0.2(vue@3.4.27(typescript@5.4.5))
-      '@celeris/locale':
-        specifier: ^0.0.2
-        version: 0.0.2(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(typescript@5.4.5)
       '@formily/core':
         specifier: ^2.3.1
         version: 2.3.1
@@ -120,12 +111,6 @@ importers:
         specifier: ^4.3.1
         version: 4.3.2(vue@3.4.27(typescript@5.4.5))
     devDependencies:
-      '@celeris/hooks':
-        specifier: ^0.0.2
-        version: 0.0.2(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(vue@3.4.27(typescript@5.4.5))
-      '@celeris/types':
-        specifier: ^0.0.2
-        version: 0.0.2
       '@vicons/ionicons5':
         specifier: ^0.12.0
         version: 0.12.0
@@ -835,28 +820,6 @@ packages:
   '@babel/types@7.24.5':
     resolution: {integrity: sha512-6mQNsaLeXTw0nxYUYu+NSa4Hx4BlF1x1x8/PMFbiR+GBSr+2DkECc69b8hgy2frEodNcvPffeH8YfWd3LI6jhQ==}
     engines: {node: '>=6.9.0'}
-
-  '@celeris/constants@0.0.2':
-    resolution: {integrity: sha512-u7Bex/42OG3yE3ROkNCHE/TgVKvW9Qlojz/a4V1rULQEPXSzbJjLOiJfYKDpMJBQOyYHL6xoDij+Eii87Jq9NQ==}
-
-  '@celeris/directives@0.0.2':
-    resolution: {integrity: sha512-hFyIGhq6SyLDE5uIdgQnt3UEDiKBGiWaxXyRwwj5s6yfvs+3U67RIeVcwtRbl8YUquzcU2Qp8oZADmk7etjFhw==}
-    peerDependencies:
-      vue: '>3.0.0'
-
-  '@celeris/hooks@0.0.2':
-    resolution: {integrity: sha512-KB1aB8BmSeaMdRthv3ssazAPBJdX0SHT3NOXewy9DjROF0k/6QcS+mpFAAxX/Is0cprvbVOr2Zw1+xQANr0k6w==}
-    peerDependencies:
-      vue: '>=3.3.4'
-
-  '@celeris/locale@0.0.2':
-    resolution: {integrity: sha512-ub/N7RcIUhZY9kEQGaWi2wqcUl7aF6z4kLfl0R5SYL18TT9ZRSKtBF7czVhtVpT5HMI9rHpwMrJhKxPie9Y6PA==}
-
-  '@celeris/types@0.0.2':
-    resolution: {integrity: sha512-Ak5GXVYUIc3rvvDLVkJsiInAkrTuDbbI6Tr7lnRzkmBr0JCavGmOr0JtqWQg2dD7qM50oNeKiBe0qOhV+D+LDw==}
-
-  '@celeris/utils@0.0.2':
-    resolution: {integrity: sha512-GSQyseBIANR/+YojhOJvdOhsTXMMw/+4hGY1ouH0DrUWa0mKozGLILzjLsuwiT/OXnCboaPDySbSXv7dor7B3w==}
 
   '@css-render/plugin-bem@0.15.14':
     resolution: {integrity: sha512-QK513CJ7yEQxm/P3EwsI+d+ha8kSOcjGvD6SevM41neEMxdULE+18iuQK6tEChAWMOQNQPLG/Rw3Khb69r5neg==}
@@ -1626,9 +1589,6 @@ packages:
 
   ajv@8.13.0:
     resolution: {integrity: sha512-PRA911Blj99jR5RMeTunVbNXMF6Lp4vZXnk5GQjcnUWUTsrXtekg/pnmFFI2u/I36Y/2bITGS30GZCXei6uNkA==}
-
-  algorithm-snowflake@0.0.0:
-    resolution: {integrity: sha512-9/ZGcPC1PyGf7Keao7whCrAOb4AY+rux485WN/NEjOHJgyPNvb3IRFdODREEtYZULkYr3cs+BjmoITS/KycOLw==}
 
   animate.css@4.1.1:
     resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
@@ -2562,9 +2522,6 @@ packages:
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-
-  lodash.pick@4.4.0:
-    resolution: {integrity: sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==}
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
@@ -4498,78 +4455,6 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.5
       to-fast-properties: 2.0.0
 
-  '@celeris/constants@0.0.2':
-    dependencies:
-      lodash.pick: 4.4.0
-
-  '@celeris/directives@0.0.2(vue@3.4.27(typescript@5.4.5))':
-    dependencies:
-      '@celeris/utils': 0.0.2
-      vue: 3.4.27(typescript@5.4.5)
-
-  '@celeris/hooks@0.0.2(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(vue@3.4.27(typescript@5.4.5))':
-    dependencies:
-      '@celeris/types': 0.0.2
-      '@celeris/utils': 0.0.2
-      '@vueuse/core': 10.9.0(vue@3.4.27(typescript@5.4.5))
-      '@vueuse/integrations': 10.11.0(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(vue@3.4.27(typescript@5.4.5))
-      vue: 3.4.27(typescript@5.4.5)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - async-validator
-      - axios
-      - change-case
-      - drauu
-      - focus-trap
-      - fuse.js
-      - idb-keyval
-      - jwt-decode
-      - nprogress
-      - qrcode
-      - sortablejs
-      - universal-cookie
-
-  '@celeris/locale@0.0.2(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(typescript@5.4.5)':
-    dependencies:
-      '@celeris/constants': 0.0.2
-      '@celeris/hooks': 0.0.2(async-validator@4.2.5)(axios@1.7.2)(nprogress@0.2.0)(vue@3.4.27(typescript@5.4.5))
-      '@celeris/types': 0.0.2
-      '@celeris/utils': 0.0.2
-      iso-639-1: 3.1.2
-      vue: 3.4.27(typescript@5.4.5)
-      vue-i18n: 9.13.1(vue@3.4.27(typescript@5.4.5))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - async-validator
-      - axios
-      - change-case
-      - drauu
-      - focus-trap
-      - fuse.js
-      - idb-keyval
-      - jwt-decode
-      - nprogress
-      - qrcode
-      - sortablejs
-      - typescript
-      - universal-cookie
-
-  '@celeris/types@0.0.2':
-    dependencies:
-      '@celeris/constants': 0.0.2
-
-  '@celeris/utils@0.0.2':
-    dependencies:
-      '@kirklin/logger': 0.0.2
-      '@kirklin/palette': 0.1.1
-      algorithm-snowflake: 0.0.0
-      colord: 2.9.3
-      crypto-js: 4.2.0
-      dayjs: 1.11.11
-      detect-mobile: 0.0.0
-      lodash-es: 4.17.21
-      path-to-regexp: 6.2.2
-
   '@css-render/plugin-bem@0.15.14(css-render@0.15.14)':
     dependencies:
       css-render: 0.15.14
@@ -5375,8 +5260,6 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
       uri-js: 4.4.1
-
-  algorithm-snowflake@0.0.0: {}
 
   animate.css@4.1.1: {}
 
@@ -6359,8 +6242,6 @@ snapshots:
   lodash-es@4.17.21: {}
 
   lodash.debounce@4.0.8: {}
-
-  lodash.pick@4.4.0: {}
 
   lodash.sortby@4.7.0: {}
 

@@ -1,6 +1,6 @@
-import type { Menu } from "@celeris/types";
-import type { RoleConstants } from "@celeris/constants";
-import { APP_PERMISSION_STORE_ID, PermissionModeConstants } from "@celeris/constants";
+import type { Menu } from "@/types";
+import type { RoleConstants } from "@/constants";
+import { APP_PERMISSION_STORE_ID, PermissionModeConstants } from "@/constants";
 import { filterTree, flattenMultiLevelRoutes, transformRouteToMenu } from "@/utils";
 import { defineStore } from "pinia";
 import type { RouteRecordRaw } from "vue-router";

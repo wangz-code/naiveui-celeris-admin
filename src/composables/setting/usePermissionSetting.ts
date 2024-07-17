@@ -1,5 +1,5 @@
-import type { RoleConstants } from "@celeris/constants";
-import { PermissionModeConstants } from "@celeris/constants";
+import type { RoleConstants } from "@/constants";
+import { PermissionModeConstants } from "@/constants";
 import { intersection, isArray } from "@/utils";
 import type { RouteRecordRaw } from "vue-router";
 import { resetRouter, router } from "@/router";

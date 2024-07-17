@@ -1,6 +1,6 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
-import { CELERIS_WEB_GITHUB_URL, VITE_DOCS_CN_URL, VITE_DOCS_URL } from "@celeris/constants";
+import { CELERIS_WEB_GITHUB_URL, VITE_DOCS_CN_URL, VITE_DOCS_URL } from "@/constants";
 import { IFRAME, LAYOUT } from "@/router/constant";
 import { ViteSvg } from "@/components/Iconx/svgs";
 import { Link } from "@vicons/ionicons5";

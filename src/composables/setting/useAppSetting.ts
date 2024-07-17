@@ -1,4 +1,4 @@
-import type { ProjectSetting } from "@celeris/types";
+import type { ProjectSetting } from "@/types";
 import { useAppStoreWithOut } from "@/store/modules/app";
 
 export function useAppSetting() {

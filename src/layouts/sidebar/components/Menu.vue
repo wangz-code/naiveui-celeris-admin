@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Menu } from "@celeris/types";
+import type { Menu } from "@/types";
 import { renderIcon } from "@/components/Iconx";
 import { mapTreeStructure } from "@/utils";
 import type { RouteLocationNormalizedLoaded } from "vue-router";

@@ -1,4 +1,4 @@
-import { ResultConstants } from "@celeris/constants";
+import { ResultConstants } from "@/constants";
 
 /**
  * API调用的请求数据格式。
