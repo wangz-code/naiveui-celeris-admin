@@ -1,4 +1,4 @@
-import type { MessageMode, UserInfo } from "@celeris/types";
+import type { MessageMode, UserInfo } from "@/types";
 import axios from "axios";
 
 // Define the API endpoint URLs as an enum

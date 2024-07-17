@@ -1,5 +1,5 @@
 import type { Router } from "vue-router";
-import { PageConstants } from "@celeris/constants";
+import { PageConstants } from "@/constants";
 import { removeRouteChangeListener } from "@/router/mitt/routeChange";
 import { useAppStore } from "@/store/modules/app";
 import { usePermissionStore } from "@/store/modules/permission";

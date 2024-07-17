@@ -2,7 +2,7 @@
  * Zero-config PWA for Vite
  * https://github.com/antfu/vite-plugin-pwa
  */
-import type { ViteEnvVariables } from "@celeris/types";
+import type { ViteEnvVariables } from "@/types";
 import { VitePWA } from "vite-plugin-pwa";
 
 /**

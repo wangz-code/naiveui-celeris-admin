@@ -1,5 +1,5 @@
-import type { OS } from "@celeris/constants";
-import { OperatingSystem } from "@celeris/constants";
+import type { OS } from "@/constants";
+import { OperatingSystem } from "@/constants";
 
 /**
  * Retrieves the operating system (OS) of the current environment based on the user agent.

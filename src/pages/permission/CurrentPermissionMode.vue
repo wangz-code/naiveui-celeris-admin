@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PermissionModeConstants } from "@celeris/constants";
+import { PermissionModeConstants } from "@/constants";
 import { useAppPermission } from "@/composables";
 
 const { togglePermissionMode, getPermissionMode } = useAppPermission();

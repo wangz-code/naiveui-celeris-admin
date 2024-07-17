@@ -1,5 +1,5 @@
 import type { RouteRecordRaw, Router } from "vue-router";
-import { PageConstants } from "@celeris/constants";
+import { PageConstants } from "@/constants";
 import { RootRoute } from "@/router/routes";
 import { PAGE_NOT_FOUND_ROUTE } from "@/router/routes/basic";
 import { usePermissionStoreWithOut } from "@/store/modules/permission";

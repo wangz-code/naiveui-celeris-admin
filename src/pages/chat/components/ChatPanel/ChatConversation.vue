@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserInfo } from "@celeris/types";
+import type { UserInfo } from "@/types";
 import type { VirtualListInst } from "naive-ui";
 import { useUserStore } from "@/store/modules/user";
 import type { ChatContextInjectionKey } from "@/pages/chat/chatContext";

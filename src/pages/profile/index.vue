@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UserInfo } from "@celeris/types";
+import type { UserInfo } from "@/types";
 import { useUserStore } from "@/store/modules/user";
 import ToolTipper from "@/components/ActionIcon/src/ToolTipper.vue";
 import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
