@@ -30,11 +30,8 @@ export enum ContentTypeEnum {
 
 export function resultSuccess<T = Recordable>(result: T, { message = "ok" } = {}) {
 	return {
-		code: ResultEnum.SUCCESS,
-		result,
 		data: result,
-		message,
-		type: "success",
+		status: "success",
 	};
 }
 

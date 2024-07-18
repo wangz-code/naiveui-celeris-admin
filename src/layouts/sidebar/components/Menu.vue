@@ -84,7 +84,7 @@ watch(
 		immediate: true,
 	}
 );
-console.log("menuList log==>", menuList);
+console.log("menuList slide log==>", menuList);
 
 const collapsedWidth = computed<number>(() => (collapsed.value ? 64 : 300));
 </script>

@@ -20,9 +20,6 @@ export async function createApplicationViteConfig(command: "build" | "serve", mo
   } = viteEnv;
   const plugins = configVitePlugins(root, viteEnv, isProductionBuild);
   const pathResolve = (pathname: string) => resolve(root, ".", pathname);
-
-
-  console.log('${pathResolve("src")}/ log==>',`${pathResolve("src")}/`);
   
   const applicationConfig: UserConfig = {
     root,

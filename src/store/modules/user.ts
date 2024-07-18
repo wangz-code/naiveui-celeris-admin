@@ -203,6 +203,7 @@ export const useUserStore = defineStore({
 				this.setShouldPasswordExpired(false);
 			} else {
 				const permissionStore = usePermissionStore();
+				console.log("permissionStore log==>", permissionStore.shouldAddRouteDynamically);
 				if (!permissionStore.shouldAddRouteDynamically) {
 					const routes = await permissionStore.buildRoutesAction();
 					routes.forEach((route) => {

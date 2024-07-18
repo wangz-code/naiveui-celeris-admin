@@ -45,6 +45,7 @@ async function signIn(e: Event) {
 				errorMessageMode: "none",
 			});
 			if (userInfo) {
+				console.log('userInfo log==>',userInfo);
 				notification.success({
 					title: t("page.login.notification.loginSuccessMessage"),
 					content: t("page.login.notification.welcomeBackMessage", { username: userInfo.fullName }),

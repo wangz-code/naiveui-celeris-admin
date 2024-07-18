@@ -36,4 +36,7 @@ export interface UserInfo {
   // Additional user information, optional
   // 其他用户信息，可选
   extraInfo?: Record<string, any>;
+
+  // token
+  token: string;
 }
