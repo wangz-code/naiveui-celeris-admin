@@ -29,6 +29,7 @@ export async function createApplicationViteConfig(command: "build" | "serve", mo
       alias: {
         "vue-i18n": "vue-i18n/dist/vue-i18n.esm-bundler.js",
         "@/": `${pathResolve("src")}/`,
+        "mock": `${pathResolve("mock")}/`,
       },
     },
     server: {

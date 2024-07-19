@@ -6,7 +6,8 @@
 		"baseUrl": ".",
 		"module": "esnext",
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["src/*"],
+			"mock": ["mock/*"]
 		},
 		"types": ["vite/client", "naive-ui/volar"]
 	},

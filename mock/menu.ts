@@ -7,12 +7,12 @@ export default [
 		statusCode: 200,
 		method: "get",
 		timeout: 1200,
-		response: () => resultSuccess(createMenuList()),
+		response: () => createMenuList(),
 	},
 ] as MockMethod[];
 
-function createMenuList() {
-	return [
+export function createMenuList() {
+	return resultSuccess([
 		{
 			title: "routes.menu.menu",
 			icon: { name: "GameControllerSharp" },
@@ -170,5 +170,5 @@ function createMenuList() {
 				{ title: "routes.result.fail", icon: { name: "CloseCircleOutline" }, meta: { title: "routes.result.fail", icon: { name: "CloseCircleOutline" } }, name: "routes.result.fail", shouldHideMenu: false, path: "/result/fail" },
 			],
 		},
-	];
+	]);
 }
