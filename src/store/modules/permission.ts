@@ -11,7 +11,6 @@ import { PAGE_NOT_FOUND_ROUTE } from "@/router/routes/basic";
 import { transformBackendDataToRoutes } from "@/router/routes/utils";
 import { useAppStore } from "@/store/modules/app";
 import { useUserStore } from "@/store/modules/user";
-console.log("asyncRoutes log==>", asyncRoutes);
 
 // 定义权限状态接口
 // Define the interface for permission state
@@ -143,14 +142,10 @@ export const usePermissionStore = defineStore({
 
 			routes = asyncRoutes;
 
-			menusApi().then((res) => {
-				const menuList = transformRouteToMenu(routes, true);
-				menuList.sort((a, b) => {
-					return (Number(a.meta?.orderNumber) || 0) - (Number(b.meta?.orderNumber) || 0);
-				});
-				console.log("apiMenu log==>", res);
-				// Set frontend menu list
-				this.setBackendMenuList(menuList);
+			menusApi().then((res: any) => {
+				console.log("apiMenu log==>", res.data.data);
+				console.log("asyncRoutes log==>", asyncRoutes);
+				this.setBackendMenuList(res.data.data);
 			});
 			// Convert multi-level routing to level 2 routing
 			routes = flattenMultiLevelRoutes(routes);

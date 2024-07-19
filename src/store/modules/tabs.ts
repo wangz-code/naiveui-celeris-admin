@@ -63,6 +63,7 @@ export const useTabsStore = defineStore({
     close(isPinned: boolean, tab: Tab) {
       const targetTabs = isPinned ? this.pinnedTabs : this.tabs;
       this.tabs = targetTabs.filter(currentTab => currentTab.fullPath !== tab.fullPath);
+      console.log('this.tabs log==>',this.tabs);
     },
     closeTab(tab: Tab) {
       this.close(false, tab);

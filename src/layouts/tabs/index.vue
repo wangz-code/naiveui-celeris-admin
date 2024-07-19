@@ -4,6 +4,9 @@ import { NTag } from "naive-ui";
 import { useI18n } from "vue-i18n";
 import { listenToRouteChange } from "@/router/mitt/routeChange";
 import { useTabs } from "@/composables/useTabs";
+import { Pinned } from "@vicons/tabler";
+
+
 
 defineOptions({
   name: "LayoutTabs",
@@ -42,7 +45,7 @@ listenToRouteChange((route) => {
         </span>
         <template #icon>
           <div class="hover:color-primary-color hover:bg-[var(--action-color)] cursor-pointer mr-1 transition" @click="pinnedTab(tab)">
-            <CAIcon :size="14" icon="tabler:pinned" />
+            <Iconx :size="14" :component="Pinned" />
           </div>
         </template>
       </NTag>

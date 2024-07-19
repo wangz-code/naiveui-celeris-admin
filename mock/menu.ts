@@ -6,13 +6,24 @@ export default [
 		url: "/api/menu/menulist",
 		statusCode: 200,
 		method: "get",
-		timeout: 1500,
+		timeout: 1200,
 		response: () => resultSuccess(createMenuList()),
 	},
 ] as MockMethod[];
 
 function createMenuList() {
 	return [
+		{
+			title: "routes.menu.menu",
+			icon: { name: "GameControllerSharp" },
+			orderNumber: -9999,
+			shouldHideSubMenuInMenu: true,
+			meta: { title: "routes.menu.menu", icon: { name: "GameControllerSharp" }, orderNumber: -9999, shouldHideSubMenuInMenu: true },
+			name: "routes.menu.menu",
+			shouldHideMenu: false,
+			path: "/menu/index",
+			redirect: "/menu/index",
+		},
 		{ title: "routes.chat.chat", icon: { name: "GameControllerSharp" }, orderNumber: -9999, shouldHideSubMenuInMenu: true, meta: { title: "routes.chat.chat", icon: { name: "GameControllerSharp" }, orderNumber: -9999, shouldHideSubMenuInMenu: true }, name: "routes.chat.chat", shouldHideMenu: false, path: "/chat/index", redirect: "/chat/index" },
 		{ title: "routes.dashboard.dashboard", icon: { name: "Dashboard" }, orderNumber: -9000, shouldHideSubMenuInMenu: true, meta: { title: "routes.dashboard.dashboard", icon: { name: "Dashboard" }, orderNumber: -9000, shouldHideSubMenuInMenu: true }, name: "routes.dashboard.dashboard", shouldHideMenu: false, path: "/dashboard/index", redirect: "/dashboard/index" },
 		{ title: "routes.profile.profile", icon: { name: "CircleSquare" }, orderNumber: -9000, shouldHideSubMenuInMenu: true, shouldHideInMenu: true, meta: { title: "routes.profile.profile", icon: { name: "CircleSquare" }, orderNumber: -9000, shouldHideSubMenuInMenu: true, shouldHideInMenu: true }, name: "routes.profile.profile", shouldHideMenu: true, path: "/profile/index", redirect: "/profile/index" },
