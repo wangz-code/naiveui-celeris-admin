@@ -17,7 +17,6 @@ const getIcons = (routes) => {
 	}
 };
 getIcons(routeModuleList);
-
 // 根路由
 export const RootRoute: RouteRecordRaw = {
 	path: "/",
