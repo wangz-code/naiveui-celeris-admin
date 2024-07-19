@@ -21,6 +21,9 @@ function handleResetSetting() {
 function handleCopySetting() {
   message.success(t("layouts.header.themeConfig.message.copyConfigSuccess"));
 }
+function handleCleanSetting() {
+  localStorage.clear()
+}
 </script>
 
 <template>
@@ -35,6 +38,10 @@ function handleCopySetting() {
     </div>
     <NButton type="warning" :block="true" @click="handleResetSetting">
       {{ t('layouts.header.themeConfig.resetConfigButton') }}
+    </NButton>
+
+    <NButton type="default" :block="true" @click="handleCleanSetting">
+      {{ t('layouts.header.themeConfig.clearStore') }}
     </NButton>
   </NSpace>
 </template>

@@ -76,7 +76,8 @@
         "message": {
           "copyConfigSuccess": "拷贝配置成功！",
           "resetConfigSuccess": "重置配置成功！"
-        }
+        },
+        "clearStore": "清理缓存"
       },
       "transitionSetting": {
         "title": "动画设置",

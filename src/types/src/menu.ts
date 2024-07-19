@@ -10,6 +10,7 @@ export interface Menu {
 	// Name of the menu item.
 	// 菜单项名称。
 	name: string;
+	title: string;
 
 	// Icon for the menu item.
 	// 菜单项图标。

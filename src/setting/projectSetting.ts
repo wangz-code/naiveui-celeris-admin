@@ -40,7 +40,7 @@ export const DEFAULT_PROJECT_SETTING: ProjectSetting = {
 
 	// 是否显示全局底部
 	// Whether to display the global footer
-	shouldShowFooter: true,
+	shouldShowFooter: false,
 
 	// 头部设置
 	// The header setting
