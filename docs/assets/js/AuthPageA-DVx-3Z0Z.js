@@ -1,0 +1,1 @@
+import{ai as t,R as e}from"./celerisComponents-CqXnuMA9.js";import{d as s,N as o,u as r,R as a}from"./vue-B5H4WroO.js";import{u as n}from"./index-CQkDbsIj.js";const i=s({__name:"AuthPageA",setup(s){const{t:i}=n();return(s,n)=>{const u=t;return a(),o(u,{title:r(i)("page.permission.roleButtonText",{role:r(e).ADMIN})},null,8,["title"])}}});export{i as default};
