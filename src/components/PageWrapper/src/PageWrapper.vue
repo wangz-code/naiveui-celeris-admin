@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NBackTop } from "naive-ui";
+
 interface PageWrapperProps {
 	useScrollbar?: boolean;
 }
@@ -6,16 +8,20 @@ interface PageWrapperProps {
 withDefaults(defineProps<PageWrapperProps>(), {
 	useScrollbar: true,
 });
+const { getShouldUseOpenBackTop } = useAppSetting();
 </script>
 
 <template>
 	<div class="page-wrapper" :class="[{ 'scrollbar-enabled': useScrollbar }]">
 		<NScrollbar v-if="useScrollbar" class="rounded-2xl">
 			<div class="m-4">
-        <slot />
-      </div>
+				<slot />
+			</div>
+			<NBackTop v-if="getShouldUseOpenBackTop" :bottom="160" :right="0" />
 		</NScrollbar>
-		<slot v-else />
+		<div v-else class="m-4">
+			<slot />
+		</div>
 	</div>
 </template>
 

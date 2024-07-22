@@ -81,7 +81,10 @@
         "enableProgressBar": "Enable Progress Bar",
         "enablePageLoadingTransition": "Enable Page Loading Animation",
         "routeTransition": "Route Transition"
-      }
+      },
+      "layout": "Page Layout",
+      "footer": "Footer",
+      "backtop": "Back Top"
     },
     "userInfo": {
       "userInformation": "User Information",

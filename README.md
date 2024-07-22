@@ -18,6 +18,7 @@ naiveui-celeris-admin 是抽取 celeris 样式
 -   vite-plugin-mock 拦截请求模拟测试数据
 -   icon 使用 xicons, src/components/Iconx 组件亦支持本地 svg 字符串导入
 -   移除所有@celeris/xxx 依赖包
+-   为什么不用mockjs 因为打包后gitpage不支持
 
 ### 开发
 

@@ -101,7 +101,7 @@ const collapsedWidth = computed<number>(() => (collapsed.value ? 64 : 300));
 <template>
 	<div :class="collapsed ? 'w-16' : 'w-60'" class="transition-width h-full shrink-0 flex-col overflow-hidden duration-75">
 		<NScrollbar class="max-h-[calc(100vh_-_4rem)]">
-			<NMenu ref="menuInstRef" v-model:value="activeMenu" :collapsed="collapsed" :collapsed-width="collapsedWidth" :mode="mode" :options="menuList" />
+			<NMenu ref="menuInstRef" accordion v-model:value="activeMenu" :collapsed="collapsed" :collapsed-width="collapsedWidth" :mode="mode" :options="menuList" />
 		</NScrollbar>
 	</div>
 </template>
