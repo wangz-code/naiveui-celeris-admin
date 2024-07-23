@@ -59,12 +59,12 @@ function selectDropdown(key) {
         <NBreadcrumbItem>
           <NDropdown v-if="breadcrumb.children" :options="breadcrumb.options" @select="selectDropdown">
             <span>
-              <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-4px text-16px" />
+              <!-- <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-4px text-16px" /> -->
               <span>{{ localize(breadcrumb.name) }}</span>
             </span>
           </NDropdown>
           <template v-else>
-            <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-2" />
+            <!-- <Iconx v-if="breadcrumb.icon" :component="breadcrumb.icon" :size="16" class="inline-block align-text-bottom mr-2" /> -->
             <span>{{ localize(breadcrumb.name) }}</span>
           </template>
         </NBreadcrumbItem>
