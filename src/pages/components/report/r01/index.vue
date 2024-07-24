@@ -10,61 +10,64 @@
 			<template #header>
 				<n-h4>{{ t("routes.components.report001") }}</n-h4>
 			</template>
+			<template #header-extra>
+				<div class="m-b-sm">
+					<n-space>
+						<n-button strong secondary>下载模板</n-button>
+						<n-button strong secondary>批量导入</n-button>
+						<n-button strong secondary>导出Excel</n-button>
+						<n-button strong secondary>打印</n-button>
+						<n-dropdown trigger="hover" :options="actionOpts" @select="handleSelect">
+							<n-button>更多...</n-button>
+						</n-dropdown>
+						<i-button type="primary" :icon="CirclePlus">新增</i-button>
+					</n-space>
+				</div>
+			</template>
 
 			<n-form ref="formRef" label-placement="left" label-width="auto" :model="formValue">
-				<n-grid :x-gap="8" :y-gap="0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" responsive="screen">
+				<n-grid :x-gap="8" :y-gap="0" cols="2 s:3 m:4 l:4 xl:6" responsive="screen">
 					<n-grid-item>
-						<n-form-item label="姓名" path="user.name">
+						<n-form-item label="模糊查询" path="where">
+							<n-input v-model:value="formValue.where" placeholder="输入关键字" />
+						</n-form-item>
+					</n-grid-item>
+					<n-grid-item>
+						<n-form-item label="姓名" path="user.name" :rule="[{ required: true, message: '姓名必填' }]">
 							<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
 						</n-form-item>
 					</n-grid-item>
-					<n-grid-item>
-						<n-form-item label="年龄" path="user.age">
-							<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
+					<n-grid-item :span="2">
+						<n-form-item label="单据日期" path="phone">
+							<n-date-picker v-model:value="formValue.dateRange" type="daterange" clearable />
 						</n-form-item>
 					</n-grid-item>
 					<n-grid-item>
-						<n-form-item label="电话号码" path="phone">
-							<n-input v-model:value="formValue.phone" placeholder="电话号码" />
+						<n-form-item label="收款状态" path="phone">
+							<n-select v-model:value="formValue.saleValue" placeholder="Select" :options="generalOptions" />
 						</n-form-item>
 					</n-grid-item>
-					<n-grid-item>
-						<n-form-item label="电话号码" path="phone">
-							<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-						</n-form-item>
-					</n-grid-item>
-					<n-grid-item>
-						<n-form-item label="姓名" path="user.name">
-							<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-						</n-form-item>
-					</n-grid-item>
+
 					<n-grid-item>
 						<n-space reverse>
 							<n-button-group>
-								<n-button type="primary" @click="comp = ChevronsDown"> 查询 </n-button>
-								<n-button @click="comp = ChevronsUp"> 重置 </n-button>
-								<n-button @click="filterShow = !filterShow">
+								<n-button attr-type="button" @click="handleValidateClick" type="info"> 查询 </n-button>
+								<n-button attr-type="reset"> 重置 </n-button>
+								<n-button attr-type="button" @click="filterShow = !filterShow">
 									<template #icon>
 										<Iconx :component="filterShow ? ChevronsUp : ChevronsDown" :size="16" />
 									</template>
 								</n-button>
-								<!-- <n-button> 导出 </n-button>
-								<n-button> 批量导入 </n-button> -->
 							</n-button-group>
 						</n-space>
 					</n-grid-item>
 				</n-grid>
 				<Transition name="fade" mode="out-in" appear>
 					<div v-show="filterShow">
-						<n-grid :x-gap="8" :y-gap="0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" responsive="screen">
+						<n-grid :x-gap="8" :y-gap="0" cols="2 s:3 m:4 l:4 xl:6" responsive="screen">
 							<n-grid-item>
-								<n-form-item label="姓名" path="user.name">
-									<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-								</n-form-item>
-							</n-grid-item>
-							<n-grid-item>
-								<n-form-item label="年龄" path="user.age">
-									<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
+								<n-form-item label="单据状态" path="user.name">
+									<n-select v-model:value="formValue.stateValue" placeholder="Select" :options="stateOptions" />
 								</n-form-item>
 							</n-grid-item>
 							<n-grid-item>
@@ -78,27 +81,29 @@
 								</n-form-item>
 							</n-grid-item>
 							<n-grid-item>
-								<n-form-item label="姓名" path="user.name">
-									<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+								<n-form-item label="电话号码" path="phone">
+									<n-input v-model:value="formValue.phone" placeholder="电话号码" />
 								</n-form-item>
 							</n-grid-item>
 						</n-grid>
 					</div>
 				</Transition>
 			</n-form>
+
 			<n-data-table :columns="columns()" :data="table.source" :pagination="pagination" :loading="table.isLoading" />
 		</n-card>
 	</page-wrapper>
 </template>
 
 <script lang="ts" setup>
-import { h } from "vue";
-import type { DataTableColumns, DataTableCreateSummary, FormInst } from "naive-ui";
-import { RowData, createColumns as columns } from "./data";
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { getR01 } from "@/apis/internal/report";
-import { ChevronsDown, ChevronsUp } from "@vicons/tabler";
-
+import { renderIcon } from "@/components/Iconx";
+import { ArrowUndoOutline, CloseOutline, Trash } from "@vicons/ionicons5";
+import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Send } from "@vicons/tabler";
+import type { DataTableCreateSummary, FormInst } from "naive-ui";
+import { h } from "vue";
+import { RowData, createColumns as columns } from "./data";
+import { Value } from "naive-ui/es/date-picker/src/interface";
 const { t } = useI18n();
 
 const message = useMessage();
@@ -109,67 +114,56 @@ const formValue = ref({
 		name: "",
 		age: "",
 	},
+	where: "",
 	phone: "",
 	select: "",
+	saleValue: "",
+	stateValue: "",
+	dateRange: [Date.now(), Date.now()] as Value,
 });
 const comp = ref<any>();
-const options = [
+const actionOpts = [
 	{
-		label: "Everybody's Got Something to Hide Except Me and My Monkey",
-		value: "song0",
-		disabled: true,
+		label: "批量发起",
+		key: "submit",
+		icon: renderIcon(Send),
 	},
 	{
-		label: "Drive My Car",
-		value: "song1",
+		label: "批量审核",
+		key: "audit",
+		icon: renderIcon(Checks),
 	},
 	{
-		label: "请选择",
-		value: "",
+		label: "批量驳回",
+		key: "reject",
+		icon: renderIcon(ArrowUndoOutline),
 	},
 	{
-		label: "You Won't See",
-		value: "song3",
-		disabled: true,
+		label: "批量反审",
+		key: "reAudit",
+		icon: renderIcon(CloseOutline),
 	},
 	{
-		label: "Nowhere Man",
-		value: "song4",
-	},
-	{
-		label: "Think For Yourself",
-		value: "song5",
-	},
-	{
-		label: "The Word",
-		value: "song6",
-	},
-	{
-		label: "Michelle",
-		value: "song7",
-		disabled: true,
-	},
-	{
-		label: "What goes on",
-		value: "song8",
-	},
-	{
-		label: "Girl",
-		value: "song9",
-	},
-	{
-		label: "I'm looking through you",
-		value: "song10",
-	},
-	{
-		label: "In My Life",
-		value: "song11",
-	},
-	{
-		label: "Wait",
-		value: "song12",
+		label: "批量删除",
+		key: "delete",
+		icon: renderIcon(Trash),
 	},
 ];
+
+const generalOptions = ["", "全部收款", "部分收款", "未收款"].map((v) => ({
+	label: v || "全部",
+	value: v,
+}));
+
+const stateOptions = ["", "起草", "待审", "通过"].map((v) => ({
+	label: v || "全部",
+	value: v,
+}));
+
+const handleSelect = (key) => {
+	message.success(key);
+};
+
 const handleValidateClick = (e: MouseEvent) => {
 	e.preventDefault();
 	formRef.value?.validate((errors) => {

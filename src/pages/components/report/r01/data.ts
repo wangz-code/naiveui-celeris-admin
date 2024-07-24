@@ -20,7 +20,7 @@ export const createColumns = (): DataTableColumns<RowData> => {
 			key: "billdate",
 		},
 		{
-			title: "顾客",
+			title: "姓名",
 			key: "name",
 		},
 		{
