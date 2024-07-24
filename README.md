@@ -1,7 +1,7 @@
 <div align='center'>
     <h1>naiveui-celeris-admin</h1>
     <div>
-        <img src='https://www.naiveui.com/assets/naivelogo-BdDVTUmz.svg' alt='celeris-web' width='200'  height='200'/>
+        <img src='https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png' alt='celeris-web' width='200'  height='200'/>
     </div>
 </div>
 
@@ -10,9 +10,9 @@
 naiveui-celeris-admin 是保留 celeris 味道,并将@celeris 依赖替换为本地
 
 ![index.png](https://raw.githubusercontent.com/WangSunio/img/main/images/index.png)
-
+---
 ![detail.png](https://raw.githubusercontent.com/WangSunio/img/main/images/detail.png)
-
+---
 ![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/report.png)
 
 ## 特点 {...celeris } 源仓库https://github.com/kirklin/celeris-web
