@@ -8,8 +8,6 @@ import { LocalesConfiguration } from "./config";
 export let i18n: ReturnType<typeof createI18n>;
 
 async function createI18nOptions(): Promise<I18nOptions> {
-  console.log('LocalesConfiguration.locale log==>',LocalesConfiguration.locale);
-  
   return deepMerge({
     legacy: false,
     locale: LocalesConfiguration.locale,
@@ -19,7 +17,6 @@ async function createI18nOptions(): Promise<I18nOptions> {
 }
 export async function setupI18n(app: App) {
   const options = await createI18nOptions();
-  console.log('createI18n options_options log==>',options);
   i18n = createI18n(options);
   app.use(i18n);
 }

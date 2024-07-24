@@ -70,9 +70,6 @@ function initializeI18n() {
 			return [key.slice(10, -5), value.default];
 		})
 	);
-	console.log('initializeI18n log==>',getLocale);
-	console.log('val log==>',getLocale.value);
-	
 	LocalesEngine.initLocales(() => ({
 		locale: getLocale.value,
 		fallbackLocale: "zh",

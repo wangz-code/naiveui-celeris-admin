@@ -143,8 +143,6 @@ export const usePermissionStore = defineStore({
 			routes = asyncRoutes;
 
 			menusApi().then((res: any) => {
-				console.log("apiMenu log==>", res.data.data);
-				console.log("asyncRoutes log==>", asyncRoutes);
 				this.setBackendMenuList(res.data.data);
 			});
 			// Convert multi-level routing to level 2 routing

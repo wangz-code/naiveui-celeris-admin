@@ -23,9 +23,6 @@ export class LocalesConfiguration {
   }
 
   static get locale(): string {
-    console.log('getLocale.value  getLocale.value  log==>',getLocale.value);
-    console.log('this.options.locale  log==>',this.options.locale);
-    
     return getLocale.value || this.options.locale;
   }
 

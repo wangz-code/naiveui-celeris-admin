@@ -82,7 +82,6 @@ function generateMenu() {
 	menuList.value = mapTreeStructure(menus, (menu) => transformProjectMenuToNaiveUIMenu(menu));
 	nextTick(() => {
 		menuInstRef.value?.showOption();
-		console.log("zhixing log==>", permissionStore.getBackendMenuList);
 	});
 }
 // Menu changes

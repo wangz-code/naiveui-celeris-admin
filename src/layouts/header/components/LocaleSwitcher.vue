@@ -7,8 +7,6 @@ import { Language } from "@vicons/ionicons5";
 
 const { getLocale, setProjectSetting } = useAppSetting();
 const { locale, availableLocales, t } = useI18n();
-console.log("locale.value log==>", locale.value);
-
 const options = computed(() =>
 	availableLocales.map((item) => ({
 		label: languagesNameList.find((languagesName) => languagesName.code === item)?.nativeName,
