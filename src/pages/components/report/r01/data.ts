@@ -1,4 +1,9 @@
+import { tableMoney } from "@/utils/src/numberUtils";
 import { DataTableColumns } from "naive-ui";
+
+type Cols = DataTableColumns & {
+	money: boolean;
+};
 
 export interface RowData {
 	key: string;
@@ -10,8 +15,9 @@ export interface RowData {
 	address: string;
 	state: number;
 }
+
 export const createColumns = (): DataTableColumns<RowData> => {
-	return [
+	return tableMoney([
 		{
 			type: "selection",
 		},
@@ -30,10 +36,12 @@ export const createColumns = (): DataTableColumns<RowData> => {
 		{
 			title: "销售金额",
 			key: "sales",
+			money: true,
 		},
 		{
 			title: "收款金额",
 			key: "payment",
+			money: true,
 		},
 		{
 			title: "地址",
@@ -43,5 +51,5 @@ export const createColumns = (): DataTableColumns<RowData> => {
 			title: "单据状态",
 			key: "state",
 		},
-	];
+	]);
 };
