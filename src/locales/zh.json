@@ -16,7 +16,9 @@
       "preview": "查看",
       "form": "表单",
       "formsimple": "简单表单",
-      "formcomplex": "复杂表单"
+      "formcomplex": "复杂表单",
+      "echarts": "Echarts",
+      "normal": "普通示例"
     },
     "chat": {
       "chat": "Chat"

@@ -1,7 +1,7 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
 import { LAYOUT } from "@/router/constant";
-import { Components, DeviceDesktopAnalytics, Edit, Forms, Report, Table } from "@vicons/tabler";
+import { ChartArcs, Components, DeviceDesktopAnalytics, Edit, Forms, Report, Table } from "@vicons/tabler";
 import { List } from "@vicons/ionicons5";
 
 const components: RouteRecordRaw = {
@@ -157,6 +157,28 @@ const components: RouteRecordRaw = {
 					component: () => import("@/pages/components/form/complex/index.vue"),
 					meta: {
 						title: "routes.components.formcomplex",
+						shouldHideInMenu: false,
+					},
+				},
+			],
+		},
+		{
+			path: "echarts",
+			name: "Echarts",
+			component: LAYOUT,
+			redirect: "/components/echarts/demo",
+			meta: {
+				title: "routes.components.echarts",
+				icon: ChartArcs,
+				shouldHideInMenu: false,
+			},
+			children: [
+				{
+					path: "demo",
+					name: "ChartsDemo",
+					component: () => import("@/pages/components/echarts/index.vue"),
+					meta: {
+						title: "routes.components.normal",
 						shouldHideInMenu: false,
 					},
 				},

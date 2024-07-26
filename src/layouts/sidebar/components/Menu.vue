@@ -95,6 +95,8 @@ watch(
 	}
 );
 const collapsedWidth = computed<number>(() => (collapsed.value ? 64 : 300));
+
+
 </script>
 
 <template>

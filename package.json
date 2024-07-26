@@ -36,6 +36,7 @@
     "destr": "^2.0.3",
     "detect-mobile": "^0.0.0",
     "echarts": "^5.5.0",
+    "echarts-gl": "^2.0.9",
     "headless-highlighter": "^0.0.0",
     "iso-639-1": "^3.1.2",
     "lodash": "^4.17.21",

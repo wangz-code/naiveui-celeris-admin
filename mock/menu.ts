@@ -215,6 +215,18 @@ export function createMenuList() {
 						},
 					],
 				},
+				{
+					title: "routes.components.echarts",
+					path: "/components/echarts",
+					children: [
+						{
+							title: "routes.components.normal",
+							shouldHideMenu: false,
+							shouldHideInMenu: false,
+							path: "/components/echarts/demo",
+						},
+					],
+				},
 			],
 		},
 		{

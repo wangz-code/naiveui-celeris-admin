@@ -16,7 +16,8 @@
       "preview": "View",
       "form": "Form",
       "formsimple": "Form Simple",
-      "formcomplex": "Form Complex"
+      "formcomplex": "Form Complex",
+      "echarts": "Echarts"
     },
     "chat": {
       "chat": "Chat"
