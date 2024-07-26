@@ -1,7 +1,7 @@
 // @unocss-include
 import type { RouteRecordRaw } from "vue-router";
 import { LAYOUT } from "@/router/constant";
-import { Components, DeviceDesktopAnalytics, Report, Table } from "@vicons/tabler";
+import { Components, DeviceDesktopAnalytics, Edit, Forms, Report, Table } from "@vicons/tabler";
 import { List } from "@vicons/ionicons5";
 
 const components: RouteRecordRaw = {
@@ -50,7 +50,7 @@ const components: RouteRecordRaw = {
 			path: "report",
 			name: "Report",
 			component: LAYOUT,
-			redirect: "/components/report/basic",
+			redirect: "/components/report/r01",
 			meta: {
 				title: "routes.components.report",
 				icon: DeviceDesktopAnalytics,
@@ -96,6 +96,29 @@ const components: RouteRecordRaw = {
 						title: "routes.components.listBasic",
 						shouldHideInMenu: false,
 					},
+					children: [
+						{
+							path: "detail",
+							name: "Detail",
+							component: () => import("@/pages/components/list/basic/detail.vue"),
+							meta: {
+								title: "routes.components.detail",
+								shouldHideInMenu: false,
+								shouldHideBreadcrumb: false,
+								currentActiveMenu: "/components/list/basic",
+							},
+						},
+						{
+							path: "preview",
+							name: "Preview",
+							component: () => import("@/pages/components/list/basic/preview.vue"),
+							meta: {
+								title: "routes.components.preview",
+								shouldHideInMenu: true,
+								currentActiveMenu: "/components/list/basic",
+							},
+						},
+					],
 				},
 				{
 					path: "card",
@@ -103,6 +126,37 @@ const components: RouteRecordRaw = {
 					component: () => import("@/pages/components/list/card/index.vue"),
 					meta: {
 						title: "routes.components.listCard",
+						shouldHideInMenu: false,
+					},
+				},
+			],
+		},
+		{
+			path: "form",
+			name: "Form",
+			component: LAYOUT,
+			redirect: "/components/form/simple",
+			meta: {
+				title: "routes.components.form",
+				icon: Edit,
+				shouldHideInMenu: false,
+			},
+			children: [
+				{
+					path: "simple",
+					name: "Simple",
+					component: () => import("@/pages/components/form/simple/index.vue"),
+					meta: {
+						title: "routes.components.formsimple",
+						shouldHideInMenu: false,
+					},
+				},
+				{
+					path: "complex",
+					name: "Complex",
+					component: () => import("@/pages/components/form/complex/index.vue"),
+					meta: {
+						title: "routes.components.formcomplex",
 						shouldHideInMenu: false,
 					},
 				},

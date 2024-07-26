@@ -53,13 +53,13 @@ function i18nRender(key: string) {
 }
 
 function transformProjectMenuToNaiveUIMenu(menu: Menu) {
-	const { path, meta, children, title } = menu;
+	const { path, children, title } = menu;
 	let icon = Components;
 	if (iconMap.get(title)) icon = iconMap.get(title).icon;
 	return {
 		label: () => {
 			if (children) {
-				return i18nRender(meta?.title as string);
+				return i18nRender(title as string);
 			}
 			return h(
 				RouterLink,
@@ -68,12 +68,12 @@ function transformProjectMenuToNaiveUIMenu(menu: Menu) {
 						path,
 					},
 				},
-				{ default: () => i18nRender(meta?.title as string) }
+				{ default: () => i18nRender(title as string) }
 			);
 		},
 		key: path,
-		icon: renderIcon(icon || (meta?.icon as string)), // || meta?.icon as string
-		collapseTitle: i18nRender(meta?.title as string),
+		icon: renderIcon(icon), // || meta?.icon as string
+		collapseTitle: i18nRender(title),
 	};
 }
 // Generate menu

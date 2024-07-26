@@ -105,74 +105,40 @@ export function createMenuList() {
 		},
 		{
 			title: "routes.components.components",
-			icon: {
-				name: "Components",
-			},
-			shouldHideSubMenuInMenu: false,
-			meta: {
-				title: "routes.components.components",
-				icon: {
-					name: "Components",
-				},
-				shouldHideSubMenuInMenu: false,
-			},
-			name: "routes.components.components",
 			shouldHideMenu: false,
 			path: "/components",
 			redirect: "/components/headlessTable/basic",
 			children: [
 				{
 					title: "routes.components.report",
-					name: "routes.components.report",
-					meta: {
-						title: "routes.components.report",
-					},
 					path: "/components/report",
 					redirect: "/components/report/r01",
 					children: [
 						{
 							title: "routes.components.report001",
-							name: "routes.components.report001",
-							shouldHideInMenu: false,
-							meta: {
-								title: "routes.components.report001",
-								shouldHideInMenu: false,
-							},
 							shouldHideMenu: false,
+							shouldHideInMenu: false,
 							path: "/components/report/r01",
 						},
 						{
 							title: "routes.components.report002",
-							name: "routes.components.report002",
-							shouldHideInMenu: false,
-							meta: {
-								title: "routes.components.report002",
-								shouldHideInMenu: false,
-							},
 							shouldHideMenu: false,
+							shouldHideInMenu: false,
 							path: "/components/report/r02",
 						},
 					],
 				},
 				{
 					title: "routes.components.list",
-					name: "routes.components.list",
-					meta: {
-						title: "routes.components.list",
-					},
 					path: "/components/list",
 					redirect: "/components/list/basic",
 					children: [
 						{
 							title: "routes.components.listBasic",
-							name: "routes.components.listBasic",
 							shouldHideInMenu: false,
-							meta: {
-								title: "routes.components.listBasic",
-								shouldHideInMenu: false,
-							},
 							shouldHideMenu: false,
 							path: "/components/list/basic",
+							shouldHideSubMenuInMenu: true,
 						},
 						{
 							title: "routes.components.listCard",
@@ -227,6 +193,25 @@ export function createMenuList() {
 							name: "routes.components.headlessTablePagination",
 							shouldHideMenu: false,
 							path: "/components/headlessTable/pagination",
+						},
+					],
+				},
+				{
+					title: "routes.components.form",
+					path: "/components/form",
+					redirect: "/components/form/simple",
+					children: [
+						{
+							title: "routes.components.formsimple",
+							shouldHideMenu: false,
+							shouldHideInMenu: false,
+							path: "/components/form/simple",
+						},
+						{
+							title: "routes.components.formcomplex",
+							shouldHideMenu: false,
+							shouldHideInMenu: false,
+							path: "/components/form/complex",
 						},
 					],
 				},

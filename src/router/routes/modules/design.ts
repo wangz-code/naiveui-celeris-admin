@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
 import { LAYOUT } from "@/router/constant";
-import { EditCircle, Palette, Typography } from "@vicons/tabler";
+import { Disabled2, EditCircle, Palette, Typography } from "@vicons/tabler";
 
 const design: RouteRecordRaw = {
   path: "/design",
@@ -9,7 +9,7 @@ const design: RouteRecordRaw = {
   redirect: "/design/palette",
   meta: {
     title: "routes.design.design",
-    icon: EditCircle,
+    icon: Disabled2,
   },
   children: [
     {

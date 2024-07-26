@@ -5,7 +5,18 @@
       "table": "Table Component",
       "headlessTable": "Headless Table",
       "headlessTableBasic": "Basic Table",
-      "headlessTablePagination": "Pagination Table"
+      "headlessTablePagination": "Pagination Table",
+      "report": "Report",
+      "report001": "Multiple Query",
+      "report002": "Simple Query",
+      "list": "List",
+      "listBasic": "listBasic",
+      "listCard": "listCard",
+      "detail": "Edit",
+      "preview": "View",
+      "form": "Form",
+      "formsimple": "Form Simple",
+      "formcomplex": "Form Complex"
     },
     "chat": {
       "chat": "Chat"

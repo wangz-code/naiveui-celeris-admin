@@ -9,9 +9,7 @@ enum API {
 
 // Define a function to call the menus API
 export function menusApi(errorMessageMode: MessageMode = "message") {
-	return new Promise((resolve) => {
-		resolve({ data: createMenuList() });
-	});
+	return new Promise((resolve) => resolve({ data: createMenuList() }));
 	return instance.get<any[]>(API.Menus);
 }
 

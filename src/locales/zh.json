@@ -7,11 +7,16 @@
       "headlessTableBasic": "基础表格",
       "headlessTablePagination": "分页表格",
       "report": "财务报表",
-      "report001": "订单销售明细表",
-      "report002": "销售收款汇总表",
+      "report001": "多条件查询报表",
+      "report002": "简单查询报表",
       "list": "列表",
       "listBasic": "基础列表",
-      "listCard": "卡片列表"
+      "listCard": "卡片列表",
+      "detail": "编辑",
+      "preview": "查看",
+      "form": "表单",
+      "formsimple": "简单表单",
+      "formcomplex": "复杂表单"
     },
     "chat": {
       "chat": "Chat"
