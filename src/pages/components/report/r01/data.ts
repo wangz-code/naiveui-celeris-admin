@@ -17,7 +17,7 @@ export interface RowData {
 }
 
 export const createColumns = (): DataTableColumns<RowData> => {
-	return tableMoney([
+	return [
 		{
 			type: "selection",
 		},
@@ -36,12 +36,14 @@ export const createColumns = (): DataTableColumns<RowData> => {
 		{
 			title: "销售金额",
 			key: "sales",
-			money: true,
+			align: "right",
+			render: tableMoney("sales"),
 		},
 		{
 			title: "收款金额",
 			key: "payment",
-			money: true,
+			align: "right",
+			render: tableMoney("payment"),
 		},
 		{
 			title: "地址",
@@ -51,5 +53,5 @@ export const createColumns = (): DataTableColumns<RowData> => {
 			title: "单据状态",
 			key: "state",
 		},
-	]);
+	];
 };

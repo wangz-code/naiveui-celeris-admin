@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-07-26
+ * @LastEditTime: 2024-08-06
  * @Description: content
 -->
 <template>
@@ -65,8 +65,8 @@
 					</n-space>
 					<n-space>
 						<n-button-group>
-							<i-button attr-type="button" @click="handleValidateClick" type="info" :icon="Search"></i-button>
-							<n-button attr-type="reset"> 重置 </n-button>
+							<i-button attr-type="button" title="查询" @click="handleValidateClick" type="info" :icon="Search"></i-button>
+							<i-button attr-type="reset"  title="重置"  :icon="Refresh"></i-button>
 							<n-button attr-type="button" @click="filterShow = !filterShow">
 								<template #icon>
 									<Iconx :component="filterShow ? ChevronsUp : ChevronsDown" :size="16" />
@@ -84,7 +84,7 @@
 <script lang="ts" setup>
 import { getR01 } from "@/apis/internal/report";
 import { renderIcon } from "@/components/Iconx";
-import { ArrowUndoOutline, CloseOutline, Trash } from "@vicons/ionicons5";
+import { ArrowUndoOutline, CloseOutline, Refresh, Resize, Trash } from "@vicons/ionicons5";
 import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Search, Send } from "@vicons/tabler";
 import type { DataTableCreateSummary, FormInst } from "naive-ui";
 import { Value } from "naive-ui/es/date-picker/src/interface";

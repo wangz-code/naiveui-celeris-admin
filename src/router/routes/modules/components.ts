@@ -100,7 +100,7 @@ const components: RouteRecordRaw = {
 						{
 							path: "detail",
 							name: "Detail",
-							component: () => import("@/pages/components/list/basic/detail.vue"),
+							component: () => import("@/pages/components/list/basic/index.vue"),
 							meta: {
 								title: "routes.components.detail",
 								shouldHideInMenu: false,
@@ -111,7 +111,7 @@ const components: RouteRecordRaw = {
 						{
 							path: "preview",
 							name: "Preview",
-							component: () => import("@/pages/components/list/basic/preview.vue"),
+							component: () => import("@/pages/components/list/basic/index.vue"),
 							meta: {
 								title: "routes.components.preview",
 								shouldHideInMenu: true,
