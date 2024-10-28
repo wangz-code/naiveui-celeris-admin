@@ -6,7 +6,7 @@ import { setupVueQuery } from "@/apis";
 import { setupDirectives } from "@/directives";
 import { setupI18n } from "@/locale";
 import { setupRouterGuard } from "@/router/guard";
-import "@/styles";
+// import "@/styles";
 import "virtual:uno.css";
 import { Iconx } from "./components/Iconx/index";
 import { router, setupRouter } from "./router";

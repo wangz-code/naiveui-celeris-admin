@@ -55,5 +55,6 @@ export function configVitePlugins(rootDir: string, viteEnv: Partial<ViteEnvVaria
 	// 拦截模拟请求
 	viteEnv.VITE_USE_MOCK && vitePlugins.push(viteMockServe());
 
+
 	return vitePlugins;
 }

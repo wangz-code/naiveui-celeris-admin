@@ -2,3 +2,5 @@
 node_modules/*
 dist/*
 autoResolver
+docs/*
+dist.zip
