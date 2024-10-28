@@ -1,0 +1,1 @@
+import{ai as t,R as e}from"./celerisComponents-DQ3ZWFAX.js";import{d as s,N as o,u as r,R as a}from"./vue-BtXWP-ej.js";import{u as n}from"./index-DpkC-lz3.js";const i=s({__name:"AuthPageB",setup(s){const{t:i}=n();return(s,n)=>{const u=t;return a(),o(u,{title:r(i)("page.permission.roleButtonText",{role:r(e).USER})},null,8,["title"])}}});export{i as default};
