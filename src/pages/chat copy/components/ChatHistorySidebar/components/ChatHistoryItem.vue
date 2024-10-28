@@ -56,7 +56,7 @@ const menuOptions = ref<MenuItem[]>(menuItems);
       <div class="menu-options flex justify-center opacity-80">
         <NDropdown :options="menuOptions">
           <NButton text>
-            <CAIcon :name="MenuHorizontalIcon" :size="20" />
+            <Iconx :component="MenuHorizontalIcon" :size="20" />
           </NButton>
         </NDropdown>
       </div>

@@ -20,10 +20,10 @@ defineOptions({
 			<header class="">
 				<Header />
 			</header>
-			<div class="block flex-1 h-full overflow-x-hidden rounded-2xl pl-0 pr-5 pt-0 pb-6">
-				<div class="min-h-full h-full w-full rounded-2xl common-bg">
+			<div class="h-full w-full common-bg radis-box">
+				<PageWrapper use-scrollbar>
 					<Content />
-				</div>
+				</PageWrapper>
 			</div>
 			<footer>
 				<Footer v-if="getShouldShowFooter" />
@@ -33,4 +33,13 @@ defineOptions({
 	</NEl>
 </template>
 
-<style scoped></style>
+<style scoped>
+.radis-box {
+	border-radius: 1rem 1rem 0rem 0rem;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 10px 10px 0px 10px;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+}
+</style>

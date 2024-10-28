@@ -6,14 +6,7 @@
 html {
 	scrollbar-gutter: auto;
 }
-
+body,
 #app {
 	height: 100vh;
-}
-.app-logo {
-	height: 59px;
-}
-
-.max-h-context {
-	max-height: calc(100vh - 8rem);
 }

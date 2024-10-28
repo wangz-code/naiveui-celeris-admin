@@ -54,7 +54,7 @@ const isLightTheme = computed(() => !isDarkMode.value);
 
 <template>
   <!-- 应用程序 Logo 区域 -->
-  <div :class="`text-${titleSize}`" class="app-logo flex items-center"@click="navigateHome">
+  <div :class="`text-${titleSize}`" class="flex items-center"@click="navigateHome">
     <!-- 根据主题和模式显示 Logo 图片 -->
     <Transition
       appear :name="RouterTransitionConstants.FADE" mode="in-out"

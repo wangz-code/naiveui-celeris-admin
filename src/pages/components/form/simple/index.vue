@@ -1,11 +1,11 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-07-26
+ * @LastEditTime: 2024-10-28
  * @Description: content
 -->
 <template>
-	<page-wrapper use-scrollbar>
+	<div>
 		<n-card>
 			<n-form ref="formRef" label-placement="left" label-width="auto" :model="formValue">
 				<n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" responsive="screen">
@@ -78,7 +78,7 @@
 			</n-form>
 			<n-data-table :columns="columns()" :data="table.source" :pagination="pagination" :loading="table.isLoading" />
 		</n-card>
-	</page-wrapper>
+	</div>
 </template>
 
 <script lang="ts" setup>

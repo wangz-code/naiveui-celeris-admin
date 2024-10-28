@@ -1,48 +1,46 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-07-22
+ * @LastEditTime: 2024-10-28
  * @Description: content
 -->
 <template>
-	<PageWrapper use-scrollbar>
-		<n-card>
-			<n-form ref="formRef" inline :label-width="80" :model="formValue">
-				<n-form-item label="姓名" path="user.name">
-					<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-				</n-form-item>
-				<n-form-item label="年龄" path="user.age">
-					<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
-				</n-form-item>
-				<n-form-item label="电话号码" path="phone">
-					<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-				</n-form-item>
-				<n-form-item label="姓名" path="user.name">
-					<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-				</n-form-item>
-				<n-form-item label="年龄" path="user.age">
-					<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
-				</n-form-item>
-				<n-form-item label="电话号码" path="phone">
-					<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-				</n-form-item>
-				<n-form-item>
-					<n-button attr-type="button" type="primary" @click="handleValidateClick"> 查询 </n-button>
-				</n-form-item>
-			</n-form>
-			<n-space>
-				<n-button>Default</n-button>
-				<n-button type="tertiary"> Tertiary </n-button>
-				<n-button type="primary"> Primary </n-button>
-				<n-button type="tertiary"> Tertiary </n-button>
-				<n-button type="tertiary"> Tertiary </n-button>
-				<n-button type="tertiary"> Tertiary </n-button>
-				<n-button type="tertiary"> Tertiary </n-button>
-			</n-space>
-			<n-divider dashed />
-			<n-data-table :columns="state.columns" :data="state.data" :summary="state.summary" size="small" :pagination="pagination" />
-		</n-card>
-	</PageWrapper>
+	<n-card>
+		<n-form ref="formRef" inline :label-width="80" :model="formValue">
+			<n-form-item label="姓名" path="user.name">
+				<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+			</n-form-item>
+			<n-form-item label="年龄" path="user.age">
+				<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
+			</n-form-item>
+			<n-form-item label="电话号码" path="phone">
+				<n-input v-model:value="formValue.phone" placeholder="电话号码" />
+			</n-form-item>
+			<n-form-item label="姓名" path="user.name">
+				<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+			</n-form-item>
+			<n-form-item label="年龄" path="user.age">
+				<n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
+			</n-form-item>
+			<n-form-item label="电话号码" path="phone">
+				<n-input v-model:value="formValue.phone" placeholder="电话号码" />
+			</n-form-item>
+			<n-form-item>
+				<n-button attr-type="button" type="primary" @click="handleValidateClick"> 查询 </n-button>
+			</n-form-item>
+		</n-form>
+		<n-space>
+			<n-button>Default</n-button>
+			<n-button type="tertiary"> Tertiary </n-button>
+			<n-button type="primary"> Primary </n-button>
+			<n-button type="tertiary"> Tertiary </n-button>
+			<n-button type="tertiary"> Tertiary </n-button>
+			<n-button type="tertiary"> Tertiary </n-button>
+			<n-button type="tertiary"> Tertiary </n-button>
+		</n-space>
+		<n-divider dashed />
+		<n-data-table :columns="state.columns" :data="state.data" :summary="state.summary" size="small" :pagination="pagination" />
+	</n-card>
 </template>
 
 <script lang="ts" setup>

@@ -60,11 +60,11 @@ onBeforeMount(() => {
 
     <div class="social-button-group flex flex-col gap-4 mb-12">
       <NButton strong secondary size="large">
-        <CAIcon icon="tabler:brand-qq" class="mr-4" />
+        <Iconx icon="tabler:brand-qq" class="mr-4" />
         {{ t('page.login.form.socialButtons.signInWithQQ') }}
       </NButton>
       <NButton strong secondary>
-        <CAIcon icon="tabler:brand-wechat" class="mr-4" />
+        <Iconx icon="tabler:brand-wechat" class="mr-4" />
         {{ t('page.login.form.socialButtons.signInWithWeChat') }}
       </NButton>
     </div>
