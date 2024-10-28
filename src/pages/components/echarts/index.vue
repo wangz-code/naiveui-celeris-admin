@@ -1,13 +1,11 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-07-26
+ * @LastEditTime: 2024-10-28
  * @Description: content
 -->
 <template>
-	<page-wrapper use-scrollbar>
-		<n-card> <scatter3D></scatter3D> </n-card>
-	</page-wrapper>
+	<n-card> <scatter3D></scatter3D> </n-card>
 </template>
 
 <script lang="ts" setup>

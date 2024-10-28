@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { PageConstants } from "@/constants";
 import { formatToDateTime } from "@/utils";
-import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 const router = useRouter();
 const { t } = useI18n();
@@ -12,7 +11,6 @@ const state = reactive({
 </script>
 
 <template>
-  <PageWrapper>
     <NCard>
       <NSpace vertical size="large">
         <NResult status="success" :title="t('page.result.successPage.title')" :sub-title="t('page.result.successPage.subTitle')">
@@ -56,5 +54,4 @@ const state = reactive({
         </NCard>
       </NSpace>
     </NCard>
-  </PageWrapper>
 </template>

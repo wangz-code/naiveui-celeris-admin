@@ -21,7 +21,7 @@ const Bar = defineComponent((props) => {
 </script>
 
 <template>
-	<PageWrapper use-scrollbar>
+	<div>
 		<n-card title="卡片"> 卡片内容 </n-card>
 		<n-card title="按钮组" class="mt-5">
 			<Iconx size="30" :component="SafeIcon" />
@@ -64,10 +64,10 @@ const Bar = defineComponent((props) => {
 			<div></div>
 		</n-card>
 
-		<n-card  class="mt-10 mb-10">
+		<n-card class="mt-10 mb-10">
 			<Preview></Preview>
 			<Form></Form>
 		</n-card>
-	</PageWrapper>
+	</div>
 </template>
 <style scoped></style>

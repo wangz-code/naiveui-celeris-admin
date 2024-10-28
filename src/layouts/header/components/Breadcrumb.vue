@@ -49,7 +49,7 @@ function selectDropdown(key) {
 			<Iconx :component="HomeOutline" :size="16" />
 		</NBreadcrumbItem>
 		<TransitionGroup name="breadcrumbAnimation">
-			<template v-for="breadcrumb in breadcrumbs" :key="breadcrumb.path">
+			<template v-for="breadcrumb in breadcrumbs" :key="breadcrumb.name">
 				<NBreadcrumbItem @click="navigateTo({ path: breadcrumb.path })">
 					{{ localize(breadcrumb.meta.title) }}
 				</NBreadcrumbItem>

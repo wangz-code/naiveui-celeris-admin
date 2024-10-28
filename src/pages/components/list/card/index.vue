@@ -1,24 +1,22 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-07-22
+ * @LastEditTime: 2024-10-28
  * @Description: content
 -->
 <template>
-	<PageWrapper use-scrollbar>
-		<n-card title="menu">
-			<n-space vertical>
-				<n-switch v-model:value="accordion">
-					<template #checked> 手风琴 </template>
-					<template #unchecked> 普通 </template>
-				</n-switch>
-				<n-button @click="selectAndExpand('难吃')"> 选中第一项 </n-button>
-				<n-button @click="selectAndExpand('/components/headlessTable/basic')"> 选中第二项 </n-button>
-				<n-button @click="selectAndExpand('依然难吃')"> 选中第三项 </n-button>
-				<n-menu ref="menuInstRef" v-model:value="selectedKey" :options="options" :accordion="accordion" />
-			</n-space>
-		</n-card>
-	</PageWrapper>
+	<n-card title="menu">
+		<n-space vertical>
+			<n-switch v-model:value="accordion">
+				<template #checked> 手风琴 </template>
+				<template #unchecked> 普通 </template>
+			</n-switch>
+			<n-button @click="selectAndExpand('难吃')"> 选中第一项 </n-button>
+			<n-button @click="selectAndExpand('/components/headlessTable/basic')"> 选中第二项 </n-button>
+			<n-button @click="selectAndExpand('依然难吃')"> 选中第三项 </n-button>
+			<n-menu ref="menuInstRef" v-model:value="selectedKey" :options="options" :accordion="accordion" />
+		</n-space>
+	</n-card>
 </template>
 
 <script lang="ts">

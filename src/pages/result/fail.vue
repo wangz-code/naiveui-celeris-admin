@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { PageConstants } from "@/constants";
-import PageWrapper from "@/components/PageWrapper/src/PageWrapper.vue";
 
 const router = useRouter();
 const { t } = useI18n();
 </script>
 
 <template>
-  <PageWrapper>
     <NCard>
       <NSpace vertical size="large">
         <NResult status="error" :title="t('page.result.failPage.title')" :sub-title="t('page.result.failPage.subTitle')">
@@ -49,7 +47,6 @@ const { t } = useI18n();
         </NCard>
       </NSpace>
     </NCard>
-  </PageWrapper>
 </template>
 
 <style scoped>

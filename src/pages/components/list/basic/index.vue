@@ -1,84 +1,82 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-08-08
+ * @LastEditTime: 2024-10-28
  * @Description: content
 -->
 <template>
-	<page-wrapper use-scrollbar>
-		<n-card>
-			<n-form ref="formRef" label-placement="left" label-width="auto" :model="formValue">
-				<n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" responsive="screen">
+	<n-card>
+		<n-form ref="formRef" label-placement="left" label-width="auto" :model="formValue">
+			<n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" responsive="screen">
+				<n-grid-item>
+					<n-form-item label="模糊查询" path="where" :show-feedback="false">
+						<n-input v-model:value="formValue.where" placeholder="输入关键字" />
+					</n-form-item>
+				</n-grid-item>
+				<n-grid-item>
+					<n-form-item label="姓名" path="user.name" :show-feedback="false" :rule="[{ required: true, message: '姓名必填' }]">
+						<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
+					</n-form-item>
+				</n-grid-item>
+				<n-grid-item :span="2">
+					<n-form-item label="单据日期" :show-feedback="false" path="phone">
+						<n-date-picker v-model:value="formValue.dateRange" type="daterange" clearable />
+					</n-form-item>
+				</n-grid-item>
+				<n-grid-item>
+					<n-form-item label="收款状态" :show-feedback="false" path="phone">
+						<n-select v-model:value="formValue.saleValue" placeholder="Select" :options="generalOptions" />
+					</n-form-item>
+				</n-grid-item>
+				<n-grid-item>
+					<n-form-item label="单据状态" :show-feedback="false" path="user.name">
+						<n-select v-model:value="formValue.stateValue" placeholder="Select" :options="stateOptions" />
+					</n-form-item>
+				</n-grid-item>
+				<template v-if="filterShow">
 					<n-grid-item>
-						<n-form-item label="模糊查询" path="where" :show-feedback="false">
-							<n-input v-model:value="formValue.where" placeholder="输入关键字" />
+						<n-form-item label="电话号码" path="phone" :show-feedback="false">
+							<n-input v-model:value="formValue.phone" placeholder="电话号码" />
 						</n-form-item>
 					</n-grid-item>
 					<n-grid-item>
-						<n-form-item label="姓名" path="user.name" :show-feedback="false" :rule="[{ required: true, message: '姓名必填' }]">
-							<n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-						</n-form-item>
-					</n-grid-item>
-					<n-grid-item :span="2">
-						<n-form-item label="单据日期" :show-feedback="false" path="phone">
-							<n-date-picker v-model:value="formValue.dateRange" type="daterange" clearable />
+						<n-form-item label="电话号码" path="phone" :show-feedback="false">
+							<n-input v-model:value="formValue.phone" placeholder="电话号码" />
 						</n-form-item>
 					</n-grid-item>
 					<n-grid-item>
-						<n-form-item label="收款状态" :show-feedback="false" path="phone">
-							<n-select v-model:value="formValue.saleValue" placeholder="Select" :options="generalOptions" />
+						<n-form-item label="电话号码" path="phone" :show-feedback="false">
+							<n-input v-model:value="formValue.phone" placeholder="电话号码" />
 						</n-form-item>
 					</n-grid-item>
-					<n-grid-item>
-						<n-form-item label="单据状态" :show-feedback="false" path="user.name">
-							<n-select v-model:value="formValue.stateValue" placeholder="Select" :options="stateOptions" />
-						</n-form-item>
-					</n-grid-item>
-					<template v-if="filterShow">
-						<n-grid-item>
-							<n-form-item label="电话号码" path="phone" :show-feedback="false">
-								<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-							</n-form-item>
-						</n-grid-item>
-						<n-grid-item>
-							<n-form-item label="电话号码" path="phone" :show-feedback="false">
-								<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-							</n-form-item>
-						</n-grid-item>
-						<n-grid-item>
-							<n-form-item label="电话号码" path="phone" :show-feedback="false">
-								<n-input v-model:value="formValue.phone" placeholder="电话号码" />
-							</n-form-item>
-						</n-grid-item>
-					</template>
-				</n-grid>
-				<n-flex class="m-t-sm m-b-sm" justify="space-between">
-					<n-space>
-						<i-button type="primary" :icon="CirclePlus">新增</i-button>
-						<n-button strong secondary>下载模板</n-button>
-						<n-button strong secondary>批量导入</n-button>
-						<n-button strong secondary>导出Excel</n-button>
-						<n-button strong secondary>打印</n-button>
-						<n-dropdown trigger="hover" :options="actionOpts" @select="handleSelect">
-							<n-button>更多...</n-button>
-						</n-dropdown>
-					</n-space>
-					<n-space>
-						<n-button-group>
-							<i-button attr-type="button" title="查询" @click="handleValidateClick" type="info" :icon="Search"></i-button>
-							<i-button attr-type="reset" title="重置" :icon="Refresh"></i-button>
-							<n-button attr-type="button" @click="filterShow = !filterShow">
-								<template #icon>
-									<Iconx :component="filterShow ? ChevronsUp : ChevronsDown" :size="16" />
-								</template>
-							</n-button>
-						</n-button-group>
-					</n-space>
-				</n-flex>
-			</n-form>
-			<n-data-table :columns="columns(renderCol)" :data="table.source" :pagination="pagination" :loading="table.isLoading" />
-		</n-card>
-	</page-wrapper>
+				</template>
+			</n-grid>
+			<n-flex class="m-t-sm m-b-sm" justify="space-between">
+				<n-space>
+					<i-button type="primary" :icon="CirclePlus">新增</i-button>
+					<n-button strong secondary>下载模板</n-button>
+					<n-button strong secondary>批量导入</n-button>
+					<n-button strong secondary>导出Excel</n-button>
+					<n-button strong secondary>打印</n-button>
+					<n-dropdown trigger="hover" :options="actionOpts" @select="handleSelect">
+						<n-button>更多...</n-button>
+					</n-dropdown>
+				</n-space>
+				<n-space>
+					<n-button-group>
+						<i-button attr-type="button" title="查询" @click="handleValidateClick" type="info" :icon="Search"></i-button>
+						<i-button attr-type="reset" title="重置" :icon="Refresh"></i-button>
+						<n-button attr-type="button" @click="filterShow = !filterShow">
+							<template #icon>
+								<Iconx :component="filterShow ? ChevronsUp : ChevronsDown" :size="16" />
+							</template>
+						</n-button>
+					</n-button-group>
+				</n-space>
+			</n-flex>
+		</n-form>
+		<n-data-table :columns="columns(renderCol)" :data="table.source" :pagination="pagination" :loading="table.isLoading" />
+	</n-card>
 </template>
 
 <script lang="ts" setup>
