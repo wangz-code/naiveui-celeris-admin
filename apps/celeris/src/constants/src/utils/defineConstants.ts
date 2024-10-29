@@ -1,4 +1,4 @@
-import pick from "lodash/pick";
+import { pick } from "@/utils";
 
 /**
  * Utility function to determine the raw type of a value.

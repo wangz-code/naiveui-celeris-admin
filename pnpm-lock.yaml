@@ -24,6 +24,9 @@ importers:
 
   apps/celeris:
     dependencies:
+      '@kirklin/logger':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@kirklin/palette':
         specifier: ^0.1.1
         version: 0.1.1
@@ -1341,6 +1344,9 @@ packages:
 
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+
+  '@kirklin/logger@0.0.2':
+    resolution: {integrity: sha512-CGZ9HGmHGTcGnU8CDQm7RR7hZgxLyRHTIFpS1FDCQkVaipdL/poq72ibpKqqQflomgKRCYV6GReP7ZXEZeDx1w==}
 
   '@kirklin/palette@0.1.1':
     resolution: {integrity: sha512-0Anm4y7CFwkOS/vZEUjmMa1Rmxu/YfKEKXUZbw1lqN0KCN2YoJ4mZs7yJ+6t7UGCiW/Mk7izXEZ6tt7m5VFDiw==}
@@ -5523,6 +5529,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@juggle/resize-observer@3.4.0': {}
+
+  '@kirklin/logger@0.0.2': {}
 
   '@kirklin/palette@0.1.1':
     dependencies:
