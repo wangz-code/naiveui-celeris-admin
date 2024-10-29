@@ -10,7 +10,7 @@ import { EncryptionFactory, createStorageName } from "@/utils";
 import type { Pinia } from "pinia";
 import destr from "destr";
 import { createPersistedState } from "pinia-plugin-persistedstate";
-import type { PersistedStateFactoryOptions, Serializer } from "pinia-plugin-persistedstate";
+import type {  PluginOptions, Serializer } from "pinia-plugin-persistedstate";
 import {
   SHOULD_ENABLE_STORAGE_ENCRYPTION,
   STORAGE_CIPHER_IV,
@@ -69,7 +69,7 @@ export function registerPiniaPersistPlugin(pinia: Pinia) {
  * @param keyPrefix prefix for storage key 储存键前缀
  * @returns persisted state factory options
  */
-export function createPersistedStateOptions(keyPrefix: string): PersistedStateFactoryOptions {
+export function createPersistedStateOptions(keyPrefix: string): PluginOptions {
   return {
     storage: localStorage,
     key: id => `${keyPrefix}__${id}`,
