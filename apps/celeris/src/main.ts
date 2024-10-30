@@ -4,7 +4,7 @@ import App from "@/App.vue";
 import { initializeConfiguration } from "@/AppConfiguration";
 import { setupVueQuery } from "@/apis";
 import { setupDirectives } from "@/directives";
-import { setupI18n } from "@/locale";
+import { setupI18n } from "@/locales";
 import { setupRouterGuard } from "@/router/guard";
 import "@/styles";
 import "virtual:uno.css";

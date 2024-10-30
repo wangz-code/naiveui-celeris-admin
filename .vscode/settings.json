@@ -193,7 +193,7 @@
   "cssVariables.lookupFiles": ["packages/core/base/design/src/**/*.css"],
 
   "i18n-ally.localesPaths": [
-    "apps/celeris/src/locales",
+    "apps/celeris/src/locales/langs",
   ],
   "i18n-ally.pathMatcher": "{locale}/{namespace}.{ext}",
   "i18n-ally.enabledParsers": ["json"],
