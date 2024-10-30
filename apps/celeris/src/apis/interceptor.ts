@@ -1,8 +1,10 @@
 import { useUserStore } from '@/store/modules/user';
-import axios, { Axios, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import { useGlobSetting } from '../composables/setting/useGlobSetting';
 
+const { API_URL } = useGlobSetting();
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: API_URL,
   timeout: 5000,
 });
 
@@ -37,4 +39,5 @@ instance.interceptors.response.use(
 const Post = <T>(url: string, data?: any, config?: AxiosRequestConfig<any> | undefined) => instance.post<any, T>(url, data, config);
 const Get = <T>(url: string, config?: AxiosRequestConfig<any> | undefined) => instance.get<any, T>(url, config);
 
-export { instance, Post, Get };
+export { Get, instance, Post };
+
