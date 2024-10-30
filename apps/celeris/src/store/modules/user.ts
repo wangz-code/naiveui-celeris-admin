@@ -183,8 +183,9 @@ export const useUserStore = defineStore(APP_USER_STORE_ID, {
     ) {
       try {
         const { errorMessageMode, redirectToHome = true, ...loginParams } = payload;
-        const { data, status } = await loginApi(loginParams);
-        if (status == 'fail') return;
+        const { data, status, message } = await loginApi(loginParams);
+        console.log('status log==>', status, message);
+        if (status == 'fail') throw message;
         this.setToken(data.token);
         return this.performAfterLoginAction(redirectToHome);
       } catch (error) {
@@ -226,11 +227,11 @@ export const useUserStore = defineStore(APP_USER_STORE_ID, {
       if (!this.getToken) {
         return null;
       }
-      const userInfo = await userInfoApi();
-      const { roles = [] } = userInfo;
+      const { data } = await userInfoApi();
+      const { roles = [] } = data;
       this.setRoleList(roles);
-      this.setUserInfo(userInfo);
-      return userInfo;
+      this.setUserInfo(data);
+      return data;
     },
 
     /**

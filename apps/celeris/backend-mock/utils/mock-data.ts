@@ -1,32 +1,26 @@
 export interface UserInfo {
   id: number;
-  password: string;
-  realName: string;
   roles: string[];
   username: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  avatarUrl: string;
+  homePageUrl: string;
+  token: string;
 }
 
 export const MOCK_USERS: UserInfo[] = [
   {
-    id: 0,
-    password: '123456',
-    realName: 'Vben',
-    roles: ['super'],
-    username: 'vben',
-  },
-  {
     id: 1,
-    password: '123456',
-    realName: 'Admin',
-    roles: ['admin'],
     username: 'admin',
-  },
-  {
-    id: 2,
-    password: '123456',
-    realName: 'Jack',
-    roles: ['user'],
-    username: 'jack',
+    fullName: 'Kirk Lin',
+    email: 'hi@kirklin.cn',
+    phone: '15912345678',
+    avatarUrl: 'https://cdn-fusion.imgimg.cc/i/2024/5553dc14e1b5ce44.jpg',
+    homePageUrl: '/dashboard/index',
+    roles: ['admin'],
+    token: 'adminFakeToken',
   },
 ];
 

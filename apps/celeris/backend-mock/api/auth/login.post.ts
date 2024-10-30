@@ -1,19 +1,9 @@
 export default defineEventHandler(async (event) => {
   const { password, username } = await readBody(event);
   console.log('password log==>', password);
+  if (!password || !username) return useResponseError('请输入账号和密码');
 
-  if (!password || !username || username != 'admin') {
-    setResponseStatus(event, 400);
-    return useResponseError('BadRequestException', 'Username and password are required');
-  }
-  return useResponseSuccess({
-    id: '1',
-    username: 'kirklin',
-    fullName: 'Kirk Lin',
-    email: 'hi@kirklin.cn',
-    phone: '15912345678',
-    avatarUrl: 'https://cdn-fusion.imgimg.cc/i/2024/5553dc14e1b5ce44.jpg',
-    homePageUrl: '/dashboard/index',
-    token: 'adminFakeToken',
-  });
+  const user = MOCK_USERS.find((item) => item.username == username);
+  if (!user) return useResponseError('用户不存在');
+  return useResponseSuccess(user);
 });

@@ -37,6 +37,7 @@ export function useResponseError(message: string, error: any = null) {
     data: null,
     error,
     message,
+    status: 'fail',
   };
 }
 

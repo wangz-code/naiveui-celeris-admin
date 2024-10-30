@@ -30,7 +30,6 @@ async function signIn(e: Event) {
     // Validate the login form
     await loginFormRef.value?.validate();
     loading.value = true;
-
     try {
       // Login the user
       const userInfo = await useUserStore().login({
@@ -40,12 +39,13 @@ async function signIn(e: Event) {
       });
       if (userInfo) {
         notification.success({
+          duration:3000,
           title: t('page.login.notification.loginSuccessMessage'),
           content: t('page.login.notification.welcomeBackMessage', { username: userInfo.fullName }),
         });
       }
     } catch (error) {
-      message.error(t('page.login.form.incorrectAccountOrPassword'));
+      message.error(String(error));
     }
   } finally {
     loading.value = false;

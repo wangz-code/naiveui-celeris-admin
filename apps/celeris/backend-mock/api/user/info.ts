@@ -1,10 +1,8 @@
-import { verifyAccessToken } from '~/utils/jwt-utils';
-import { unAuthorizedResponse } from '~/utils/response';
-
 export default eventHandler((event) => {
-  const userinfo = verifyAccessToken(event);
-  if (!userinfo) {
-    return unAuthorizedResponse(event);
+  const authorization = event.headers.get('authorization');
+  if (!authorization) {
+    return useResponseError('token 不存在');
   }
-  return useResponseSuccess(userinfo);
+  const user = MOCK_USERS.find((item) => item.token == authorization);
+  return useResponseSuccess(user);
 });
