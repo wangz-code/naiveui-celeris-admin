@@ -33,6 +33,8 @@ export function userInfoApi() {
 }
 
 // Define a function to call the permission code API
-export function permissionCodeApi(errorMessageMode: MessageMode = 'dialog') {}
+export function permissionCodeApi(errorMessageMode: MessageMode = 'dialog') {
+  return Get<DefRes<string[]>>('/auth/permission');
+}
 
 export { API };

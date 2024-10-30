@@ -10,32 +10,11 @@ import { flattenMultiLevelRoutes } from '@/utils';
 import { defineStore } from 'pinia';
 import type { RouteRecordRaw } from 'vue-router';
 
-// 定义权限状态接口
-// Define the interface for permission state
-interface PermissionState {
-  // 存储用户的权限码列表，可以是字符串或数字
-  // Store the user's permission code list, which can be strings or numbers
-  permissionCodes: string[] | number[];
-  // 当前路由是否是动态添加的标识
-  // Flag indicating whether the current route is dynamically added
-  shouldAddRouteDynamically: boolean;
-  // 上一次菜单更新的时间戳，用于判断是否需要更新菜单
-  // Timestamp of the last menu update, used to determine if the menu needs to be updated
-  lastMenuBuildTime: number;
-  // 后台控制的菜单列表，用于动态生成路由表
-  // Menu list controlled by backend for dynamic route generation
-  backendMenuList: Menu[];
-  // 前端控制的菜单列表，通过用户角色来过滤
-  // Menu list controlled by frontend, filtered by user roles
-  frontendMenuList: Menu[];
-}
-
-export const usePermissionStore = defineStore({
-  id: APP_PERMISSION_STORE_ID,
-  state: (): PermissionState => ({
+export const usePermissionStore = defineStore(APP_PERMISSION_STORE_ID, {
+  state: () => ({
     // 存储用户的权限码列表，可以是字符串或数字
     // Store the user's permission code list, which can be strings or numbers
-    permissionCodes: [],
+    permissionCodes: [] as string[],
     // 当前路由是否是动态添加的标识
     // Flag indicating whether the current route is dynamically added
     shouldAddRouteDynamically: false,
@@ -46,10 +25,10 @@ export const usePermissionStore = defineStore({
     lastMenuBuildTime: 0,
     // 后台控制的菜单列表，用于动态生成路由表
     // Menu list controlled by backend for dynamic route generation
-    backendMenuList: [],
+    backendMenuList: [] as Menu[],
     // 前端控制的菜单列表，通过用户角色来过滤
     // Menu list controlled by frontend, filtered by user roles
-    frontendMenuList: [],
+    frontendMenuList: [] as Menu[],
   }),
   getters: {
     // 获取用户的权限码列表
@@ -116,8 +95,8 @@ export const usePermissionStore = defineStore({
     },
 
     async changePermissionCode() {
-      const permissionCodes = await permissionCodeApi();
-      this.setPermissionCodes(permissionCodes);
+      const { data } = await permissionCodeApi();
+      this.setPermissionCodes(data);
     },
 
     async buildRoutesAction(): Promise<RouteRecordRaw[]> {
