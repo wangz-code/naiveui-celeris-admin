@@ -18,7 +18,7 @@ const chat: RouteRecordRaw = {
 		{
 			path: "index",
 			name: "Chat",
-			component: () => import("@/pages/chat/index.vue"),
+			component: () => import("@/views/chat/index.vue"),
 			meta: {
 				title: "routes.chat.chat",
 				icon: GameControllerSharp,

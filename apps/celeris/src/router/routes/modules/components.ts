@@ -29,7 +29,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "basic",
 					name: "headlessTableBasic",
-					component: () => import("@/pages/components/headless-table/basic/index.vue"),
+					component: () => import("@/views/components/headless-table/basic/index.vue"),
 					meta: {
 						title: "routes.components.headlessTableBasic",
 						shouldHideInMenu: false,
@@ -38,7 +38,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "pagination",
 					name: "headlessTablePagination",
-					component: () => import("@/pages/components/headless-table/pagination/index.vue"),
+					component: () => import("@/views/components/headless-table/pagination/index.vue"),
 					meta: {
 						title: "routes.components.headlessTablePagination",
 						shouldHideInMenu: false,
@@ -60,7 +60,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "r01",
 					name: "report001",
-					component: () => import("@/pages/components/report/r01/index.vue"),
+					component: () => import("@/views/components/report/r01/index.vue"),
 					meta: {
 						title: "routes.components.report001",
 						shouldHideInMenu: false,
@@ -69,7 +69,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "r02",
 					name: "report002",
-					component: () => import("@/pages/components/report/r02/index.vue"),
+					component: () => import("@/views/components/report/r02/index.vue"),
 					meta: {
 						title: "routes.components.report002",
 						shouldHideInMenu: false,
@@ -91,7 +91,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "basic",
 					name: "listBasic",
-					component: () => import("@/pages/components/list/basic/index.vue"),
+					component: () => import("@/views/components/list/basic/index.vue"),
 					meta: {
 						title: "routes.components.listBasic",
 						shouldHideInMenu: false,
@@ -100,7 +100,7 @@ const components: RouteRecordRaw = {
 						{
 							path: "detail",
 							name: "Detail",
-							component: () => import("@/pages/components/list/basic/index.vue"),
+							component: () => import("@/views/components/list/basic/index.vue"),
 							meta: {
 								title: "routes.components.detail",
 								shouldHideInMenu: false,
@@ -111,7 +111,7 @@ const components: RouteRecordRaw = {
 						{
 							path: "preview",
 							name: "Preview",
-							component: () => import("@/pages/components/list/basic/index.vue"),
+							component: () => import("@/views/components/list/basic/index.vue"),
 							meta: {
 								title: "routes.components.preview",
 								shouldHideInMenu: true,
@@ -123,7 +123,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "card",
 					name: "listCard",
-					component: () => import("@/pages/components/list/card/index.vue"),
+					component: () => import("@/views/components/list/card/index.vue"),
 					meta: {
 						title: "routes.components.listCard",
 						shouldHideInMenu: false,
@@ -145,7 +145,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "simple",
 					name: "Simple",
-					component: () => import("@/pages/components/form/simple/index.vue"),
+					component: () => import("@/views/components/form/simple/index.vue"),
 					meta: {
 						title: "routes.components.formsimple",
 						shouldHideInMenu: false,
@@ -154,7 +154,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "complex",
 					name: "Complex",
-					component: () => import("@/pages/components/form/complex/index.vue"),
+					component: () => import("@/views/components/form/complex/index.vue"),
 					meta: {
 						title: "routes.components.formcomplex",
 						shouldHideInMenu: false,
@@ -176,7 +176,7 @@ const components: RouteRecordRaw = {
 				{
 					path: "demo",
 					name: "ChartsDemo",
-					component: () => import("@/pages/components/echarts/index.vue"),
+					component: () => import("@/views/components/echarts/index.vue"),
 					meta: {
 						title: "routes.components.normal",
 						shouldHideInMenu: false,

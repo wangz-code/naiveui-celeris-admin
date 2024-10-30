@@ -17,7 +17,7 @@ const result: RouteRecordRaw = {
     {
       path: "success",
       name: "ResultSuccess",
-      component: () => import("@/pages/result/success.vue"),
+      component: () => import("@/views/result/success.vue"),
       meta: {
         title: "routes.result.success",
         icon: CheckmarkCircleOutline,
@@ -26,7 +26,7 @@ const result: RouteRecordRaw = {
     {
       path: "fail",
       name: "ResultFail",
-      component: () => import("@/pages/result/fail.vue"),
+      component: () => import("@/views/result/fail.vue"),
       meta: {
         title: "routes.result.fail",
         icon: CloseCircleOutline

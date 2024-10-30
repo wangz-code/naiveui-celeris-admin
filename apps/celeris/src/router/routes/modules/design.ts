@@ -15,7 +15,7 @@ const design: RouteRecordRaw = {
     {
       path: "palette",
       name: "Palette",
-      component: () => import("@/pages/design/palette/index.vue"),
+      component: () => import("@/views/design/palette/index.vue"),
       meta: {
         title: "routes.design.palette",
         icon: Palette,
@@ -24,7 +24,7 @@ const design: RouteRecordRaw = {
     {
       path: "typography",
       name: "Typography",
-      component: () => import("@/pages/design/typography/index.vue"),
+      component: () => import("@/views/design/typography/index.vue"),
       meta: {
         title: "routes.design.typography",
         icon: Typography,

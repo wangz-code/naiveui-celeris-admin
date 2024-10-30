@@ -18,7 +18,7 @@ const profile: RouteRecordRaw = {
     {
       path: "index",
       name: "Profile",
-      component: () => import("@/pages/profile/index.vue"),
+      component: () => import("@/views/profile/index.vue"),
       meta: {
         title: "routes.profile.profile",
         icon: CircleSquare,

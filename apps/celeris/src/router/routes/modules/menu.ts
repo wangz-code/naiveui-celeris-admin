@@ -25,7 +25,7 @@ const menu: RouteRecordRaw = {
 		{
 			path: "index",
 			name: "Menu",
-			component: () => import("@/pages/menu/index.vue"),
+			component: () => import("@/views/menu/index.vue"),
 			meta: {
 				title: "routes.menu.menu",
 				icon: Armchair,
@@ -35,7 +35,7 @@ const menu: RouteRecordRaw = {
 		{
 			path: "fuck",
 			name: "FuckMenu",
-			component: () => import("@/pages/menu/index.vue"),
+			component: () => import("@/views/menu/index.vue"),
 			meta: {
 				title: "routes.menu.menu",
 				icon: Armchair,
