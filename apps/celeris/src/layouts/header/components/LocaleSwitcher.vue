@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LocalesEngine, languagesNameList, useI18n } from "@/locale";
+import { LocalesEngine, languagesNameList, useI18n } from "@/locales";
 import { ActionIcon } from "@/components/ActionIcon";
 
 import { useAppSetting } from "@/composables";

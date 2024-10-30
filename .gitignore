@@ -5,3 +5,4 @@ autoResolver
 dist.zip
 .turbo
 .cache
+.nitro

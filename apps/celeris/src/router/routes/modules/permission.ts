@@ -28,7 +28,7 @@ const permission: RouteRecordRaw = {
         {
           path: "page",
           name: "FrontPageAuth",
-          component: () => import("@/pages/permission/frontend/index.vue"),
+          component: () => import("@/views/permission/frontend/index.vue"),
           meta: {
             title: "routes.permission.pageAuth",
           },
@@ -36,7 +36,7 @@ const permission: RouteRecordRaw = {
         {
           path: "button-permission",
           name: "FrontButtonAuth",
-          component: () => import("@/pages/permission/frontend/ButtonPermission.vue"),
+          component: () => import("@/views/permission/frontend/ButtonPermission.vue"),
           meta: {
             title: "routes.permission.buttonAuth",
           },
@@ -44,7 +44,7 @@ const permission: RouteRecordRaw = {
         {
           path: "auth-pageA",
           name: "FrontAuthPageA",
-          component: () => import("@/pages/permission/frontend/AuthPageA.vue"),
+          component: () => import("@/views/permission/frontend/AuthPageA.vue"),
           meta: {
             title: "routes.permission.authPageA",
             allowedRoles: [RoleConstants.ADMIN],
@@ -53,7 +53,7 @@ const permission: RouteRecordRaw = {
         {
           path: "auth-pageB",
           name: "FrontAuthPageB",
-          component: () => import("@/pages/permission/frontend/AuthPageB.vue"),
+          component: () => import("@/views/permission/frontend/AuthPageB.vue"),
           meta: {
             title: "routes.permission.authPageB",
             allowedRoles: [RoleConstants.USER],
@@ -73,7 +73,7 @@ const permission: RouteRecordRaw = {
         {
           path: "page",
           name: "BackAuthPage",
-          component: () => import("@/pages/permission/backend/index.vue"),
+          component: () => import("@/views/permission/backend/index.vue"),
           meta: {
             title: "routes.permission.pageAuth",
           },
@@ -81,7 +81,7 @@ const permission: RouteRecordRaw = {
         {
           path: "button-permission",
           name: "BackButtonAuth",
-          component: () => import("@/pages/permission/backend/ButtonPermission.vue"),
+          component: () => import("@/views/permission/backend/ButtonPermission.vue"),
           meta: {
             title: "routes.permission.buttonAuth",
           },

@@ -16,7 +16,7 @@ const dashboard: RouteRecordRaw = {
 		{
 			path: "index",
 			name: "Dashboard",
-			component: () => import("@/pages/dashboard/index.vue"),
+			component: () => import("@/views/dashboard/index.vue"),
 			meta: {
 				title: "routes.dashboard.dashboard",
 				icon: Dashboard,

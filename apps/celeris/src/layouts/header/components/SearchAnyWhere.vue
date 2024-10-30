@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Search } from "@vicons/ionicons5";
-import { NText } from "naive-ui";
+import { Search } from '@vicons/ionicons5';
+import { NText } from 'naive-ui';
 
 const { commandIcon, open } = useSearchDialog();
 

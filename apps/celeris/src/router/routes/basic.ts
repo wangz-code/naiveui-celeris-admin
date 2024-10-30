@@ -42,7 +42,7 @@ export const REDIRECT_ROUTE: RouteRecordRaw = {
     {
       path: "/redirect/:path(.*)",
       name: REDIRECT_NAME,
-      component: () => import("@/pages/internal/redirect/index.vue"),
+      component: () => import("@/views/internal/redirect/index.vue"),
       meta: {
         title: REDIRECT_NAME,
         shouldHideBreadcrumb: true,

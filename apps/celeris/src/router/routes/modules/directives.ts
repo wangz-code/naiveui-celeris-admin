@@ -17,7 +17,7 @@ const directive: RouteRecordRaw = {
     {
       path: "ripple",
       name: "Ripple",
-      component: () => import("@/pages/directives/ripple/index.vue"),
+      component: () => import("@/views/directives/ripple/index.vue"),
       meta: {
         title: "routes.directives.ripple",
         icon: DropCircle,
@@ -26,7 +26,7 @@ const directive: RouteRecordRaw = {
     {
       path: "copy",
       name: "Copy",
-      component: () => import("@/pages/directives/copy/index.vue"),
+      component: () => import("@/views/directives/copy/index.vue"),
       meta: {
         title: "routes.directives.copy",
         icon: CopyOutline,

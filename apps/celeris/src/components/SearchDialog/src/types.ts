@@ -1,5 +1,7 @@
+import type { Component } from "vue";
+
 export interface SearchGroupItem {
-  iconName: string | null | undefined;
+  iconName: string | null | Component;
   iconImage: string | null;
   key: number | string;
   title: string;

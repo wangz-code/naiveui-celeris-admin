@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import CollapseButton from "@/layouts/header/components/CollapseButton.vue";
-import FullScreenButton from "@/layouts/header/components/FullScreenButton.vue";
-import LocaleSwitcher from "@/layouts/header/components/LocaleSwitcher.vue";
-import UserInfoButton from "@/layouts/header/components/UserInfoButton.vue";
-import SettingButton from "@/layouts/setting/index.vue";
-import Breadcrumb from "@/layouts/header/components/Breadcrumb.vue";
-import SearchAnyWhere from "@/layouts/header/components/SearchAnyWhere.vue";
-import LayoutTabs from "@/layouts/tabs/index.vue";
+import CollapseButton from '@/layouts/header/components/CollapseButton.vue';
+import FullScreenButton from '@/layouts/header/components/FullScreenButton.vue';
+import LocaleSwitcher from '@/layouts/header/components/LocaleSwitcher.vue';
+import UserInfoButton from '@/layouts/header/components/UserInfoButton.vue';
+import SettingButton from '@/layouts/setting/index.vue';
+import Breadcrumb from '@/layouts/header/components/Breadcrumb.vue';
+import SearchAnyWhere from '@/layouts/header/components/SearchAnyWhere.vue';
+import LayoutTabs from '@/layouts/tabs/index.vue';
 
 defineOptions({
-  name: "HeaderLayout",
+  name: 'HeaderLayout',
 });
 </script>
 
@@ -21,11 +21,11 @@ defineOptions({
     <div class="flex-1 <lg:hidden">
       <Breadcrumb />
     </div>
-    <div class="flex flex-grow-1 items-center <2xl:hidden">
+    <div class="flex-1 items-center <xl:hidden">
       <LayoutTabs />
     </div>
     <div class="flex">
-      <NSpace >
+      <NSpace>
         <SearchAnyWhere />
         <div class="flex items-center justify-center">
           <NSpace>
@@ -42,6 +42,4 @@ defineOptions({
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

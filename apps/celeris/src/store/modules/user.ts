@@ -10,6 +10,7 @@ import { DEFAULT_PROJECT_SETTING } from '@/setting/projectSetting';
 import { router } from '@/router';
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 import { usePermissionStore } from '@/store/modules/permission';
+import { log } from 'console';
 
 interface UserState {
   // Whether the user should be logged in
@@ -182,10 +183,10 @@ export const useUserStore = defineStore(APP_USER_STORE_ID, {
     ) {
       try {
         const { errorMessageMode, redirectToHome = true, ...loginParams } = payload;
-        const { token } = await loginApi(loginParams, errorMessageMode);
-        console.log('token log==>', token);
-
-        this.setToken(token);
+        const { data, status, message } = await loginApi(loginParams);
+        console.log('status log==>', status, message);
+        if (status == 'fail') throw message;
+        this.setToken(data.token);
         return this.performAfterLoginAction(redirectToHome);
       } catch (error) {
         return Promise.reject(error);
@@ -226,11 +227,11 @@ export const useUserStore = defineStore(APP_USER_STORE_ID, {
       if (!this.getToken) {
         return null;
       }
-      const userInfo = await userInfoApi();
-      const { roles = [] } = userInfo;
+      const { data } = await userInfoApi();
+      const { roles = [] } = data;
       this.setRoleList(roles);
-      this.setUserInfo(userInfo);
-      return userInfo;
+      this.setUserInfo(data);
+      return data;
     },
 
     /**

@@ -1,6 +1,6 @@
 import { MockMethod } from "vite-plugin-mock";
 import { resultSuccess } from "../_util";
-import { RowData } from "@/pages/components/report/r01/data";
+import { RowData } from "@/views/components/report/r01/data";
 import { faker } from "@faker-js/faker";
 export default [
 	{
