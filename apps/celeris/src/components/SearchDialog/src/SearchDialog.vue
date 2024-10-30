@@ -49,12 +49,12 @@ const faltMenu = (menus: Menu[], newMenu: SearchGroupItem[] = []) => {
   return newMenu;
 };
 
-const applicationRouterSearchGroupData: SearchGroup = reactive({
+const applicationRouterSearchGroupData: SearchGroup = {
   name: t('searchDialog.applications'),
   items: faltMenu(menu),
-});
+};
 
-const searchGroups = ref<SearchGroups>([
+const searchGroups = shallowRef<SearchGroups>([
   applicationRouterSearchGroupData,
   {
     name: t('searchDialog.actions'),
@@ -196,16 +196,16 @@ onMounted(() => {
               </div>
               <NEl class="group-list">
                 <div
-                  v-for="item of group.items"
+                  v-for="(item, idx) of group.items"
                   :id="item.key.toString()"
-                  :key="item.key"
+                  :key="item.key + String(idx)"
                   class="item flex items-center my-2"
                   :class="{ active: item.key === activeItem }"
                   @click="executeAction(item.action)"
                 >
                   <NEl class="icon">
                     <NAvatar v-if="item.iconImage" round :size="28" :src="item.iconImage" />
-                    <Iconx v-if="item.iconName" :component="item.iconName" :size="18" />
+                    <Iconx v-else :component="item.iconName" :size="18" />
                   </NEl>
                   <div class="title grow">
                     <Highlighter highlight-class-name="highlight" :search-words="keywords" :auto-escape="true" :text-to-highlight="item.title" />
@@ -294,5 +294,7 @@ onMounted(() => {
 .search-dialog .search-dialog-action-bar .content-wrap .group .group-list .item:hover {
   box-shadow: 0 0 0 1px var(--primary-color-hover) inset;
 }
+.highlight {
+  color: white;
+}
 </style>
-@/components/SearchDialog/src/types

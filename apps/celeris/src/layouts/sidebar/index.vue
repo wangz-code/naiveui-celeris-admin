@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import SidebarHeader from "./components/SidebarHeader.vue";
-import SidebarFooter from "./components/SidebarFooter.vue";
-import { useMenuSetting } from "@/composables";
-import MenuLayout from "@/layouts/sidebar/components/Menu.vue";
-
+import SidebarHeader from './components/SidebarHeader.vue';
+import SidebarFooter from './components/SidebarFooter.vue';
+import { useMenuSetting } from '@/composables';
+import MenuLayout from '@/layouts/sidebar/components/Menu.vue';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 defineOptions({
-  name: "SidebarLayout",
+  name: 'SidebarLayout',
 });
 
 const isCollapse = useMenuSetting().getCollapsed;
 
 const sidebar = ref(null);
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const smAndLarger = breakpoints.greaterOrEqual('sm'); // sm and larger
+watch(
+  () => smAndLarger.value,
+  (n) => {
+    useMenuSetting().setMenuSetting({
+      collapsed: !n,
+    });
+  },
+);
 </script>
 
 <template>
-  <aside
-    id="sidebar"
-    class="sidebar flex flex-col h-full"
-    :class="{ collapsed: isCollapse, opened: !isCollapse }"
-  >
+  <aside id="sidebar" class="sidebar flex flex-col h-full" :class="{ collapsed: isCollapse, opened: !isCollapse }">
     <div ref="sidebar" class="sidebar-wrap grow flex flex-col">
       <SidebarHeader :collapsed="isCollapse" />
       <NScrollbar>
@@ -29,6 +35,4 @@ const sidebar = ref(null);
   </aside>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
