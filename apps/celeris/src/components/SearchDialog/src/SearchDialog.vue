@@ -269,7 +269,6 @@ onMounted(() => {
   gap: 10px;
   cursor: pointer;
   border-radius: 10px;
-  width: 100%;
   text-align: left;
 }
 .search-dialog .search-dialog-action-bar .content-wrap .group .group-list .item .icon {
