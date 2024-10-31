@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-10-28
+ * @LastEditTime: 2024-10-31
  * @Description: content
 -->
 <template>
@@ -46,7 +46,6 @@
 <script lang="ts" setup>
 import { h } from 'vue';
 import type { DataTableColumns, DataTableCreateSummary, FormInst } from 'naive-ui';
-const { t } = useI18n();
 
 interface RowData {
   key: number;

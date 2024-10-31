@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ChevronBackCircleOutline, ChevronForwardCircleOutline, SearchOutline } from '@vicons/ionicons5';
-import { SearchOutline as SearchOutlineSvg, SafeIcon, FullScreenSvg } from '#/components/Iconx/svgs';
+import { FullScreenSvg, SafeIcon, SearchOutline as SearchOutlineSvg } from '#/components/Iconx/svgs';
+import { ChevronForwardCircleOutline, SearchOutline } from '@vicons/ionicons5';
 
 import Form from './components/Form/index.vue';
 import Preview from './components/Preview/index.vue';
@@ -9,13 +9,12 @@ defineOptions({
 });
 
 const isChange = ref(false);
-const isComp = ref(false);
 
-const Foo = defineComponent((props) => {
+const Foo = defineComponent(() => {
   return () => h('b', '组件Foo');
 });
 
-const Bar = defineComponent((props) => {
+const Bar = defineComponent(() => {
   return () => h('b', '组件Bar');
 });
 </script>

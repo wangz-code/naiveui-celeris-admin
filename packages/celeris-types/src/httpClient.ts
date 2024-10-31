@@ -1,3 +1,5 @@
+import type { Recordable } from "./config";
+
 export type MessageMode = 'none' | 'dialog' | 'message' | 'notification' | undefined;
 
 export interface RequestOptions {

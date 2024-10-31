@@ -40,7 +40,7 @@ const rules: FormRules = {
       message: t('page.login.form.confirmPassword.error'),
     },
     {
-      validator: (rule: FormItemRule, value: string): boolean => {
+      validator: (_: FormItemRule, value: string): boolean => {
         return value === model.value.password;
       },
       message: t('page.login.form.confirmPassword.validator'),

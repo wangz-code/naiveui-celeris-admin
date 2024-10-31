@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useNaiveUIConfigProvider } from '#/composables';
 import { subscribeStore } from '#/store/subscribe';
-import { ViteEnvVariables } from 'celeris-types';
-
 /**
  * Subscribe to the store.
  * 订阅 store。

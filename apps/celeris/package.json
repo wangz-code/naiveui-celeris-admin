@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "pnpm cross-env NODE_ENV=production vite build",
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist",
-    "typecheck": "vue-tsc --noEmit --skipLibCheck",
+    "typecheck": "vue-tsc -b",
     "preview": "vite preview"
   },
   "imports": {
@@ -82,6 +82,7 @@
     "vite-plugin-pwa": "catalog:",
     "vite-plugin-vue-devtools": "catalog:",
     "vitest": "catalog:",
+    "@types/lodash-es": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

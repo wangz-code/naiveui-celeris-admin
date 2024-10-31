@@ -35,7 +35,10 @@ function getStatusType(status: number): StatusType {
   }
 }
 
-const checkStatus = (status: number) => {};
+const checkStatus = (status: number) => {
+  console.log('status log==>',status);
+  
+};
 onMounted(() => {
   try {
     statusType.value = getStatusType(props.status);

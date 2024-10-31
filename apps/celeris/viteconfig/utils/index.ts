@@ -1,4 +1,4 @@
-import type { Recordable, ViteEnvVariables } from 'celeris-types';
+import type { Recordable } from 'celeris-types';
 import process from 'node:process';
 import type { ProxyOptions } from 'vite';
 /**
