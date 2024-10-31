@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { presetPrimaryColors } from "@/utils";
-import { ColorCheckbox } from "./components";
+import { presetPrimaryColors } from '#/utils';
+import { ColorCheckbox } from './components';
 
 const { getThemeColor, setThemeColor } = useThemeSetting();
 const { t } = useI18n();
@@ -20,6 +20,4 @@ const { t } = useI18n();
   </NSpace>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

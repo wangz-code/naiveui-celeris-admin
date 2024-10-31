@@ -1,10 +1,4 @@
-import {
-  Comment,
-  Fragment,
-  type VNode,
-  type VNodeChild,
-  createTextVNode,
-} from "vue";
+import { Comment, Fragment, type VNode, type VNodeChild, createTextVNode } from 'vue';
 
 /**
  * Flattens an array of VNode children.
@@ -19,17 +13,13 @@ import {
  * @returns {VNode[]} Returns an array of flattened VNodes.
  *                    返回展平后的 VNode 数组。
  */
-export function flattenVNodes(
-  vNodes: VNodeChild[],
-  filterCommentNode = true,
-  result: VNode[] = [],
-): VNode[] {
+export function flattenVNodes(vNodes: VNodeChild[], filterCommentNode = true, result: VNode[] = []): VNode[] {
   vNodes.forEach((vNode) => {
     if (vNode === null) {
       return;
     }
-    if (typeof vNode !== "object") {
-      if (typeof vNode === "string" || typeof vNode === "number") {
+    if (typeof vNode !== 'object') {
+      if (typeof vNode === 'string' || typeof vNode === 'number') {
         result.push(createTextVNode(String(vNode)));
       }
       return;

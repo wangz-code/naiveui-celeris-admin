@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { RouterTransitionConstants } from '@/constants';
-import { listenToRouteChange } from '@/router/mitt/routeChange';
-import { Tab, useTabsStore } from '@/store/modules/tabs';
+import { RouterTransitionConstants } from 'celeris-constants';
+import { listenToRouteChange } from '#/router/mitt/routeChange';
+import { Tab, useTabsStore } from '#/store/modules/tabs';
 import { NTag } from 'naive-ui';
 import { useI18n } from 'vue-i18n';
 

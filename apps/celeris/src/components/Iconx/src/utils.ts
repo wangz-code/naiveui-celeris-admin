@@ -1,7 +1,7 @@
-import type { Component } from "vue";
-import { h } from "vue";
-import { isNil } from "@/utils";
-import { Iconx } from "../index";
+import type { Component } from 'vue';
+import { h } from 'vue';
+import { isNil } from '#/utils';
+import { Iconx } from '../index';
 
 /**
  * Renders an icon component based on the provided icon name or component.
@@ -13,8 +13,8 @@ import { Iconx } from "../index";
  *                            如果图标有效，则返回一个渲染图标组件的函数；否则返回 void。
  */
 export function renderIcon(icon: Component | string) {
-	if (isNil(icon)) {
-		return;
-	}
-	return () => h(Iconx, { component: icon });
+  if (isNil(icon)) {
+    return;
+  }
+  return () => h(Iconx, { component: icon });
 }

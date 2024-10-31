@@ -1,4 +1,3 @@
-import type { ViteEnvVariables } from '@/types';
 import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -8,6 +7,8 @@ import { createAutoImportPluginConfig } from './unpluginAutoImport';
 import { createVueComponentsPluginConfig } from './unpluginVueComponets';
 import { createVisualizerPluginConfig } from './visualizer';
 import { viteNitroMockPlugin } from './nitro-mock';
+import { ViteEnvVariables } from 'celeris-types';
+
 /**
  * Configure the Vite plugins.
  *

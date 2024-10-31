@@ -1,8 +1,8 @@
-import { computed } from "vue";
-import { useLocalStorage } from "@/hooks";
-import { LOCALES_STORE_KEY } from "@/constants";
+import { computed } from 'vue';
+import { useLocalStorage } from '#/hooks';
+import { LOCALES_STORE_KEY } from 'celeris-constants';
 
-const store = useLocalStorage(LOCALES_STORE_KEY, "zh");
+const store = useLocalStorage(LOCALES_STORE_KEY, 'zh');
 
 export function setLocale(locale: string) {
   store.value = locale;

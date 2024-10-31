@@ -7,8 +7,7 @@ export default eventHandler((event) => {
     return unAuthorizedResponse(event);
   }
 
-  const codes =
-    MOCK_CODES.find((item) => item.username === userinfo.username)?.codes ?? [];
+  const codes = MOCK_CODES.find((item) => item.username === userinfo.username)?.codes ?? [];
 
   return useResponseSuccess(codes);
 });

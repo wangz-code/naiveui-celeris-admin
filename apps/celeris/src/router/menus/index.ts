@@ -1,7 +1,7 @@
-import { router } from '@/router';
-import { usePermissionStore } from '@/store/modules/permission';
-import type { Menu, MenuModule } from '@/types';
-import { createPathMatcher, filterTree, getAllParentPaths, getFirstMatchingParent, isHttpUrl, loadMenusFromModules, transformMenuModule } from '@/utils';
+import { router } from '#/router';
+import { usePermissionStore } from '#/store/modules/permission';
+import type { Menu, MenuModule } from 'celeris-types';
+import { createPathMatcher, filterTree, getAllParentPaths, getFirstMatchingParent, isHttpUrl, loadMenusFromModules, transformMenuModule } from '#/utils';
 import type { RouteRecordNormalized } from 'vue-router';
 
 const { isBackendPermissionMode, isRolePermissionMode, isRouteMappingPermissionMode } = useAppPermission();

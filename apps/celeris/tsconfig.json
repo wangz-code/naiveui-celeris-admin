@@ -1,15 +1,7 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom", "esnext"],
-    "baseUrl": ".",
-    "module": "esnext",
-    "paths": {
-      "@/*": ["src/*"],
-      "mock": ["mock/*"]
-    },
-    "types": ["vite/client", "naive-ui/volar"]
-  },
-  "include": ["autoResolver", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "@/types", "src/types", "server/**/*.ts"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

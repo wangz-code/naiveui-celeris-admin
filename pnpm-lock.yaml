@@ -432,6 +432,12 @@ importers:
       bignumber.js:
         specifier: 'catalog:'
         version: 9.1.2
+      celeris-constants:
+        specifier: workspace:*
+        version: link:../../packages/celeris-constants
+      celeris-types:
+        specifier: workspace:*
+        version: link:../../packages/celeris-types
       colord:
         specifier: 'catalog:'
         version: 2.9.3
@@ -574,6 +580,18 @@ importers:
       vue-tsc:
         specifier: 'catalog:'
         version: 2.1.8(typescript@5.6.3)
+
+  packages/celeris-constants:
+    dependencies:
+      lodash-es:
+        specifier: 'catalog:'
+        version: 4.17.21
+
+  packages/celeris-types:
+    dependencies:
+      celeris-constants:
+        specifier: workspace:*
+        version: link:../celeris-constants
 
   packages/eslint-config:
     dependencies:

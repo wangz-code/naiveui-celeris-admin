@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { colord, extend } from "colord";
-import a11yPlugin from "colord/plugins/a11y";
-import { copyToClipboard, generateColorPalettes } from "@/utils";
+import { colord, extend } from 'colord';
+import a11yPlugin from 'colord/plugins/a11y';
+import { copyToClipboard, generateColorPalettes } from '#/utils';
 
 defineOptions({
-  name: "ColorPalette",
+  name: 'ColorPalette',
 });
 
 defineProps({
   primaryColor: {
     type: String,
-    default: "#66CCFF",
+    default: '#66CCFF',
   },
   colorName: {
     type: String,
-    default: "primary",
+    default: 'primary',
   },
   colorType: {
     type: String,
-    default: "hex",
+    default: 'hex',
   },
 });
 
@@ -43,7 +43,7 @@ function getContrastingColor(background: string): string {
   const bgColor = colord(background);
   const luminance = bgColor.luminance();
   const threshold = 0.4;
-  return luminance > threshold ? "black" : "white";
+  return luminance > threshold ? 'black' : 'white';
 }
 
 /**
@@ -68,10 +68,7 @@ const showColorPaletteValue = ref(false);
 
 <template>
   <div class="color-palette">
-    <div
-      class="color-palette__header"
-      :style="{ backgroundColor: primaryColor, color: getContrastingColor(primaryColor) }"
-    >
+    <div class="color-palette__header" :style="{ backgroundColor: primaryColor, color: getContrastingColor(primaryColor) }">
       <div class="color-palette__header-title">
         {{ colorName }}
       </div>
@@ -88,13 +85,8 @@ const showColorPaletteValue = ref(false);
         @mouseleave="showColorPaletteValue = false"
         @click="copyColorValue(color)"
       >
-        <span class="color-palette__item-label">
-          {{ colorName }}-{{ index + 1 }}
-        </span>
-        <span
-          class="color-palette__item-value"
-          :style="{ opacity: showColorPaletteValue ? 1 : 0 }"
-        >
+        <span class="color-palette__item-label"> {{ colorName }}-{{ index + 1 }} </span>
+        <span class="color-palette__item-value" :style="{ opacity: showColorPaletteValue ? 1 : 0 }">
           {{ colord(color).toHex().toString().toUpperCase() }}
         </span>
       </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
+import ActionIcon from '#/components/ActionIcon/src/ActionIcon.vue';
 
-const SEARCH_ICON = "tabler:search";
+const SEARCH_ICON = 'tabler:search';
 </script>
 
 <template>
@@ -15,6 +15,4 @@ const SEARCH_ICON = "tabler:search";
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

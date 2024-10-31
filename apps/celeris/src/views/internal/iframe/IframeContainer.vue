@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import type { RouteRecordName } from "vue-router";
-import { useFrameKeepAlive } from "./useFrameKeepAlive";
-import IframePage from "@/views/internal/iframe/IframePage.vue";
+import type { RouteRecordName } from 'vue-router';
+import { useFrameKeepAlive } from './useFrameKeepAlive';
+import IframePage from '#/views/internal/iframe/IframePage.vue';
 
-defineOptions(
-  {
-    name: "IframeLayout",
-  },
-);
+defineOptions({
+  name: 'IframeLayout',
+});
 const { getCanEmbedIFramePage } = useAppSetting();
 const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
 

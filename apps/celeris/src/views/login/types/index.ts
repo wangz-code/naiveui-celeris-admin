@@ -13,4 +13,4 @@ export interface ForgotPasswordFromType {
   phoneNumber: string | null;
 }
 
-export type AuthFormType = "signIn" | "signUp" | "forgotPassword";
+export type AuthFormType = 'signIn' | 'signUp' | 'forgotPassword';

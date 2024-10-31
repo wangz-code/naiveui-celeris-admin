@@ -1,14 +1,8 @@
-import {
-  convertColorToRgbString,
-  convertColorToRgbValues,
-  generateColorPalettes,
-  isColor,
-  setCssVariable,
-} from "@/utils";
-import { effectScope, onScopeDispose, watch } from "vue";
-import type { GlobalThemeOverrides } from "naive-ui";
-import { kebabCase } from "lodash-es";
-import { useDesignStore } from "@/store/modules/design";
+import { convertColorToRgbString, convertColorToRgbValues, generateColorPalettes, isColor, setCssVariable } from '#/utils';
+import { effectScope, onScopeDispose, watch } from 'vue';
+import type { GlobalThemeOverrides } from 'naive-ui';
+import { kebabCase } from 'lodash-es';
+import { useDesignStore } from '#/store/modules/design';
 
 /**
  * 订阅NaiveUI自定义主题的变化
@@ -39,7 +33,7 @@ export default function subscribeThemeStore() {
   });
 }
 
-type ThemeVars = Exclude<GlobalThemeOverrides["common"], undefined>;
+type ThemeVars = Exclude<GlobalThemeOverrides['common'], undefined>;
 type ThemeVarsKeys = keyof ThemeVars;
 
 /**
@@ -52,7 +46,7 @@ function addThemeColorCssVariablesToHtml(themeVars: ThemeVars) {
     if (vars) {
       if (isColor(vars)) {
         setCssVariable(`--${kebabCase(key)}`, convertColorToRgbString(vars));
-        if (key === "primaryColor") {
+        if (key === 'primaryColor') {
           const colorPalettes = generateColorPalettes(vars);
 
           for (let index = 0; index < colorPalettes.length; index++) {
@@ -77,7 +71,7 @@ function addThemeRgbColorCssVariablesToHtml(themeVars: ThemeVars) {
     if (vars) {
       if (isColor(vars)) {
         setCssVariable(`--${kebabCase(key)}-rgb`, convertColorToRgbValues(vars));
-        if (key === "primaryColor") {
+        if (key === 'primaryColor') {
           const colorPalettes = generateColorPalettes(vars);
 
           for (let index = 0; index < colorPalettes.length; index++) {

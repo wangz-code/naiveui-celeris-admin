@@ -1,30 +1,30 @@
 <script lang="ts" setup>
-import { NButton, NDivider } from "naive-ui";
-import { computed, onBeforeMount, ref } from "vue";
-import { RouterTransitionConstants } from "@/constants";
-import SignIn from "@/views/login/components/AuthForm/components/SignIn.vue";
-import SignUp from "@/views/login/components/AuthForm/components/SignUp.vue";
-import ForgotPassword from "@/views/login/components/AuthForm/components/ForgotPassword.vue";
-import type { AuthFormType } from "@/views/login/types";
+import { NButton, NDivider } from 'naive-ui';
+import { computed, onBeforeMount, ref } from 'vue';
+import { RouterTransitionConstants } from '../../../../../../../packages/celeris-constants';
+import SignIn from '#/views/login/components/AuthForm/components/SignIn.vue';
+import SignUp from '#/views/login/components/AuthForm/components/SignUp.vue';
+import ForgotPassword from '#/views/login/components/AuthForm/components/ForgotPassword.vue';
+import type { AuthFormType } from '#/views/login/types';
 
 const props = defineProps<{
   type?: AuthFormType;
 }>();
 const { t } = useI18n();
-const typeRef = ref<AuthFormType>("signIn");
+const typeRef = ref<AuthFormType>('signIn');
 
 const title = computed<string>(() =>
-  typeRef.value === "signIn" ? t("page.login.form.welcomeBackTitle") : typeRef.value === "signUp" ? t("page.login.form.helloTitle") : t("page.login.form.forgotPasswordTitle"),
+  typeRef.value === 'signIn' ? t('page.login.form.welcomeBackTitle') : typeRef.value === 'signUp' ? t('page.login.form.helloTitle') : t('page.login.form.forgotPasswordTitle'),
 );
 
 function gotoSignIn() {
-  typeRef.value = "signIn";
+  typeRef.value = 'signIn';
 }
 function gotoSignUp() {
-  typeRef.value = "signUp";
+  typeRef.value = 'signUp';
 }
 function gotoForgotPassword() {
-  typeRef.value = "forgotPassword";
+  typeRef.value = 'forgotPassword';
 }
 
 onBeforeMount(() => {
@@ -35,7 +35,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="auth-form-wrap w-full ">
+  <div class="auth-form-wrap w-full">
     <AppLogo class="mb-4" display-title />
     <div class="title mb-4 text-3xl font-bold">
       {{ title }}
@@ -45,18 +45,14 @@ onBeforeMount(() => {
     </div>
 
     <div class="form">
-      <Transition
-        appear :name="RouterTransitionConstants.FADE_SLIDE" mode="out-in"
-      >
+      <Transition appear :name="RouterTransitionConstants.FADE_SLIDE" mode="out-in">
         <SignIn v-if="typeRef === 'signIn'" key="signin" @forgot-password="gotoForgotPassword()" />
         <ForgotPassword v-else-if="typeRef === 'forgotPassword'" key="forgotpassword" />
         <SignUp v-else-if="typeRef === 'signUp'" key="signup" />
       </Transition>
     </div>
 
-    <NDivider title-placement="center">
-      Or
-    </NDivider>
+    <NDivider title-placement="center"> Or </NDivider>
 
     <div class="social-button-group flex flex-col gap-4 mb-12">
       <NButton strong secondary size="large">

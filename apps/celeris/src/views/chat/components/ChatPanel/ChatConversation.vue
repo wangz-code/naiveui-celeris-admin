@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { UserInfo } from "@/types";
-import type { VirtualListInst } from "naive-ui";
-import { useUserStore } from "@/store/modules/user";
-import type { ChatContextInjectionKey } from "@/views/chat/chatContext";
-import { chatContextInjectionKey } from "@/views/chat/chatContext";
+import type { UserInfo } from 'celeris-types';
+import type { VirtualListInst } from 'naive-ui';
+import { useUserStore } from '#/store/modules/user';
+import type { ChatContextInjectionKey } from '#/views/chat/chatContext';
+import { chatContextInjectionKey } from '#/views/chat/chatContext';
 
 defineProps({
   maxHeight: {
@@ -53,7 +53,7 @@ function generateFakeData(): Conversation[] {
 }
 
 function generateRandomText(): string {
-  const words: string[] = ["Hello", "How", "Are", "You", "Doing", "Today", "Good", "Morning", "Afternoon", "Evening"];
+  const words: string[] = ['Hello', 'How', 'Are', 'You', 'Doing', 'Today', 'Good', 'Morning', 'Afternoon', 'Evening'];
   const text: string[] = [];
 
   for (let i = 0; i < 5; i++) {
@@ -61,13 +61,13 @@ function generateRandomText(): string {
     text.push(words[randomIndex]);
   }
 
-  return text.join(" ");
+  return text.join(' ');
 }
 
 const conversations: Conversation[] = generateFakeData();
 onMounted(() => {
   nextTick(() => {
-    conversationsVirtualListInst.value?.scrollTo({ position: "bottom" });
+    conversationsVirtualListInst.value?.scrollTo({ position: 'bottom' });
   });
 });
 </script>
@@ -82,10 +82,7 @@ onMounted(() => {
     item-resizable
   >
     <template #default="{ item, index }">
-      <div
-        :key="index" class="conversation flex"
-        :class="{ mine: item.isMine }"
-      >
+      <div :key="index" class="conversation flex" :class="{ mine: item.isMine }">
         <div class="avatar">
           <NAvatar round size="large" :src="item.user.avatarUrl" />
         </div>

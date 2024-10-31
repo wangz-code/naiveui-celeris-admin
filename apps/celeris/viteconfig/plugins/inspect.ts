@@ -1,5 +1,5 @@
-import type { PluginOption } from "vite";
-import Inspect from "vite-plugin-inspect";
+import type { PluginOption } from 'vite';
+import Inspect from 'vite-plugin-inspect';
 
 export function createInspectPluginConfig(): PluginOption {
   // https://github.com/antfu/vite-plugin-inspect

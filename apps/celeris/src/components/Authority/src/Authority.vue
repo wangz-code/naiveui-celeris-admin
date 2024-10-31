@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-import type { RoleConstants } from "@/constants";
-import { useAppPermission } from "@/composables";
+import type { PropType } from 'vue';
+import type { RoleConstants } from 'celeris-constants';
+import { useAppPermission } from '#/composables';
 
 defineProps({
   /**
@@ -12,7 +12,7 @@ defineProps({
    */
   value: {
     type: [Number, Array, String] as PropType<RoleConstants | RoleConstants[] | string | string[]>,
-    default: "",
+    default: '',
   },
 });
 

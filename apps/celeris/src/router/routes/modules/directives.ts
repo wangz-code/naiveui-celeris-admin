@@ -1,34 +1,34 @@
 // @unocss-include
-import type { RouteRecordRaw } from "vue-router";
-import { LAYOUT } from "@/router/constant";
-import { CopyOutline } from "@vicons/ionicons5";
-import { Backhoe, DropCircle } from "@vicons/tabler";
+import type { RouteRecordRaw } from 'vue-router';
+import { LAYOUT } from '#/router/constant';
+import { CopyOutline } from '@vicons/ionicons5';
+import { Backhoe, DropCircle } from '@vicons/tabler';
 
 const directive: RouteRecordRaw = {
-  path: "/directive",
-  name: "Directives",
+  path: '/directive',
+  name: 'Directives',
   component: LAYOUT,
-  redirect: "/directive/copy",
+  redirect: '/directive/copy',
   meta: {
-    title: "routes.directives.directives",
+    title: 'routes.directives.directives',
     icon: Backhoe,
   },
   children: [
     {
-      path: "ripple",
-      name: "Ripple",
-      component: () => import("@/views/directives/ripple/index.vue"),
+      path: 'ripple',
+      name: 'Ripple',
+      component: () => import('#/views/directives/ripple/index.vue'),
       meta: {
-        title: "routes.directives.ripple",
+        title: 'routes.directives.ripple',
         icon: DropCircle,
       },
     },
     {
-      path: "copy",
-      name: "Copy",
-      component: () => import("@/views/directives/copy/index.vue"),
+      path: 'copy',
+      name: 'Copy',
+      component: () => import('#/views/directives/copy/index.vue'),
       meta: {
-        title: "routes.directives.copy",
+        title: 'routes.directives.copy',
         icon: CopyOutline,
       },
     },

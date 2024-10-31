@@ -1,3 +1,3 @@
-import ColorCheckbox from "./ColorCheckbox.vue";
+import ColorCheckbox from './ColorCheckbox.vue';
 
 export { ColorCheckbox };

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ChatContextInjectionKey } from "@/views/chat/chatContext";
-import { chatContextInjectionKey } from "@/views/chat/chatContext";
-import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
+import type { ChatContextInjectionKey } from '#/views/chat/chatContext';
+import { chatContextInjectionKey } from '#/views/chat/chatContext';
+import ActionIcon from '#/components/ActionIcon/src/ActionIcon.vue';
 
 const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
 </script>
@@ -15,7 +15,7 @@ const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInje
             <div class="relative rounded-full flex items-center pb-1 pr-2" :class="{ available: selectedAssistantRef.available }">
               <NAvatar round :src="selectedAssistantRef.avatar" size="large" />
             </div>
-            <div class="overflow-hidden flex justify-between items-center ">
+            <div class="overflow-hidden flex justify-between items-center">
               <div class="name whitespace-nowrap text-ellipsis grow font-bold">
                 {{ selectedAssistantRef.name }}
               </div>
@@ -76,8 +76,7 @@ const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInje
 .chat-history-action :deep(.ca-card) > .ca-card__content,
 :deep(.ca-card) > .ca-card__footer {
   box-sizing: border-box;
-  padding: 0 calc(var(--n-padding-left) / 2) calc(var(--n-padding-bottom) / 2)
-    calc(var(--n-padding-left) / 2);
+  padding: 0 calc(var(--n-padding-left) / 2) calc(var(--n-padding-bottom) / 2) calc(var(--n-padding-left) / 2);
 }
 .chat-history-action :deep(.ca-card) > .ca-card__content:first-child,
 :deep(.ca-card) > .ca-card__footer:first-child {

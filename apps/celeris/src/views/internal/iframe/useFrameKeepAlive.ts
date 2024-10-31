@@ -1,7 +1,7 @@
-import { uniqBy } from "@/utils";
-import { computed, toRaw } from "vue";
-import type { RouteRecordName, RouteRecordRaw } from "vue-router";
-import { useRouter } from "vue-router";
+import { uniqBy } from '#/utils';
+import { computed, toRaw } from 'vue';
+import type { RouteRecordName, RouteRecordRaw } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 export function useFrameKeepAlive() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export function useFrameKeepAlive() {
         framePages.push(...getAllFramePages(children));
       }
     }
-    framePages = uniqBy(framePages, "name");
+    framePages = uniqBy(framePages, 'name');
     return framePages;
   }
 

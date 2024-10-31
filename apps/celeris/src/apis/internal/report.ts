@@ -1,27 +1,19 @@
-/*
- * @Author: wangqz
- * @Date: 2024-07-23
- * @LastEditTime: 2024-07-23
- * @Description: content
- */
-import type { MessageMode } from "@/types";
-import { instance } from "../interceptor";
-import { R01 } from "mock/report/r01";
+import { Get } from '../interceptor';
+import type { TableRes } from '../type';
 
-// Define the API endpoint URLs as an enum
-enum API {
-	R01 = "/report/r01",
+export interface R01Data {
+  key: string;
+  billdate: string;
+  name: string;
+  phone: string;
+  sales: number;
+  payment: number;
+  address: string;
+  state: number;
 }
 
-// Define a function to call the menus API
-export function getR01(errorMessageMode: MessageMode = "message") {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			console.log("getR01Api log==>");
-			resolve({ data: R01.createResult() });
-		}, 1500);
-	});
-	return instance.get<any[]>(API.R01);
-}
+type RowData = R01Data;
 
-export { API };
+export function getR01(params: { page: number; pageSize: number }) {
+  return Get<TableRes<RowData[]>>('/table/r01', { params });
+}

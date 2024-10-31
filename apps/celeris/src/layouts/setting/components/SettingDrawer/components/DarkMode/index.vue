@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useThemeSetting } from "@/composables";
-import { SettingMenu } from "@/layouts/setting/components/SettingDrawer/components";
-import { Checkmark, Moon, Sunny } from "@vicons/ionicons5";
+import { useThemeSetting } from '#/composables';
+import { SettingMenu } from '#/layouts/setting/components/SettingDrawer/components';
+import { Checkmark, Moon, Sunny } from '@vicons/ionicons5';
 
-defineOptions({ name: "DarkMode" });
+defineOptions({ name: 'DarkMode' });
 
 const { getDarkMode, setDarkMode, getFollowSystemTheme, setFollowSystemTheme } = useThemeSetting();
 const { t } = useI18n();

@@ -1,4 +1,4 @@
-import { useToggle } from "@vueuse/core";
+import { useToggle } from '@vueuse/core';
 
 export function useLoading(initValue = false) {
   const [value, toggle] = useToggle(initValue);

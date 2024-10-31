@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ChatInputActionBar from "@/views/chat/components/ChatPanel/MessageInputArea/ChatInputActionBar.vue";
-import ChatInputAreaInner from "@/views/chat/components/ChatPanel/MessageInputArea/ChatInputAreaInner.vue";
-import SendMessageButton from "@/views/chat/components/ChatPanel/MessageInputArea/SendMessageButton.vue";
+import ChatInputActionBar from '#/views/chat/components/ChatPanel/MessageInputArea/ChatInputActionBar.vue';
+import ChatInputAreaInner from '#/views/chat/components/ChatPanel/MessageInputArea/ChatInputAreaInner.vue';
+import SendMessageButton from '#/views/chat/components/ChatPanel/MessageInputArea/SendMessageButton.vue';
 </script>
 
 <template>
@@ -17,6 +17,4 @@ import SendMessageButton from "@/views/chat/components/ChatPanel/MessageInputAre
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

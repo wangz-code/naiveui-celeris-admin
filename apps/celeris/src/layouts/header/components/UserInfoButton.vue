@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { UserInfo } from "@/types";
-import { ToolTipper } from "@/components/ActionIcon";
-import { useUserStore } from "@/store/modules/user";
+import type { UserInfo } from 'celeris-types';
+import { ToolTipper } from '#/components/ActionIcon';
+import { useUserStore } from '#/store/modules/user';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -11,16 +11,16 @@ const dialog = useDialog();
 const message = useMessage();
 function handleLogout() {
   dialog.warning({
-    title: t("layouts.logoutConfirmation.title"),
-    content: t("layouts.logoutConfirmation.content"),
-    positiveText: t("layouts.logoutConfirmation.positiveText"),
-    negativeText: t("layouts.logoutConfirmation.negativeText"),
+    title: t('layouts.logoutConfirmation.title'),
+    content: t('layouts.logoutConfirmation.content'),
+    positiveText: t('layouts.logoutConfirmation.positiveText'),
+    negativeText: t('layouts.logoutConfirmation.negativeText'),
     onPositiveClick: () => {
       userStore.logout();
-      message.success(t("layouts.logoutConfirmation.onPositiveClickMessage"));
+      message.success(t('layouts.logoutConfirmation.onPositiveClickMessage'));
     },
     onNegativeClick: () => {
-      message.info(t("layouts.logoutConfirmation.onNegativeClickMessage"));
+      message.info(t('layouts.logoutConfirmation.onNegativeClickMessage'));
     },
   });
 }
@@ -35,9 +35,7 @@ function handleLogout() {
             <div class="flex-1 flex items-center justify-center">
               <NAvatar round :src="userInfo?.avatarUrl" />
             </div>
-            <div class="flex-1 flex items-center justify-center">
-              user
-            </div>
+            <div class="flex-1 flex items-center justify-center">user</div>
           </div>
         </NEl>
       </ToolTipper>
@@ -61,6 +59,4 @@ function handleLogout() {
   </NPopover>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

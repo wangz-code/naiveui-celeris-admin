@@ -4,18 +4,14 @@
  * @link https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
  *
  */
-import type { GlobEnvConfig } from "@/types";
-import type { Encryption } from "@/utils";
-import { EncryptionFactory, createStorageName } from "@/utils";
-import type { Pinia } from "pinia";
-import destr from "destr";
-import { createPersistedState } from "pinia-plugin-persistedstate";
-import type {  PluginOptions, Serializer } from "pinia-plugin-persistedstate";
-import {
-  SHOULD_ENABLE_STORAGE_ENCRYPTION,
-  STORAGE_CIPHER_IV,
-  STORAGE_CIPHER_KEY,
-} from "@/setting/encryptionSetting";
+import type { GlobEnvConfig } from 'celeris-types';
+import type { Encryption } from '#/utils';
+import { EncryptionFactory, createStorageName } from '#/utils';
+import type { Pinia } from 'pinia';
+import destr from 'destr';
+import { createPersistedState } from 'pinia-plugin-persistedstate';
+import type { PluginOptions, Serializer } from 'pinia-plugin-persistedstate';
+import { SHOULD_ENABLE_STORAGE_ENCRYPTION, STORAGE_CIPHER_IV, STORAGE_CIPHER_KEY } from '#/setting/encryptionSetting';
 
 const persistEncryption: Encryption = EncryptionFactory.createAesEncryption({ key: STORAGE_CIPHER_KEY, iv: STORAGE_CIPHER_IV });
 
@@ -72,7 +68,7 @@ export function registerPiniaPersistPlugin(pinia: Pinia) {
 export function createPersistedStateOptions(keyPrefix: string): PluginOptions {
   return {
     storage: localStorage,
-    key: id => `${keyPrefix}__${id}`,
+    key: (id) => `${keyPrefix}__${id}`,
     serializer: customSerializer(SHOULD_ENABLE_STORAGE_ENCRYPTION),
   };
 }

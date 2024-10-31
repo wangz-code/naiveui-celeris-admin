@@ -1,9 +1,9 @@
-import { ref } from "vue";
-import { isWindows } from "@/utils";
+import { ref } from 'vue';
+import { isWindows } from '#/utils';
 
 const listener = ref();
 export function useSearchDialog() {
-  const commandIcon = ref(isWindows() ? "CTRL" : "⌘");
+  const commandIcon = ref(isWindows() ? 'CTRL' : '⌘');
   return {
     commandIcon,
     trigger: (cb: () => void): void => {

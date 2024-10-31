@@ -17,13 +17,13 @@ const valueString = computed(() => {
   const value = dataCount?.value;
 
   if (!value) {
-    return "";
+    return '';
   }
 
   if (currency?.value) {
-    return new Intl.NumberFormat("zh-CN", { style: "currency", currency: "CNY" }).format(value);
+    return new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY' }).format(value);
   } else {
-    return new Intl.NumberFormat("zh-CN").format(value);
+    return new Intl.NumberFormat('zh-CN').format(value);
   }
 });
 </script>
@@ -49,16 +49,11 @@ const valueString = computed(() => {
           <slot name="meta" />
         </div>
       </div>
-      <div
-        ref="chart"
-        class="chart-wrapper overflow-hidden"
-        :style="{ height: `${chartHeight}px` }"
-      >
+      <div ref="chart" class="chart-wrapper overflow-hidden" :style="{ height: `${chartHeight}px` }">
         <slot name="chart" />
       </div>
     </div>
   </NCard>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

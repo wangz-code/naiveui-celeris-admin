@@ -1,5 +1,5 @@
-import { intersectionWith, mergeWith, unionWith } from "lodash-es";
-import { isArray, isEqual, isObject } from "./typeChecks";
+import { intersectionWith, mergeWith, unionWith } from 'lodash-es';
+import { isArray, isEqual, isObject } from './typeChecks';
 
 /**
  * Recursively merge two objects.
@@ -18,7 +18,7 @@ import { isArray, isEqual, isObject } from "./typeChecks";
 export function deepMerge<T extends object | null | undefined, U extends object | null | undefined>(
   source: T,
   target: U,
-  mergeArrays: "union" | "intersection" | "concat" | "replace" = "replace",
+  mergeArrays: 'union' | 'intersection' | 'concat' | 'replace' = 'replace',
 ): T & U {
   if (!target) {
     return source as T & U;
@@ -29,13 +29,13 @@ export function deepMerge<T extends object | null | undefined, U extends object 
   return mergeWith({}, source, target, (sourceValue, targetValue) => {
     if (isArray(targetValue) && isArray(sourceValue)) {
       switch (mergeArrays) {
-        case "union":
+        case 'union':
           return unionWith(sourceValue, targetValue, isEqual);
-        case "intersection":
+        case 'intersection':
           return intersectionWith(sourceValue, targetValue, isEqual);
-        case "concat":
+        case 'concat':
           return sourceValue.concat(targetValue);
-        case "replace":
+        case 'replace':
           return targetValue;
         default:
           throw new Error(`Unknown merge array strategy: ${mergeArrays as string}`);
@@ -93,9 +93,7 @@ export function memo<TDeps extends readonly any[], TResult>(
 
     // 检查依赖参数是否发生变化
     // Check if the dependency parameters have changed
-    const dependenciesChanged
-      = newDependencies.length !== dependencies.length
-      || newDependencies.some((dep: any, index: number) => dependencies[index] !== dep);
+    const dependenciesChanged = newDependencies.length !== dependencies.length || newDependencies.some((dep: any, index: number) => dependencies[index] !== dep);
 
     if (!dependenciesChanged) {
       return result!;
@@ -136,10 +134,7 @@ export function memo<TDeps extends readonly any[], TResult>(
           `
             font-size: .6rem;
             font-weight: bold;
-            color: hsl(${Math.max(
-            0,
-            Math.min(120 - 120 * computationFpsPercentage, 120),
-          )}deg 100% 31%);`,
+            color: hsl(${Math.max(0, Math.min(120 - 120 * computationFpsPercentage, 120))}deg 100% 31%);`,
           options?.key,
         );
       }
@@ -161,7 +156,7 @@ export function memo<TDeps extends readonly any[], TResult>(
 export function getErrorMessage(error: Error | { message: string } | string): string {
   if (error instanceof Error) {
     return error.message;
-  } else if (isObject(error) && "message" in error) {
+  } else if (isObject(error) && 'message' in error) {
     return error.message;
   } else {
     return String(error);

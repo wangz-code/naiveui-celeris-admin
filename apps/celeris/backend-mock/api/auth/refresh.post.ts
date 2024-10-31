@@ -1,8 +1,4 @@
-import {
-  clearRefreshTokenCookie,
-  getRefreshTokenFromCookie,
-  setRefreshTokenCookie,
-} from '~/utils/cookie-utils';
+import { clearRefreshTokenCookie, getRefreshTokenFromCookie, setRefreshTokenCookie } from '~/utils/cookie-utils';
 import { verifyRefreshToken } from '~/utils/jwt-utils';
 import { forbiddenResponse } from '~/utils/response';
 
@@ -19,9 +15,7 @@ export default defineEventHandler(async (event) => {
     return forbiddenResponse(event);
   }
 
-  const findUser = MOCK_USERS.find(
-    (item) => item.username === userinfo.username,
-  );
+  const findUser = MOCK_USERS.find((item) => item.username === userinfo.username);
   if (!findUser) {
     return forbiddenResponse(event);
   }

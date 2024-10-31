@@ -1,5 +1,5 @@
-import type { MenuSetting } from "@/types";
-import { useAppStoreWithOut } from "@/store/modules/app";
+import type { MenuSetting } from 'celeris-types';
+import { useAppStoreWithOut } from '#/store/modules/app';
 
 export function useMenuSetting() {
   const appStore = useAppStoreWithOut();

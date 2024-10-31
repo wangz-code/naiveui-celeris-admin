@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RoleConstants } from "@/constants";
-import CurrentPermissionMode from "../CurrentPermissionMode.vue";
-import { useUserStore } from "@/store/modules/user";
+import { RoleConstants } from '../../../../../../packages/celeris-constants';
+import CurrentPermissionMode from '../CurrentPermissionMode.vue';
+import { useUserStore } from '#/store/modules/user';
 
 const userStore = useUserStore();
 const { isBackendPermissionMode, refreshMenu } = useAppPermission();
@@ -38,6 +38,4 @@ const isUser = computed(() => userStore.getRoleList.includes(RoleConstants.USER)
   </NCard>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

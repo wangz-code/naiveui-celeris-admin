@@ -1,8 +1,8 @@
-import { cloneDeep, omit } from "lodash-es";
-import { pathToRegexp } from "path-to-regexp";
-import { createRouter, createWebHashHistory } from "vue-router";
-import type { RouteLocationNormalized, RouteRecordNormalized, RouteRecordRaw, Router } from "vue-router";
-import { loadDataFromModules } from "./moduleHelper";
+import { cloneDeep, omit } from 'lodash-es';
+import { pathToRegexp } from 'path-to-regexp';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import type { RouteLocationNormalized, RouteRecordNormalized, RouteRecordRaw, Router } from 'vue-router';
+import { loadDataFromModules } from './moduleHelper';
 
 /**
  * 从模块对象中加载路由配置并加入到路由集合中
@@ -83,7 +83,7 @@ function upgradeRouteLevel(routeModule: RouteRecordRaw) {
   router = null;
 
   // Omits the 'children' property from each child route.
-  routeModule.children = <RouteRecordRaw[] | undefined>routeModule.children?.map(child => omit(child, "children"));
+  routeModule.children = <RouteRecordRaw[] | undefined>routeModule.children?.map((child) => omit(child, 'children'));
 }
 
 /**
@@ -93,18 +93,14 @@ function upgradeRouteLevel(routeModule: RouteRecordRaw) {
  * @param children The sub-routes to be added.
  * @param routeModule The route module to be upgraded.
  */
-function addToSecondaryRoute(
-  routes: RouteRecordNormalized[],
-  children: RouteRecordRaw[],
-  routeModule: RouteRecordRaw,
-) {
+function addToSecondaryRoute(routes: RouteRecordNormalized[], children: RouteRecordRaw[], routeModule: RouteRecordRaw) {
   for (const child of children) {
-    const route = routes.find(r => r.name === child.name);
+    const route = routes.find((r) => r.name === child.name);
     if (!route) {
       continue;
     }
     routeModule.children = routeModule.children || [];
-    if (!routeModule.children.find(c => c.name === route.name)) {
+    if (!routeModule.children.find((c) => c.name === route.name)) {
       routeModule.children?.push(route as unknown as RouteRecordRaw);
     }
     if (child.children?.length) {
@@ -121,7 +117,7 @@ function addToSecondaryRoute(
  */
 function isMultiLevelRoute(routeModule: RouteRecordRaw): boolean {
   // Checks if the route module has 'children' property and the children are not empty.
-  if (!routeModule || !Reflect.has(routeModule, "children") || !routeModule.children?.length) {
+  if (!routeModule || !Reflect.has(routeModule, 'children') || !routeModule.children?.length) {
     return false;
   }
 

@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance } from "@vue/runtime-core";
+import type { ComponentPublicInstance } from '@vue/runtime-core';
 
 export {
   isArguments,
@@ -36,7 +36,7 @@ export {
   isUndefined,
   isWeakMap,
   isWeakSet,
-} from "lodash-es";
+} from 'lodash-es';
 
 /**
  * Checks if the code is running in a server-side rendering (SSR) environment.
@@ -48,7 +48,7 @@ export {
  */
 export const isServerRendering = (() => {
   try {
-    return !(typeof window !== "undefined" && document !== undefined);
+    return !(typeof window !== 'undefined' && document !== undefined);
   } catch (e) {
     return true;
   }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { isGreaterOrEqual2xl, isSmallerOrEqualXl } from "@/hooks";
-import ChatHistorySidebar from "./ChatHistorySidebar/index.vue";
-import ChatPanel from "./ChatPanel/index.vue";
-import AssistantSidebar from "./AssistantSidebar/index.vue";
-import { chatContextInjectionKey } from "@/views/chat/chatContext";
-import { defaultAssistant } from "@/views/chat/data";
+import { isGreaterOrEqual2xl, isSmallerOrEqualXl } from '#/hooks';
+import ChatHistorySidebar from './ChatHistorySidebar/index.vue';
+import ChatPanel from './ChatPanel/index.vue';
+import AssistantSidebar from './AssistantSidebar/index.vue';
+import { chatContextInjectionKey } from '#/views/chat/chatContext';
+import { defaultAssistant } from '#/views/chat/data';
 
 provide(chatContextInjectionKey, {
   selectedAssistantRef: ref(defaultAssistant),
@@ -25,13 +25,7 @@ watchEffect(() => {
 右侧边栏显示了每个助手的聊天记录，并且可以根据用户选择的助手动态加载相应的聊天记录。
 中央面板则用于展示选定助手的实时对话界面，可能包含一个消息输入框以及用于加载历史对话记录的功能。 -->
   <NLayout has-sider sider-placement="left" class="chat-layout h-full rounded-2xl">
-    <NLayoutSider
-      collapse-mode="transform"
-      :collapsed-width="0"
-      :width="siderWidth"
-      :native-scrollbar="true"
-      show-trigger="arrow-circle"
-    >
+    <NLayoutSider collapse-mode="transform" :collapsed-width="0" :width="siderWidth" :native-scrollbar="true" show-trigger="arrow-circle">
       <AssistantSidebar />
     </NLayoutSider>
     <NLayoutContent>
@@ -39,13 +33,7 @@ watchEffect(() => {
         <NLayoutContent content-class="p-4">
           <ChatPanel />
         </NLayoutContent>
-        <NLayoutSider
-          collapse-mode="transform"
-          :collapsed-width="0"
-          :width="360"
-          :native-scrollbar="true"
-          show-trigger="arrow-circle"
-        >
+        <NLayoutSider collapse-mode="transform" :collapsed-width="0" :width="360" :native-scrollbar="true" show-trigger="arrow-circle">
           <ChatHistorySidebar />
         </NLayoutSider>
       </NLayout>
@@ -53,6 +41,4 @@ watchEffect(() => {
   </NLayout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

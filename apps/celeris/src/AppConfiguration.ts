@@ -1,5 +1,5 @@
-import { useAppSetting, useNaiveUIConfigProvider } from '@/composables';
-import { LocalesEngine } from '@/locales';
+import { useAppSetting, useNaiveUIConfigProvider } from '#/composables';
+import { LocalesEngine } from '#/locales';
 import { createDiscreteApi } from 'naive-ui';
 
 function initializeHttpRequest() {

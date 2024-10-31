@@ -1,5 +1,5 @@
-import type { OS } from "@/constants";
-import { OperatingSystem } from "@/constants";
+import type { OS } from 'celeris-constants';
+import { OperatingSystem } from 'celeris-constants';
 
 /**
  * Retrieves the operating system (OS) of the current environment based on the user agent.
@@ -10,16 +10,16 @@ import { OperatingSystem } from "@/constants";
  */
 export function detectOperatingSystem(): OS {
   const { userAgent } = navigator;
-  if (userAgent.includes("Win")) {
+  if (userAgent.includes('Win')) {
     return OperatingSystem.Windows;
   }
-  if (userAgent.includes("Mac")) {
+  if (userAgent.includes('Mac')) {
     return OperatingSystem.MacOS;
   }
-  if (userAgent.includes("X11")) {
+  if (userAgent.includes('X11')) {
     return OperatingSystem.UNIX;
   }
-  if (userAgent.includes("Linux")) {
+  if (userAgent.includes('Linux')) {
     return OperatingSystem.Linux;
   }
 

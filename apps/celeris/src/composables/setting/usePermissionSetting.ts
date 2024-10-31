@@ -1,12 +1,12 @@
-import type { RoleConstants } from "@/constants";
-import { PermissionModeConstants } from "@/constants";
-import { intersection, isArray } from "@/utils";
-import type { RouteRecordRaw } from "vue-router";
-import { resetRouter, router } from "@/router";
-import { DEFAULT_PROJECT_SETTING } from "@/setting/projectSetting";
-import { useAppStoreWithOut } from "@/store/modules/app";
-import { usePermissionStoreWithOut } from "@/store/modules/permission";
-import { useUserStoreWithOut } from "@/store/modules/user";
+import type { RoleConstants } from 'celeris-constants';
+import { PermissionModeConstants } from 'celeris-constants';
+import { intersection, isArray } from '#/utils';
+import type { RouteRecordRaw } from 'vue-router';
+import { resetRouter, router } from '#/router';
+import { DEFAULT_PROJECT_SETTING } from '#/setting/projectSetting';
+import { useAppStoreWithOut } from '#/store/modules/app';
+import { usePermissionStoreWithOut } from '#/store/modules/permission';
+import { useUserStoreWithOut } from '#/store/modules/user';
 
 export function useAppPermission() {
   const userStore = useUserStoreWithOut();
@@ -31,10 +31,7 @@ export function useAppPermission() {
    */
   function togglePermissionMode() {
     appStore.setProjectSetting({
-      permissionMode:
-        appStore.projectSetting?.permissionMode === PermissionModeConstants.BACKEND
-          ? PermissionModeConstants.ROUTE_MAPPING
-          : PermissionModeConstants.BACKEND,
+      permissionMode: appStore.projectSetting?.permissionMode === PermissionModeConstants.BACKEND ? PermissionModeConstants.ROUTE_MAPPING : PermissionModeConstants.BACKEND,
     });
     location.reload();
   }
@@ -72,7 +69,7 @@ export function useAppPermission() {
       if (!isArray(permission)) {
         return userStore.getRoleList.includes(permission as RoleConstants);
       }
-      return (intersection(permission, userStore.getRoleList)).length > 0;
+      return intersection(permission, userStore.getRoleList).length > 0;
     }
 
     if (PermissionModeConstants.BACKEND === permMode) {
@@ -80,7 +77,7 @@ export function useAppPermission() {
       if (!isArray(permission)) {
         return allCodeList.includes(permission);
       }
-      return (intersection(permission, allCodeList)).length > 0;
+      return intersection(permission, allCodeList).length > 0;
     }
     return defaultValue;
   }
@@ -93,9 +90,7 @@ export function useAppPermission() {
    */
   async function changeRole(roles: RoleConstants | RoleConstants[]): Promise<void> {
     if (DEFAULT_PROJECT_SETTING.permissionMode !== PermissionModeConstants.ROUTE_MAPPING) {
-      throw new Error(
-        "Please switch to ROUTE_MAPPING mode in the configuration before performing this operation.",
-      );
+      throw new Error('Please switch to ROUTE_MAPPING mode in the configuration before performing this operation.');
     }
 
     if (!isArray(roles)) {

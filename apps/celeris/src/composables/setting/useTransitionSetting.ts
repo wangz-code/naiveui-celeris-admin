@@ -1,5 +1,5 @@
-import type { TransitionSetting } from "@/types";
-import { useAppStoreWithOut } from "@/store/modules/app";
+import type { TransitionSetting } from 'celeris-types';
+import { useAppStoreWithOut } from '#/store/modules/app';
 
 export function useTransitionSetting() {
   const appStore = useAppStoreWithOut();
@@ -12,19 +12,19 @@ export function useTransitionSetting() {
 
   const getRouterBasicTransition = toRef(() => appStore.getTransitionSetting.routerBasicTransition);
 
-  const setRouterBasicTransition = (routerBasicTransition: TransitionSetting["routerBasicTransition"]) => {
+  const setRouterBasicTransition = (routerBasicTransition: TransitionSetting['routerBasicTransition']) => {
     appStore.setProjectSetting({ transitionSetting: { routerBasicTransition } });
   };
 
-  const setShouldEnableTransition = (shouldEnable: TransitionSetting["shouldEnable"]) => {
+  const setShouldEnableTransition = (shouldEnable: TransitionSetting['shouldEnable']) => {
     appStore.setProjectSetting({ transitionSetting: { shouldEnable } });
   };
 
-  const setShouldOpenNProgress = (shouldOpenNProgress: TransitionSetting["shouldOpenNProgress"]) => {
+  const setShouldOpenNProgress = (shouldOpenNProgress: TransitionSetting['shouldOpenNProgress']) => {
     appStore.setProjectSetting({ transitionSetting: { shouldOpenNProgress } });
   };
 
-  const setShouldOpenPageLoading = (shouldOpenPageLoading: TransitionSetting["shouldOpenPageLoading"]) => {
+  const setShouldOpenPageLoading = (shouldOpenPageLoading: TransitionSetting['shouldOpenPageLoading']) => {
     appStore.setProjectSetting({ transitionSetting: { shouldOpenPageLoading } });
   };
 

@@ -1,4 +1,4 @@
-import type { MessageMode, UserInfo } from '@/types';
+import type { MessageMode, UserInfo } from 'celeris-types';
 import { Get, Post } from '../interceptor';
 import { DefRes } from '../type';
 

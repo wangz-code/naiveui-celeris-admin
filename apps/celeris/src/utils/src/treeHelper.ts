@@ -1,4 +1,4 @@
-import { isArray } from "./typeChecks";
+import { isArray } from './typeChecks';
 
 /**
  * TreeHelperConfig interface defines the configuration for tree structure.
@@ -23,9 +23,9 @@ interface TreeHelperConfig<T = any> {
  * 默认配置
  */
 const DEFAULT_TREE_HELPER_CONFIG: TreeHelperConfig = {
-  idKey: "id",
-  childrenKey: "children",
-  parentKey: "parentId",
+  idKey: 'id',
+  childrenKey: 'children',
+  parentKey: 'parentId',
 };
 
 /**
@@ -102,11 +102,7 @@ export function flattenTree<T>(tree: T[], config: Partial<TreeHelperConfig> = {}
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  * @returns The first node in the tree that satisfies the predicate. 符合条件的第一个节点。
  */
-export function findTreeNode<T>(
-  treeData: T[],
-  predicate: (node: T) => boolean,
-  config: Partial<TreeHelperConfig> = {},
-): T | null {
+export function findTreeNode<T>(treeData: T[], predicate: (node: T) => boolean, config: Partial<TreeHelperConfig> = {}): T | null {
   const { childrenKey } = getTreeHelperConfig(config);
   for (const node of treeData) {
     if (predicate(node)) {
@@ -133,11 +129,7 @@ export function findTreeNode<T>(
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  * @returns An array of nodes that satisfy the predicate. 符合条件的节点组成的数组。
  */
-export function findTreeNodes<T>(
-  treeData: T[],
-  predicate: (node: T) => boolean,
-  config: Partial<TreeHelperConfig> = {},
-): T[] {
+export function findTreeNodes<T>(treeData: T[], predicate: (node: T) => boolean, config: Partial<TreeHelperConfig> = {}): T[] {
   const { childrenKey } = getTreeHelperConfig(config);
   const result: T[] = [];
 
@@ -164,11 +156,7 @@ export function findTreeNodes<T>(
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  * @returns The path to the first node in the tree that satisfies the predicate. 符合条件的第一个节点的路径。
  */
-export function findFirstNodePath<T>(
-  treeData: T[],
-  predicate: (node: T) => boolean,
-  config: Partial<TreeHelperConfig> = {},
-): T[] | null {
+export function findFirstNodePath<T>(treeData: T[], predicate: (node: T) => boolean, config: Partial<TreeHelperConfig> = {}): T[] | null {
   const { childrenKey } = getTreeHelperConfig(config);
   for (const node of treeData) {
     if (predicate(node)) {
@@ -195,11 +183,7 @@ export function findFirstNodePath<T>(
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  * @returns An array of paths to the nodes that satisfy the predicate. 符合条件的节点的路径组成的数组。
  */
-export function findAllNodePaths<T>(
-  treeData: T[],
-  predicate: (node: T) => boolean,
-  config: Partial<TreeHelperConfig> = {},
-): T[][] {
+export function findAllNodePaths<T>(treeData: T[], predicate: (node: T) => boolean, config: Partial<TreeHelperConfig> = {}): T[][] {
   const { childrenKey } = getTreeHelperConfig(config);
   const result: T[][] = [];
 
@@ -211,7 +195,7 @@ export function findAllNodePaths<T>(
     const children = node[childrenKey];
     if (children) {
       const foundPaths = findAllNodePaths(children, predicate, config);
-      foundPaths.forEach(path => result.push([node, ...path]));
+      foundPaths.forEach((path) => result.push([node, ...path]));
     }
   }
 
@@ -226,15 +210,11 @@ export function findAllNodePaths<T>(
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  * @returns A new tree that only contains nodes and their ancestors that satisfy the predicate.
  */
-export function filterTree<T>(
-  treeNodes: T[],
-  predicate: (node: T) => boolean,
-  config: Partial<TreeHelperConfig> = {},
-): T[] {
+export function filterTree<T>(treeNodes: T[], predicate: (node: T) => boolean, config: Partial<TreeHelperConfig> = {}): T[] {
   const { childrenKey } = getTreeHelperConfig(config);
   function filterSubtree(nodes: T[]): T[] {
     return nodes
-      .map(node => ({ ...node }))
+      .map((node) => ({ ...node }))
       .filter((node) => {
         node[childrenKey] = node[childrenKey] && filterSubtree(node[childrenKey]);
         return predicate(node) || (node[childrenKey] && node[childrenKey].length);
@@ -251,11 +231,7 @@ export function filterTree<T>(
  * @param callback The callback function to execute for each node. 每个节点都会执行该回调函数。
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  */
-export function traverseTreeRecursive<T>(
-  treeData: T[],
-  callback: (node: T) => void,
-  config: Partial<TreeHelperConfig> = {},
-) {
+export function traverseTreeRecursive<T>(treeData: T[], callback: (node: T) => void, config: Partial<TreeHelperConfig> = {}) {
   const { childrenKey } = getTreeHelperConfig(config);
 
   function dfs(node: T) {
@@ -278,11 +254,7 @@ export function traverseTreeRecursive<T>(
  * @param callback The callback function to execute for each node. 每个节点都会执行该回调函数。
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  */
-export function traverseTreeIterative<T>(
-  treeData: T[],
-  callback: (node: T) => void,
-  config: Partial<TreeHelperConfig> = {},
-): void {
+export function traverseTreeIterative<T>(treeData: T[], callback: (node: T) => void, config: Partial<TreeHelperConfig> = {}): void {
   const { childrenKey } = getTreeHelperConfig(config);
   const stack: T[] = [...treeData];
 
@@ -305,11 +277,7 @@ export function traverseTreeIterative<T>(
  * @param callback The callback function to execute for each node. 每个节点都会执行该回调函数，第一个参数为节点本身，第二个参数为其父节点（如果存在）。
  * @param config The configuration for TreeHelper. 树形结构的配置项。
  */
-export function traverseTreeIterativeWithParent<T>(
-  treeData: T[],
-  callback: (node: T, parent?: T) => void,
-  config: Partial<TreeHelperConfig> = {},
-): void {
+export function traverseTreeIterativeWithParent<T>(treeData: T[], callback: (node: T, parent?: T) => void, config: Partial<TreeHelperConfig> = {}): void {
   const { childrenKey } = getTreeHelperConfig(config);
 
   const stack: { node: T; parent?: T }[] = [];
@@ -339,10 +307,10 @@ export function traverseTreeIterativeWithParent<T>(
  */
 export function mapTreeStructure<T = any, R = any>(
   treeData: T[],
-  convertNodeToStructure: (node: T) => Partial<R> & { [key: TreeHelperConfig["childrenKey"]]: any },
+  convertNodeToStructure: (node: T) => Partial<R> & { [key: TreeHelperConfig['childrenKey']]: any },
   config: Partial<TreeHelperConfig> = {},
 ) {
-  return treeData.map(node => mapTreeNodeStructure(node, convertNodeToStructure, getTreeHelperConfig(config)));
+  return treeData.map((node) => mapTreeNodeStructure(node, convertNodeToStructure, getTreeHelperConfig(config)));
 }
 
 /**
@@ -355,7 +323,7 @@ export function mapTreeStructure<T = any, R = any>(
  */
 export function mapTreeNodeStructure<T = any, R = any>(
   node: T,
-  convertNodeToStructure: (node: T) => Partial<R> & { [key: TreeHelperConfig["childrenKey"]]: any },
+  convertNodeToStructure: (node: T) => Partial<R> & { [key: TreeHelperConfig['childrenKey']]: any },
   config: Partial<TreeHelperConfig> = {},
 ) {
   const { childrenKey } = getTreeHelperConfig(config);
@@ -364,7 +332,7 @@ export function mapTreeNodeStructure<T = any, R = any>(
   if (hasChildren) {
     return {
       ...convertedNode,
-      [childrenKey]: node[childrenKey].map(childNode => mapTreeNodeStructure(childNode, convertNodeToStructure, config)),
+      [childrenKey]: node[childrenKey].map((childNode) => mapTreeNodeStructure(childNode, convertNodeToStructure, config)),
     };
   } else {
     return {

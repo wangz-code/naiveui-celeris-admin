@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
+import ActionIcon from '#/components/ActionIcon/src/ActionIcon.vue';
 </script>
 
 <template>
@@ -14,6 +14,4 @@ import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

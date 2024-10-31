@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { renderIcon } from "@/components/Iconx";
-import type { RendererElement, RendererNode, VNode } from "vue";
-import type { ChatSummary } from "@/views/chat/components/AssistantSidebar/types";
-import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
+import { renderIcon } from '#/components/Iconx';
+import type { RendererElement, RendererNode, VNode } from 'vue';
+import type { ChatSummary } from '#/views/chat/components/AssistantSidebar/types';
+import ActionIcon from '#/components/ActionIcon/src/ActionIcon.vue';
 
 defineProps({
   chatSummary: {
@@ -13,11 +13,11 @@ defineProps({
 
 const showActions = ref(false);
 
-const TrashIcon = "carbon:trash-can";
-const MenuHorizontalIcon = "carbon:overflow-menu-horizontal";
-const ExportIcon = "tabler:download";
-const EditIcon = "tabler:edit";
-const ArchiveIcon = "tabler:archive";
+const TrashIcon = 'carbon:trash-can';
+const MenuHorizontalIcon = 'carbon:overflow-menu-horizontal';
+const ExportIcon = 'tabler:download';
+const EditIcon = 'tabler:edit';
+const ArchiveIcon = 'tabler:archive';
 
 interface MenuItem {
   label: string;
@@ -26,18 +26,18 @@ interface MenuItem {
 }
 const menuItems: MenuItem[] = [
   {
-    label: "导出",
-    key: "Export",
+    label: '导出',
+    key: 'Export',
     icon: renderIcon(ExportIcon),
   },
   {
-    label: "重命名",
-    key: "Edit",
+    label: '重命名',
+    key: 'Edit',
     icon: renderIcon(EditIcon),
   },
   {
-    label: "删除",
-    key: "Delete",
+    label: '删除',
+    key: 'Delete',
     icon: renderIcon(TrashIcon),
   },
 ];
@@ -65,5 +65,4 @@ const menuOptions = ref<MenuItem[]>(menuItems);
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

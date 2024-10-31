@@ -1,13 +1,13 @@
-import type { App } from "vue";
-import type { RouteRecordName, RouteRecordRaw } from "vue-router";
-import { createRouter, createWebHashHistory } from "vue-router";
-import { basicRoutes } from "./routes";
+import type { App } from 'vue';
+import type { RouteRecordName, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { basicRoutes } from './routes';
 
 // Create a whitelist of route names
 const WHITE_NAME_LIST: RouteRecordName[] = [];
 function generateRouteNames(routes: RouteRecordRaw[]) {
   routes.forEach((route) => {
-    WHITE_NAME_LIST.push(route.name ?? "");
+    WHITE_NAME_LIST.push(route.name ?? '');
     if (route.children) {
       generateRouteNames(route.children);
     }

@@ -6,7 +6,7 @@
     "dev": "turbo dev",
     "preview": "turbo build && pnpm -F naive-admin run preview",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"apps/celeris/**/*.{ts,tsx,vue}\""
   },
   "packageManager": "pnpm@9.7.1",
   "dependencies": {

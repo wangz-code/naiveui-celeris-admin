@@ -1,29 +1,19 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
-import {
-  type FormInst,
-  type FormItemRule,
-  type FormRules,
-  type FormValidationError,
-  NButton,
-  NForm,
-  NFormItem,
-  NInput,
-  useMessage,
-} from "naive-ui";
+import { type FormInst, type FormItemRule, type FormRules, type FormValidationError, NButton, NForm, NFormItem, NInput, useMessage } from 'naive-ui';
 
-import { useUserStore } from "@/store/modules/user";
-import type { SignUpFromType } from "@/views/login/types";
+import { useUserStore } from '#/store/modules/user';
+import type { SignUpFromType } from '#/views/login/types';
 
 const { t } = useI18n();
 
 const formRef = ref<FormInst | null>(null);
 
 const model = ref<SignUpFromType>({
-  username: "kirklin",
-  password: "123456",
-  confirmPassword: "123456",
+  username: 'kirklin',
+  password: '123456',
+  confirmPassword: '123456',
 });
 const message = useMessage();
 const loading = ref<boolean>(false);
@@ -32,29 +22,29 @@ const rules: FormRules = {
   username: [
     {
       required: true,
-      trigger: ["blur"],
-      message: t("page.login.form.username.error"),
+      trigger: ['blur'],
+      message: t('page.login.form.username.error'),
     },
   ],
   password: [
     {
       required: true,
-      trigger: ["blur"],
-      message: t("page.login.form.password.error"),
+      trigger: ['blur'],
+      message: t('page.login.form.password.error'),
     },
   ],
   confirmPassword: [
     {
       required: true,
-      trigger: ["blur"],
-      message: t("page.login.form.confirmPassword.error"),
+      trigger: ['blur'],
+      message: t('page.login.form.confirmPassword.error'),
     },
     {
       validator: (rule: FormItemRule, value: string): boolean => {
         return value === model.value.password;
       },
-      message: t("page.login.form.confirmPassword.validator"),
-      trigger: ["blur", "password-input"],
+      message: t('page.login.form.confirmPassword.validator'),
+      trigger: ['blur', 'password-input'],
     },
   ],
 };
@@ -67,22 +57,22 @@ function signUp(e: Event) {
       // Login the user
       const userInfo = await useUserStore().login({
         ...{
-          username: "kirklin",
-          password: "123456",
+          username: 'kirklin',
+          password: '123456',
         },
         remember: true,
-        errorMessageMode: "none",
+        errorMessageMode: 'none',
       });
       if (userInfo) {
         loading.value = false;
         notification.success({
-          title: t("page.login.notification.loginSuccessMessage"),
-          content: t("page.login.notification.welcomeBackMessage", { username: userInfo.fullName }),
+          title: t('page.login.notification.loginSuccessMessage'),
+          content: t('page.login.notification.welcomeBackMessage', { username: userInfo.fullName }),
         });
       }
     } else {
       loading.value = false;
-      message.error("Invalid credentials");
+      message.error('Invalid credentials');
     }
   });
 }

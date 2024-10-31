@@ -14,6 +14,9 @@
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "preview": "vite preview"
   },
+  "imports": {
+    "#/*": "./src/*"
+  },
   "dependencies": {
     "@kirklin/logger": "catalog:",
     "@kirklin/palette": "catalog:",
@@ -45,6 +48,8 @@
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "pkg-types": "catalog:",
+    "celeris-constants": "workspace:*",
+    "celeris-types": "workspace:*",
     "vue": "catalog:",
     "vue-draggable-plus": "catalog:",
     "vue-echarts": "catalog:",

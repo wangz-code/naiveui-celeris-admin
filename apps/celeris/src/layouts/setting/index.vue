@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import SettingButton from "@/layouts/setting/components/SettingButton.vue";
-import SettingDrawer from "@/layouts/setting/components/SettingDrawer/index.vue";
+import SettingButton from '#/layouts/setting/components/SettingButton.vue';
+import SettingDrawer from '#/layouts/setting/components/SettingDrawer/index.vue';
 
 defineOptions({
-  name: "Setting",
+  name: 'Setting',
 });
 </script>
 
@@ -12,6 +12,4 @@ defineOptions({
   <SettingDrawer />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

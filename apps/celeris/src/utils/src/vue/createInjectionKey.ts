@@ -1,4 +1,4 @@
-import type { InjectionKey } from "vue";
+import type { InjectionKey } from 'vue';
 
 /**
  * Creates an injection key for use with the provide/inject API.

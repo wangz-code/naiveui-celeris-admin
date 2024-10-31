@@ -8,10 +8,7 @@ export function clearRefreshTokenCookie(event: H3Event<EventHandlerRequest>) {
   });
 }
 
-export function setRefreshTokenCookie(
-  event: H3Event<EventHandlerRequest>,
-  refreshToken: string,
-) {
+export function setRefreshTokenCookie(event: H3Event<EventHandlerRequest>, refreshToken: string) {
   setCookie(event, 'jwt', refreshToken, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineOptions({
-  name: "SidebarFooter",
+  name: 'SidebarFooter',
 });
 
 withDefaults(
@@ -15,6 +15,4 @@ withDefaults(
   <div class="sidebar-footer" :class="{ collapsed }" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,4 +1,4 @@
-import { isArray } from "./typeChecks";
+import { isArray } from './typeChecks';
 
 /**
  * 从模块对象中加载数据并合并到一个数组中
@@ -7,7 +7,7 @@ import { isArray } from "./typeChecks";
  * @returns 加载后的数据数组 Loaded data array
  */
 export function loadDataFromModules<T>(modules: Record<string, any>): T[] {
-// 创建一个空数组用于存储数据 Create an empty array to store data
+  // 创建一个空数组用于存储数据 Create an empty array to store data
   const dataList: T[] = [];
   Object.keys(modules).forEach((key) => {
     const mod = modules[key].default || {};

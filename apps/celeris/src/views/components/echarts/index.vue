@@ -5,9 +5,9 @@
  * @Description: content
 -->
 <template>
-	<n-card> <scatter3D></scatter3D> </n-card>
+  <n-card> <scatter3D></scatter3D> </n-card>
 </template>
 
 <script lang="ts" setup>
-import scatter3D from "./components/scatter3D.vue";
+import scatter3D from './components/scatter3D.vue';
 </script>

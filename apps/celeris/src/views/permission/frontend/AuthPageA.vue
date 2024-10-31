@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RoleConstants } from "@/constants";
+import { RoleConstants } from 'celeris-constants';
 
 const { t } = useI18n();
 </script>
@@ -8,6 +8,4 @@ const { t } = useI18n();
   <NCard :title="t('page.permission.roleButtonText', { role: RoleConstants.ADMIN })" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
