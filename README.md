@@ -7,7 +7,7 @@
 
 ## 简介
 
-naiveui-celeris-admin 是保留 celeris 味道,并将@celeris 依赖替换为本地
+naiveui-celeris-admin 是保留 celeris css,并将@celeris 依赖替换为本地
 
 ![index.png](https://raw.githubusercontent.com/WangSunio/img/main/images/index.png)
 ---
@@ -24,7 +24,6 @@ naiveui-celeris-admin 是保留 celeris 味道,并将@celeris 依赖替换为本
 -   unplugin-vue-components 自动导入 components
 -   vite-plugin-mock 拦截请求模拟测试数据
 -   icon 使用 xicons, src/components/Iconx 组件亦支持本地 svg 字符串导入
--   移除所有@celeris/xxx 依赖包
 ### 开发
 
 ```bash
