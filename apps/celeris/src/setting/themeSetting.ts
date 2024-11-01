@@ -1,5 +1,5 @@
-import type { ThemeSetting } from "@/types";
-import { presetPrimaryColors } from "@/utils";
+import type { ThemeSetting } from 'celeris-types';
+import { presetPrimaryColors } from '#/utils';
 
 export const DEFAULT_THEME_SETTING: ThemeSetting = {
   // 网站灰色模式，开启可能是因为某些悲伤的日子

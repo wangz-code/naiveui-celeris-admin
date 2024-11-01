@@ -1,15 +1,15 @@
-import type { MessageMode } from '@/types';
-import type { UserInfo } from '@/types/src/user';
+import type { MessageMode } from 'celeris-types';
+import type { UserInfo } from '#/types/src/user';
 import { defineStore } from 'pinia';
-import { field, getErrorMessage, logger } from '@/utils';
-import type { RoleConstants } from '@/constants';
-import { APP_USER_STORE_ID, PageConstants, PermissionCacheTypeConstants } from '@/constants';
-import { loginApi, logoutApi, userInfoApi } from '@/apis/internal/auth';
-import type { LoginParams } from '@/apis/internal/auth';
-import { DEFAULT_PROJECT_SETTING } from '@/setting/projectSetting';
-import { router } from '@/router';
-import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
-import { usePermissionStore } from '@/store/modules/permission';
+import { field, getErrorMessage, logger } from '#/utils';
+import type { RoleConstants } from 'celeris-constants';
+import { APP_USER_STORE_ID, PageConstants, PermissionCacheTypeConstants } from 'celeris-constants';
+import { loginApi, logoutApi, userInfoApi } from '#/apis/internal/auth';
+import type { LoginParams } from '#/apis/internal/auth';
+import { DEFAULT_PROJECT_SETTING } from '#/setting/projectSetting';
+import { router } from '#/router';
+import { PAGE_NOT_FOUND_ROUTE } from '#/router/routes/basic';
+import { usePermissionStore } from '#/store/modules/permission';
 import { log } from 'console';
 
 interface UserState {

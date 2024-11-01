@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Assistant } from "@/views/chat/components/AssistantSidebar/types";
-import AssistantItem from "@/views/chat/components/AssistantSidebar/components/AssistantItem.vue";
-import { type ChatContextInjectionKey, chatContextInjectionKey } from "@/views/chat/chatContext";
-import { defaultAssistant, fakeAssistants } from "@/views/chat/data";
+import type { Assistant } from '#/views/chat/components/AssistantSidebar/types';
+import AssistantItem from '#/views/chat/components/AssistantSidebar/components/AssistantItem.vue';
+import { type ChatContextInjectionKey, chatContextInjectionKey } from '#/views/chat/chatContext';
+import { defaultAssistant, fakeAssistants } from '#/views/chat/data';
 
 const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
 function handleSelectedRole(assistant: Assistant) {
@@ -12,9 +12,7 @@ function handleSelectedRole(assistant: Assistant) {
 
 <template>
   <div class="contacts-list">
-    <NEl
-      class="cursor-pointer flex items-center w-full pb-1 overflow-hidden transition ease-out hover:bg-[var(--hover-color)]"
-    >
+    <NEl class="cursor-pointer flex items-center w-full pb-1 overflow-hidden transition ease-out hover:bg-[var(--hover-color)]">
       <AssistantItem :assistant="defaultAssistant" @click="handleSelectedRole(defaultAssistant)" />
     </NEl>
     <NCollapse :default-expanded-names="['default']" arrow-placement="left">

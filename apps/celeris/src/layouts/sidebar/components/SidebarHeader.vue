@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineOptions({
-  name: "SidebarHeader",
+  name: 'SidebarHeader',
 });
 
 const props = defineProps<{
@@ -15,5 +15,4 @@ const { collapsed } = toRefs(props);
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import ChatHistorySidebarActionBar
-  from "@/views/chat/components/ChatHistorySidebar/components/ChatHistorySidebarActionBar.vue";
-import ChatList from "@/views/chat/components/ChatHistorySidebar/components/ChatList.vue";
+import ChatHistorySidebarActionBar from '#/views/chat/components/ChatHistorySidebar/components/ChatHistorySidebarActionBar.vue';
+import ChatList from '#/views/chat/components/ChatHistorySidebar/components/ChatList.vue';
 
 defineOptions({
-  name: "ChatHistorySidebar",
+  name: 'ChatHistorySidebar',
 });
 </script>
 
@@ -15,6 +14,4 @@ defineOptions({
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,9 +1,9 @@
-import type { RouteRecordRaw, Router } from "vue-router";
-import { PageConstants } from "@/constants";
-import { RootRoute } from "@/router/routes";
-import { PAGE_NOT_FOUND_ROUTE } from "@/router/routes/basic";
-import { usePermissionStoreWithOut } from "@/store/modules/permission";
-import { useUserStoreWithOut } from "@/store/modules/user";
+import type { RouteRecordRaw, Router } from 'vue-router';
+import { PageConstants } from 'celeris-constants';
+import { RootRoute } from '#/router/routes';
+import { PAGE_NOT_FOUND_ROUTE } from '#/router/routes/basic';
+import { usePermissionStoreWithOut } from '#/store/modules/permission';
+import { useUserStoreWithOut } from '#/store/modules/user';
 
 const LOGIN_PATH = PageConstants.BASE_LOGIN;
 const ROOT_PATH = RootRoute.path;
@@ -12,12 +12,7 @@ export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, from, next) => {
-    if (
-      from.path === ROOT_PATH
-      && to.path === PageConstants.BASE_HOME
-      && userStore.getUserInfo?.homePageUrl
-      && userStore.getUserInfo.homePageUrl !== PageConstants.BASE_HOME
-    ) {
+    if (from.path === ROOT_PATH && to.path === PageConstants.BASE_HOME && userStore.getUserInfo?.homePageUrl && userStore.getUserInfo.homePageUrl !== PageConstants.BASE_HOME) {
       next(userStore.getUserInfo.homePageUrl);
       return;
     }
@@ -30,7 +25,7 @@ export function createPermissionGuard(router: Router) {
         try {
           await userStore.performAfterLoginAction();
           if (!shouldPasswordExpired) {
-            next((to.query?.redirect as string) || "/");
+            next((to.query?.redirect as string) || '/');
             return;
           }
         } catch {
@@ -65,11 +60,7 @@ export function createPermissionGuard(router: Router) {
     }
 
     // Jump to the 404 page after processing the login
-    if (
-      from.path === LOGIN_PATH
-      && to.name === PAGE_NOT_FOUND_ROUTE.name
-      && to.fullPath !== (userStore.getUserInfo?.homePageUrl || PageConstants.BASE_HOME)
-    ) {
+    if (from.path === LOGIN_PATH && to.name === PAGE_NOT_FOUND_ROUTE.name && to.fullPath !== (userStore.getUserInfo?.homePageUrl || PageConstants.BASE_HOME)) {
       next(userStore.getUserInfo?.homePageUrl || PageConstants.BASE_HOME);
       return;
     }

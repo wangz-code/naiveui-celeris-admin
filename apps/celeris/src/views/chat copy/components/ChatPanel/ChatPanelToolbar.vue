@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { RendererElement, RendererNode, VNode } from "vue";
-import { renderIcon } from "@/components/Iconx";
-import type { ChatContextInjectionKey } from "@/views/chat/chatContext";
-import { chatContextInjectionKey } from "@/views/chat/chatContext";
-import ActionIcon from "@/components/ActionIcon/src/ActionIcon.vue";
+import type { RendererElement, RendererNode, VNode } from 'vue';
+import { renderIcon } from '#/components/Iconx';
+import type { ChatContextInjectionKey } from '#/views/chat/chatContext';
+import { chatContextInjectionKey } from '#/views/chat/chatContext';
+import ActionIcon from '#/components/ActionIcon/src/ActionIcon.vue';
 
 const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
-const TrashIcon = "carbon:trash-can";
-const MenuHorizontalIcon = "carbon:overflow-menu-horizontal";
-const SHARE_ICON = "tabler:share";
-const ExportIcon = "tabler:download";
+const TrashIcon = 'carbon:trash-can';
+const MenuHorizontalIcon = 'carbon:overflow-menu-horizontal';
+const SHARE_ICON = 'tabler:share';
+const ExportIcon = 'tabler:download';
 interface MenuItem {
   label: string;
   key: string;
@@ -17,13 +17,13 @@ interface MenuItem {
 }
 const menuItems: MenuItem[] = [
   {
-    label: "Export Session",
-    key: "Export",
+    label: 'Export Session',
+    key: 'Export',
     icon: renderIcon(ExportIcon),
   },
   {
-    label: "Delete",
-    key: "Delete",
+    label: 'Delete',
+    key: 'Delete',
     icon: renderIcon(TrashIcon),
   },
 ];
@@ -33,10 +33,7 @@ const menuOptions = ref<MenuItem[]>(menuItems);
 <template>
   <div class="chat-panel-toolbar flex grow items-center sticky backdrop-blur pb-2">
     <div class="assistant flex items-center grow">
-      <div
-        class="flex items-center mr-2"
-        :class="{ 'state-online': selectedAssistantRef.id === '0' }"
-      >
+      <div class="flex items-center mr-2" :class="{ 'state-online': selectedAssistantRef.id === '0' }">
         <NAvatar round size="large" :src="selectedAssistantRef.avatar" />
       </div>
       <div class="info flex flex-col">

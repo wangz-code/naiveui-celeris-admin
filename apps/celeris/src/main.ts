@@ -1,19 +1,19 @@
-import { createApp } from "vue";
+import { createApp } from 'vue';
 
-import App from "@/App.vue";
-import { initializeConfiguration } from "@/AppConfiguration";
-import { setupVueQuery } from "@/apis";
-import { setupDirectives } from "@/directives";
-import { setupI18n } from "@/locales";
-import { setupRouterGuard } from "@/router/guard";
-import "@/styles";
-import "virtual:uno.css";
-import { Iconx } from "./components/Iconx/index";
-import { router, setupRouter } from "./router";
-import { setupStore } from "./store";
+import App from '#/App.vue';
+import { initializeConfiguration } from '#/AppConfiguration';
+import { setupVueQuery } from '#/apis';
+import { setupDirectives } from '#/directives';
+import { setupI18n } from '#/locales';
+import { setupRouterGuard } from '#/router/guard';
+import '#/styles';
+import 'virtual:uno.css';
+import { Iconx } from './components/Iconx/index';
+import { router, setupRouter } from './router';
+import { setupStore } from './store';
 const app = createApp(App);
-app.use(Iconx);
 
+app.use(Iconx);
 // Configure vue-query
 // 配置 vue-query
 setupVueQuery(app);
@@ -35,12 +35,12 @@ setupRouterGuard(router);
 setupDirectives(app);
 
 void Promise.all([
-	// Initialize internal system configuration
-	// 初始化内部系统配置
-	initializeConfiguration(),
-	// Configure i18n
-	// 配置国际化
-	setupI18n(app),
+  // Initialize internal system configuration
+  // 初始化内部系统配置
+  initializeConfiguration(),
+  // Configure i18n
+  // 配置国际化
+  setupI18n(app),
 ]).finally(() => {
-	app.mount("#app");
+  app.mount('#app');
 });

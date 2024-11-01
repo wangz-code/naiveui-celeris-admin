@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { earningsIndicator, interwovenReflections, totalIncomeIndicator } from '@/assets';
-import AuthForm from '@/views/login/components/AuthForm/index.vue';
+import { earningsIndicator, interwovenReflections, totalIncomeIndicator } from '#/assets';
+import AuthForm from '#/views/login/components/AuthForm/index.vue';
 
 defineOptions({
   name: 'Login',

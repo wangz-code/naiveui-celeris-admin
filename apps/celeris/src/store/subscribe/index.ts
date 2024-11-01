@@ -1,4 +1,4 @@
-import subscribeThemeStore from "./theme";
+import subscribeThemeStore from './theme';
 
 /**
  * Subscribe to the store.

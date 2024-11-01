@@ -1,23 +1,22 @@
-import type { ThemeSetting } from "@/types";
-import { deepMerge } from "@/utils";
-import { defineStore } from "pinia";
-import { APP_DESIGN_STORE_ID } from "@/constants";
-import type { GlobalTheme, GlobalThemeOverrides } from "naive-ui";
-import { darkTheme, lightTheme } from "naive-ui";
-import { getNaiveUICustomTheme } from "./themeUtils";
-import { DEFAULT_THEME_SETTING } from "@/setting/themeSetting";
+import type { ThemeSetting } from 'celeris-types';
+import { deepMerge } from '#/utils';
+import { defineStore } from 'pinia';
+import { APP_DESIGN_STORE_ID } from 'celeris-constants';
+import type { GlobalTheme, GlobalThemeOverrides } from 'naive-ui';
+import { darkTheme, lightTheme } from 'naive-ui';
+import { getNaiveUICustomTheme } from './themeUtils';
+import { DEFAULT_THEME_SETTING } from '#/setting/themeSetting';
 
 interface DesignState {
   themeSetting: ThemeSetting;
 }
 const colorMode = useColorMode({
-  initialValue: DEFAULT_THEME_SETTING.shouldFollowSystemTheme ? "auto" : (DEFAULT_THEME_SETTING.shouldEnableDarkMode ? "dark" : "light"),
+  initialValue: DEFAULT_THEME_SETTING.shouldFollowSystemTheme ? 'auto' : DEFAULT_THEME_SETTING.shouldEnableDarkMode ? 'dark' : 'light',
 });
 const isOsDarkTheme = usePreferredDark();
-export const useDesignStore = defineStore({
-  id: APP_DESIGN_STORE_ID,
+export const useDesignStore = defineStore(APP_DESIGN_STORE_ID, {
   persist: {
-    paths: ["themeSetting"],
+    pick: ['themeSetting'],
   },
   state: (): DesignState => ({
     themeSetting: DEFAULT_THEME_SETTING,
@@ -33,10 +32,13 @@ export const useDesignStore = defineStore({
     },
     // 获取Naive UI 自定义主题
     getNaiveUICustomTheme(state): GlobalThemeOverrides | null {
-      return getNaiveUICustomTheme({
-        ...state.themeSetting.otherColor,
-        primary: state.themeSetting.themeColor,
-      }, this.getDarkMode);
+      return getNaiveUICustomTheme(
+        {
+          ...state.themeSetting.otherColor,
+          primary: state.themeSetting.themeColor,
+        },
+        this.getDarkMode,
+      );
     },
     //  获取暗黑模式
     getDarkMode(state): boolean {
@@ -70,10 +72,10 @@ export const useDesignStore = defineStore({
     // 设置暗黑模式
     setDarkMode(darkMode: boolean): void {
       if (this.themeSetting.shouldFollowSystemTheme) {
-        colorMode.value = "auto";
+        colorMode.value = 'auto';
         this.setThemeSetting({ shouldEnableDarkMode: isOsDarkTheme.value });
       } else {
-        colorMode.value = darkMode ? "dark" : "light";
+        colorMode.value = darkMode ? 'dark' : 'light';
         this.setThemeSetting({ shouldEnableDarkMode: darkMode });
       }
     },
@@ -87,7 +89,7 @@ export const useDesignStore = defineStore({
     },
     // 设置跟随系统主题
     setFollowSystemTheme(followSystemTheme: boolean): void {
-      colorMode.value = followSystemTheme ? "auto" : this.getThemeSetting.shouldEnableDarkMode ? "dark" : "light";
+      colorMode.value = followSystemTheme ? 'auto' : this.getThemeSetting.shouldEnableDarkMode ? 'dark' : 'light';
       this.setThemeSetting({ shouldFollowSystemTheme: followSystemTheme });
     },
     // 设置主题颜色

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RoleConstants } from "@/constants";
-import CurrentPermissionMode from "../CurrentPermissionMode.vue";
-import { usePermissionStore } from "@/store/modules/permission";
-import { useUserStore } from "@/store/modules/user";
-import Authority from "@/components/Authority/src/Authority.vue";
+import { RoleConstants } from '../../../../../../packages/celeris-constants';
+import CurrentPermissionMode from '../CurrentPermissionMode.vue';
+import { usePermissionStore } from '#/store/modules/permission';
+import { useUserStore } from '#/store/modules/user';
+import Authority from '#/components/Authority/src/Authority.vue';
 
 const { hasPermission, isBackendPermissionMode } = useAppPermission();
 const permissionStore = usePermissionStore();
@@ -29,12 +29,7 @@ async function switchToken(role: RoleConstants) {
       {{ permissionStore.getPermissionCodes }}
     </NCard>
     <NDivider />
-    <NAlert
-      class="mt-4"
-      type="info"
-      :title="t('page.permission.backendLeftMenuChangeTitle')"
-      show-icon
-    />
+    <NAlert class="mt-4" type="info" :title="t('page.permission.backendLeftMenuChangeTitle')" show-icon />
 
     <NDivider />
 
@@ -52,13 +47,13 @@ async function switchToken(role: RoleConstants) {
       <NDivider>{{ t('page.permission.componentWayTitle') }}</NDivider>
       <Authority value="1000">
         <NButton type="primary" class="mx-4">
-          {{ t('page.permission.codeButtonText', { code: "1000" }) }}
+          {{ t('page.permission.codeButtonText', { code: '1000' }) }}
         </NButton>
       </Authority>
 
       <Authority value="2000">
         <NButton type="success" class="mx-4">
-          {{ t('page.permission.codeButtonText', { code: "2000" }) }}
+          {{ t('page.permission.codeButtonText', { code: '2000' }) }}
         </NButton>
       </Authority>
 
@@ -70,11 +65,11 @@ async function switchToken(role: RoleConstants) {
 
       <NDivider>{{ t('page.permission.functionWayTitle') }}</NDivider>
       <NButton v-if="hasPermission('1000')" type="primary" class="mx-4">
-        {{ t('page.permission.codeButtonText', { code: "1000" }) }}
+        {{ t('page.permission.codeButtonText', { code: '1000' }) }}
       </NButton>
 
       <NButton v-if="hasPermission('2000')" type="success" class="mx-4">
-        {{ t('page.permission.codeButtonText', { code: "2000" }) }}
+        {{ t('page.permission.codeButtonText', { code: '2000' }) }}
       </NButton>
 
       <NButton v-if="hasPermission(['1000', '2000'])" type="error" class="mx-4">
@@ -83,11 +78,11 @@ async function switchToken(role: RoleConstants) {
 
       <NDivider>{{ t('page.permission.directiveWayTitle') }}</NDivider>
       <NButton v-auth="'1000'" type="primary" class="mx-4">
-        {{ t('page.permission.codeButtonText', { code: "1000" }) }}
+        {{ t('page.permission.codeButtonText', { code: '1000' }) }}
       </NButton>
 
       <NButton v-auth="'2000'" type="success" class="mx-4">
-        {{ t('page.permission.codeButtonText', { code: "2000" }) }}
+        {{ t('page.permission.codeButtonText', { code: '2000' }) }}
       </NButton>
 
       <NButton v-auth="['1000', '2000']" type="error" class="mx-4">
@@ -97,6 +92,4 @@ async function switchToken(role: RoleConstants) {
   </NCard>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

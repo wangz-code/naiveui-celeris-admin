@@ -1,12 +1,12 @@
-import { permissionCodeApi } from '@/apis/internal/auth';
-import { menusApi } from '@/apis/internal/menu';
-import type { RoleConstants } from '@/constants';
-import { APP_PERMISSION_STORE_ID, PermissionModeConstants } from '@/constants';
-import { asyncRoutes } from '@/router/routes';
-import { useAppStore } from '@/store/modules/app';
-import { useUserStore } from '@/store/modules/user';
-import type { Menu } from '@/types';
-import { flattenMultiLevelRoutes } from '@/utils';
+import { permissionCodeApi } from '#/apis/internal/auth';
+import { menusApi } from '#/apis/internal/menu';
+import type { RoleConstants } from 'celeris-constants';
+import { APP_PERMISSION_STORE_ID, PermissionModeConstants } from 'celeris-constants';
+import { asyncRoutes } from '#/router/routes';
+import { useAppStore } from '#/store/modules/app';
+import { useUserStore } from '#/store/modules/user';
+import type { Menu } from 'celeris-types';
+import { flattenMultiLevelRoutes } from '#/utils';
 import { defineStore } from 'pinia';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -119,8 +119,8 @@ export const usePermissionStore = defineStore(APP_PERMISSION_STORE_ID, {
 
       routes = asyncRoutes;
 
-      menusApi().then((res: any) => {
-        this.setBackendMenuList(res.data.data);
+      menusApi().then(({ data }) => {
+        this.setBackendMenuList(data);
       });
       // Convert multi-level routing to level 2 routing
       routes = flattenMultiLevelRoutes(routes);

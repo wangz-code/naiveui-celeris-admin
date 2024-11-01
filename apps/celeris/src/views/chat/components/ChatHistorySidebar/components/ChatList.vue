@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import type { ChatHistorySidebar } from "@/views/chat/components/AssistantSidebar/types";
-import ChatHistoryItem from "@/views/chat/components/ChatHistorySidebar/components/ChatHistoryItem.vue";
+import { onMounted, ref } from 'vue';
+import type { ChatHistorySidebar } from '#/views/chat/components/AssistantSidebar/types';
+import ChatHistoryItem from '#/views/chat/components/ChatHistorySidebar/components/ChatHistoryItem.vue';
 
 const chatHistory = ref<ChatHistorySidebar>(); // 使用 ChatHistorySidebar 类型的 ref
 
@@ -9,12 +9,12 @@ const chatHistory = ref<ChatHistorySidebar>(); // 使用 ChatHistorySidebar 类�
 onMounted(() => {
   // 这里可以替换为实际获取聊天历史摘要的逻辑
   chatHistory.value = {
-    assistantId: "1", // 设置相关联的聊天助手 ID
+    assistantId: '1', // 设置相关联的聊天助手 ID
     chatSummaries: [
-      { id: "1", assistantId: "1", title: "Chat with Customer Support", archived: false },
-      { id: "2", assistantId: "1", title: "Product Inquiry", archived: false },
-      { id: "3", assistantId: "1", title: "Technical Assistance", archived: false },
-      { id: "4", assistantId: "1", title: "Sales Meeting", archived: false },
+      { id: '1', assistantId: '1', title: 'Chat with Customer Support', archived: false },
+      { id: '2', assistantId: '1', title: 'Product Inquiry', archived: false },
+      { id: '3', assistantId: '1', title: 'Technical Assistance', archived: false },
+      { id: '4', assistantId: '1', title: 'Sales Meeting', archived: false },
       // 添加更多聊天摘要条目
     ],
   };
@@ -38,7 +38,8 @@ onMounted(() => {
           <template v-else>
             <!-- 渲染聊天历史摘要列表 -->
             <div
-              v-for="chatSummary in chatHistory?.chatSummaries" :key="chatSummary.id"
+              v-for="chatSummary in chatHistory?.chatSummaries"
+              :key="chatSummary.id"
               class="cursor-pointer flex items-center w-full overflow-hidden transition ease-out border-[var(--border-color)]"
             >
               <ChatHistoryItem :chat-summary="chatSummary" />

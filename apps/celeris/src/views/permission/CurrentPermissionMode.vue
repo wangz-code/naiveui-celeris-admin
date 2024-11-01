@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PermissionModeConstants } from "@/constants";
-import { useAppPermission } from "@/composables";
+import { PermissionModeConstants } from 'celeris-constants';
+import { useAppPermission } from '#/composables';
 
 const { togglePermissionMode, getPermissionMode } = useAppPermission();
 const { t } = useI18n();
@@ -12,7 +12,7 @@ const { t } = useI18n();
       {{ getPermissionMode === PermissionModeConstants.BACKEND ? t('page.permission.permissionMode.backendMode') : t('page.permission.permissionMode.frontendMode') }}
     </NButton>
     <NButton class="ml-4" type="primary" @click="togglePermissionMode">
-      {{ t("page.permission.permissionMode.toggleMode") }}
+      {{ t('page.permission.permissionMode.toggleMode') }}
     </NButton>
   </NCard>
 </template>

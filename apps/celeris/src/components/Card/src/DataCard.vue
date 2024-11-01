@@ -12,13 +12,13 @@ const valueString = computed(() => {
   const value = val?.value || 0;
 
   if (!value) {
-    return "";
+    return '';
   }
 
   if (currency?.value) {
-    return new Intl.NumberFormat("zh-CN", { style: "currency", currency: "CNY" }).format(value);
+    return new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY' }).format(value);
   } else {
-    return new Intl.NumberFormat("zh-CN").format(value);
+    return new Intl.NumberFormat('zh-CN').format(value);
   }
 });
 </script>
@@ -26,10 +26,7 @@ const valueString = computed(() => {
 <template>
   <NCard>
     <div class="flex items-center h-full">
-      <div
-        class="card-wrap flex gap-4 w-full"
-        :class="{ 'items-center': centered, 'text-center': centered, 'flex-col': !horizontal }"
-      >
+      <div class="card-wrap flex gap-4 w-full" :class="{ 'items-center': centered, 'text-center': centered, 'flex-col': !horizontal }">
         <div class="icon">
           <slot name="icon" />
         </div>
@@ -46,5 +43,4 @@ const valueString = computed(() => {
   </NCard>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

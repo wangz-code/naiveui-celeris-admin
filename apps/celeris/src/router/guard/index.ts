@@ -1,11 +1,11 @@
-import { useTransitionSetting } from "@/composables/setting/useTransitionSetting";
-import { createPageLoadingGuard } from "@/router/guard/pageLoadingGuard";
-import { createPermissionGuard } from "@/router/guard/permissionGuard";
-import { createStateGuard } from "@/router/guard/stateGuard";
-import { notifyRouteChange } from "@/router/mitt/routeChange";
-import NProgress from "@/setting/nprogress";
-import { openWindow } from "@/utils";
-import type { RouteLocationNormalized, Router } from "vue-router";
+import { useTransitionSetting } from '#/composables/setting/useTransitionSetting';
+import { createPageLoadingGuard } from '#/router/guard/pageLoadingGuard';
+import { createPermissionGuard } from '#/router/guard/permissionGuard';
+import { createStateGuard } from '#/router/guard/stateGuard';
+import { notifyRouteChange } from '#/router/mitt/routeChange';
+import NProgress from '#/setting/nprogress';
+import { openWindow } from '#/utils';
+import type { RouteLocationNormalized, Router } from 'vue-router';
 
 // Don't change the order of creation
 // 不要改变创建的顺序
@@ -58,10 +58,7 @@ export function createPageGuard(router: Router): void {
  * @param router - 路由对象。
  */
 export function createHttpGuard(router: Router) {
-  
-
   router.beforeEach(() => {
-   
     return true;
   });
 }
@@ -101,7 +98,7 @@ export function createProgressGuard(router: Router) {
 export function createExternalLinkGuard(router: Router) {
   router.beforeEach((to) => {
     const { meta } = to;
-    if (meta && Reflect.has(meta, "externalLink")) {
+    if (meta && Reflect.has(meta, 'externalLink')) {
       openWindow(<string>meta.externalLink);
       return false;
     }

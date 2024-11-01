@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Assistant } from "@/views/chat/components/AssistantSidebar/types";
+import type { Assistant } from '#/views/chat/components/AssistantSidebar/types';
 
 defineProps({
   assistant: {
@@ -14,8 +14,8 @@ defineProps({
     <div class="relative rounded-full flex items-center pr-2" :class="{ available: assistant.available }">
       <NAvatar round :src="assistant.avatar" size="large" />
     </div>
-    <div class="overflow-hidden flex flex-col grow gap-1 p-1 ">
-      <div class="overflow-hidden flex justify-between items-center ">
+    <div class="overflow-hidden flex flex-col grow gap-1 p-1">
+      <div class="overflow-hidden flex justify-between items-center">
         <NText class="name whitespace-nowrap text-ellipsis grow font-bold">
           {{ assistant.name }}
         </NText>
@@ -30,5 +30,4 @@ defineProps({
   </div>
 </template>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

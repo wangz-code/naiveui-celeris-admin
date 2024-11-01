@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AssistantSidebarActionBar from "./components/AssistantSidebarActionBar.vue";
-import RoleList from "@/views/chat/components/AssistantSidebar/components/AssistantList.vue";
+import AssistantSidebarActionBar from './components/AssistantSidebarActionBar.vue';
+import RoleList from '#/views/chat/components/AssistantSidebar/components/AssistantList.vue';
 
 defineOptions({
-  name: "AssistantSidebar",
+  name: 'AssistantSidebar',
 });
 </script>
 
@@ -12,6 +12,4 @@ defineOptions({
   <RoleList />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

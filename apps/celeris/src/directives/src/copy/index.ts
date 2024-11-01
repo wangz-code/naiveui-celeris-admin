@@ -1,6 +1,5 @@
-import type { Directive, DirectiveBinding } from "vue";
-import { copyToClipboard, logger } from "@/utils";
-
+import type { Directive, DirectiveBinding } from 'vue';
+import { copyToClipboard, logger } from '#/utils';
 
 interface CopyDirectiveElement extends HTMLElement {
   copyData: string;
@@ -16,12 +15,12 @@ const copy: Directive = {
     el.copyData = binding.value as string;
     const handleClick = () => {
       if (!el.copyData) {
-        logger.warn("There is no content to copy.");
+        logger.warn('There is no content to copy.');
         return;
       }
       copyToClipboard(el.copyData);
     };
-    el.addEventListener("click", handleClick);
+    el.addEventListener('click', handleClick);
 
     el.__handleClick__ = handleClick;
   },
@@ -29,7 +28,7 @@ const copy: Directive = {
     el.copyData = binding.value as string;
   },
   beforeUnmount(el: CopyDirectiveElement) {
-    el.removeEventListener("click", el.__handleClick__);
+    el.removeEventListener('click', el.__handleClick__);
   },
 };
 

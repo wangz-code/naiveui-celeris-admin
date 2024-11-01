@@ -1,5 +1,5 @@
-import type { I18nOptions } from "vue-i18n";
-import { getLocale, setLocale } from "./store";
+import type { I18nOptions } from 'vue-i18n';
+import { getLocale, setLocale } from './store';
 
 export interface LocalesOptions {
   locale: string;
@@ -10,8 +10,8 @@ export interface LocalesOptions {
 export class LocalesConfiguration {
   private static options: LocalesOptions = {
     messagesHandler: () => {},
-    locale: "zh",
-    fallbackLocale: "zh",
+    locale: 'zh',
+    fallbackLocale: 'zh',
   };
 
   static configure(options: Partial<LocalesOptions>): void {

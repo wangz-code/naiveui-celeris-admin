@@ -1,5 +1,5 @@
-import type { Component, ComponentInternalInstance, MaybeRef } from "vue";
-import { defineComponent, getCurrentInstance, h } from "vue";
+import type { Component, ComponentInternalInstance, MaybeRef } from 'vue';
+import { defineComponent, getCurrentInstance, h } from 'vue';
 
 type VNode = ReturnType<typeof h>;
 
@@ -18,7 +18,7 @@ function createInnerComp(
 
 function forwardRefComponent(component: Component): Component {
   const higherOrderComponent = defineComponent({
-    name: "forwardRefHOC",
+    name: 'forwardRefHOC',
     /* Placeholder for async loading */
     __asyncLoader: Promise.resolve(),
     setup() {

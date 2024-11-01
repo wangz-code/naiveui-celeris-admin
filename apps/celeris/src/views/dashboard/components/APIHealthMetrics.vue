@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import DataCard from "@/components/Card/src/DataCard.vue";
-import CardInnerIcon from "@/views/dashboard/components/CardInnerIcon.vue";
-import { AlertTriangle, Wallet } from "@vicons/tabler";
+import DataCard from '#/components/Card/src/DataCard.vue';
+import CardInnerIcon from '#/views/dashboard/components/CardInnerIcon.vue';
+import { AlertTriangle, Wallet } from '@vicons/tabler';
 </script>
 
 <template>
@@ -25,6 +25,4 @@ import { AlertTriangle, Wallet } from "@vicons/tabler";
   </NGrid>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

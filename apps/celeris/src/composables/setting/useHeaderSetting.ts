@@ -1,5 +1,5 @@
-import type { HeaderSetting } from "@/types";
-import { useAppStoreWithOut } from "@/store/modules/app";
+import type { HeaderSetting } from 'celeris-types';
+import { useAppStoreWithOut } from '#/store/modules/app';
 
 export function useHeaderSetting() {
   const appStore = useAppStoreWithOut();

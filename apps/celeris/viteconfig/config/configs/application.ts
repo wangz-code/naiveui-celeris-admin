@@ -1,37 +1,19 @@
-import { resolve } from "node:path";
-import { readPackageJSON } from "pkg-types";
-import type { UserConfig } from "vite";
-import { loadEnv } from "vite";
-import { configVitePlugins } from "../../plugins";
-import { configureProxy, updateEnvVariables } from "../../utils";
-
-export async function createApplicationViteConfig(command: "build" | "serve", mode: string, cwd: string) {
+import { readPackageJSON } from 'pkg-types';
+import type { UserConfig } from 'vite';
+import { loadEnv } from 'vite';
+import { configVitePlugins } from '../../plugins';
+import { configureProxy, updateEnvVariables } from '../../utils';
+export async function createApplicationViteConfig(command: 'build' | 'serve', mode: string, cwd: string) {
   const root = cwd;
-  const isProductionBuild = command === "build";
-  const env: Recordable<string> = loadEnv(mode, root);
+  const env = loadEnv(mode, root);
   const defineData = await createDefineData(root);
   const viteEnv = updateEnvVariables(env);
-  const {
-    VITE_PORT,
-    VITE_PROXY,
-    VITE_USE_HTTPS,
-    VITE_PUBLIC_PATH,
-    VITE_DROP_CONSOLE,
-  } = viteEnv;
-  const plugins = configVitePlugins(root, viteEnv, isProductionBuild);
-  const pathResolve = (pathname: string) => resolve(root, ".", pathname);
-  
+  const { VITE_PORT, VITE_PROXY, VITE_USE_HTTPS, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv;
+  const plugins = configVitePlugins(viteEnv, { mode, command });
+
   const applicationConfig: UserConfig = {
     root,
     base: VITE_PUBLIC_PATH,
-
-    resolve: {
-      alias: {
-        "vue-i18n": "vue-i18n/dist/vue-i18n.esm-bundler.js",
-        "@/": `${pathResolve("src")}/`,
-        "mock": `${pathResolve("mock")}/`,
-      },
-    },
     server: {
       // Listening on all local IPs
       host: VITE_USE_HTTPS,
@@ -40,29 +22,16 @@ export async function createApplicationViteConfig(command: "build" | "serve", mo
       proxy: !VITE_USE_HTTPS ? configureProxy(VITE_PROXY) : {},
     },
     esbuild: {
-      pure: VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
+      pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
     },
     define: defineData,
     build: {
-      target: "es2015",
-      minify: "terser",
-      cssTarget: "chrome80",
-      rollupOptions: {
-        output: {
-          chunkFileNames: "assets/js/[name]-[hash].js",
-          entryFileNames: "assets/js/[name]-[hash].js",
-          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
-          manualChunks: {
-            vue: ["vue", "pinia", "vue-router"],
-            echarts: ["echarts", "vue-echarts"],
-            celerisComponents: ["@/components/Iconx", "naive-ui"],
-          },
-        },
-      },
+      target: 'es2015',
+      minify: 'terser',
+      cssTarget: 'chrome80',
     },
     css: {
-      preprocessorOptions: {
-      },
+      preprocessorOptions: {},
     },
     plugins,
   };
@@ -73,7 +42,6 @@ async function createDefineData(root: string) {
   try {
     const pkgJson = await readPackageJSON(root);
     const { dependencies, devDependencies, name, version } = pkgJson;
-
     const __APP_INFO__ = {
       pkg: { dependencies, devDependencies, name, version },
       lastBuildTime: new Date().getTime(),

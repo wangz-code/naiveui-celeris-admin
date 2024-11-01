@@ -1,4 +1,4 @@
-import { ResultConstants } from "@/constants";
+import { ResultConstants } from 'celeris-constants';
 
 /**
  * API调用的请求数据格式。
@@ -19,7 +19,7 @@ export interface SuccessResponse<T = any> {
   code: number;
   data: T;
   message: string;
-  type: "success";
+  type: 'success';
 }
 
 /**
@@ -30,7 +30,7 @@ export interface ErrorResponse<T = any> {
   code: number;
   data: T | null;
   message: string;
-  type: "error";
+  type: 'error';
 }
 
 /**
@@ -68,12 +68,12 @@ export function paginate<T = any>(pageNo: number, pageSize: number, array: T[]):
  * @returns {SuccessResponse<T>} - 带有数据的成功响应。
  * A successful response with data.
  */
-export function createSuccessResponse<T = any>(data: T, message = "ok"): SuccessResponse<T> {
+export function createSuccessResponse<T = any>(data: T, message = 'ok'): SuccessResponse<T> {
   return {
     code: ResultConstants.SUCCESS,
     data,
     message,
-    type: "success",
+    type: 'success',
   };
 }
 
@@ -96,14 +96,17 @@ export function createSuccessResponse<T = any>(data: T, message = "ok"): Success
  * @returns {SuccessResponse<{ items: T[]; total: number }>} - 带有分页结果的成功响应。
  * A successful response with a paginated list of results.
  */
-export function createPaginatedSuccessResponse<T = any>(page: number, pageSize: number, list: T[], message = "ok"): SuccessResponse<{ items: T[]; total: number }> {
+export function createPaginatedSuccessResponse<T = any>(page: number, pageSize: number, list: T[], message = 'ok'): SuccessResponse<{ items: T[]; total: number }> {
   const paginatedList = paginate(page, pageSize, list);
 
   return {
-    ...createSuccessResponse({
-      items: paginatedList,
-      total: list.length,
-    }, message),
+    ...createSuccessResponse(
+      {
+        items: paginatedList,
+        total: list.length,
+      },
+      message,
+    ),
   };
 }
 
@@ -123,12 +126,12 @@ export function createPaginatedSuccessResponse<T = any>(page: number, pageSize: 
  * @returns {ErrorResponse<T>} - 带有消息和可选代码和数据的错误响应。
  * An error response with a message and optional code and data.
  */
-export function createErrorResponse<T = any>(message = "请求失败。", code = ResultConstants.ERROR, data: T | null = null): ErrorResponse<T> {
+export function createErrorResponse<T = any>(message = '请求失败。', code = ResultConstants.ERROR, data: T | null = null): ErrorResponse<T> {
   return {
     code,
     data,
     message,
-    type: "error",
+    type: 'error',
   };
 }
 

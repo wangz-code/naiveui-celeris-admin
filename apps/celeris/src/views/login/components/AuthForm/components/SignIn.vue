@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';
 
-import { useI18n } from '@/locales';
-import { useUserStore } from '@/store/modules/user';
-import type { SignInFromType } from '@/views/login/types';
+import { useI18n } from '#/locales';
+import { useUserStore } from '#/store/modules/user';
+import type { SignInFromType } from '#/views/login/types';
 const emit = defineEmits(['forgot-password']);
 const { t } = useI18n();
 const message = useMessage();
@@ -39,7 +39,7 @@ async function signIn(e: Event) {
       });
       if (userInfo) {
         notification.success({
-          duration:3000,
+          duration: 3000,
           title: t('page.login.notification.loginSuccessMessage'),
           content: t('page.login.notification.welcomeBackMessage', { username: userInfo.fullName }),
         });

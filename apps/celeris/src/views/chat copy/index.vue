@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import ChatLayout from "./components/ChatLayout.vue";
+import ChatLayout from './components/ChatLayout.vue';
 
 defineOptions({
-  name: "Chat",
+  name: 'Chat',
 });
 </script>
 
 <template>
-    <ChatLayout />
+  <ChatLayout />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { Iconx } from '@/components/Iconx';
-import { FullScreenSvg } from '@/components/Iconx/svgs';
-import type { SearchGroup, SearchGroupItem, SearchGroups } from '@/components/SearchDialog/src/types';
-import { useSearchDialog } from '@/composables/useSearchDialog';
-import { getShallowMenus } from '@/router/menus';
-import { usePermissionStore } from '@/store/modules/permission';
-import type { Menu } from '@/types';
-import { isWindows } from '@/utils';
+import { Iconx } from '#/components/Iconx';
+import { FullScreenSvg } from '#/components/Iconx/svgs';
+import type { SearchGroup, SearchGroupItem, SearchGroups } from '#/components/SearchDialog/src/types';
+import { useSearchDialog } from '#/composables/useSearchDialog';
+import { usePermissionStore } from '#/store/modules/permission';
+import { isWindows } from '#/utils';
 import { Close, Enter, MenuOutline, Search } from '@vicons/ionicons5';
 import { ArrowsSort } from '@vicons/tabler';
 import { isArray } from '@vue/shared';
+import type { Menu } from 'celeris-types';
 import Highlighter from 'headless-highlighter';
 import type { ScrollbarInst } from 'naive-ui';
 

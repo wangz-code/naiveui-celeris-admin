@@ -6,3 +6,4 @@ dist.zip
 .turbo
 .cache
 .nitro
+.output

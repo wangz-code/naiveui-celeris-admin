@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/modules/user';
+import { useUserStore } from '#/store/modules/user';
 import axios, { AxiosRequestConfig } from 'axios';
 import { useGlobSetting } from '../composables/setting/useGlobSetting';
 
@@ -40,4 +40,3 @@ const Post = <T>(url: string, data?: any, config?: AxiosRequestConfig<any> | und
 const Get = <T>(url: string, config?: AxiosRequestConfig<any> | undefined) => instance.get<any, T>(url, config);
 
 export { Get, instance, Post };
-

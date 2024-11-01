@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useDesignStore } from "@/store/modules/design";
+import { useDesignStore } from '#/store/modules/design';
 
 defineOptions({
-  name: "ThemeBackup",
+  name: 'ThemeBackup',
 });
 const { t } = useI18n();
 const message = useMessage();
@@ -16,13 +16,13 @@ function getSettingJson() {
 
 function handleResetSetting() {
   designStore.resetDesignState();
-  message.success(t("layouts.header.themeConfig.message.resetConfigSuccess"));
+  message.success(t('layouts.header.themeConfig.message.resetConfigSuccess'));
 }
 function handleCopySetting() {
-  message.success(t("layouts.header.themeConfig.message.copyConfigSuccess"));
+  message.success(t('layouts.header.themeConfig.message.copyConfigSuccess'));
 }
 function handleCleanSetting() {
-  localStorage.clear()
+  localStorage.clear();
 }
 </script>
 

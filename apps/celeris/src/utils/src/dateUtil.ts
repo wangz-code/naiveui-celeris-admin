@@ -1,8 +1,8 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 // Date-time and date format constants
-const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
-const DATE_FORMAT = "YYYY-MM-DD";
+const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 /**
  * Formats a date to a specific date-time format.

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import MessageInputArea from "./MessageInputArea/index.vue";
-import ChatConversation from "./ChatConversation.vue";
-import ChatPanelToolbar from "@/views/chat/components/ChatPanel/ChatPanelToolbar.vue";
+import MessageInputArea from './MessageInputArea/index.vue';
+import ChatConversation from './ChatConversation.vue';
+import ChatPanelToolbar from '#/views/chat/components/ChatPanel/ChatPanelToolbar.vue';
 
 defineOptions({
-  name: "ChatPanel",
+  name: 'ChatPanel',
 });
 
 const chatWrapperRef = resolveRef(null);
@@ -36,6 +36,4 @@ const maxChatPanelHeight = computed(() => {
   </NSplit>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

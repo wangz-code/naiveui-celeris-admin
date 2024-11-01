@@ -1,28 +1,23 @@
-import type { RouteRecordRaw } from "vue-router";
-import {
-  EXCEPTION_COMPONENT,
-  LAYOUT,
-  PAGE_NOT_FOUND_NAME,
-  REDIRECT_NAME,
-} from "@/router/constant";
+import type { RouteRecordRaw } from 'vue-router';
+import { EXCEPTION_COMPONENT, LAYOUT, PAGE_NOT_FOUND_NAME, REDIRECT_NAME } from '#/router/constant';
 
 // 404 on a page
 export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
-  path: "/:path(.*)*",
+  path: '/:path(.*)*',
   name: PAGE_NOT_FOUND_NAME,
   component: LAYOUT,
   meta: {
-    title: "ErrorPage",
+    title: 'ErrorPage',
     shouldHideInMenu: true,
     shouldHideBreadcrumb: true,
   },
   children: [
     {
-      path: "/:path(.*)*",
+      path: '/:path(.*)*',
       name: PAGE_NOT_FOUND_NAME,
       component: EXCEPTION_COMPONENT,
       meta: {
-        title: "ErrorPage",
+        title: 'ErrorPage',
         shouldHideInMenu: true,
         shouldHideBreadcrumb: true,
       },
@@ -30,9 +25,9 @@ export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
   ],
 };
 export const REDIRECT_ROUTE: RouteRecordRaw = {
-  path: "/redirect",
+  path: '/redirect',
   component: LAYOUT,
-  name: "RedirectTo",
+  name: 'RedirectTo',
   meta: {
     title: REDIRECT_NAME,
     shouldHideBreadcrumb: true,
@@ -40,9 +35,9 @@ export const REDIRECT_ROUTE: RouteRecordRaw = {
   },
   children: [
     {
-      path: "/redirect/:path(.*)",
+      path: '/redirect/:path(.*)',
       name: REDIRECT_NAME,
-      component: () => import("@/views/internal/redirect/index.vue"),
+      component: () => import('#/views/internal/redirect/index.vue'),
       meta: {
         title: REDIRECT_NAME,
         shouldHideBreadcrumb: true,

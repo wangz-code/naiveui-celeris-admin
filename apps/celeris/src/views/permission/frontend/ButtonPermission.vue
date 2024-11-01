@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RoleConstants } from "@/constants";
+import { RoleConstants } from '../../../../../../packages/celeris-constants';
 
-import CurrentPermissionMode from "../CurrentPermissionMode.vue";
-import Authority from "@/components/Authority/src/Authority.vue";
-import { useUserStore } from "@/store/modules/user";
+import CurrentPermissionMode from '../CurrentPermissionMode.vue';
+import Authority from '#/components/Authority/src/Authority.vue';
+import { useUserStore } from '#/store/modules/user';
 
 const { changeRole, hasPermission } = useAppPermission();
 const { t } = useI18n();
@@ -79,6 +79,4 @@ const isUser = computed(() => userStore.getRoleList.includes(RoleConstants.USER)
   </NCard>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

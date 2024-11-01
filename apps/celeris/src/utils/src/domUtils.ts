@@ -1,5 +1,5 @@
-import { isServerRendering, isString } from "./typeChecks";
-import { NOOP } from "./util";
+import { isServerRendering, isString } from './typeChecks';
+import { NOOP } from './util';
 
 /**
  * Toggle the given CSS class name on the specified element.
@@ -10,9 +10,9 @@ import { NOOP } from "./util";
  * @param element - The HTML element to which the class should be added or removed. 应添加或移除类的 HTML 元素。
  */
 export function toggleCssClass(enableClass: boolean, className: string, element: HTMLElement = document.body) {
-  const classNames = element.className.split(" ").filter(cn => cn !== className); // Split classNames by space, remove className.
+  const classNames = element.className.split(' ').filter((cn) => cn !== className); // Split classNames by space, remove className.
   const newClassNames = enableClass ? [...classNames, className] : classNames; // Add className if enableClass is true.
-  element.className = newClassNames.join(" ").trim(); // Join newClassNames with space and set to element.className.
+  element.className = newClassNames.join(' ').trim(); // Join newClassNames with space and set to element.className.
 }
 
 /**
@@ -49,13 +49,13 @@ export function setCssVariables(variables: Record<string, string | null>, elemen
  */
 export function parseCSS(cssStr: string): Record<string, string> {
   const cssObj: Record<string, string> = {};
-  const rules = cssStr.split(";");
+  const rules = cssStr.split(';');
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i].trim();
     if (!rule) {
       continue;
     }
-    const [prop, val] = rule.split(":");
+    const [prop, val] = rule.split(':');
     if (!prop || !val) {
       continue;
     }
@@ -78,7 +78,7 @@ export function serializeCSS(cssObj: Record<string, string>): string {
       cssArr.push(`${prop}: ${cssObj[prop]};`);
     }
   }
-  return cssArr.join(" ");
+  return cssArr.join(' ');
 }
 
 /**
@@ -108,11 +108,7 @@ export const on = (() => {
     handler: (ev: HTMLElementEventMap[K]) => void,
     options: boolean | AddEventListenerOptions = false,
   ) => {
-    element.addEventListener(
-      event,
-      handler as EventListenerOrEventListenerObject,
-      options,
-    );
+    element.addEventListener(event, handler as EventListenerOrEventListenerObject, options);
   };
 })();
 
@@ -143,11 +139,7 @@ export const off = (() => {
     handler: (ev: HTMLElementEventMap[K]) => void,
     options: boolean | EventListenerOptions = false,
   ) => {
-    element.removeEventListener(
-      type,
-      handler as EventListenerOrEventListenerObject,
-      options,
-    );
+    element.removeEventListener(type, handler as EventListenerOrEventListenerObject, options);
   };
 })();
 
@@ -170,9 +162,7 @@ export function querySelector(selectors: string, container?: Document | HTMLElem
   if (isServerRendering) {
     return NOOP();
   }
-  return (
-    (container ?? document).querySelector<HTMLElement>(selectors) ?? undefined
-  );
+  return (container ?? document).querySelector<HTMLElement>(selectors) ?? undefined;
 }
 
 /**
@@ -201,7 +191,7 @@ export function querySelector(selectors: string, container?: Document | HTMLElem
  */
 export function getElement(target: string | HTMLElement | undefined, container?: Document | HTMLElement): HTMLElement | undefined {
   if (isString(target)) {
-    const selector = target[0] === "#" ? `[id='${target.slice(1)}']` : target;
+    const selector = target[0] === '#' ? `[id='${target.slice(1)}']` : target;
     return querySelector(selector, container);
   }
   return target;

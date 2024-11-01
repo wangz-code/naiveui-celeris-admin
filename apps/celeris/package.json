@@ -10,9 +10,13 @@
   "scripts": {
     "dev": "vite",
     "build": "pnpm cross-env NODE_ENV=production vite build",
+    "build:analyze": "pnpm vite build --mode analyze",
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist",
-    "typecheck": "vue-tsc --noEmit --skipLibCheck",
+    "typecheck": "vue-tsc -b",
     "preview": "vite preview"
+  },
+  "imports": {
+    "#/*": "./src/*"
   },
   "dependencies": {
     "@kirklin/logger": "catalog:",
@@ -45,6 +49,8 @@
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "pkg-types": "catalog:",
+    "celeris-constants": "workspace:*",
+    "celeris-types": "workspace:*",
     "vue": "catalog:",
     "vue-draggable-plus": "catalog:",
     "vue-echarts": "catalog:",
@@ -56,8 +62,11 @@
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vitejs/plugin-legacy": "catalog:",
     "@vue/compiler-dom": "catalog:",
     "@vue/test-utils": "catalog:",
+    "@types/lodash-es": "catalog:",
+    "@types/crypto-js": "catalog:",
     "cross-env": "catalog:",
     "dotenv": "catalog:",
     "jsdom": "catalog:",
