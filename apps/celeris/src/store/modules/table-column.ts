@@ -1,5 +1,5 @@
 import { APP_TableCols_STORE_ID } from 'celeris-constants';
-import { isFunction, isString } from 'lodash-es';
+import { isFunction } from 'lodash-es';
 import { defineStore } from 'pinia';
 
 type Columns = Array<{ [x: string]: any }>;
@@ -19,7 +19,7 @@ export const useTableColStore = defineStore(APP_TableCols_STORE_ID, {
     render: {},
   }),
   actions: {
-    /** 每个用户使用不同的缓存key */
+    /** 每个用户使用不同的缓存id */
     getID(uid: string) {
       const userStore = useUserStore();
       return userStore.userInfo.username + '_' + uid;

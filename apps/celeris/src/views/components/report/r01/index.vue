@@ -101,6 +101,7 @@ const action = (): VNodeChild =>
   h(
     NButton,
     {
+      size: 'small',
       onClick: () => {
         message.info('action');
       },

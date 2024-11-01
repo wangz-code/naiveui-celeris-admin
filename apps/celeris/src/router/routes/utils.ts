@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { cloneDeep, field, isString, logger } from '#/utils';
 import { EXCEPTION_COMPONENT, IFRAME, LAYOUT, getParentLayout } from '#/router/constant';
+import type { Recordable } from 'celeris-types';
 
 type DynamicPagesModules = Record<string, () => Promise<Recordable>>;
 

@@ -1,5 +1,6 @@
 import type { I18nOptions } from 'vue-i18n';
 import { getLocale, setLocale } from './store';
+import type { AnyFn } from '@vueuse/core';
 
 export interface LocalesOptions {
   locale: string;

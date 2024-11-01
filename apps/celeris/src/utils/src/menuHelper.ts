@@ -2,12 +2,9 @@ import type { Menu, MenuModule } from 'celeris-types';
 import { cloneDeep } from 'lodash-es';
 import type { RouteRecordRaw } from 'vue-router';
 import { loadDataFromModules } from './moduleHelper';
+import { createPathMatcher } from './router';
 import { findFirstNodePath, mapTreeStructure } from './treeHelper';
 import { isHttpUrl } from './typeChecks';
-import { createPathMatcher } from './router';
-import { MenuOption, NIcon } from 'naive-ui';
-import { GameController } from '@vicons/ionicons5';
-import { Component } from 'vue';
 
 /**
  * 从模块对象中加载菜单配置并加入到菜单集合中

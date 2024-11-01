@@ -1,5 +1,6 @@
 import type { ProjectSetting } from 'celeris-types';
 import { useAppStoreWithOut } from '#/store/modules/app';
+import type { DeepPartial } from 'unocss';
 
 export function useAppSetting() {
   const appStore = useAppStoreWithOut();

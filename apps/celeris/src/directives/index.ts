@@ -1,11 +1,11 @@
-import type { App } from 'vue';
+import type { App, Directive } from 'vue';
 import copy from './src/copy';
 import ripple from './src/ripple';
 import anchor from './src/anchor';
 import authDirective from './src/permission';
 
 // 全局
-export const AllDirectives = {
+export const AllDirectives: { [x: string]: Directive } = {
   // Custom directives
   copy,
   ripple,

@@ -4,9 +4,9 @@ import FullScreenButton from '#/layouts/header/components/FullScreenButton.vue';
 import LocaleSwitcher from '#/layouts/header/components/LocaleSwitcher.vue';
 import UserInfoButton from '#/layouts/header/components/UserInfoButton.vue';
 import SettingButton from '#/layouts/setting/index.vue';
-import Breadcrumb from '#/layouts/header/components/Breadcrumb.vue';
 import SearchAnyWhere from '#/layouts/header/components/SearchAnyWhere.vue';
 import LayoutTabs from '#/layouts/tabs/index.vue';
+import Breadcrumb from './components/Breadcrumb.vue';
 
 defineOptions({
   name: 'HeaderLayout',
