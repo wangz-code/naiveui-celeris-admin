@@ -1,0 +1,1 @@
+import{d as s,bp as a,g as e,am as t,p as r}from"./index-MskScSmw.js";const o=s({__name:"Authority",props:{value:{type:[Number,Array,String],default:""}},setup(s){const{hasPermission:o}=a();return(a,p)=>e(o)(s.value)?t(a.$slots,"default",{key:0}):r("",!0)}});export{o as _};
