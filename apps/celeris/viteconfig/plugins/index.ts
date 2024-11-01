@@ -8,6 +8,10 @@ import { createVueComponentsPluginConfig } from './unpluginVueComponets';
 import { createVisualizerPluginConfig } from './visualizer';
 import { viteNitroMockPlugin } from './nitro-mock';
 import { ViteEnvVariables } from 'celeris-types';
+import legacy from '@vitejs/plugin-legacy';
+import { promisify } from 'node:util';
+import gzipPlugin from 'rollup-plugin-gzip';
+import { brotliCompress } from 'node:zlib';
 
 /**
  * Configure the Vite plugins.
@@ -16,7 +20,11 @@ import { ViteEnvVariables } from 'celeris-types';
  * @param viteEnv The Vite environment variables.
  * @param isProductionBuild Whether the current command is for a production build.
  */
-export function configVitePlugins(rootDir: string, viteEnv: Partial<ViteEnvVariables>, isProductionBuild: boolean): Array<PluginOption | PluginOption[]> {
+type Params = {
+  command: 'build' | 'serve';
+  mode: string | 'analyze';
+};
+export function configVitePlugins(viteEnv: Partial<ViteEnvVariables>, { mode, command }: Params): Array<PluginOption | PluginOption[]> {
   const vitePlugins: Array<PluginOption | PluginOption[]> = [];
 
   // Add the Vue plugin.
@@ -48,13 +56,30 @@ export function configVitePlugins(rootDir: string, viteEnv: Partial<ViteEnvVaria
   vitePlugins.push(createUnoCSSPluginConfig());
 
   // Add the rollup-plugin-visualizer
-  // 添加 打包分析 插件
-  // https://github.com/btd/rollup-plugin-visualizer
-  viteEnv.VITE_USE_BUILD_ANALYZER && vitePlugins.push(createVisualizerPluginConfig());
+  // 添加 打包分析 插件 https://github.com/btd/rollup-plugin-visualizer
+  command == 'build' && mode == 'analyze' && vitePlugins.push(createVisualizerPluginConfig());
 
   // Add
   // 拦截模拟请求
   viteEnv.VITE_USE_MOCK && vitePlugins.push(viteNitroMockPlugin({}));
+
+  // Add
+  // 兼容旧版浏览器 https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
+  viteEnv.VITE_LEGACY && vitePlugins.push(legacy({ targets: ['defaults', 'not IE 11'] }));
+
+  // add
+  // 生成brotli压缩文件
+  viteEnv.VITE_BUILD_COMPRESS == 'brotli' &&
+    vitePlugins.push(
+      gzipPlugin({
+        customCompression: (content) => promisify(brotliCompress)(Buffer.from(content)),
+        fileName: '.br',
+      }),
+    );
+
+  // add
+  // 生成gzip压缩文件
+  viteEnv.VITE_BUILD_COMPRESS == 'gzip' && vitePlugins.push(gzipPlugin());
 
   return vitePlugins;
 }

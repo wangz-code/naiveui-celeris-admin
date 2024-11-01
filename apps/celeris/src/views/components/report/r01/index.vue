@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-10-31
+ * @LastEditTime: 2024-11-01
  * @Description: content
 -->
 <template>
@@ -59,26 +59,7 @@
           <n-button strong secondary>批量导入</n-button>
           <n-button strong secondary>导出Excel</n-button>
           <n-button strong secondary>打印</n-button>
-          <n-popover trigger="click" placement="bottom">
-            <template #trigger>
-              <n-button strong secondary>列设置</n-button>
-            </template>
-            <n-checkbox-group v-model:value="checks" @update:value="setCols">
-              <n-flex justify="space-between" class="m-t-1">
-                <n-checkbox label="全选" />
-                <n-button size="tiny" type="info">保存</n-button>
-              </n-flex>
-              <n-divider dashed style="margin: 10px 0px" />
-              <VueDraggable ref="el" v-model="checkCol" @update="onUpdateCol">
-                <div v-for="item in checkCol" :key="item">
-                  <n-flex v-if="item.title" class="m-t-2" justify="space-between">
-                    <n-checkbox :value="item.key" :label="item.title" />
-                    <Iconx :component="DragDrop"></Iconx>
-                  </n-flex>
-                </div>
-              </VueDraggable>
-            </n-checkbox-group>
-          </n-popover>
+          <cols-config id="R01" v-model:columns="columns"></cols-config>
           <n-dropdown trigger="hover" :options="actionOpts" @select="handleSelect">
             <n-button>更多...</n-button>
           </n-dropdown>
@@ -102,29 +83,31 @@
 
 <script lang="ts" setup>
 import { getR01, R01Data } from '#/apis';
+import { ColsConfig } from '../../cols-config';
 import { renderIcon } from '#/components/Iconx';
-import { ArrowUndoOutline, CloseOutline, Refresh, Resize, Trash } from '@vicons/ionicons5';
-import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Search, Send, Tornado } from '@vicons/tabler';
-import type { DataTableCreateSummary, FormInst } from 'naive-ui';
+import { useTableColStore } from '#/store';
+import { ArrowUndoOutline, CloseOutline, Refresh, Trash } from '@vicons/ionicons5';
+import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Search, Send } from '@vicons/tabler';
+import { NButton, type DataTableCreateSummary, type FormInst } from 'naive-ui';
 import { Value } from 'naive-ui/es/date-picker/src/interface';
-import { h } from 'vue';
+import { h, VNodeChild } from 'vue';
 import { createColumns } from './data';
-import { VueDraggable, useDraggable } from 'vue-draggable-plus';
-import { DragDrop } from '@vicons/tabler';
-import { cloneDeep } from '#/utils';
-const { t } = useI18n();
-
 type RowData = R01Data;
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
 const filterShow = ref(true);
-const columns = ref(createColumns());
-const el = ref();
-const keys = columns.value.map((item) => item.key);
-const drag = ref([]);
-const checks = cloneDeep(keys);
-const checkCol = ref(toRaw(columns.value));
 
+const action = (): VNodeChild =>
+  h(
+    NButton,
+    {
+      onClick: () => {
+        message.info('action');
+      },
+    },
+    () => '操作',
+  );
+const columns = ref(createColumns(action));
 const formValue = ref({
   user: {
     name: '',
@@ -137,7 +120,6 @@ const formValue = ref({
   stateValue: '',
   dateRange: [Date.now(), Date.now()] as Value,
 });
-const comp = ref<any>();
 const actionOpts = [
   {
     label: '批量发起',
@@ -176,9 +158,7 @@ const stateOptions = ['', '起草', '待审', '通过'].map((v) => ({
   value: v,
 }));
 
-const handleSelect = (key) => {
-  message.success(key);
-};
+const handleSelect = () => {};
 
 const handleValidateClick = (e: MouseEvent) => {
   e.preventDefault();
@@ -221,7 +201,7 @@ const pagination = reactive({
   pageSize: 10,
   showSizePicker: true,
   pageSizes: [10, 20, 100],
-  prefix: ({ itemCount }) => `${itemCount}条记录`,
+  prefix: ({ itemCount }: any) => `${itemCount}条记录`,
   onChange: (page: number) => {
     pagination.page = page;
   },
@@ -230,16 +210,8 @@ const pagination = reactive({
     pagination.page = 1;
   },
 });
+
 const table = reactive({ source: [] as RowData[], isLoading: false, summary: createSummary });
-
-const onUpdateCol = (val) => {
-  columns.value = toRaw(checkCol.value);
-};
-
-const setCols = (value = []) => {
-  console.log('value log==>', value);
-  columns.value = checkCol.value.filter((item) => value.includes(item.key));
-};
 
 onQuery();
 </script>

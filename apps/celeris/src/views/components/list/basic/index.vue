@@ -87,10 +87,9 @@ import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Search, Send } from '@vic
 import { NButton, type DataTableCreateSummary, type FormInst } from 'naive-ui';
 import { Value } from 'naive-ui/es/date-picker/src/interface';
 import { h } from 'vue';
-import { RowData, createColumns as columns } from './data';
+import { createColumns as columns } from './data';
 
 import ActionBtn from './action.vue';
-const { t } = useI18n();
 
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);

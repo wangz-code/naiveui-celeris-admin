@@ -1,11 +1,9 @@
 import type { R01Data } from '#/apis';
 import { tableMoney } from '#/utils/src/numberUtils';
-import { DataTableColumns } from 'naive-ui';
+import type { DataTableColumns } from 'naive-ui';
+import type { VNodeChild } from 'vue';
 
-type Cols = DataTableColumns & {
-  money: boolean;
-};
-export const createColumns = (): DataTableColumns<R01Data> => {
+export const createColumns = (action: () => VNodeChild): DataTableColumns<R01Data> => {
   return [
     {
       type: 'selection',
@@ -41,6 +39,11 @@ export const createColumns = (): DataTableColumns<R01Data> => {
     {
       title: '单据状态',
       key: 'state',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: action,
     },
   ];
 };

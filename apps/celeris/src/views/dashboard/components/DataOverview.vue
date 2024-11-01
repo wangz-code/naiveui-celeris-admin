@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { LineSeriesOption } from 'echarts';
-import type { ToolTipFormatterParams } from '../../../../../../packages/types/src/echarts';
-import { queryDataOverview } from '#/apis/internal/dashboard';
 import VChart from 'vue-echarts';
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -9,6 +7,7 @@ import { LineChart } from 'echarts/charts';
 import { TooltipComponent, GridComponent, GraphicComponent } from 'echarts/components';
 import { BrandMessenger, ThumbUp, UserCircle, Copy } from '@vicons/tabler';
 import { responseMock } from '../mockResp';
+import { ToolTipFormatterParams } from 'celeris-types';
 
 use([CanvasRenderer, TooltipComponent, GridComponent, GraphicComponent, LineChart]);
 function tooltipItemsHtmlString(items: ToolTipFormatterParams[]) {
@@ -212,7 +211,7 @@ async function fetchData() {
   try {
     const { data } = await responseMock['data-overview'];
     xAxis.value = data.xAxis;
-    data.data.forEach((el) => {
+    data.data.forEach((el: any) => {
       if (el.name === '用户数') {
         userData.value = el.value;
       } else if (el.name === '总对话数') {

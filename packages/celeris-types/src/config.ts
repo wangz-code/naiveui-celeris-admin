@@ -168,8 +168,6 @@ export interface GlobConfig {
   APP_TITLE: string;
   // Service interface url
   API_URL: string;
-  // Basic interface address SSR
-  API_URL_SSR: string;
   // Basic interface address prefix
   API_URL_PREFIX: string;
   // Project abbreviation
@@ -188,8 +186,6 @@ export interface GlobEnvConfig extends ImportMeta {
   VITE_GLOB_APP_TITLE: string;
   // Service interface url
   VITE_GLOB_API_URL: string;
-  // Basic interface address SSR
-  VITE_GLOB_API_URL_SSR: string;
   // Basic interface address prefix
   VITE_GLOB_API_URL_PREFIX: string;
   // Project abbreviation
@@ -211,14 +207,6 @@ export interface ViteEnvVariables extends GlobEnvConfig {
   // 是否使用模拟数据
   VITE_USE_MOCK: boolean;
 
-  // Whether to analyze build
-  // 是否分析构建
-  VITE_USE_BUILD_ANALYZER: boolean;
-
-  // Whether to enable PWA
-  // 是否开启 PWA
-  VITE_USE_PWA: boolean;
-
   // The public path when deployed
   // 部署时的公共路径
   VITE_PUBLIC_PATH: string;
@@ -235,10 +223,6 @@ export interface ViteEnvVariables extends GlobEnvConfig {
   // 网站短名称
   VITE_GLOB_APP_SHORT_NAME: string;
 
-  // Whether to use CDN acceleration
-  // 是否使用 CDN 加速
-  VITE_USE_CDN: boolean;
-
   // Whether to remove console in production environment
   // 是否在生产环境中去除 console
   VITE_DROP_CONSOLE: boolean;
@@ -254,10 +238,6 @@ export interface ViteEnvVariables extends GlobEnvConfig {
   // Whether to support legacy browsers
   // 是否兼容老版本浏览器
   VITE_LEGACY: boolean;
-
-  // Whether to enable image compression
-  // 是否启用图片压缩
-  VITE_USE_IMAGEMIN: boolean;
 }
 
 export type Recordable<T = any> = Record<string, T>;

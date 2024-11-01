@@ -1,9 +1,4 @@
-/*
- * @Author: wangqz
- * @Date: 2024-05-22
- * @LastEditTime: 2024-05-22
- * @Description: content
- */
+import type { Recordable } from "celeris-types";
 
 export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}) {
   return {
@@ -15,7 +10,7 @@ export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}
   };
 }
 
-const returnPromise = (res) => {
+const returnPromise = (res: any) => {
   return Promise.resolve(resultSuccess(res));
 };
 

@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "pnpm cross-env NODE_ENV=production vite build",
+    "build:analyze": "pnpm vite build --mode analyze",
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist",
     "typecheck": "vue-tsc -b",
     "preview": "vite preview"
@@ -61,8 +62,11 @@
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vitejs/plugin-legacy": "catalog:",
     "@vue/compiler-dom": "catalog:",
     "@vue/test-utils": "catalog:",
+    "@types/lodash-es": "catalog:",
+    "@types/crypto-js": "catalog:",
     "cross-env": "catalog:",
     "dotenv": "catalog:",
     "jsdom": "catalog:",
@@ -82,7 +86,6 @@
     "vite-plugin-pwa": "catalog:",
     "vite-plugin-vue-devtools": "catalog:",
     "vitest": "catalog:",
-    "@types/lodash-es": "catalog:",
     "vue-tsc": "catalog:"
   }
 }

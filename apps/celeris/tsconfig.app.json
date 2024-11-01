@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "#/*": ["src/*"]
+      "#/*": ["src/*"],
     }
   },
   "include": ["autoResolver", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/*.d.ts"]

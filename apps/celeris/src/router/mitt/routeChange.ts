@@ -5,9 +5,7 @@
 import { getRawRoute, mitt } from '#/utils';
 import type { RouteLocationNormalized } from 'vue-router';
 
-const emitter = mitt();
-
-const key = Symbol('route change event');
+const emitter = mitt<{ RouteChange: RouteLocationNormalized }>();
 
 // 用于保存最近一次切换的标签页
 let lastTab: RouteLocationNormalized;
@@ -17,7 +15,7 @@ export function notifyRouteChange(newRoute: RouteLocationNormalized) {
   // 获取原始路由
   const rawRoute = getRawRoute(newRoute);
   // 触发事件
-  emitter.emit(key, rawRoute);
+  emitter.emit('RouteChange', rawRoute);
   // 更新最近一次切换的标签页
   lastTab = rawRoute;
 }
@@ -25,7 +23,7 @@ export function notifyRouteChange(newRoute: RouteLocationNormalized) {
 // 监听路由变化
 export function listenToRouteChange(callback: (route: RouteLocationNormalized) => void, immediate = true) {
   // 注册回调函数
-  emitter.on(key, callback);
+  emitter.on('RouteChange', callback);
   // 如果立即执行，则调用回调函数并传入最近一次切换的标签页
   immediate && lastTab && callback(lastTab);
 }

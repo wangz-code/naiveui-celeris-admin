@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { useThemeVars } from 'naive-ui';
-import { isNil } from '#/utils';
-import type { ToolTipFormatterParams } from '../../../../../../packages/types/src/echarts';
 import { DataInsightCard } from '#/components/Card';
+import { isNil } from '#/utils';
 import CardInnerIcon from '#/views/dashboard/components/CardInnerIcon.vue';
-import { queryUserAnalysisData } from '#/apis/internal/dashboard';
+import { useThemeVars } from 'naive-ui';
 import VChart from 'vue-echarts';
 import { responseMock } from '../mockResp';
+import { ToolTipFormatterParams } from 'celeris-types';
 
 const props = defineProps({
   title: {
