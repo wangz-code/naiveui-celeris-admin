@@ -13,6 +13,8 @@
 
 ![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/report.png)
 
+![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/cols.png)
+
 ## 特点 {...celeris } 源仓库https://github.com/kirklin/celeris-web
 
 改动
