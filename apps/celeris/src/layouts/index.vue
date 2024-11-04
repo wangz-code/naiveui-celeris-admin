@@ -16,7 +16,7 @@ defineOptions({
     <div>
       <SidebarLayout />
     </div>
-    <div class="flex flex-col flex-1 h-full w-full">
+    <div class="flex flex-col flex-1 h-full w-full overflow-auto">
       <header class="">
         <Header />
       </header>

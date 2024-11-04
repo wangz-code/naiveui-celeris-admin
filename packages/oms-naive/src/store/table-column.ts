@@ -1,4 +1,3 @@
-import { APP_TableCols_STORE_ID } from 'celeris-constants';
 import { MD5 } from 'crypto-js';
 import { isFunction } from 'lodash-es';
 import { defineStore } from 'pinia';
@@ -13,7 +12,7 @@ type TableState = {
 };
 
 const getField = (columns: Columns) => {
-  return MD5(columns.reduce((pre, curr) => pre + curr.key + curr.title, '')).toString();
+  return MD5(JSON.stringify(columns)).toString();
 };
 const setCols = (columns: Columns, config: Config) => {
   const getShow = (key: string) => {
@@ -24,7 +23,7 @@ const setCols = (columns: Columns, config: Config) => {
   };
   const cfg: Config = [];
   for (let i = 0; i < columns.length; i++) {
-    const item = columns[i];
+    const item = columns[i]!;
     const key = item.key || item.type;
     cfg.push({
       order: i,
@@ -37,7 +36,7 @@ const setCols = (columns: Columns, config: Config) => {
   return cfg;
 };
 
-export const useTableColStore = defineStore(APP_TableCols_STORE_ID, {
+export const useTableColStore = defineStore('APP_TableCols_STORE', {
   persist: {
     pick: ['tables'],
   },
@@ -48,8 +47,7 @@ export const useTableColStore = defineStore(APP_TableCols_STORE_ID, {
   actions: {
     /** 每个用户使用不同的缓存id */
     getID(uid: string) {
-      const userStore = useUserStore();
-      return userStore.userInfo.username + '_' + uid;
+      return uid;
     },
 
     /** 1.初始化列配置 */
@@ -66,6 +64,7 @@ export const useTableColStore = defineStore(APP_TableCols_STORE_ID, {
       if (cols) {
         // 检查字段变化 更新缓存
         if (cols.field != field) this.setColsConfig(uid, setCols(columns, cols.config), field);
+
         for (const item of cols.config) {
           if (render.has(item.key)) item.column.render = render.get(item.key);
         }
@@ -77,8 +76,8 @@ export const useTableColStore = defineStore(APP_TableCols_STORE_ID, {
     /** 配置列配置 */
     setColsConfig(uid: string, config: Config, field?: string) {
       const id = this.getID(uid);
-      this.tables[id].config = config;
-      if (field) this.tables[id].field = field;
+      this.tables[id]!.config = config;
+      if (field) this.tables[id]!.field = field;
     },
     /** 重置 */
     resetTableCols() {

@@ -1,7 +1,10 @@
+<!--
+ * @Author: wangqz
+ * @Date: 2024-11-04
+ * @LastEditTime: 2024-11-04
+ * @Description: content
+-->
 <template>
-  
-</template>
-<!-- <template>
   <n-popover trigger="click" placement="bottom">
     <template #trigger>
       <i-button title="列设置" :icon="Settings"></i-button>
@@ -12,21 +15,22 @@
     </n-flex>
     <n-divider dashed style="margin: 10px 0px" />
     <VueDraggable ref="el" v-model="colsConfig" @update="refresh" class="cols-box">
-        <div v-for="item in colsConfig" :key="item.key">
-          <n-flex v-if="item.title" class="m-t-2" justify="space-between">
-            <n-checkbox v-model:checked="item.show" @update:checked="refresh" :label="item.title" />
-            <Iconx :component="DragDrop"></Iconx>
-          </n-flex>
-        </div>
+      <div v-for="item in colsConfig" :key="item.key">
+        <n-flex v-if="item.title" class="m-t-2" justify="space-between">
+          <n-checkbox v-model:checked="item.show" @update:checked="refresh" :label="item.title" />
+          <Iconx :component="DragDrop"></Iconx>
+        </n-flex>
+      </div>
     </VueDraggable>
   </n-popover>
 </template>
 
 <script lang="ts" setup>
-import { useTableColStore } from '#/store';
 import { Settings, DragDrop } from '@vicons/tabler';
+import { useTableColStore } from '../../store/table-column';
 import { defineModel, ref } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
+
 const { name } = defineProps<{ name: string }>();
 const columns = defineModel<any[]>('columns', { default: [] });
 
@@ -53,4 +57,4 @@ refresh();
   height: 500px;
   overflow: auto;
 }
-</style> -->
+</style>

@@ -1,5 +1,3 @@
-import type { ComponentPublicInstance } from '@vue/runtime-core';
-
 export {
   isArguments,
   isArray,
@@ -59,8 +57,4 @@ export const isServerRendering = (() => {
 export function isHttpUrl(path: string): boolean {
   const regex = /^https?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/i;
   return regex.test(path);
-}
-
-export function isComponentInstance(value: any): value is ComponentPublicInstance {
-  return value?.$ !== undefined;
 }
