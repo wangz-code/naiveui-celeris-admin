@@ -24,14 +24,14 @@ import { useTableColStore } from '#/store';
 import { DragDrop } from '@vicons/tabler';
 import { defineModel, ref } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
-const { id } = defineProps<{ id: string }>();
+const { name } = defineProps<{ name: string }>();
 const columns = defineModel<any[]>('columns', { default: [] });
 
 const { initTableCols, setColsConfig } = useTableColStore();
-const colsConfig = ref(initTableCols(id, columns.value));
+const colsConfig = ref(initTableCols(name, columns.value));
 const refresh = () => {
   columns.value = colsConfig.value.filter((item) => item.show).map((item) => item.column);
-  setColsConfig(id, colsConfig.value);
+  setColsConfig(name, colsConfig.value);
 };
 
 const resetSort = () => {

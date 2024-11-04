@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-11-01
+ * @LastEditTime: 2024-11-04
  * @Description: content
 -->
 <template>
@@ -59,7 +59,7 @@
           <n-button strong secondary>批量导入</n-button>
           <n-button strong secondary>导出Excel</n-button>
           <n-button strong secondary>打印</n-button>
-          <cols-config id="R01" v-model:columns="columns"></cols-config>
+          <cols-config name="R01" v-model:columns="columns"></cols-config>
           <n-dropdown trigger="hover" :options="actionOpts" @select="handleSelect">
             <n-button>更多...</n-button>
           </n-dropdown>
@@ -83,14 +83,13 @@
 
 <script lang="ts" setup>
 import { getR01, R01Data } from '#/apis';
-import { ColsConfig } from '../../cols-config';
 import { renderIcon } from '#/components/Iconx';
-import { useTableColStore } from '#/store';
 import { ArrowUndoOutline, CloseOutline, Refresh, Trash } from '@vicons/ionicons5';
 import { Checks, ChevronsDown, ChevronsUp, CirclePlus, Search, Send } from '@vicons/tabler';
 import { NButton, type DataTableCreateSummary, type FormInst } from 'naive-ui';
 import { Value } from 'naive-ui/es/date-picker/src/interface';
 import { h, VNodeChild } from 'vue';
+import { ColsConfig } from '../../cols-config';
 import { createColumns } from './data';
 type RowData = R01Data;
 const message = useMessage();
@@ -109,7 +108,10 @@ const action = (): VNodeChild =>
     () => '操作',
   );
 const columns = ref(createColumns(action));
+console.log('columns log==>',columns.value);
+
 const formValue = ref({
+
   user: {
     name: '',
     age: '',
