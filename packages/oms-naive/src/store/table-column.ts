@@ -1,14 +1,16 @@
 import { MD5 } from 'crypto-js';
 import { isFunction } from 'lodash-es';
+import type { DataTableBaseColumn, DataTableColumnKey, DataTableColumns } from 'naive-ui';
 import { defineStore } from 'pinia';
+import type { VNodeChild } from 'vue';
 
-type Columns = Array<{ [x: string]: any }>;
-type Config = Array<{ key: string; title: string; show: boolean; column: { [x: string]: any }; order: number }>;
+type Columns = DataTableColumns<any>;
+type Config = Array<{ key: DataTableColumnKey; title: string | undefined; show: boolean; column: DataTableBaseColumn; order: number }>;
 type TableState = {
   tables: {
     [x: string]: { config: Config; field: string };
   };
-  render: { [x: string]: Map<string, Function> };
+  render: { [x: string]: Map<DataTableColumnKey, (rowData: any, rowIndex: number) => VNodeChild> };
 };
 
 const getField = (columns: Columns) => {
@@ -23,12 +25,12 @@ const setCols = (columns: Columns, config: Config) => {
   };
   const cfg: Config = [];
   for (let i = 0; i < columns.length; i++) {
-    const item = columns[i]!;
-    const key = item.key || item.type;
+    const item = columns[i] as DataTableBaseColumn;
+    const key = String(item.key || item.type);
     cfg.push({
       order: i,
       key,
-      title: item.title,
+      title: item.title as string | undefined,
       show: getShow(key),
       column: item,
     });
@@ -58,13 +60,12 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
       if (!this.render[id]) this.render[id] = new Map();
       const render = this.render[id];
       const field = getField(columns);
-      for (const item of columns) {
+      for (const item of columns as DataTableBaseColumn[]) {
         isFunction(item.render) && render.set(item.key, item.render);
       }
       if (cols) {
         // 检查字段变化 更新缓存
         if (cols.field != field) this.setColsConfig(uid, setCols(columns, cols.config), field);
-
         for (const item of cols.config) {
           if (render.has(item.key)) item.column.render = render.get(item.key);
         }
@@ -80,7 +81,11 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
       if (field) this.tables[id]!.field = field;
     },
     /** 重置 */
-    resetTableCols() {
+    resetTableCols(uid: string) {
+      delete this.tables[uid];
+    },
+    /** 清理 */
+    cleanTableCols() {
       this.tables = {};
     },
   },

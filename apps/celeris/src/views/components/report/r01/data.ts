@@ -15,6 +15,7 @@ export const createColumns = (action: () => VNodeChild): DataTableColumns<R01Dat
   return [
     {
       type: 'selection',
+      fixed: 'left',
     },
     {
       title: '单据日期',

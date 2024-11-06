@@ -140,9 +140,5 @@ export const useListQuery = <T>({ data, reload }: { data: T; reload: Function })
     qParams.value = cloneDeep(data);
     reload();
   };
-  const onClear = () => {
-    qParams.value.fuzzy = '';
-    reload();
-  };
-  return { qParams, onClear, onReset };
+  return { qParams, onReset };
 };

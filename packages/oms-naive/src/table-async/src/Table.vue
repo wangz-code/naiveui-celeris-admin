@@ -1,5 +1,5 @@
 <template>
-  <slot name="form" v-bind="{ filter, reload, qParams }"></slot>
+  <slot name="form" v-bind="{ collapsed, reload, qParams }"></slot>
   <n-flex class="m-t-sm m-b-sm" justify="space-between">
     <span>
       <slot name="bar-left"></slot>
@@ -7,10 +7,10 @@
     <n-button-group>
       <i-button attr-type="button" title="查询" type="info" :icon="Search" @click="reload"></i-button>
       <i-button attr-type="reset" title="重置" :icon="Refresh" @click="onReset"></i-button>
-      <cols-config v-model:columns="columns"> </cols-config>
-      <n-button attr-type="button" @click="filter = !filter">
+      <cols-config :columns="columns" :onChange="setCols"> </cols-config>
+      <n-button attr-type="button" @click="collapsed = !collapsed">
         <template #icon>
-          <Iconx :component="filter ? ChevronsUp : ChevronsDown" :size="16" />
+          <Iconx :component="collapsed ? ChevronsDown : ChevronsUp" :size="16" />
         </template>
       </n-button>
     </n-button-group>
@@ -23,32 +23,33 @@
     :pagination="pagination"
     :loading="table.isLoading"
     :row-key="(rows: any) => rows[rowkey]"
+    :scroll-x="scrollX"
     :max-height="500"
     @update:checked-row-keys="handleCheck"
   />
 </template>
-<script setup lang="ts" generic="Q extends object">
+<script setup lang="ts" generic="T extends object, Q extends object, A extends Function">
 import { useDialogPro, useListQuery, usePagination, useTableChecked } from '@oms/naive';
 import { Refresh } from '@vicons/ionicons5';
 import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
-import { type DataTableColumns } from 'naive-ui';
+import { type DataTableBaseColumn, type DataTableColumns } from 'naive-ui';
 import { reactive, ref } from 'vue';
 import ColsConfig from './ColsConfig.vue';
-
-type RowRecord = any;
-const columns = defineModel<DataTableColumns<RowRecord>>('columns', { default: [] });
+const columns = defineModel<DataTableColumns<T>>('columns', { default: [] });
 const { api, params, rowkey } = defineProps<{
-  api: (p: any) => Promise<any>;
+  api: A;
   rowkey: string;
   params: { cleanValue?: any[] } & Q;
 }>();
 
-const filter = ref(true);
+const collapsed = ref(false);
 const Dialog = useDialogPro();
 const cleanValue = params.cleanValue ? params.cleanValue : [null, ''];
 
+const scrollX = columns.value.reduce((pre, curr) => pre + Number(curr.width) || 0, 0);
+
 const { pagination, setPageProps, reload, setQuery } = usePagination();
-const table = reactive({ source: [] as RowRecord[], isLoading: false });
+const table = reactive({ source: [] as DataTableBaseColumn[], isLoading: false });
 const { handleCheck, cKeys, cRows, cleanCheck } = useTableChecked(rowkey);
 const { qParams, onReset } = useListQuery<Q>({ data: params, reload });
 
@@ -74,6 +75,10 @@ const onQuery = setQuery(async () => {
     table.isLoading = false;
   }
 });
+
+const setCols = (cols: DataTableColumns<T>) => {
+  columns.value = cols;
+};
 defineExpose({ cKeys, cRows, cleanCheck, reload });
 onQuery();
 </script>
