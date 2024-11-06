@@ -11,11 +11,10 @@ export function useNaiveUIConfigProvider() {
     theme: getNaiveUIPresetTheme,
     'theme-overrides': getNaiveUICustomTheme,
     namespace: designNamespace,
-    locale: getLocale.value === 'zh' ? zhCN : null,
-    'date-locale': getLocale.value === 'zh' ? dateZhCN : null,
+    locale: getLocale().value === 'zh-CN' ? zhCN : null,
+    'date-locale': getLocale().value === 'zh-CN' ? dateZhCN : null,
     'inline-theme-disabled': true,
   });
-
   return {
     configProviderProps,
   };

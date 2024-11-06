@@ -80,7 +80,7 @@ export interface ProjectSetting {
 
   // 国际化语言
   // The locale
-  locale: string;
+  locale: 'zh-CN' | 'en-US';
 
   // 是否显示主题切换按钮
   // Whether to display the dark mode toggle button

@@ -21,6 +21,6 @@ const mockData = createResult();
 
 export default eventHandler(async (event) => {
   await sleep(600);
-  const { page, pageSize } = getQuery(event);
-  return usePageResponseSuccess(page as string, pageSize as string, mockData);
+  const { offset, limit } = getQuery(event);
+  return usePageResponseSuccess(offset / limit + 1, limit, mockData);
 });

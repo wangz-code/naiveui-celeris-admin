@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-11-04
- * @LastEditTime: 2024-11-04
+ * @LastEditTime: 2024-11-06
  * @Description: content
 -->
 <template>
@@ -28,17 +28,19 @@
 <script lang="ts" setup>
 import { Settings, DragDrop } from '@vicons/tabler';
 import { useTableColStore } from '../../store/table-column';
-import { defineModel, ref } from 'vue';
+import { ref } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
+import { useRoute } from 'vue-router';
+import type { DataTableColumns } from 'naive-ui';
 
-const { name } = defineProps<{ name: string }>();
-const columns = defineModel<any[]>('columns', { default: [] });
+const columns = defineModel<DataTableColumns<any>>('columns', { default: [] });
+const { fullPath: uid } = useRoute();
 
 const { initTableCols, setColsConfig } = useTableColStore();
-const colsConfig = ref(initTableCols(name, columns.value));
+const colsConfig = ref(initTableCols(uid, columns.value));
 const refresh = () => {
-  columns.value = colsConfig.value.filter((item) => item.show).map((item) => item.column);
-  setColsConfig(name, colsConfig.value);
+  columns.value = colsConfig.value.filter((item) => item.show).map((item) => item.column) as DataTableColumns<any>;
+  setColsConfig(uid, colsConfig.value);
 };
 
 const resetSort = () => {

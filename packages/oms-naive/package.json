@@ -27,7 +27,8 @@
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "vue-draggable-plus": "catalog:",
-    "vue-i18n": "catalog:"
+    "vue-i18n": "catalog:",
+    "vue-router": "catalog:"
   },
   "devDependencies": {
     "@types/lodash-es": "catalog:"
