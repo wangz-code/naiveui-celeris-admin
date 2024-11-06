@@ -30,6 +30,7 @@
     "@vue/shared": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/integrations": "catalog:",
+    "@oms/naive": "workspace:*",
     "animate.css": "catalog:",
     "axios": "catalog:",
     "bignumber.js": "catalog:",

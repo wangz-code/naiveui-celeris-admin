@@ -1,12 +1,9 @@
 import { permissionCodeApi } from '#/apis/internal/auth';
 import { menusApi } from '#/apis/internal/menu';
-import type { RoleConstants } from 'celeris-constants';
-import { APP_PERMISSION_STORE_ID, PermissionModeConstants } from 'celeris-constants';
 import { asyncRoutes } from '#/router/routes';
-import { useAppStore } from '#/store/modules/app';
-import { useUserStore } from '#/store/modules/user';
-import type { Menu } from 'celeris-types';
 import { flattenMultiLevelRoutes } from '#/utils';
+import { APP_PERMISSION_STORE_ID } from 'celeris-constants';
+import type { Menu } from 'celeris-types';
 import { defineStore } from 'pinia';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -100,23 +97,7 @@ export const usePermissionStore = defineStore(APP_PERMISSION_STORE_ID, {
     },
 
     async buildRoutesAction(): Promise<RouteRecordRaw[]> {
-      const userStore = useUserStore();
-      const appStore = useAppStore();
       let routes: RouteRecordRaw[] = [];
-
-      // Get user's roles and permission mode from app store
-      const roleList: RoleConstants[] = toRaw(userStore.getRoleList) || [];
-      const permissionMode = appStore.getProjectSetting.permissionMode || PermissionModeConstants.ROUTE_MAPPING;
-      // Filter routes by allowed roles
-      const routeFilterByRole = (route: RouteRecordRaw) => {
-        const { meta }: { meta?: { allowedRoles?: RoleConstants[] } } = route;
-        const { allowedRoles } = meta || {};
-        if (!allowedRoles) {
-          return true;
-        }
-        return roleList.some((role) => allowedRoles.includes(role));
-      };
-
       routes = asyncRoutes;
 
       menusApi().then(({ data }) => {

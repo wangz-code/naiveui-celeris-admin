@@ -1,4 +1,5 @@
 import { useDesignStoreWithOut } from '#/store/modules/design';
+import type { ThemeSetting } from 'celeris-types';
 
 export function useThemeSetting() {
   const designStore = useDesignStoreWithOut();
@@ -9,7 +10,7 @@ export function useThemeSetting() {
 
   // 设置主题配置
   // set theme setting
-  const setThemeSetting = (themeSetting) => designStore.setThemeSetting(themeSetting);
+  const setThemeSetting = (themeSetting: Partial<ThemeSetting>) => designStore.setThemeSetting(themeSetting);
 
   // 获取Naive UI 预设主题
   // get Naive UI preset theme
@@ -39,15 +40,15 @@ export function useThemeSetting() {
   // get theme color
   const getThemeColor = toRef(() => designStore.getThemeColor);
 
-  const setDarkMode = (darkMode) => designStore.setDarkMode(darkMode);
+  const setDarkMode = (darkMode: boolean) => designStore.setDarkMode(darkMode);
 
-  const setColorWeakMode = (colorWeakMode) => designStore.setColorWeakMode(colorWeakMode);
+  const setColorWeakMode = (colorWeakMode: boolean) => designStore.setColorWeakMode(colorWeakMode);
 
-  const setGrayMode = (grayMode) => designStore.setGrayMode(grayMode);
+  const setGrayMode = (grayMode: boolean) => designStore.setGrayMode(grayMode);
 
-  const setFollowSystemTheme = (followSystemTheme) => designStore.setFollowSystemTheme(followSystemTheme);
+  const setFollowSystemTheme = (followSystemTheme: boolean) => designStore.setFollowSystemTheme(followSystemTheme);
 
-  const setThemeColor = (themeColor) => designStore.setThemeColor(themeColor);
+  const setThemeColor = (themeColor: string) => designStore.setThemeColor(themeColor);
 
   const resetDesignState = () => designStore.resetDesignState();
   return {

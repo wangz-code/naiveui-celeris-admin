@@ -40,7 +40,7 @@
     "naive-ui": "^2.40.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^8.2.0",
-    "pinia": "^2.2.4",
+    "pinia": "^2.2.6",
     "pinia-plugin-persistedstate": "^4.1.2",
     "pkg-types": "^1.2.1",
     "vue": "^3.5.12",

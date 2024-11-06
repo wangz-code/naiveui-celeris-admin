@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import { useThemeSetting } from '#/composables';
 import { SettingMenu } from '#/layouts/setting/components/SettingDrawer/components';
-import { Checkmark, Moon, Sunny } from '@vicons/ionicons5';
 
 defineOptions({ name: 'SetLayout' });
 
 const { setProjectSetting, getShouldShowFooter, getShouldUseOpenBackTop } = useAppSetting();
 const { t } = useI18n();
 
-const setConfig = (value, key: string) => {
+const setConfig = (value: any, key: string) => {
   setProjectSetting({
     [key]: value,
   });

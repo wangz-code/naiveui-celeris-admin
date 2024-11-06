@@ -1,7 +1,7 @@
 /*
  * @Author: wangqz
  * @Date: 2024-07-25
- * @LastEditTime: 2024-08-08
+ * @LastEditTime: 2024-11-04
  * @Description: content
  */
 
@@ -19,7 +19,7 @@ export function Money(val: string | number | any, point = 2) {
 
 // 格式化table cols
 export function tableMoney(key: string) {
-  return (row) => Money(row[key]);
+  return (row: { [k: string]: string }) => Money(row[key]);
 }
 
 // 生成table col

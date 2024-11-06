@@ -1,27 +1,16 @@
-<script setup>
-import { getCurrentParent } from '#/router/menus';
-import { asyncRoutes } from '#/router/routes';
-import { getFirstMatchingParent, isNil } from '#/utils';
+<script lang="ts" setup>
 import { HomeOutline } from '@vicons/ionicons5';
 import { useI18n } from 'vue-i18n';
-
-defineOptions({
-  name: 'LayoutBreadcrumb',
-});
 
 const { t, te } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const { currentRoute } = useRouter();
-const breadcrumbs = ref([]);
+const breadcrumbs = ref<any[]>([]);
 
-function navigateTo(page) {
-  const { name, path } = page;
-  if (name && name !== route.name) {
-    router.push({ name });
-  } else if (path && path !== route.path) {
-    router.push({ path });
-  }
+function navigateTo(page: { path: string }) {
+  const { path } = page;
+  path && path !== route.path && router.push({ path });
 }
 watchEffect(() => {
   const root = currentRoute.value.matched[0];
@@ -34,12 +23,8 @@ watchEffect(() => {
   breadcrumbs.value = res;
 });
 
-function localize(key) {
+function localize(key: string) {
   return te(key) ? t(key) : key;
-}
-
-function selectDropdown(key) {
-  navigateTo({ path: key });
 }
 </script>
 

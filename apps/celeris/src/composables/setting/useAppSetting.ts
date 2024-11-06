@@ -1,5 +1,6 @@
 import type { ProjectSetting } from 'celeris-types';
 import { useAppStoreWithOut } from '#/store/modules/app';
+import type { DeepPartial } from 'unocss';
 
 export function useAppSetting() {
   const appStore = useAppStoreWithOut();
@@ -10,7 +11,7 @@ export function useAppSetting() {
 
   // 获取国际化语言
   // Get the locale
-  const getLocale = toRef(() => appStore.getProjectSetting.locale);
+  const getLocale = () => toRef(() => appStore.getProjectSetting.locale);
 
   // 获取是否显示主题切换按钮
   // Get whether to display the dark mode toggle button

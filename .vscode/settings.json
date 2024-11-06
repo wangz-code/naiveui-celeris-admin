@@ -194,6 +194,7 @@
 
   "i18n-ally.localesPaths": [
     "apps/celeris/src/locales/langs",
+    "packages/oms-naive/src/langs",
   ],
   "i18n-ally.pathMatcher": "{locale}/{namespace}.{ext}",
   "i18n-ally.enabledParsers": ["json"],

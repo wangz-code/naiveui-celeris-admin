@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { RouterTransitionConstants } from 'celeris-constants';
 import { listenToRouteChange } from '#/router/mitt/routeChange';
 import { Tab, useTabsStore } from '#/store/modules/tabs';
+import { RouterTransitionConstants } from 'celeris-constants';
 import { NTag } from 'naive-ui';
 import { useI18n } from 'vue-i18n';
 
@@ -18,10 +18,10 @@ function getCurrentTab() {
 }
 
 const { currentRoute } = router;
-const { addTab, pinnedTab, getTabsList } = tabStore;
+const { addTab } = tabStore;
 
 const tabsList = computed(() => tabStore.getTabsList);
-const currentTab = (tab) => getCurrentTab()?.fullPath === tab.fullPath;
+const currentTab = (tab: Tab) => getCurrentTab()?.fullPath === tab.fullPath;
 const closeTab = (tab: Tab) => {
   tabStore.closeTab(tab);
 };
@@ -31,7 +31,7 @@ const go = (fullPath: string) => {
 };
 
 const { t, te } = useI18n();
-const localize = (key) => (te(key) ? t(key) : key);
+const localize = (key: string) => (te(key) ? t(key) : key);
 
 listenToRouteChange((route) => addTab(route));
 </script>

@@ -1,4 +1,4 @@
-import type { MessageMode, UserInfo } from 'celeris-types';
+import type { UserInfo } from 'celeris-types';
 import { Get, Post } from '../interceptor';
 import { DefRes } from '../type';
 
@@ -33,7 +33,7 @@ export function userInfoApi() {
 }
 
 // Define a function to call the permission code API
-export function permissionCodeApi(errorMessageMode: MessageMode = 'dialog') {
+export function permissionCodeApi() {
   return Get<DefRes<string[]>>('/auth/permission');
 }
 

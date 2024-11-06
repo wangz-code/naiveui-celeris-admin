@@ -5,6 +5,7 @@ import { Dashboard } from '@vicons/tabler';
 const dashboard: MenuModule = {
   orderNumber: 1,
   menu: {
+    title: 'Dashboard',
     path: '/dashboard',
     name: 'Dashboard',
     icon: Dashboard,

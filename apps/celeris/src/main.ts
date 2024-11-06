@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 
 import App from '#/App.vue';
-import { initializeConfiguration } from '#/AppConfiguration';
 import { setupVueQuery } from '#/apis';
 import { setupDirectives } from '#/directives';
 import { setupI18n } from '#/locales';
@@ -35,9 +34,6 @@ setupRouterGuard(router);
 setupDirectives(app);
 
 void Promise.all([
-  // Initialize internal system configuration
-  // 初始化内部系统配置
-  initializeConfiguration(),
   // Configure i18n
   // 配置国际化
   setupI18n(app),
