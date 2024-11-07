@@ -1,5 +1,5 @@
-import type { Directive } from 'vue';
 import { querySelector } from '#/utils';
+import type { Directive } from 'vue';
 
 // 定义 Ripple 选项接口
 interface RippleOptions {
@@ -72,7 +72,7 @@ function createRipple(event: MouseEvent | TouchEvent, el: HTMLElement, backgroun
   const border = Math.max(Number.parseInt(getComputedStyle(el).borderWidth.replace('px', '')), 0);
   const zIndex = options.zIndex;
 
-  const ripple = createRippleElement(dx, dy, radius, options.transition, background, zIndex);
+  const ripple = createRippleElement(dx, dy, options.transition, background, zIndex);
   const rippleContainer = createRippleContainer(width, height, border, getComputedStyle(el));
 
   rippleContainer.appendChild(ripple);
@@ -108,8 +108,9 @@ function setBackground(el: HTMLElement, background: string | null) {
 }
 
 // 创建 Ripple 元素
-function createRippleElement(dx: number, dy: number, radius: number, transition: number, background: string, zIndex: string) {
+function createRippleElement(dx: number, dy: number, transition: number, background: string, zIndex: string) {
   const ripple = document.createElement('div');
+
   ripple.className = 'ripple';
   ripple.style.marginTop = `${dy}px`;
   ripple.style.marginLeft = `${dx}px`;

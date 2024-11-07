@@ -1,20 +1,17 @@
 <script setup lang="ts">
-import SidebarHeader from './components/SidebarHeader.vue';
-import SidebarFooter from './components/SidebarFooter.vue';
 import { useMenuSetting } from '#/composables';
+import { isGreaterOrEqualSm } from '#/hooks';
 import MenuLayout from '#/layouts/sidebar/components/Menu.vue';
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import SidebarFooter from './components/SidebarFooter.vue';
+import SidebarHeader from './components/SidebarHeader.vue';
 defineOptions({
   name: 'SidebarLayout',
 });
 
 const isCollapse = useMenuSetting().getCollapsed;
-
 const sidebar = ref(null);
-const breakpoints = useBreakpoints(breakpointsTailwind);
-const smAndLarger = breakpoints.greaterOrEqual('sm'); // sm and larger
 watch(
-  () => smAndLarger.value,
+  () => isGreaterOrEqualSm.value,
   (n) => {
     useMenuSetting().setMenuSetting({
       collapsed: !n,

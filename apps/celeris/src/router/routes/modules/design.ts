@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router';
 import { LAYOUT } from '#/router/constant';
-import { Disabled2, EditCircle, Palette, Typography } from '@vicons/tabler';
+import { Disabled2, Palette, Typography } from '@vicons/tabler';
+import type { RouteRecordRaw } from 'vue-router';
 
 const design: RouteRecordRaw = {
   path: '/design',

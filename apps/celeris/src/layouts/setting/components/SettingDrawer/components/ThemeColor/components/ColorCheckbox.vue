@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { isWhiteColor } from '#/utils';
 import { Checkmark } from '@vicons/ionicons5';
 
 defineOptions({
   name: 'ColorCheckbox',
 });
 
-const props = withDefaults(defineProps<Props>(), {});
+withDefaults(defineProps<Props>(), {});
 
 interface Props {
   /**
@@ -20,8 +19,6 @@ interface Props {
    */
   checked: boolean;
 }
-
-const isWhite = computed(() => isWhiteColor(props.color));
 </script>
 
 <template>

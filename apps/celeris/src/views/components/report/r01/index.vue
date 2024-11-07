@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-11-06
+ * @LastEditTime: 2024-11-07
  * @Description: content
 -->
 <template>
@@ -79,7 +79,7 @@ import { createColumns } from './data';
 type RowData = R01Data;
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
-const { tableRef, reload, getKeys } = useAsyncTable<RowData>();
+const { tableRef, reload } = useAsyncTable<RowData>();
 const queryParams = {
   fuzzy: '',
   filter: {

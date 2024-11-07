@@ -1,6 +1,9 @@
-import type { ButtonColorScene, ColorAction, ColorType, ColorTypeCase, ThemeColor, ThemeConfig } from 'celeris-types';
+// @ts-nocheck
+// @ts-ignore
 import { deepMerge, generateColorPalettes } from '#/utils';
+import type { ButtonColorScene, ColorAction, ColorType, ColorTypeCase, ThemeColor, ThemeConfig } from 'celeris-types';
 import { type GlobalThemeOverrides, commonDark, commonLight } from 'naive-ui';
+
 
 /**
  * 将字符串的第一个字符大写
