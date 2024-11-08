@@ -1,5 +1,5 @@
 import type { R01Data } from '#/apis';
-import { tableMoney } from '#/utils/src/numberUtils';
+import { sortDate, sortNumber, sortString, tableMoney, tableSort } from '#/utils/src/numberUtils';
 import { Money } from '@oms/naive';
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui';
 import type { SummaryCell } from 'naive-ui/es/data-table/src/interface';
@@ -22,13 +22,13 @@ export const createColumns = (action: () => VNodeChild): DataTableColumns<R01Dat
     {
       title: '单据日期',
       key: 'billdate',
-      sorter: (a, b) => new Date(a.billdate).getTime() - new Date(b.billdate).getTime(),
+      sorter: sortDate('billdate'),
       width: 100,
     },
     {
       title: '姓名',
       key: 'name',
-      sorter: (a, b) => a.name.charCodeAt(0) - b.name.charCodeAt(0),
+      sorter: sortString('name'),
       width: 100,
     },
     {
@@ -40,25 +40,25 @@ export const createColumns = (action: () => VNodeChild): DataTableColumns<R01Dat
       width: 120,
     },
     {
-      title: '销售金额91',
+      title: '销售金额',
       key: 'sales',
       width: 150,
       align: 'right',
-      sorter: (a, b) => a.sales - b.sales,
+      sorter: sortNumber('sales'),
       render: tableMoney('sales'),
     },
     {
-      title: '收款金额1',
+      title: '收款金额',
       width: 100,
       key: 'payment',
       align: 'right',
-      sorter: true,
+      sorter: sortNumber('payment'),
       render: tableMoney('payment'),
     },
     {
       title: '地址',
       key: 'address',
-      width: 100,
+      width: 160,
     },
     {
       title: '单据状态',
@@ -81,14 +81,12 @@ const render = <T>(pageData: T[], field: keyof T) => h('span', {}, Money(pageDat
 
 const reduceSummary = <T>(pageData: T[], fields: (keyof T)[]) => {
   const sum = {} as { [k in keyof T]: SummaryCell };
-  sum[fields[0]] = { value: '合计' };
-  for (let i = 1; i < fields.length; i++) {
-    const key = fields[i];
+  for (const key of fields) {
     sum[key] = { value: render(pageData, key) };
   }
   return sum;
 };
 
 export const createSummary: DataTableCreateSummary<R01Data> = (pageData) => {
-  return reduceSummary(pageData, ['billdate', 'sales', 'payment']);
+  return reduceSummary(pageData, ['sales', 'payment']);
 };
