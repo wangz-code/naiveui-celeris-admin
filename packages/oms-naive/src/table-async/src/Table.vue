@@ -19,44 +19,54 @@
     remote
     size="small"
     :columns="columns"
-    :data="table.source"
+    :data="tableSorce"
     :pagination="pagination"
-    :loading="table.isLoading"
+    :loading="isLoading"
     :row-key="(rows: any) => rows[rowkey]"
     :scroll-x="scrollX"
     :max-height="500"
+    :summary="summary"
+    @update:sorter="handleSorterChange"
     @update:checked-row-keys="handleCheck"
   />
 </template>
 <script setup lang="ts" generic="T extends object, Q extends object, A extends Function">
-import { useDialogPro, useListQuery, usePagination, useTableChecked } from '@oms/naive';
+import { useDialogPro, usePagination, useTableChecked } from '@oms/naive';
 import { Refresh } from '@vicons/ionicons5';
 import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
-import { type DataTableBaseColumn, type DataTableColumns } from 'naive-ui';
-import { reactive, ref } from 'vue';
+import { cloneDeep, isArray, isFunction, isObject } from 'lodash-es';
+import { type DataTableColumns, type DataTableCreateSummary, type DataTableSortState } from 'naive-ui';
+import type { CompareFn } from 'naive-ui/es/data-table/src/interface';
+import { ref } from 'vue';
 import ColsConfig from './ColsConfig.vue';
 const columns = defineModel<DataTableColumns<T>>('columns', { default: [] });
 const { api, params, rowkey } = defineProps<{
   api: A;
   rowkey: string;
   params: { cleanValue?: any[] } & Q;
+  summary: DataTableCreateSummary;
 }>();
 
 const collapsed = ref(false);
 const Dialog = useDialogPro();
 const cleanValue = params.cleanValue ? params.cleanValue : [null, ''];
-
 const scrollX = columns.value.reduce((pre, curr) => pre + Number(curr.width) || 0, 0);
 
 const { pagination, setPageProps, reload, setQuery } = usePagination();
-const table = reactive({ source: [] as DataTableBaseColumn[], isLoading: false });
-const { handleCheck, cKeys, cRows, cleanCheck } = useTableChecked(rowkey);
-const { qParams, onReset } = useListQuery<Q>({ data: params, reload });
+const { cKeys, cRows, handleCheck, cleanCheck } = useTableChecked(rowkey);
+const tableSorce = ref<T[]>([]);
+const isLoading = ref(false);
+let copiedData = [] as T[];
+const qParams = ref(cloneDeep(params));
+const onReset = () => {
+  qParams.value = cloneDeep(params);
+  reload();
+};
 
 const onQuery = setQuery(async () => {
   const { pageSize = 10, page = 1 } = pagination;
   try {
-    table.isLoading = true;
+    isLoading.value = true;
     const { fuzzy, filter } = qParams.value;
     const params = {
       fuzzy,
@@ -69,16 +79,33 @@ const onQuery = setQuery(async () => {
       Dialog.error(message);
       return;
     }
-    table.source = data.items;
-    setPageProps({ count: data.total });
+    copiedData = cloneDeep(data.items);
+    tableSorce.value = data.items;
+    setPageProps({ itemCount: data.total });
   } finally {
-    table.isLoading = false;
+    isLoading.value = false;
   }
 });
 
-const setCols = (cols: DataTableColumns<T>) => {
-  columns.value = cols;
+const handleSorterChange = (sorter: DataTableSortState) => {
+  if (isLoading.value) return;
+  isLoading.value = true;
+  if (isArray(sorter)) console.error('sorter 暂不支持 multiple 排序');
+  // 异步排序 => sorter=true 暂定
+  // if (isBoolean(sorter.sorter) && sorter.sorter) qParams.value.sort = { [sorter.columnKey]: sorter.order };
+  // 前端排序 => 根据传递的sort函数处理
+  if (isFunction(sorter.sorter)) {
+    const compareFn = sorter.sorter as CompareFn<T>;
+    const orderedData = cloneDeep(copiedData);
+    if (sorter.order == 'ascend') orderedData.sort(compareFn);
+    if (sorter.order == 'descend') orderedData.sort(compareFn).reverse();
+    tableSorce.value = orderedData;
+  }
+  isLoading.value = false;
 };
+
+const setCols = (cols: DataTableColumns<T>) => (columns.value = cols);
+
 defineExpose({ cKeys, cRows, cleanCheck, reload });
 onQuery();
 </script>

@@ -1,138 +1,161 @@
-<!--
- * @Author: wangqz
- * @Date: 2024-07-22
- * @LastEditTime: 2024-10-31
- * @Description: content
--->
 <template>
   <n-card>
-    <n-form ref="formRef" inline :label-width="80" :model="formValue">
-      <n-form-item label="姓名" path="user.name">
-        <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-      </n-form-item>
-      <n-form-item label="年龄" path="user.age">
-        <n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
-      </n-form-item>
-      <n-form-item label="电话号码" path="phone">
-        <n-input v-model:value="formValue.phone" placeholder="电话号码" />
-      </n-form-item>
-      <n-form-item label="姓名" path="user.name">
-        <n-input v-model:value="formValue.user.name" placeholder="输入姓名" />
-      </n-form-item>
-      <n-form-item label="年龄" path="user.age">
-        <n-input v-model:value="formValue.user.age" placeholder="输入年龄" />
-      </n-form-item>
-      <n-form-item label="电话号码" path="phone">
-        <n-input v-model:value="formValue.phone" placeholder="电话号码" />
-      </n-form-item>
-      <n-form-item>
-        <n-button attr-type="button" type="primary" @click="handleValidateClick"> 查询 </n-button>
-      </n-form-item>
-    </n-form>
-    <n-space>
-      <n-button>Default</n-button>
-      <n-button type="tertiary"> Tertiary </n-button>
-      <n-button type="primary"> Primary </n-button>
-      <n-button type="tertiary"> Tertiary </n-button>
-      <n-button type="tertiary"> Tertiary </n-button>
-      <n-button type="tertiary"> Tertiary </n-button>
-      <n-button type="tertiary"> Tertiary </n-button>
-    </n-space>
-    <n-divider dashed />
-    <n-data-table :columns="state.columns" :data="state.data" :summary="state.summary" size="small" :pagination="pagination" />
+    <n-data-table
+      remote
+      ref="table"
+      :columns="columns"
+      :data="data"
+      :loading="loading"
+      :pagination="pagination"
+      :row-key="rowKey"
+      @update:sorter="handleSorterChange"
+      @update:filters="handleFiltersChange"
+      @update:page="handlePageChange"
+    />
   </n-card>
 </template>
 
-<script lang="ts" setup>
-import { h } from 'vue';
-import type { DataTableColumns, DataTableCreateSummary, FormInst } from 'naive-ui';
+<script>
+import { defineComponent, onMounted, reactive, ref } from 'vue';
 
-interface RowData {
-  key: number;
-  name: string;
-  age: number;
-  address: string;
-}
-const message = useMessage();
-const formRef = ref<FormInst | null>(null);
-const formValue = ref({
-  user: {
-    name: '',
-    age: '',
+const column1 = {
+  title: 'column1',
+  key: 'column1',
+  sorter: true,
+  sortOrder: false,
+};
+
+const column2 = {
+  title: 'column2',
+  key: 'column2',
+  filter: true,
+  filterOptionValues: [],
+  filterOptions: [
+    {
+      label: 'Value1',
+      value: 1,
+    },
+    {
+      label: 'Value2',
+      value: 2,
+    },
+  ],
+};
+
+const columns = [
+  column1,
+  column2,
+  {
+    title: 'Column3',
+    key: 'column3',
   },
-  phone: '',
-});
+];
 
-const handleValidateClick = (e: MouseEvent) => {
-  e.preventDefault();
-  formRef.value?.validate((errors) => {
-    if (!errors) {
-      message.success('Valid');
-    } else {
-      console.log(errors);
-      message.error('Invalid');
-    }
+const data = Array(987)
+  .fill(null)
+  .map((_, index) => {
+    return {
+      column1: index,
+      column2: (index % 2) + 1,
+      column3: `a${index}`,
+    };
   });
-};
 
-const createColumns = (): DataTableColumns<RowData> => {
-  return [
-    {
-      type: 'selection',
-    },
-    {
-      title: 'Name',
-      key: 'name',
-    },
-    {
-      title: 'Age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      key: 'address',
-    },
-  ];
-};
+function query(page, pageSize = 10, order = 'ascend', filterValues = []) {
+  return new Promise((resolve) => {
+    const copiedData = data.map((v) => v);
+    const orderedData = order === 'descend' ? copiedData.reverse() : copiedData;
+    const filteredData = filterValues.length ? orderedData.filter((row) => filterValues.includes(row.column2)) : orderedData;
+    const pagedData = filteredData.slice((page - 1) * pageSize, page * pageSize);
+    const total = filteredData.length;
+    const pageCount = Math.ceil(filteredData.length / pageSize);
+    setTimeout(
+      () =>
+        resolve({
+          pageCount,
+          data: pagedData,
+          total,
+        }),
+      1500,
+    );
+  });
+}
 
-const createData = (): RowData[] => {
-  const res: RowData[] = [];
-  for (let i = 0; i < 100; i++) {
-    res.push({
-      key: i,
-      name: 'John Brown' + i,
-      age: 32,
-      address: 'New York No. 1 Lake Park',
+export default defineComponent({
+  setup() {
+    const dataRef = ref([]);
+    const loadingRef = ref(true);
+    const columnsRef = ref(columns);
+    const column1Reactive = reactive(column1);
+    const column2Reactive = reactive(column2);
+    const paginationReactive = reactive({
+      page: 1,
+      pageCount: 1,
+      pageSize: 10,
+      prefix({ itemCount }) {
+        return `Total is ${itemCount}.`;
+      },
     });
-  }
-  return res;
-};
 
-const createSummary: DataTableCreateSummary = (pageData) => {
-  return {
-    name: {
-      value: h(
-        'span',
-        { style: { color: 'red' } },
-        (pageData as unknown as RowData[]).reduce((prevValue, row) => prevValue + row.age, 0),
-      ),
-      colSpan: 3,
-    },
-  };
-};
+    onMounted(() => {
+      query(paginationReactive.page, paginationReactive.pageSize, column1Reactive.sortOrder, column2Reactive.filterOptionValues).then((data) => {
+        dataRef.value = data.data;
+        paginationReactive.pageCount = data.pageCount;
+        paginationReactive.itemCount = data.total;
+        loadingRef.value = false;
+      });
+    });
 
-const pagination = reactive({
-  page: 2,
-  pageSize: 10,
-  showSizePicker: true,
-  pageSizes: [10, 20, 100],
-  onChange: (page: number) => {
-    pagination.page = page;
-  },
-  onUpdatePageSize: (pageSize: number) => {
-    pagination.pageSize = pageSize;
-    pagination.page = 1;
+    return {
+      data: dataRef,
+      columns: columnsRef,
+      column1: column1Reactive,
+      column2: column2Reactive,
+      pagination: paginationReactive,
+      loading: loadingRef,
+      rowKey(rowData) {
+        return rowData.column1;
+      },
+      handleSorterChange(sorter) {
+        if (!sorter || sorter.columnKey === 'column1') {
+          if (!loadingRef.value) {
+            loadingRef.value = true;
+            query(paginationReactive.page, paginationReactive.pageSize, !sorter ? false : sorter.order, column2Reactive.filterOptionValues).then((data) => {
+              column1Reactive.sortOrder = !sorter ? false : sorter.order;
+              dataRef.value = data.data;
+              paginationReactive.pageCount = data.pageCount;
+              paginationReactive.itemCount = data.total;
+              loadingRef.value = false;
+            });
+          }
+        }
+      },
+      handleFiltersChange(filters) {
+        if (!loadingRef.value) {
+          loadingRef.value = true;
+          const filterValues = filters.column2 || [];
+          query(paginationReactive.page, paginationReactive.pageSize, column1Reactive.sortOrder, filterValues).then((data) => {
+            column2Reactive.filterOptionValues = filterValues;
+            dataRef.value = data.data;
+            paginationReactive.pageCount = data.pageCount;
+            paginationReactive.itemCount = data.total;
+            loadingRef.value = false;
+          });
+        }
+      },
+      handlePageChange(currentPage) {
+        if (!loadingRef.value) {
+          loadingRef.value = true;
+          query(currentPage, paginationReactive.pageSize, column1Reactive.sortOrder, column2Reactive.filterOptionValues).then((data) => {
+            dataRef.value = data.data;
+            paginationReactive.page = currentPage;
+            paginationReactive.pageCount = data.pageCount;
+            paginationReactive.itemCount = data.total;
+            loadingRef.value = false;
+          });
+        }
+      },
+    };
   },
 });
-const state = { summary: createSummary, data: createData(), columns: createColumns() };
 </script>

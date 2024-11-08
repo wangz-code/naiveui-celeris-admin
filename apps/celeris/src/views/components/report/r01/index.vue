@@ -6,7 +6,7 @@
 -->
 <template>
   <n-card>
-    <oms-table-async ref="tableRef" :columns="createColumns(action)" :api="getR01" rowkey="key" :params="queryParams">
+    <oms-table-async ref="tableRef" :columns="createColumns(action)" :summary="createSummary" :api="getR01" rowkey="key" :params="queryParams">
       <template #form="{ collapsed, reload, qParams }">
         <n-form ref="formRef" label-placement="left" label-width="auto" :model="qParams">
           <n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" :collapsed="collapsed" :collapsed-rows="1" responsive="screen">
@@ -75,7 +75,7 @@ import { ArrowUndoOutline, CloseOutline, Trash } from '@vicons/ionicons5';
 import { Checks, CirclePlus, Send } from '@vicons/tabler';
 import { NButton, type FormInst } from 'naive-ui';
 import { h, VNodeChild } from 'vue';
-import { createColumns } from './data';
+import { createColumns, createSummary } from './data';
 type RowData = R01Data;
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);

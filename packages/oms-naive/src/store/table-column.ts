@@ -1,16 +1,20 @@
 import { MD5 } from 'crypto-js';
-import { isFunction } from 'lodash-es';
 import type { DataTableBaseColumn, DataTableColumnKey, DataTableColumns } from 'naive-ui';
+import type { Sorter } from 'naive-ui/es/data-table/src/interface';
 import { defineStore } from 'pinia';
 import type { VNodeChild } from 'vue';
 
 type Columns = DataTableColumns<any>;
 type Config = Array<{ key: DataTableColumnKey; title: string | undefined; show: boolean; column: DataTableBaseColumn; order: number }>;
+type Call = {
+  render: (rowData: any, rowIndex: number) => VNodeChild;
+  sorter: boolean | Sorter | 'default';
+};
 type TableState = {
   tables: {
     [x: string]: { config: Config; field: string };
   };
-  render: { [x: string]: Map<DataTableColumnKey, (rowData: any, rowIndex: number) => VNodeChild> };
+  fn: { [x: string]: Map<DataTableColumnKey, Call> };
 };
 
 const getField = (columns: Columns) => {
@@ -44,7 +48,7 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
   },
   state: (): TableState => ({
     tables: {},
-    render: {},
+    fn: {},
   }),
   actions: {
     /** 每个用户使用不同的缓存id */
@@ -57,17 +61,24 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
       const id = this.getID(uid);
       const cols = this.tables[id];
       // 缓存render
-      if (!this.render[id]) this.render[id] = new Map();
-      const render = this.render[id];
+      if (!this.fn[id]) this.fn[id] = new Map();
+      const fn = this.fn[id];
       const field = getField(columns);
       for (const item of columns as DataTableBaseColumn[]) {
-        isFunction(item.render) && render.set(item.key, item.render);
+        const call = {} as Call;
+        if (item.render) call.render = item.render;
+        if (item.sorter) call.sorter = item.sorter;
+        fn.set(item.key, call);
       }
       if (cols) {
         // 检查字段变化 更新缓存
         if (cols.field != field) this.setColsConfig(uid, setCols(columns, cols.config), field);
         for (const item of cols.config) {
-          if (render.has(item.key)) item.column.render = render.get(item.key);
+          if (fn.has(item.key)) {
+            const call = fn.get(item.key)!;
+            if (call.render) item.column.render = call.render;
+            if (call.sorter) item.column.sorter = call.sorter;
+          }
         }
         return cols.config;
       }

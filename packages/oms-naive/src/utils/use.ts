@@ -130,15 +130,3 @@ export const useResetForm = <T>() => {
   return { refForm, nextRestForm, checkRestForm };
 };
 
-/**
- * @description 封装了查询常用的参数
- * @descript 已加入自动导入
- */
-export const useListQuery = <T>({ data, reload }: { data: T; reload: Function }) => {
-  const qParams = ref<T>(cloneDeep(data));
-  const onReset = () => {
-    qParams.value = cloneDeep(data);
-    reload();
-  };
-  return { qParams, onReset };
-};
