@@ -1,7 +1,7 @@
 <div align='center'>
-    <h1>naiveui-celeris-admin</h1>
+    <h1>Naive Admin</h1>
     <div>
-        <img src='https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png' alt='celeris-web' width='200'  height='200'/>
+        <img src='https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png' alt='Naive Admin' width='200'  height='200'/>
     </div>
 </div>
 
@@ -15,15 +15,14 @@
 
 ![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/cols.png)
 
-## 特点 {...celeris } 源仓库https://github.com/kirklin/celeris-web
+## 源仓库 [celeris](https://github.com/kirklin/celeris-web)
 
 改动
 
-- 保留 celeris css,并将@celeris 依赖替换为本地,布局部分css 修改
-- unplugin-auto-import 自动导入 api
-- unplugin-vue-components 自动导入 components
+- 保留 celeris css,并将@celeris 依赖替换为本地, 修改布局, tabs 等
+- 自动导入 api & components
 - nitro 拦截请求模拟测试数据
-- icon 使用 xicons, src/components/Iconx 组件亦支持本地 svg 字符串导入
+- 封装 table异步组件, 支持列拖拽排序 ,缓存配置 ,固定列
 
 ### 开发
 

@@ -5,12 +5,12 @@
       <slot name="bar-left"></slot>
     </span>
     <n-button-group>
-      <i-button attr-type="button" title="查询" type="info" :icon="Search" @click="reload"></i-button>
-      <i-button attr-type="reset" title="重置" :icon="Refresh" @click="onReset"></i-button>
+      <oms-ibtn attr-type="button" title="查询" type="info" :icon="Search" @click="reload"></oms-ibtn>
+      <oms-ibtn attr-type="reset" title="重置" :icon="Refresh" @click="onReset"></oms-ibtn>
       <cols-config :columns="columns" :onChange="setCols"> </cols-config>
       <n-button attr-type="button" @click="collapsed = !collapsed">
         <template #icon>
-          <Iconx :component="collapsed ? ChevronsDown : ChevronsUp" :size="16" />
+          <oms-icon :component="collapsed ? ChevronsDown : ChevronsUp" :size="16" />
         </template>
       </n-button>
     </n-button-group>
@@ -31,11 +31,11 @@
   />
 </template>
 <script setup lang="ts" generic="T extends object, Q extends object, A extends Function">
-import { useDialogPro, usePagination, useTableChecked } from '@oms/naive';
+import { OmsIcon, useDialogPro, usePagination, useTableChecked, OmsIbtn } from '@oms/naive';
 import { Refresh } from '@vicons/ionicons5';
 import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
-import { cloneDeep, isArray, isFunction, isObject } from 'lodash-es';
-import { type DataTableColumns, type DataTableCreateSummary, type DataTableSortState } from 'naive-ui';
+import { cloneDeep, isArray, isFunction } from 'lodash-es';
+import { NFlex, NButtonGroup, NButton, type DataTableColumns, type DataTableCreateSummary, type DataTableSortState } from 'naive-ui';
 import type { CompareFn } from 'naive-ui/es/data-table/src/interface';
 import { ref } from 'vue';
 import ColsConfig from './ColsConfig.vue';
@@ -44,7 +44,7 @@ const { api, params, rowkey } = defineProps<{
   api: A;
   rowkey: string;
   params: { cleanValue?: any[] } & Q;
-  summary: DataTableCreateSummary;
+  summary?: DataTableCreateSummary<T>;
 }>();
 
 const collapsed = ref(false);

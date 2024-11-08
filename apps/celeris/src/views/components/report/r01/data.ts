@@ -1,5 +1,5 @@
 import type { R01Data } from '#/apis';
-import { sortDate, sortNumber, sortString, tableMoney, tableSort } from '#/utils/src/numberUtils';
+import { sortDate, sortNumber, sortString, tableMoney } from '#/utils/src/numberUtils';
 import { Money } from '@oms/naive';
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui';
 import type { SummaryCell } from 'naive-ui/es/data-table/src/interface';

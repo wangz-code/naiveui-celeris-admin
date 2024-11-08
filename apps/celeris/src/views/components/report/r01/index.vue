@@ -1,9 +1,3 @@
-<!--
- * @Author: wangqz
- * @Date: 2024-07-22
- * @LastEditTime: 2024-11-07
- * @Description: content
--->
 <template>
   <n-card>
     <oms-table-async ref="tableRef" :columns="createColumns(action)" :summary="createSummary" :api="getR01" rowkey="key" :params="queryParams">
