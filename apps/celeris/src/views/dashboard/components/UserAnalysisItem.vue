@@ -83,7 +83,7 @@ const { chartOption } = useChartOption(() => {
     ],
   };
 });
-async function fetchData(params: { quota: string }) {
+async function fetchData() {
   try {
     const { data } = await responseMock['user-analysis-data'];
     const { chartData: resChartData } = data;
@@ -107,7 +107,7 @@ async function fetchData(params: { quota: string }) {
     setLoading(false);
   }
 }
-fetchData({ quota: props.quota });
+fetchData();
 </script>
 
 <template>

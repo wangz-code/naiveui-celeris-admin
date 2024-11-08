@@ -1,7 +1,7 @@
 // @unocss-include
 import type { RouteRecordRaw } from 'vue-router';
 import { LAYOUT } from '#/router/constant';
-import { ChartArcs, Components, DeviceDesktopAnalytics, Edit, Forms, Report, Table } from '@vicons/tabler';
+import { ChartArcs, Components, DeviceDesktopAnalytics, Edit, Table } from '@vicons/tabler';
 import { List } from '@vicons/ionicons5';
 
 const components: RouteRecordRaw = {

@@ -1,15 +1,9 @@
-<!--
- * @Author: wangqz
- * @Date: 2024-07-22
- * @LastEditTime: 2024-11-06
- * @Description: content
--->
 <template>
   <n-card>
-    <oms-table-async ref="tableRef" :columns="columns" :api="getR01" rowkey="key" :params="queryParams">
-      <template #form="{ filter, reload, qParams }">
+    <oms-table-async ref="tableRef" :columns="createColumns(action)" :summary="createSummary" :api="getR01" rowkey="key" :params="queryParams">
+      <template #form="{ collapsed, reload, qParams }">
         <n-form ref="formRef" label-placement="left" label-width="auto" :model="qParams">
-          <n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" responsive="screen">
+          <n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" :collapsed="collapsed" :collapsed-rows="1" responsive="screen">
             <n-form-item-gi :label="$t('common.likeQuery')" path="fuzzy" :show-feedback="false">
               <n-input v-model:value="qParams.fuzzy" :placeholder="$t('common.input')" clearable @keyup.enter="reload" @clear="reload" />
             </n-form-item-gi>
@@ -20,7 +14,7 @@
             </n-grid-item>
             <n-grid-item :span="2">
               <n-form-item label="单据日期" :show-feedback="false" path="phone">
-                <n-date-picker v-model:value="formValue.dateRange" type="daterange" clearable />
+                <n-date-picker v-model:value="qParams.filter.dateRange" type="daterange" clearable />
               </n-form-item>
             </n-grid-item>
             <n-grid-item>
@@ -30,26 +24,24 @@
             </n-grid-item>
             <n-grid-item>
               <n-form-item label="单据状态" :show-feedback="false" path="user.name">
-                <n-select v-model:value="formValue.stateValue" placeholder="Select" :options="stateOptions" />
+                <n-select v-model:value="qParams.filter.stateValue" placeholder="Select" :options="stateOptions" />
               </n-form-item>
             </n-grid-item>
-            <template v-if="filter">
-              <n-grid-item>
-                <n-form-item label="电话号码" path="phone" :show-feedback="false">
-                  <n-input v-model:value="formValue.phone" placeholder="电话号码" />
-                </n-form-item>
-              </n-grid-item>
-              <n-grid-item>
-                <n-form-item label="电话号码" path="phone" :show-feedback="false">
-                  <n-input v-model:value="formValue.phone" placeholder="电话号码" />
-                </n-form-item>
-              </n-grid-item>
-              <n-grid-item>
-                <n-form-item label="电话号码" path="phone" :show-feedback="false">
-                  <n-input v-model:value="formValue.phone" placeholder="电话号码" />
-                </n-form-item>
-              </n-grid-item>
-            </template>
+            <n-grid-item>
+              <n-form-item label="电话号码" path="phone" :show-feedback="false">
+                <n-input v-model:value="qParams.filter.phone" placeholder="电话号码" />
+              </n-form-item>
+            </n-grid-item>
+            <n-grid-item>
+              <n-form-item label="电话号码" path="phone" :show-feedback="false">
+                <n-input v-model:value="qParams.filter.phone" placeholder="电话号码" />
+              </n-form-item>
+            </n-grid-item>
+            <n-grid-item>
+              <n-form-item label="电话号码" path="phone" :show-feedback="false">
+                <n-input v-model:value="qParams.filter.phone" placeholder="电话号码" />
+              </n-form-item>
+            </n-grid-item>
           </n-grid>
         </n-form>
       </template>
@@ -76,20 +68,23 @@ import { OmsTableAsync, useAsyncTable } from '@oms/naive';
 import { ArrowUndoOutline, CloseOutline, Trash } from '@vicons/ionicons5';
 import { Checks, CirclePlus, Send } from '@vicons/tabler';
 import { NButton, type FormInst } from 'naive-ui';
-import { Value } from 'naive-ui/es/date-picker/src/interface';
 import { h, VNodeChild } from 'vue';
-import { createColumns } from './data';
+import { createColumns, createSummary } from './data';
 type RowData = R01Data;
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
-// const asyTable = ref<TableAsyRef<RowData>>();
-const { tableRef, reload, getKeys } = useAsyncTable<RowData>();
+const { tableRef, reload } = useAsyncTable<RowData>();
 const queryParams = {
   fuzzy: '',
   filter: {
-    name: "",
+    name: '',
     state: null,
     saleValue: null,
+    where: '',
+    phone: '',
+    select: '',
+    stateValue: '',
+    dateRange: null,
   },
 };
 const action = (): VNodeChild =>
@@ -103,21 +98,7 @@ const action = (): VNodeChild =>
     },
     () => '操作',
   );
-const columns = ref(createColumns(action));
-console.log('columns log==>', columns.value);
 
-const formValue = ref({
-  user: {
-    name: '',
-    age: '',
-  },
-  where: '',
-  phone: '',
-  select: '',
-  saleValue: '',
-  stateValue: '',
-  dateRange: [Date.now(), Date.now()] as Value,
-});
 const actionOpts = [
   {
     label: '批量发起',

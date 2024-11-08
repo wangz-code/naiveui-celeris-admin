@@ -4,6 +4,7 @@ import { RootRoute } from '#/router/routes';
 import { PAGE_NOT_FOUND_ROUTE } from '#/router/routes/basic';
 import { usePermissionStoreWithOut } from '#/store/modules/permission';
 import { useUserStoreWithOut } from '#/store/modules/user';
+import type { Recordable } from 'celeris-types';
 
 const LOGIN_PATH = PageConstants.BASE_LOGIN;
 const ROOT_PATH = RootRoute.path;
@@ -88,7 +89,6 @@ export function createPermissionGuard(router: Router) {
     router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
 
     permissionStore.setShouldAddRouteDynamically(true);
-
     if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
       next({ path: to.fullPath, replace: true, query: to.query });

@@ -1,14 +1,20 @@
 import { MD5 } from 'crypto-js';
-import { isFunction } from 'lodash-es';
+import type { DataTableBaseColumn, DataTableColumnKey, DataTableColumns } from 'naive-ui';
+import type { Sorter } from 'naive-ui/es/data-table/src/interface';
 import { defineStore } from 'pinia';
+import type { VNodeChild } from 'vue';
 
-type Columns = Array<{ [x: string]: any }>;
-type Config = Array<{ key: string; title: string; show: boolean; column: { [x: string]: any }; order: number }>;
+type Columns = DataTableColumns<any>;
+type Config = Array<{ key: DataTableColumnKey; title: string | undefined; show: boolean; column: DataTableBaseColumn; order: number }>;
+type Call = {
+  render: (rowData: any, rowIndex: number) => VNodeChild;
+  sorter: boolean | Sorter | 'default';
+};
 type TableState = {
   tables: {
     [x: string]: { config: Config; field: string };
   };
-  render: { [x: string]: Map<string, Function> };
+  fn: { [x: string]: Map<DataTableColumnKey, Call> };
 };
 
 const getField = (columns: Columns) => {
@@ -23,12 +29,12 @@ const setCols = (columns: Columns, config: Config) => {
   };
   const cfg: Config = [];
   for (let i = 0; i < columns.length; i++) {
-    const item = columns[i]!;
-    const key = item.key || item.type;
+    const item = columns[i] as DataTableBaseColumn;
+    const key = String(item.key || item.type);
     cfg.push({
       order: i,
       key,
-      title: item.title,
+      title: item.title as string | undefined,
       show: getShow(key),
       column: item,
     });
@@ -42,7 +48,7 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
   },
   state: (): TableState => ({
     tables: {},
-    render: {},
+    fn: {},
   }),
   actions: {
     /** 每个用户使用不同的缓存id */
@@ -55,18 +61,24 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
       const id = this.getID(uid);
       const cols = this.tables[id];
       // 缓存render
-      if (!this.render[id]) this.render[id] = new Map();
-      const render = this.render[id];
+      if (!this.fn[id]) this.fn[id] = new Map();
+      const fn = this.fn[id];
       const field = getField(columns);
-      for (const item of columns) {
-        isFunction(item.render) && render.set(item.key, item.render);
+      for (const item of columns as DataTableBaseColumn[]) {
+        const call = {} as Call;
+        if (item.render) call.render = item.render;
+        if (item.sorter) call.sorter = item.sorter;
+        fn.set(item.key, call);
       }
       if (cols) {
         // 检查字段变化 更新缓存
         if (cols.field != field) this.setColsConfig(uid, setCols(columns, cols.config), field);
-
         for (const item of cols.config) {
-          if (render.has(item.key)) item.column.render = render.get(item.key);
+          if (fn.has(item.key)) {
+            const call = fn.get(item.key)!;
+            if (call.render) item.column.render = call.render;
+            if (call.sorter) item.column.sorter = call.sorter;
+          }
         }
         return cols.config;
       }
@@ -80,7 +92,11 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
       if (field) this.tables[id]!.field = field;
     },
     /** 重置 */
-    resetTableCols() {
+    resetTableCols(uid: string) {
+      delete this.tables[uid];
+    },
+    /** 清理 */
+    cleanTableCols() {
       this.tables = {};
     },
   },

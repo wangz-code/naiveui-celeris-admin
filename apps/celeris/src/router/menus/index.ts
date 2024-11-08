@@ -1,17 +1,15 @@
 import { router } from '#/router';
 import { usePermissionStore } from '#/store/modules/permission';
-import type { Menu, MenuModule } from 'celeris-types';
-import { createPathMatcher, filterTree, getAllParentPaths, getFirstMatchingParent, isHttpUrl, loadMenusFromModules, transformMenuModule } from '#/utils';
+import { createPathMatcher, filterTree, getAllParentPaths, getFirstMatchingParent, isHttpUrl } from '#/utils';
+import type { Menu } from 'celeris-types';
 import type { RouteRecordNormalized } from 'vue-router';
 
-const { isBackendPermissionMode, isRolePermissionMode, isRouteMappingPermissionMode } = useAppPermission();
+const { isRolePermissionMode } = useAppPermission();
 
 // Load all menu modules and transform them into menus
-const menuModuleList: MenuModule[] = loadMenusFromModules(import.meta.glob<{ default: any }>('./modules/**/*.ts', { eager: true }));
-const staticMenus: Menu[] = menuModuleList.map(transformMenuModule);
 
 // Filter menus based on the current permission mode
-function filterMenusByPermissionMode(menus: Menu[]): Menu[] {
+function filterMenusByPermissionMode(): Menu[] {
   const permissionStore = usePermissionStore();
 
   // Recursively filter out hidden menus
@@ -27,7 +25,7 @@ function filterMenusByPermissionMode(menus: Menu[]): Menu[] {
 
 // Get all menus, filtered by permission mode and role
 export function getMenus(): Menu[] {
-  const menus = filterMenusByPermissionMode(staticMenus);
+  const menus = filterMenusByPermissionMode();
   if (toValue(isRolePermissionMode)) {
     const routes = router.getRoutes();
     return filterTree(menus, basicFilter(routes));
@@ -49,7 +47,7 @@ export function getCurrentParent(currentPath: string) {
 
 // Get a list of top-level menus
 export function getShallowMenus(): Menu[] {
-  const menus = filterMenusByPermissionMode(staticMenus);
+  const menus = filterMenusByPermissionMode();
   const shallowMenus = menus.map((menu) => ({ ...menu, children: undefined }));
   if (toValue(isRolePermissionMode)) {
     const routes = router.getRoutes();

@@ -9,11 +9,11 @@ const routeModuleList: RouteRecordRaw[] = loadRoutesFromModules(modules);
 export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
 export const iconMap = new Map();
-const getIcons = (routes) => {
+const getIcons = (routes: RouteRecordRaw[]) => {
   for (let i = 0; i < routes.length; i++) {
     const element = routes[i].meta;
     if (element) iconMap.set(element.title, element);
-    if (routes[i].children) getIcons(routes[i].children);
+    if (routes[i].children) getIcons(routes[i].children || []);
   }
 };
 getIcons(routeModuleList);

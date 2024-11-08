@@ -1,4 +1,7 @@
+// @ts-ignore
+// @ts-nocheck
 /**
+ *
  * copy to https://github.com/developit/mitt
  * Expand clear method
  */

@@ -6,7 +6,7 @@ import { reactive } from 'vue';
 export const pageSizes = [5, 10, 20, 100];
 type PaginationOpt = {
   onQuery?: () => void;
-  count: string;
+  itemCount: string;
   props?: PaginationProps;
 };
 
@@ -17,7 +17,7 @@ type PaginationOpt = {
 export const usePagination = () => {
   const options: PaginationOpt = {
     onQuery: () => {},
-    count: '',
+    itemCount: '',
   };
   const pagination: PaginationProps = reactive({
     page: 1,
@@ -25,11 +25,10 @@ export const usePagination = () => {
     pageSizes,
     itemCount: 0,
     pageSize: 10,
+    prefix: ({ itemCount }) => `${itemCount}${$t('naive.table.total')}`,
   });
   const setPageProps = (opt: PaginationOpt) => {
-    pagination.itemCount = Number(opt.count);
-    pagination.prefix = () => `${opt.count}${$t('naive.table.total')}`;
-
+    pagination.itemCount = Number(opt.itemCount);
     pagination.onUpdatePage = (page: number) => {
       pagination.page = page;
       options.onQuery && options.onQuery();
@@ -51,10 +50,11 @@ export const usePagination = () => {
   };
 
   /** 重置page=1,并调用 onQuery */
-  const reload = debounce(() => {
+  const reload = () => {
     pagination.page = 1;
     options.onQuery && options.onQuery();
-  }, 250);
+  };
+
   return { pagination, setPageProps, reload, setQuery };
 };
 

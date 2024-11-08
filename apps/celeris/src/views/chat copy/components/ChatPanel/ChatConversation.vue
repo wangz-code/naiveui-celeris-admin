@@ -1,9 +1,7 @@
 <script setup lang="ts">
+import { useUserStore } from '#/store/modules/user';
 import type { UserInfo } from 'celeris-types';
 import type { VirtualListInst } from 'naive-ui';
-import { useUserStore } from '#/store/modules/user';
-import type { ChatContextInjectionKey } from '#/views/chat/chatContext';
-import { chatContextInjectionKey } from '#/views/chat/chatContext';
 
 defineProps({
   maxHeight: {
@@ -12,7 +10,6 @@ defineProps({
 });
 const { userInfo } = useUserStore();
 const conversationsVirtualListInst = ref<VirtualListInst>();
-const { selectedAssistantRef } = inject<ChatContextInjectionKey>(chatContextInjectionKey)!;
 interface Message {
   text: string;
   date: Date;
@@ -34,7 +31,7 @@ function generateFakeData(): Conversation[] {
 
     const conversation: Conversation = {
       id: i,
-      user: i % 2 === 0 ? userInfo : { id: selectedAssistantRef.value.id, username: selectedAssistantRef.value.name, avatarUrl: selectedAssistantRef.value.avatar },
+      user: userInfo,
       isMine,
       messages: [],
       date: new Date(),
