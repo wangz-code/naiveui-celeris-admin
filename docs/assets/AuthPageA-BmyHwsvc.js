@@ -1,0 +1,1 @@
+import{d as t,u as e,c as s,e as a,L as o,o as n,bz as r}from"./index-Chs2zBSz.js";const u=t({__name:"AuthPageA",setup(t){const{t:u}=e();return(t,e)=>{const l=o;return n(),s(l,{title:a(u)("page.permission.roleButtonText",{role:a(r).ADMIN})},null,8,["title"])}}});export{u as default};
