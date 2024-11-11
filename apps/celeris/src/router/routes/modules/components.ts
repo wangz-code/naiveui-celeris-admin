@@ -59,7 +59,7 @@ const components: RouteRecordRaw = {
       children: [
         {
           path: 'r01',
-          name: 'report001',
+          name: 'reportTest',
           component: () => import('#/views/components/report/r01/index.vue'),
           meta: {
             title: 'routes.components.report001',
@@ -68,7 +68,7 @@ const components: RouteRecordRaw = {
         },
         {
           path: 'r02',
-          name: 'report002',
+          name: 'reportDemo',
           component: () => import('#/views/components/report/r02/index.vue'),
           meta: {
             title: 'routes.components.report002',

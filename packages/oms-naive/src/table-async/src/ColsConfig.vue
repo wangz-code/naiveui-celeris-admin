@@ -7,12 +7,11 @@
       长按拖动排序
       <n-button size="tiny" type="info" @click="reset">重置</n-button>
     </n-flex>
-    <n-divider dashed style="margin: 10px 0px" />
     <VueDraggable ref="el" v-model="colsConfig" @update="refresh" class="cols-box">
       <div v-for="item in colsConfig" :key="item.key">
         <n-flex v-if="item.title" class="m-t-2" align="center">
-          <n-icon v-if="item.column.fixed" :component="PinnedOff" @click="fixed(item)" />
-          <n-icon v-else :component="Pinned" @click="fixed(item.column as DataTableColumn)" />
+          <n-icon v-if="item.column.fixed" :component="PinnedOff" @click="fixedToggle(item.column)" class="pointer" />
+          <n-icon v-else :component="Pinned" @click="fixedToggle(item.column)" class="pointer" />
           <n-checkbox v-model:checked="item.show" @update:checked="refresh" :label="item.title" />
         </n-flex>
       </div>
@@ -50,8 +49,8 @@ const reset = () => {
   refresh();
 };
 
-const fixed = (column: DataTableColumn) => {
-  if (column.fixed) {
+const fixedToggle = (column: DataTableColumn) => {
+  if (column.fixed == 'left') {
     delete column.fixed;
   } else {
     column.fixed = 'left';
@@ -64,7 +63,11 @@ refresh();
 
 <style scoped>
 .cols-box {
-  height: 500px;
+  margin-top: 10px;
+  height: 50vh;
   overflow: auto;
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

@@ -16,7 +16,7 @@ export const useAsyncTable = <T>() => {
   const tableRef = ref<TableAsyRef<T>>();
   const getRef = () => {
     if (!tableRef.value) {
-      console.error('table Instance is not found, are you bind ref');
+      console.error('table Instance is not found, are you bind ref, ref函数需要在 onMounted内调用');
       return;
     }
     return tableRef.value;
@@ -24,5 +24,6 @@ export const useAsyncTable = <T>() => {
   const reload = () => getRef()?.reload();
   const getKeys = () => getRef()?.cKeys;
   const getRows = () => getRef()?.cRows;
-  return { tableRef, reload, getKeys, getRows };
+  const setKeys = (keys: DataTableRowKey[]) => getRef()?.setKeys(keys);
+  return { tableRef, reload, getKeys, getRows, setKeys };
 };

@@ -26,6 +26,7 @@
     :scroll-x="scrollX"
     :max-height="500"
     :summary="summary"
+    :checked-row-keys="cKeys"
     @update:sorter="handleSorterChange"
     @update:checked-row-keys="handleCheck"
   />
@@ -35,21 +36,27 @@ import { OmsIcon, useDialogPro, usePagination, useTableChecked, OmsIbtn } from '
 import { Refresh } from '@vicons/ionicons5';
 import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
 import { cloneDeep, isArray, isFunction } from 'lodash-es';
-import { NFlex, NButtonGroup, NButton, type DataTableColumns, type DataTableCreateSummary, type DataTableSortState } from 'naive-ui';
+import { NFlex, NButtonGroup, NButton, type DataTableColumns, type DataTableCreateSummary, type DataTableSortState, type DataTableRowKey } from 'naive-ui';
 import type { CompareFn } from 'naive-ui/es/data-table/src/interface';
 import { ref } from 'vue';
 import ColsConfig from './ColsConfig.vue';
 const columns = defineModel<DataTableColumns<T>>('columns', { default: [] });
-const { api, params, rowkey } = defineProps<{
+type TablePorps = {
+  /** 请求 */
   api: A;
+  /** 唯一索引 */
   rowkey: string;
-  params: { cleanValue?: any[] } & Q;
+  /** 查询参数  filterClean:格式化时清空 */
+  params: Q & { filterClean?: Array<string | null> };
+  /** 合计行 */
   summary?: DataTableCreateSummary<T>;
-}>();
+  /** 立即查询 default: true */
+  query?: boolean;
+};
+const { api, params, rowkey, query = true } = defineProps<TablePorps>();
 
 const collapsed = ref(false);
 const Dialog = useDialogPro();
-const cleanValue = params.cleanValue ? params.cleanValue : [null, ''];
 const scrollX = columns.value.reduce((pre, curr) => pre + Number(curr.width) || 0, 0);
 
 const { pagination, setPageProps, reload, setQuery } = usePagination();
@@ -63,16 +70,20 @@ const onReset = () => {
   reload();
 };
 
+const setKeys = (keys: DataTableRowKey[]) => {
+  cKeys.value = keys;
+};
+
 const onQuery = setQuery(async () => {
   const { pageSize = 10, page = 1 } = pagination;
   try {
     isLoading.value = true;
-    const { fuzzy, filter } = qParams.value;
+    const { fuzzy = '', filter = {}, filterClean = ['', null] } = qParams.value;
     const params = {
-      fuzzy,
+      fuzzy: fuzzy.trim(),
       limit: pageSize,
       offset: (page - 1) * pageSize,
-      filter: JSON.stringify(filter, (_, value) => (cleanValue.includes(value) ? undefined : value)), // 清理参数为null
+      filter: JSON.stringify(filter, (_, value) => (filterClean.includes(value) ? undefined : value)), // 清理参数为null
     };
     const { data, status, message } = await api(params);
     if (status != 'success') {
@@ -106,6 +117,8 @@ const handleSorterChange = (sorter: DataTableSortState) => {
 
 const setCols = (cols: DataTableColumns<T>) => (columns.value = cols);
 
-defineExpose({ cKeys, cRows, cleanCheck, reload });
-onQuery();
+defineExpose({ cKeys, cRows, setKeys, cleanCheck, reload });
+
+console.log('noQuery', query);
+query && onQuery();
 </script>
