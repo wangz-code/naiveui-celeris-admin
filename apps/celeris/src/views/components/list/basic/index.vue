@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-07-22
- * @LastEditTime: 2024-11-07
+ * @LastEditTime: 2024-11-13
  * @Description: content
 -->
 <template>
@@ -70,7 +70,7 @@
 <script lang="ts" setup>
 import { getR01, R01Data } from '#/apis';
 import { renderIcon } from '#/components/Iconx';
-import { OmsTableAsync, useAsyncTable } from '@oms/naive';
+import { OmsTableAsync, useAsyncTable } from 'naive-oms';
 import { ArrowUndoOutline, CloseOutline, Trash } from '@vicons/ionicons5';
 import { Checks, CirclePlus, Send } from '@vicons/tabler';
 import { NButton, type FormInst } from 'naive-ui';

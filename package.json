@@ -37,6 +37,7 @@
     "iso-639-1": "^3.1.3",
     "lodash-es": "^4.17.21",
     "mockjs": "^1.1.0",
+    "naive-oms": "^1.0.0",
     "naive-ui": "^2.40.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^8.2.0",

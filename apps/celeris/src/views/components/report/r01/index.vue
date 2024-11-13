@@ -1,6 +1,6 @@
 <template>
   <n-card>
-    <oms-table-async ref="tableRef" :columns="createColumns(action)" :summary="createSummary" :api="getR01" rowkey="key" :params="queryParams">
+    <oms-table-async ref="tableRef" :columns="createColumns(action)" :summary="createSummary" :api="getR01" :config="config">
       <template #form="{ collapsed, reload, qParams }">
         <n-form ref="formRef" label-placement="left" label-width="auto" :model="qParams">
           <n-grid :x-gap="8" :y-gap="15" cols="2 s:3 m:4 l:5 xl:6" :collapsed="collapsed" :collapsed-rows="1" responsive="screen">
@@ -47,11 +47,16 @@
       </template>
       <template #bar-left>
         <n-space>
-          <i-button type="primary" :icon="CirclePlus" @click="reload">新增</i-button>
-          <n-button strong secondary>下载模板</n-button>
+          <i-button type="primary" :icon="CirclePlus">新增</i-button>
+          <n-button strong secondary @click="showMsg(getKeys)">获取选中Keys</n-button>
+          <n-button strong secondary @click="showMsg(getRows)">获取选中Rows</n-button>
+          <n-button strong secondary @click="showMsg(getSource)">获取当页数据</n-button>
+          <n-button strong secondary @click="setKeys([0, 1, 2])">设置选中Keys</n-button>
+          <n-button strong secondary @click="setRows([{ id: 3 }, { id: 4}, { id: 5 }])">设置选中Rows</n-button>
+          <!-- <n-button strong secondary>下载模板</n-button>
           <n-button strong secondary>批量导入</n-button>
           <n-button strong secondary>导出Excel</n-button>
-          <n-button strong secondary>打印</n-button>
+          <n-button strong secondary>打印</n-button> -->
           <n-dropdown trigger="hover" :options="actionOpts">
             <n-button>更多...</n-button>
           </n-dropdown>
@@ -64,7 +69,7 @@
 <script lang="ts" setup>
 import { getR01, R01Data } from '#/apis';
 import { renderIcon } from '#/components/Iconx';
-import { OmsTableAsync, useAsyncTable } from '@oms/naive';
+import { OmsTableAsync, TableConfig, useAsyncTable } from 'naive-oms';
 import { ArrowUndoOutline, CloseOutline, Trash } from '@vicons/ionicons5';
 import { Checks, CirclePlus, Send } from '@vicons/tabler';
 import { NButton, type FormInst } from 'naive-ui';
@@ -73,19 +78,23 @@ import { createColumns, createSummary } from './data';
 type RowData = R01Data;
 const message = useMessage();
 const formRef = ref<FormInst | null>(null);
-const { tableRef, reload } = useAsyncTable<RowData>();
-const queryParams = {
-  fuzzy: '',
-  filter: {
-    name: '',
-    state: null,
-    saleValue: null,
-    where: '',
-    phone: '',
-    select: '',
-    stateValue: '',
-    dateRange: null,
+const { tableRef, getKeys, getRows, getSource, setRows, setKeys } = useAsyncTable<RowData>();
+const config: TableConfig = {
+  params: {
+    fuzzy: '',
+    filter: {
+      name: '',
+      state: null,
+      saleValue: null,
+      where: '',
+      phone: '',
+      select: '',
+      stateValue: '',
+      dateRange: null,
+    },
   },
+  watchFilter: true,
+  rowKey: 'id',
 };
 const action = (): VNodeChild =>
   h(
@@ -141,7 +150,8 @@ const stateOptions = ['', '起草', '待审', '通过'].map((v) => ({
   value: v,
 }));
 
-onMounted(() => {
-  // tableRef.value?.setKeys(['3ad6d83b-7f5a-4a9b-b2df-8b00ab2afc67']);
-});
+const showMsg = (fn: () => any[]) => {
+  const res = fn();
+  message.info(!res.length ? '空数据' : JSON.stringify(res));
+};
 </script>

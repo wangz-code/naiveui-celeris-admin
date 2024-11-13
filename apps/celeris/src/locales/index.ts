@@ -3,7 +3,7 @@ import { createI18n, useI18n } from 'vue-i18n';
 
 import en from './langs/en-US.json';
 import cn from './langs/zh-CN.json';
-import { setOmsLocal } from '@oms/naive';
+import { setOmsLocal } from 'naive-oms';
 
 export type Locale = 'en-US' | 'zh-CN';
 
