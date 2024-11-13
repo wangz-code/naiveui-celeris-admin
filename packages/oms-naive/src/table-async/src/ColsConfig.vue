@@ -1,7 +1,9 @@
 <template>
   <n-popover trigger="click" placement="bottom">
     <template #trigger>
-      <i-button title="列设置" :icon="Settings"></i-button>
+      <n-button type="default">
+        <n-icon :component="Settings" />
+      </n-button>
     </template>
     <n-flex justify="space-between" class="m-t-1 text-gray">
       长按拖动排序
@@ -22,7 +24,7 @@
 <script lang="ts" setup generic="T extends object">
 import { Pinned, PinnedOff, Settings } from '@vicons/tabler';
 import { cloneDeep } from 'lodash-es';
-import { NFlex, NIcon, type DataTableColumn, type DataTableColumns } from 'naive-ui';
+import { NFlex, NIcon, NPopover, NButton, NCheckbox, type DataTableColumn, type DataTableColumns } from 'naive-ui';
 import { ref } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import { useRoute } from 'vue-router';
@@ -64,7 +66,7 @@ refresh();
 <style scoped>
 .cols-box {
   margin-top: 10px;
-  height: 50vh;
+  max-height: 50vh;
   overflow: auto;
 }
 .pointer {

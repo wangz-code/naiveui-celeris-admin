@@ -14,7 +14,7 @@ type TableState = {
   tables: {
     [x: string]: { config: Config; field: string };
   };
-  fn: { [x: string]: Map<DataTableColumnKey, Call> };
+  fn: { [x: string]: { [key: DataTableColumnKey]: Call } };
 };
 
 const getField = (columns: Columns) => {
@@ -55,27 +55,26 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
     getID(uid: string) {
       return uid;
     },
-
     /** 1.初始化列配置 */
     initTableCols(uid: string, columns: Columns) {
       const id = this.getID(uid);
       const cols = this.tables[id];
       // 缓存render
-      if (!this.fn[id]) this.fn[id] = new Map();
-      const fn = this.fn[id];
+      if (!this.fn[id]) this.fn[id] = {};
+      const fnObj = this.fn[id]!;
       const field = getField(columns);
       for (const item of columns as DataTableBaseColumn[]) {
         const call = {} as Call;
         if (item.render) call.render = item.render;
         if (item.sorter) call.sorter = item.sorter;
-        fn.set(item.key, call);
+        fnObj[item.key] = call;
       }
       if (cols) {
         // 检查字段变化 更新缓存
         if (cols.field != field) this.setColsConfig(uid, setCols(columns, cols.config), field);
         for (const item of cols.config) {
-          if (fn.has(item.key)) {
-            const call = fn.get(item.key)!;
+          if (fnObj[item.key]) {
+            const call = fnObj[item.key]!;
             if (call.render) item.column.render = call.render;
             if (call.sorter) item.column.sorter = call.sorter;
           }
@@ -83,7 +82,7 @@ export const useTableColStore = defineStore('APP_TableCols_STORE', {
         return cols.config;
       }
       this.tables[id] = { config: setCols(columns, []), field };
-      return this.tables[id].config;
+      return this.tables[id]!.config;
     },
     /** 配置列配置 */
     setColsConfig(uid: string, config: Config, field?: string) {

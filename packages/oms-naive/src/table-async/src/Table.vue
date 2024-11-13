@@ -1,19 +1,10 @@
 <template>
-  <slot name="form" v-bind="{ collapsed, reload, qParams }"></slot>
+  <slot name="form" v-bind="{ collapsed, reload, qParams, TableCtrl }"> </slot>
   <n-flex class="m-t-sm m-b-sm" justify="space-between">
     <span>
       <slot name="bar-left"></slot>
     </span>
-    <n-button-group>
-      <oms-ibtn attr-type="button" title="查询" type="info" :icon="Search" @click="reload"></oms-ibtn>
-      <oms-ibtn attr-type="reset" title="重置" :icon="Refresh" @click="onReset"></oms-ibtn>
-      <cols-config :columns="columns" :onChange="setCols"> </cols-config>
-      <n-button attr-type="button" @click="collapsed = !collapsed">
-        <template #icon>
-          <oms-icon :component="collapsed ? ChevronsDown : ChevronsUp" :size="16" />
-        </template>
-      </n-button>
-    </n-button-group>
+    <component v-if="buttonGrop == 'default'" :is="TableCtrl()"></component>
   </n-flex>
   <n-data-table
     remote
@@ -22,51 +13,52 @@
     :data="tableSorce"
     :pagination="pagination"
     :loading="isLoading"
-    :row-key="(rows: any) => rows[rowkey]"
+    :row-key="(rows: any) => rows[rowKey]"
     :scroll-x="scrollX"
-    :max-height="500"
+    :max-height="maxHeight || 500"
     :summary="summary"
     :checked-row-keys="cKeys"
     @update:sorter="handleSorterChange"
     @update:checked-row-keys="handleCheck"
   />
 </template>
-<script setup lang="ts" generic="T extends object, Q extends object, A extends Function">
-import { OmsIcon, useDialogPro, usePagination, useTableChecked, OmsIbtn } from '@oms/naive';
-import { Refresh } from '@vicons/ionicons5';
-import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
+<script setup lang="tsx" generic="T extends object, A extends Function, Q extends object">
+import { useDialogPro, usePagination, useTableChecked, type TableConfig } from '@oms/naive';
 import { cloneDeep, isArray, isFunction } from 'lodash-es';
-import { NFlex, NButtonGroup, NButton, type DataTableColumns, type DataTableCreateSummary, type DataTableSortState, type DataTableRowKey } from 'naive-ui';
+import { NDataTable, NFlex, type DataTableColumns, type DataTableCreateSummary, type DataTableRowKey, type DataTableSortState } from 'naive-ui';
 import type { CompareFn } from 'naive-ui/es/data-table/src/interface';
-import { ref, toRaw } from 'vue';
-import ColsConfig from './ColsConfig.vue';
+import { h, onMounted, ref, toRaw, watch } from 'vue';
+import TableBtnGroup from './TableBtnGroup.vue';
 const columns = defineModel<DataTableColumns<T>>('columns', { default: [] });
+
 type TablePorps = {
   /** 请求 */
   api: A;
-  /** 唯一索引 */
-  rowkey: string;
-  /** 查询参数  filterClean:格式化时清空 */
-  params: Q & { filterClean?: Array<string | null> };
+  /** 配置参数*/
+  config: TableConfig<Q>;
   /** 合计行 */
   summary?: DataTableCreateSummary<T>;
   /** 立即查询 default: true */
   query?: boolean;
+  /** 表格高度 */
+  maxHeight?: string | number;
+  /** 查询重置按钮组位置 需要手动添加 <component justify="end" :is="TableCtrl()"></component> */
+  buttonGrop?: 'top' | 'default';
 };
-const { api, params, rowkey, query = true } = defineProps<TablePorps>();
-
+const { api, config, query = true, buttonGrop = 'default' } = defineProps<TablePorps>();
+const rowKey = config.rowKey;
 const collapsed = ref(false);
 const Dialog = useDialogPro();
 const scrollX = columns.value.reduce((pre, curr) => pre + Number(curr.width) || 0, 0);
 
 const { pagination, setPageProps, reload, setQuery } = usePagination();
-const { cKeys, cRows, handleCheck, cleanCheck } = useTableChecked<T>(rowkey);
+const { cKeys, cRows, handleCheck, cleanCheck } = useTableChecked<T>(rowKey);
 const tableSorce = ref<T[]>([]);
 const isLoading = ref(false);
 let copiedData = [] as T[];
-const qParams = ref(cloneDeep(params));
+const qParams = ref(cloneDeep(config.params));
 const onReset = () => {
-  qParams.value = cloneDeep(params);
+  qParams.value = cloneDeep(config.params);
   reload();
 };
 
@@ -74,7 +66,7 @@ const setKeys = (keys: DataTableRowKey[]) => (cKeys.value = keys);
 
 const setRows = (rows: T[]) => {
   cRows.value = rows;
-  setKeys(rows.map((item: any) => item[rowkey]));
+  setKeys(rows.map((item: any) => item[rowKey]));
 };
 
 const getSource = () => toRaw(tableSorce.value);
@@ -83,21 +75,19 @@ const onQuery = setQuery(async () => {
   const { pageSize = 10, page = 1 } = pagination;
   try {
     isLoading.value = true;
-    const { fuzzy = '', filter = {}, filterClean = ['', null] } = qParams.value;
-    const params = {
-      fuzzy: fuzzy.trim(),
+    let params = {
       limit: pageSize,
       offset: (page - 1) * pageSize,
-      filter: JSON.stringify(filter, (_, value) => (filterClean.includes(value) ? undefined : value)), // 清理参数为null
     };
+    if (config.paramsHandler) params = { ...params, ...config.paramsHandler(toRaw(qParams.value)) };
     const { data, status, message } = await api(params);
     if (status != 'success') {
       Dialog.error(message);
       return;
     }
-    copiedData = cloneDeep(data.items);
-    tableSorce.value = data.items;
-    setPageProps({ itemCount: data.total });
+    copiedData = cloneDeep(data.list);
+    tableSorce.value = data.list;
+    setPageProps({ itemCount: data.count });
   } finally {
     isLoading.value = false;
   }
@@ -120,9 +110,23 @@ const handleSorterChange = (sorter: DataTableSortState) => {
   isLoading.value = false;
 };
 
-const setCols = (cols: DataTableColumns<T>) => (columns.value = cols);
-
-defineExpose({ cKeys, cRows, setKeys, setRows, cleanCheck, reload, getSource });
+const TableCtrl = () => {
+  const { colsConfig = true } = config;
+  return h(TableBtnGroup, {
+    collapsed: collapsed.value,
+    'onUpdate:collapsed': (value) => (collapsed.value = value),
+    setCols: (cols: DataTableColumns<T>) => (columns.value = cols),
+    columns: columns.value,
+    onReload: reload,
+    colsConfig,
+    onReset,
+  });
+};
 
 query && onQuery();
+onMounted(() => {
+  const { watchFilter } = config;
+  watchFilter && watch(() => qParams.value.filter, reload, { deep: 1 });
+});
+defineExpose({ cKeys, cRows, setKeys, setRows, cleanCheck, reload, getSource, refresh: onQuery, qParams });
 </script>
