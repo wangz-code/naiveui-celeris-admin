@@ -140,4 +140,8 @@ const stateOptions = ['', '起草', '待审', '通过'].map((v) => ({
   label: v || '全部',
   value: v,
 }));
+
+onMounted(() => {
+  // tableRef.value?.setKeys(['3ad6d83b-7f5a-4a9b-b2df-8b00ab2afc67']);
+});
 </script>

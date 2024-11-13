@@ -8,6 +8,9 @@ export type TableAsyRef<Row> = {
   cRows: Row[];
   setKeys: (p: DataTableRowKey[]) => void;
   setRows: (p: Row[]) => void;
+  getKeys: () => DataTableRowKey[];
+  getRows: () => Row[];
+  getSource: () => Row[];
   cleanCheck: () => void;
   reload: () => void;
 };
@@ -16,7 +19,7 @@ export const useAsyncTable = <T>() => {
   const tableRef = ref<TableAsyRef<T>>();
   const getRef = () => {
     if (!tableRef.value) {
-      console.error('table Instance is not found, are you bind ref, ref函数需要在 onMounted内调用');
+      console.error('table Instance is not found, are you bind ref, 数需要在 onMounted后调用');
       return;
     }
     return tableRef.value;
@@ -25,5 +28,7 @@ export const useAsyncTable = <T>() => {
   const getKeys = () => getRef()?.cKeys;
   const getRows = () => getRef()?.cRows;
   const setKeys = (keys: DataTableRowKey[]) => getRef()?.setKeys(keys);
-  return { tableRef, reload, getKeys, getRows, setKeys };
+  const setRows = (rows: T[]) => getRef()?.setRows(rows);
+  const getSource = () => getRef()?.getSource();
+  return { tableRef, reload, getKeys, getRows, setKeys, setRows, getSource };
 };

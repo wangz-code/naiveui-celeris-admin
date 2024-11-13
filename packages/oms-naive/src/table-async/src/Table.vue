@@ -38,7 +38,7 @@ import { ChevronsDown, ChevronsUp, Search } from '@vicons/tabler';
 import { cloneDeep, isArray, isFunction } from 'lodash-es';
 import { NFlex, NButtonGroup, NButton, type DataTableColumns, type DataTableCreateSummary, type DataTableSortState, type DataTableRowKey } from 'naive-ui';
 import type { CompareFn } from 'naive-ui/es/data-table/src/interface';
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import ColsConfig from './ColsConfig.vue';
 const columns = defineModel<DataTableColumns<T>>('columns', { default: [] });
 type TablePorps = {
@@ -60,7 +60,7 @@ const Dialog = useDialogPro();
 const scrollX = columns.value.reduce((pre, curr) => pre + Number(curr.width) || 0, 0);
 
 const { pagination, setPageProps, reload, setQuery } = usePagination();
-const { cKeys, cRows, handleCheck, cleanCheck } = useTableChecked(rowkey);
+const { cKeys, cRows, handleCheck, cleanCheck } = useTableChecked<T>(rowkey);
 const tableSorce = ref<T[]>([]);
 const isLoading = ref(false);
 let copiedData = [] as T[];
@@ -70,9 +70,14 @@ const onReset = () => {
   reload();
 };
 
-const setKeys = (keys: DataTableRowKey[]) => {
-  cKeys.value = keys;
+const setKeys = (keys: DataTableRowKey[]) => (cKeys.value = keys);
+
+const setRows = (rows: T[]) => {
+  cRows.value = rows;
+  setKeys(rows.map((item: any) => item[rowkey]));
 };
+
+const getSource = () => toRaw(tableSorce.value);
 
 const onQuery = setQuery(async () => {
   const { pageSize = 10, page = 1 } = pagination;
@@ -117,8 +122,7 @@ const handleSorterChange = (sorter: DataTableSortState) => {
 
 const setCols = (cols: DataTableColumns<T>) => (columns.value = cols);
 
-defineExpose({ cKeys, cRows, setKeys, cleanCheck, reload });
+defineExpose({ cKeys, cRows, setKeys, setRows, cleanCheck, reload, getSource });
 
-console.log('noQuery', query);
 query && onQuery();
 </script>
