@@ -487,8 +487,8 @@ importers:
         specifier: 'catalog:'
         version: 1.1.0
       naive-oms:
-        specifier: ^1.0.5
-        version: 1.0.5(@types/sortablejs@1.15.8)(typescript@5.6.3)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/sortablejs@1.15.8)(typescript@5.6.3)
       nprogress:
         specifier: 'catalog:'
         version: 0.2.0
@@ -4190,8 +4190,8 @@ packages:
   muggle-string@0.4.1:
     resolution: {integrity: sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ==}
 
-  naive-oms@1.0.5:
-    resolution: {integrity: sha512-Q0UYkts3wApERhsrh/2VJPPsl7BOBV1lO7sairRchzQ+cehP2+WVRZfmtr2ND6Os2vGY8/Bzp6gkx++zr8bhng==}
+  naive-oms@1.0.7:
+    resolution: {integrity: sha512-B4IxD0Wc5YUsWPqWkl5QkqhoOrYgbzTzmQL4E5v2K2h2VdM/Vwyc4vc9AhqeNS+Mo89l4dZ2ddo12wWpmTJlNg==}
 
   naive-ui@2.40.1:
     resolution: {integrity: sha512-3NkL+vLRQZKQxCHXa+7xiD6oM74OrQELaehDkGYRYpr6kjT+JJB+Z7h+5LC70gn8VkbgCAETv0+uRWF+6MLlgQ==}
@@ -9385,10 +9385,11 @@ snapshots:
 
   muggle-string@0.4.1: {}
 
-  naive-oms@1.0.5(@types/sortablejs@1.15.8)(typescript@5.6.3):
+  naive-oms@1.0.7(@types/sortablejs@1.15.8)(typescript@5.6.3):
     dependencies:
       '@vicons/ionicons5': 0.12.0
       '@vicons/tabler': 0.12.0
+      '@vue/shared': 3.5.12
       bignumber.js: 9.1.2
       crypto-js: 4.2.0
       lodash-es: 4.17.21
