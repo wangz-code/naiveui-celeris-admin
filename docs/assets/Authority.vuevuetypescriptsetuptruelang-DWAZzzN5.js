@@ -1,0 +1,1 @@
+import{d as s,bn as e,e as a,ae as t,q as r}from"./index-BT0ZcDkn.js";const o=s({__name:"Authority",props:{value:{type:[Number,Array,String],default:""}},setup(s){const{hasPermission:o}=e();return(e,n)=>a(o)(s.value)?t(e.$slots,"default",{key:0}):r("",!0)}});export{o as _};
