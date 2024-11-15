@@ -2,7 +2,7 @@ import { Get } from '../interceptor';
 import type { TableRes } from '../type';
 
 export interface R01Data {
-  key: string;
+  id: number;
   billdate: string;
   name: string;
   phone: string;

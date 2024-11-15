@@ -15,8 +15,8 @@ export function usePageResponseSuccess<T = any>(page: number | string, pageSize:
 
   return {
     ...useResponseSuccess({
-      items: pageData,
-      total: list.length,
+      list: pageData,
+      count: list.length,
     }),
     message,
   };

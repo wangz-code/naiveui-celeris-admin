@@ -1,6 +1,6 @@
 import type { R01Data } from '#/apis';
 import { sortDate, sortNumber, sortString, tableMoney } from '#/utils/src/numberUtils';
-import { Money } from '@oms/naive';
+import { Money } from 'naive-oms';
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui';
 import type { SummaryCell } from 'naive-ui/es/data-table/src/interface';
 import type { VNodeChild } from 'vue';

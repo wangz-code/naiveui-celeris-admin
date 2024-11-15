@@ -3,6 +3,7 @@ import errorHandler from './error';
 export default defineNitroConfig({
   devErrorHandler: errorHandler,
   errorHandler: '~/error',
+
   routeRules: {
     '/api/**': {
       cors: true,
@@ -15,4 +16,6 @@ export default defineNitroConfig({
       },
     },
   },
+
+  compatibilityDate: '2024-11-13',
 });
