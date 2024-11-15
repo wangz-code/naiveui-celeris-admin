@@ -46,7 +46,7 @@
     "iso-639-1": "catalog:",
     "lodash-es": "catalog:",
     "mockjs": "catalog:",
-    "naive-oms": "^1.0.5",
+    "naive-oms": "^1.0.7",
     "nprogress": "catalog:",
     "path-to-regexp": "catalog:",
     "pinia": "catalog:",
