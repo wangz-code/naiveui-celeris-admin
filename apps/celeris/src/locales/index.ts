@@ -3,8 +3,6 @@ import { createI18n, useI18n } from 'vue-i18n';
 
 import en from './langs/en-US.json';
 import cn from './langs/zh-CN.json';
-import { setOmsLocal } from 'naive-oms';
-
 export type Locale = 'en-US' | 'zh-CN';
 
 const messages = {
@@ -42,9 +40,8 @@ const setLocal = (locale: Locale) => {
 
 async function setupI18n(app: App) {
   const { getLocale } = useAppSetting();
-  const local = getLocale().value;
+  const local = getLocale.value;
   setLocal(local);
-  setOmsLocal(local);
   app.use(i18n);
 }
 

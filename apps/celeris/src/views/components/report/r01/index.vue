@@ -96,6 +96,9 @@ const config: TableConfig = {
   watchFilter: true,
   rowKey: 'id',
 };
+
+const res= inject("n-config-provider")
+console.log('res log==>',res);
 const action = (): VNodeChild =>
   h(
     NButton,

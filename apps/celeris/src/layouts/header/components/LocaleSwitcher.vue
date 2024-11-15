@@ -4,7 +4,6 @@ import { ActionIcon } from '#/components/ActionIcon';
 
 import { useAppSetting } from '#/composables';
 import { Language } from '@vicons/ionicons5';
-
 const { setProjectSetting } = useAppSetting();
 
 function handleSelect(key: Locale) {
