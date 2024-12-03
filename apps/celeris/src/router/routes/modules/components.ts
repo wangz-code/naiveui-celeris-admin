@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import { LAYOUT } from '#/router/constant';
 import { ChartArcs, Components, DeviceDesktopAnalytics, Edit, Table } from '@vicons/tabler';
 import { List } from '@vicons/ionicons5';
-
+import { DocumentPdf } from '@vicons/carbon';
 const components: RouteRecordRaw = {
   path: '/components',
   name: 'Components',
@@ -177,6 +177,28 @@ const components: RouteRecordRaw = {
           path: 'demo',
           name: 'ChartsDemo',
           component: () => import('#/views/components/echarts/index.vue'),
+          meta: {
+            title: 'routes.components.normal',
+            shouldHideInMenu: false,
+          },
+        },
+      ],
+    },
+    {
+      path: 'pdf',
+      name: 'PDF',
+      component: LAYOUT,
+      redirect: '/components/pdf/demo',
+      meta: {
+        title: 'routes.components.pdf',
+        icon: DocumentPdf,
+        shouldHideInMenu: false,
+      },
+      children: [
+        {
+          path: 'demo',
+          name: 'PdfDemo',
+          component: () => import('#/views/components/pdf/index.vue'),
           meta: {
             title: 'routes.components.normal',
             shouldHideInMenu: false,

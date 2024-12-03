@@ -18,7 +18,8 @@
       "formsimple": "简单表单",
       "formcomplex": "复杂表单",
       "echarts": "Echarts",
-      "normal": "普通示例"
+      "normal": "普通示例",
+      "pdf": "PDF"
     },
     "chat": {
       "chat": "Chat"
