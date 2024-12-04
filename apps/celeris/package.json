@@ -8,7 +8,8 @@
   "homepage": "https://github.com/kirklin/celeris-web",
   "main": "src/main.ts",
   "scripts": {
-    "dev": "vite --force",
+    "dev": "vite",
+    "devforce": "vite --force",
     "build": "pnpm cross-env NODE_ENV=production vite build",
     "build:analyze": "pnpm vite build --mode analyze",
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist",
@@ -60,6 +61,7 @@
     "vue-draggable-plus": "catalog:",
     "vue-echarts": "catalog:",
     "vue-i18n": "catalog:",
+    "vue-qrcode": "^2.2.2",
     "vue-router": "catalog:"
   },
   "devDependencies": {

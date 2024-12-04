@@ -1,0 +1,633 @@
+<style scoped>
+.row-margin {
+  width: 40px;
+}
+</style>
+<template>
+  <div>
+    <n-flex>
+      <n-button @click="preview">预览</n-button>
+      <n-button @click="clean">清空</n-button>
+      <!-- <n-button @click="addHeader">+头部</n-button> -->
+      <n-button @click="addTable">+表格</n-button>
+      <n-button @click="initPdf">初始化</n-button>
+      <!-- <n-button @click="addBaseInfo">+基本信息</n-button> -->
+      <!-- <n-button @click="addGoods">+商品信息</n-button> -->
+      <n-button @click="addOther">+其他</n-button>
+    </n-flex>
+    <n-scrollbar style="max-height: 66vh">
+      <div class="m-r-sm">
+        <div class="m-t-xs" v-for="(item, idx) in docDefinition.content" :key="idx">
+          <n-card v-if="item.table" :title="item.table.tittle">
+            <template #header-extra>
+              <n-flex>
+                <!-- <n-checkbox v-model:checked="item.layout" :checked-value="undefined" unchecked-value="noBorders">表格边框</n-checkbox> -->
+                <n-select size="tiny" style="width: 80px" v-model:value="item.layout" :options="layoutOptions" />
+                <n-button size="tiny" @click="addTable">编辑表格</n-button>
+                <n-button size="tiny" @click="addTableCol(item.table)">增加列</n-button>
+                <n-button size="tiny" @click="addTableRow(item.table)">增加行</n-button>
+                <n-button size="tiny" @click="remove(idx)">删除表格</n-button>
+              </n-flex>
+            </template>
+            <div>
+              <n-flex class="m-b-xs" :size="[5, 1]">
+                <div>列宽</div>
+                <div v-for="(w, wIdx) in item.table.widths">
+                  <n-input-group>
+                    <n-input-group-label size="tiny">列{{ wIdx + 1 }}</n-input-group-label>
+                    <n-input v-model:value="item.table.widths[wIdx]" size="tiny" placeholder="列宽" style="width: 45px" />
+                  </n-input-group>
+                </div>
+                <div>
+                  <n-input-group>
+                    <n-input-group-label size="tiny">表格间距(左上右下)</n-input-group-label>
+                    <n-input-number v-model:value="item.margin[0]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
+                    <n-input-number v-model:value="item.margin[1]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
+                    <n-input-number v-model:value="item.margin[2]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
+                    <n-input-number v-model:value="item.margin[3]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
+                  </n-input-group>
+                </div>
+              </n-flex>
+              <n-list v-for="(t, tIdx) in item.table.body" :key="tIdx">
+                <n-card size="small" class="m-b-xs">
+                  <template #header>
+                    <n-flex :size="[5, 0]">
+                      <n-tag :bordered="false" type="info" size="small">
+                        第 {{ tIdx + 1 }} 行
+                        <template #icon>
+                          <n-checkbox :checked-value="undefined" unchecked-value="noBorders"></n-checkbox>
+                        </template>
+                      </n-tag>
+                      <n-button size="tiny" @click="removeRow(item.table, tIdx)">删除行</n-button>
+                    </n-flex>
+                  </template>
+
+                  <n-list-item v-for="(body, bIdx) in t" :key="bIdx">
+                    <template #prefix>
+                      <n-checkbox style="width: 60px" :checked-value="undefined" unchecked-value="noBorders">列{{ bIdx + 1 }}</n-checkbox>
+                    </template>
+                    <div>
+                      <div v-if="body.image != undefined">
+                        <n-flex>
+                          <img :src="body.src" width="50" />
+                          <n-button-group>
+                            <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                            <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                            <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                          </n-button-group>
+                          <div>
+                            <n-input-group>
+                              <n-input-group-label size="tiny">宽/高</n-input-group-label>
+                              <n-input-number v-model:value="body.width" size="tiny" placeholder="尺寸" style="width: 80px" />
+                              <n-input-number v-model:value="body.height" size="tiny" placeholder="尺寸" style="width: 80px" />
+                            </n-input-group>
+                          </div>
+                        </n-flex>
+                        <n-input type="text" v-model:value="body.src" />
+                      </div>
+                      <div v-if="body.text != undefined">
+                        <n-flex justify="space-between">
+                          <div>
+                            <n-input v-model:value="body.text" type="text" placeholder="请输入" />
+                          </div>
+                          <n-flex>
+                            <n-checkbox v-model:checked="body.bold">粗体</n-checkbox>
+                            <n-button-group>
+                              <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                              <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                              <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                            </n-button-group>
+                            <div>
+                              <n-input-group>
+                                <n-input-group-label size="tiny">字体</n-input-group-label>
+                                <n-input-number v-model:value="body.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
+                              </n-input-group>
+                            </div>
+                          </n-flex>
+                        </n-flex>
+                      </div>
+                      <div v-if="body.qr != undefined">
+                        <n-flex justify="space-between">
+                          <!-- {{ body.qr }} -->
+                          <vue-qrcode :value="body.qr" />
+
+                          <n-flex>
+                            <n-button-group>
+                              <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                              <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                              <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                            </n-button-group>
+                            <div>
+                              <n-input-group>
+                                <n-input-group-label size="tiny">宽高</n-input-group-label>
+                                <n-input-number v-model:value="body.fit" size="tiny" placeholder="尺寸" style="width: 80px" />
+                              </n-input-group>
+                            </div>
+                          </n-flex>
+                        </n-flex>
+                        <n-input type="text" v-model:value="body.qr" />
+                      </div>
+                      <div v-if="body.ol != undefined">
+                        <n-card title="列表" size="small">
+                          <template #header-extra>
+                            <n-flex :size="[5, 0]">
+                              <n-button size="tiny">清空</n-button>
+                              <n-button size="tiny">增加一行</n-button>
+                              <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
+                                <n-button size="tiny">设置序号</n-button>
+                              </n-popselect>
+                            </n-flex>
+                          </template>
+                          <n-list>
+                            <n-list-item v-for="(ol, olIdx) in body.ol">
+                              <div>
+                                <n-input type="textarea" v-model:value="body.ol[olIdx]"></n-input>
+                              </div>
+                              <n-flex :size="[5, 0]">
+                                <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                                  <n-button size="tiny">切换</n-button>
+                                </n-popselect>
+                                <n-button size="tiny">移除</n-button>
+                              </n-flex>
+                            </n-list-item>
+                          </n-list>
+                        </n-card>
+                      </div>
+                      <div v-if="body.table != undefined">
+                        <n-card title="表格" size="small">
+                          <template #header-extra>
+                            <n-flex :size="[5, 0]">
+                              <n-button size="tiny">清空</n-button>
+                              <n-button size="tiny">增加一行</n-button>
+                              <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
+                                <n-button size="tiny">设置序号</n-button>
+                              </n-popselect>
+                            </n-flex>
+                          </template>
+                          <n-list v-for="(row, rowIdx) in body.table.body">
+                            <n-list-item v-for="(col, cIdx) in row">
+                              <div>
+                                <n-input v-model:value="col.text"></n-input>
+                              </div>
+                              <n-flex :size="[5, 0]">
+                                <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                                  <n-button size="tiny">切换</n-button>
+                                </n-popselect>
+                                <n-button size="tiny">移除</n-button>
+                              </n-flex>
+                            </n-list-item>
+                          </n-list>
+                        </n-card>
+                      </div>
+                    </div>
+                    <n-flex class="m-t-xs">
+                      <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                        <n-button size="tiny">切换</n-button>
+                      </n-popselect>
+                      <div>
+                        <n-input-group>
+                          <n-input-group-label size="tiny">跨列</n-input-group-label>
+                          <n-input-number v-model:value="body.colSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
+                        </n-input-group>
+                      </div>
+                      <div>
+                        <n-input-group>
+                          <n-input-group-label size="tiny">跨行</n-input-group-label>
+                          <n-input-number v-model:value="body.rowSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
+                        </n-input-group>
+                      </div>
+                      <div>
+                        <n-input-group>
+                          <n-input-group-label size="tiny">间距</n-input-group-label>
+                          <n-input-number v-model:value="body.margin[0]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                          <n-input-number v-model:value="body.margin[1]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                          <n-input-number v-model:value="body.margin[2]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                          <n-input-number v-model:value="body.margin[3]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                        </n-input-group>
+                      </div>
+                      <n-button size="tiny" @click="removeCol(item.table, bIdx)">删除整列</n-button>
+                    </n-flex>
+                  </n-list-item>
+                </n-card>
+              </n-list>
+            </div>
+          </n-card>
+        </div>
+      </div>
+    </n-scrollbar>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import pdfMake from 'pdfmake';
+import { ref } from 'vue';
+// import { logo } from '../img';
+import { dog as logo } from '../dog';
+import { SyStBold, SyStLight, SyStMedium, SyStSemiBold } from '../SC-index';
+import { cloneDeep } from 'lodash-es';
+import VueQrcode from 'vue-qrcode';
+const emit = defineEmits(['preview']);
+const options = [
+  {
+    label: '文本',
+    value: 'text',
+  },
+  {
+    label: '图片',
+    value: 'image',
+  },
+  {
+    label: '二维码',
+    value: 'qr',
+  },
+  {
+    label: '列表',
+    value: 'ol',
+  },
+  {
+    label: '表格',
+    value: 'table',
+  },
+];
+const layoutOptions = [
+  {
+    label: '全边框',
+    value: '',
+  },
+  {
+    label: '无边框',
+    value: 'noBorders',
+  },
+  {
+    label: '细线分割',
+    value: 'lightHorizontalLines',
+  },
+];
+const indexOptions = [
+  {
+    label: '全边框',
+    value: '',
+  },
+  {
+    label: '无边框',
+    value: 'noBorders',
+  },
+  {
+    label: '细线分割',
+    value: 'lightHorizontalLines',
+  },
+];
+
+// 加载字体
+const vfs = {
+  SyStBold,
+  SyStLight,
+  SyStMedium,
+  SyStSemiBold,
+};
+const fonts = {
+  SySt: {
+    normal: 'SyStLight',
+    medium: 'SyStMedium',
+    semiBold: 'SyStSemiBold',
+    bold: 'SyStBold',
+  },
+};
+pdfMake.setFonts(fonts);
+pdfMake.addVirtualFileSystem(vfs);
+
+const setIndex = () => {};
+
+const setColType = (type: 'text' | 'image' | 'qr', table, idx) => {
+  const item = {
+    text: { text: '文本', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+    image: {
+      image: logo,
+      src: logo,
+      width: 50,
+      height: 50,
+      alignment: 'left',
+      margin: [0, 0, 0, 0],
+    },
+    qr: { qr: '二维码', alignment: 'right', fit: 80, margin: [0, 0, 0, 0] },
+    ol: {
+      ol: [
+        '如果本次付款金额小于销售单金额的20%，则以本次付款金额作为交易定金；如果本次付款金额大于等于销售单金额的20%，则以销售单金额的20%作为定金(定制产品除外，由双方自行约定)。',
+        '甲乙双方签订协议后，双方应严格遵守：甲方(买方)违约退货的，无权要求返还定金；乙方(卖方)不能交货的，则应双倍返还定金，乙方(卖方)逾期交货的，甲方可要求乙方支付违约金；违约金计算方式为：逾期商品总价的3‰×逾期天数，违约金不超过定金的两倍。',
+        '甲方(买方)在验收中发现数量、质量等方面有异议，应当场提出。验收合格签字确认。',
+        '如因甲方(买方)客观原因造成乙方(卖方)无法送货入户的，甲方(买方)应承担相关责任。',
+        '除本单据所约定条款，乙方(卖方)按照行业《三包责任规则》、《行业文明经营规则》的规定履行职责及承担违约责任。',
+        '本单据签订后，甲方(买方)、乙方(卖方)再商议的其他变更条款，需另行书面约定。未作另行约定的，按本单据条款履行。',
+      ],
+      alignment: 'left',
+      fontSize: 10,
+      bold: true,
+      margin: [0, 0, 0, 0],
+      colSpan: 0,
+    },
+    table: {
+      table: {
+        tittle: '表格',
+        body: [
+          [
+            { text: '列', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+            { text: '列', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+            { text: '列', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+          ],
+        ],
+        widths: ['*', '*', '*'],
+      },
+      layout: '',
+      margin: [0, 0, 0, 0],
+    },
+  };
+  table[idx] = item[type];
+  console.log('table log==>', type, table, idx);
+};
+
+const addTable = () => {
+  docDefinition.value.content.push({
+    table: {
+      tittle: '表格',
+      body: [
+        [
+          { text: '电子销售单', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+          { text: '电子销售单', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+          { text: '电子销售单', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
+        ],
+      ],
+      widths: ['*', '*', '*'],
+    },
+    layout: '',
+    margin: [0, 0, 0, 0],
+  });
+  preview();
+};
+const addHeader = () => {
+  docDefinition.value.content.unshift({
+    table: {
+      tittle: '头部',
+      body: [
+        [
+          {
+            image: logo,
+            src: logo,
+            width: 50,
+            height: 50,
+            alignment: 'left',
+            margin: [0, 0, 0, 0],
+          },
+          { text: '电子销售单', fontSize: 20, margin: [0, 10, 0, 0], alignment: 'center', bold: true },
+          { qr: '二维码', alignment: 'right', fit: 80, margin: [0, 0, 0, 0] },
+        ],
+      ],
+      widths: [100, '*', 100],
+    },
+    layout: 'noBorders',
+    margin: [0, 0, 0, 1],
+  });
+  preview();
+};
+
+const addGoods = () => {
+  docDefinition.value.content.push({
+    table: {
+      tittle: '商品信息',
+      body: [
+        [
+          { text: '商品名称', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '型号', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '规格', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '单价', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '数量', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '金额', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '备注', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+        ],
+        [
+          { text: '这个是商品名称超长这个是商品名称超长这个是商品名称超长', alignment: 'left', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: 'XAS', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: '100*100*100', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: '1000', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: '10', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: '100000', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+          { text: '红色', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0] },
+        ],
+      ],
+      widths: ['*', 70, 70, 40, 40, 42, 60],
+    },
+    margin: [0, 0, 0, -1],
+  });
+  preview();
+};
+
+const addBaseInfo = () => {
+  docDefinition.value.content.push({
+    table: {
+      tittle: '基本信息',
+      body: [
+        [
+          { text: '甲方(买方)：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, margin: [0, 0, 0, 0] },
+          { text: '甲方(买方)电话：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custtelephone]', fontSize: 10, margin: [0, 0, 0, 0] },
+        ],
+        [
+          { text: '订货日期：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, margin: [0, 0, 0, 0] },
+          { text: '送货时间/方式：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, margin: [0, 0, 0, 0] },
+        ],
+        [
+          { text: '送货地址：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, colSpan: 3, margin: [0, 0, 0, 0] },
+        ],
+        [
+          { text: '乙方(卖方)：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, margin: [0, 0, 0, 0] },
+          { text: '乙方(卖方)电话：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          { text: '$[custname] / $[custcard]', fontSize: 10, margin: [0, 0, 0, 0] },
+        ],
+      ],
+      widths: [60, '*', 80, 160],
+    },
+    layout: '',
+    margin: [0, 0, 0, -1],
+  });
+  preview();
+};
+
+const clean = () => {
+  docDefinition.value.content = [];
+  console.log('docDefinition.value log==>', docDefinition.value);
+  preview();
+};
+const remove = (idx: number) => {
+  docDefinition.value.content.splice(idx, 1);
+  preview();
+};
+
+const removeRow = (table, idx) => {
+  table.body.splice(idx, 1);
+  table.widths = [];
+};
+const removeCol = (table, idx) => {
+  for (const b of table.body) {
+    b.splice(idx, 1);
+  }
+  if (table.body.length) {
+    table.widths = new Array(table.body[0].length).fill('*');
+    return;
+  }
+  table.widths = [];
+};
+
+const addOther = () => {
+  const other = [
+    {
+      table: {
+        tittle: '表格',
+        body: [
+          [
+            { text: '销售单金额：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+            { text: '$ 1000', fontSize: 10, margin: [0, 0, 0, 0] },
+            { text: '实际收款金额最终以收款单为准', alignment: 'center', align: 'center', fontSize: 10, bold: true, rowSpan: 2, margin: [0, 0, 0, 0] },
+          ],
+          [
+            { text: '销售单金额(大写)：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+            { text: '壹仟元整', fontSize: 10, margin: [0, 0, 0, 0] },
+          ],
+        ],
+        widths: [100, '*', 160],
+      },
+      margin: [0, 0, 0, -1],
+    },
+    {
+      table: {
+        tittle: '表格',
+        body: [
+          [
+            { text: '销售单备注：', alignment: 'center', fontSize: 10, bold: true, lineHeight: 3.5, margin: [0, 0, 0, 0] },
+            { text: 'lallala', fontSize: 10, lineHeight: 3.5, margin: [0, 0, 0, 0] },
+            {
+              ul: [
+                {
+                  qr: 'text in QR',
+                  alignment: 'center',
+                  fit: 80,
+                  listType: 'none',
+                  margin: [0, 0, 0, 2],
+                },
+                { text: '微信扫一扫,进行收货及评价', fontSize: 10, listType: 'none', margin: [0, 0, 0, 0] },
+              ],
+              alignment: 'center',
+              margin: [0, 0, 0, 0],
+              rowSpan: 2,
+            },
+          ],
+          [
+            { text: '其他约定：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+            {
+              ol: ['货款余额应由甲方(买方)在送货前      天付清。', '本单销售单金额中已包含橱柜、移门等定制商品上门测量、设计、出图等费用      元。'],
+              fontSize: 10,
+              margin: [0, 0, 0, 0],
+            },
+          ],
+          [
+            {
+              ol: [
+                '如果本次付款金额小于销售单金额的20%，则以本次付款金额作为交易定金；如果本次付款金额大于等于销售单金额的20%，则以销售单金额的20%作为定金(定制产品除外，由双方自行约定)。',
+                '甲乙双方签订协议后，双方应严格遵守：甲方(买方)违约退货的，无权要求返还定金；乙方(卖方)不能交货的，则应双倍返还定金，乙方(卖方)逾期交货的，甲方可要求乙方支付违约金；违约金计算方式为：逾期商品总价的3‰×逾期天数，违约金不超过定金的两倍。',
+                '甲方(买方)在验收中发现数量、质量等方面有异议，应当场提出。验收合格签字确认。',
+                '如因甲方(买方)客观原因造成乙方(卖方)无法送货入户的，甲方(买方)应承担相关责任。',
+                '除本单据所约定条款，乙方(卖方)按照行业《三包责任规则》、《行业文明经营规则》的规定履行职责及承担违约责任。',
+                '本单据签订后，甲方(买方)、乙方(卖方)再商议的其他变更条款，需另行书面约定。未作另行约定的，按本单据条款履行。',
+              ],
+              alignment: 'left',
+              fontSize: 10,
+              bold: true,
+              colSpan: 3,
+              margin: [0, 0, 0, 0],
+            },
+          ],
+          [
+            {
+              text: `一经签字确认，将视同甲方(买方)对本单据所有内容均表示同意。 `,
+              alignment: 'left',
+              fontSize: 10,
+              bold: true,
+              colSpan: 3,
+              margin: [0, 0, 0, 0],
+            },
+          ],
+        ],
+        widths: [100, '*', 100],
+      },
+      margin: [0, 0, 0, -1],
+    },
+    {
+      table: {
+        tittle: '底部',
+        body: [
+          [
+            { text: '甲方(买方)签字：', alignment: 'left', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+            { text: ' 乙方(卖方)签字(盖章)：', alignment: 'left', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+          ],
+        ],
+        widths: [100, '*'],
+        border: false,
+      },
+      layout: 'noBorders',
+      margin: [0, 0, 0, -1],
+    },
+  ];
+  docDefinition.value.content = docDefinition.value.content.concat(other);
+  preview();
+};
+const docDefinition = ref({
+  content: [] as any[],
+  styles: {},
+  defaultStyle: {
+    font: 'SySt',
+    fontSize: 15,
+    bold: false,
+  },
+});
+
+const addTableCol = (table) => {
+  console.log('table log==>', table);
+
+  for (const item of table.body) {
+    item.push({ text: '文本', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] });
+  }
+  // console.log(' e log==>', table);
+  // t.push({ text: '文本', alignment: 'center', fontSize: 10, bold: true });
+  table.widths.push('*');
+};
+
+const addTableRow = (table) => {
+  if (table.body.length) {
+    table.body.push(cloneDeep(table.body[0]));
+    return;
+  }
+  table.body = [
+    [
+      { text: '列', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+      { text: '列', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, -1] },
+      { text: '列', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, -1] },
+      { text: '列', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, -1] },
+    ],
+  ];
+  table.widths = ['*', '*', '*', '*'];
+};
+const preview = () => {
+  emit('preview', cloneDeep(toRaw(docDefinition.value)));
+};
+
+const initPdf = () => {
+  addHeader();
+  addBaseInfo();
+  addGoods();
+  addOther();
+};
+onMounted(() => {});
+</script>
