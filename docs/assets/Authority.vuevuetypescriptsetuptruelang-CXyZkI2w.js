@@ -1,0 +1,1 @@
+import{d as s,bu as a,e,a7 as t,q as r}from"./index-DARFfA1y.js";const o=s({__name:"Authority",props:{value:{type:[Number,Array,String],default:""}},setup(s){const{hasPermission:o}=a();return(a,u)=>e(o)(s.value)?t(a.$slots,"default",{key:0}):r("",!0)}});export{o as _};
