@@ -1,1 +1,0 @@
-import{d as t,u as e,e as s,g as a,K as o,o as n,bq as r}from"./index-MskScSmw.js";const u=t({__name:"AuthPageA",setup(t){const{t:u}=e();return(t,e)=>{const l=o;return n(),s(l,{title:a(u)("page.permission.roleButtonText",{role:a(r).ADMIN})},null,8,["title"])}}});export{u as default};
