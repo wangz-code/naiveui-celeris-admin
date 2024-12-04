@@ -19,7 +19,7 @@
 import pdfMake from 'pdfmake';
 import * as PDFObject from 'pdfobject';
 import { ref } from 'vue';
-import { SyStBold, SyStLight, SyStMedium, SyStSemiBold } from '../SC-index';
+import { SyStBold, SyStLight } from '../SC-index';
 import { debounce } from 'lodash-es';
 
 const { docDefinition } = defineProps<{
@@ -31,14 +31,12 @@ const pdfUrl = ref('');
 const vfs = {
   SyStBold,
   SyStLight,
-  SyStMedium,
-  SyStSemiBold,
 };
 const fonts = {
   SySt: {
     normal: 'SyStLight',
-    medium: 'SyStMedium',
-    semiBold: 'SyStSemiBold',
+    // medium: 'SyStMedium',
+    // semiBold: 'SyStSemiBold',
     bold: 'SyStBold',
   },
 };

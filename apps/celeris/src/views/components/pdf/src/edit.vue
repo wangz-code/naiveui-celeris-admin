@@ -219,12 +219,10 @@
 </template>
 
 <script lang="ts" setup>
-import pdfMake from 'pdfmake';
-import { ref } from 'vue';
 import { cloneDeep } from 'lodash-es';
+import { ref } from 'vue';
 import VueQrcode from 'vue-qrcode';
 import { dog as logo } from '../dog';
-import { SyStBold, SyStLight } from '../SC-index';
 const emit = defineEmits(['preview']);
 const options = [
   {
@@ -276,20 +274,6 @@ const indexOptions = [
     value: 'lightHorizontalLines',
   },
 ];
-
-// 加载字体
-const vfs = {
-  SyStBold,
-  SyStLight,
-};
-const fonts = {
-  SySt: {
-    normal: 'SyStLight',
-    bold: 'SyStBold',
-  },
-};
-pdfMake.setFonts(fonts);
-pdfMake.addVirtualFileSystem(vfs);
 
 const setIndex = () => {};
 
