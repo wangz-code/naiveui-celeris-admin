@@ -221,11 +221,10 @@
 <script lang="ts" setup>
 import pdfMake from 'pdfmake';
 import { ref } from 'vue';
-// import { logo } from '../img';
-import { dog as logo } from '../dog';
-import { SyStBold, SyStLight, SyStMedium, SyStSemiBold } from '../SC-index';
 import { cloneDeep } from 'lodash-es';
 import VueQrcode from 'vue-qrcode';
+import { dog as logo } from '../dog';
+import { SyStBold, SyStLight } from '../SC-index';
 const emit = defineEmits(['preview']);
 const options = [
   {
@@ -282,14 +281,10 @@ const indexOptions = [
 const vfs = {
   SyStBold,
   SyStLight,
-  SyStMedium,
-  SyStSemiBold,
 };
 const fonts = {
   SySt: {
     normal: 'SyStLight',
-    medium: 'SyStMedium',
-    semiBold: 'SyStSemiBold',
     bold: 'SyStBold',
   },
 };
