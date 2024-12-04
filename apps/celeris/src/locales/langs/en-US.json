@@ -17,7 +17,8 @@
       "form": "Form",
       "formsimple": "Form Simple",
       "formcomplex": "Form Complex",
-      "echarts": "Echarts"
+      "echarts": "Echarts",
+      "pdf": "PDF"
     },
     "chat": {
       "chat": "Chat"

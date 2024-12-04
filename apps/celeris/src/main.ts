@@ -11,7 +11,6 @@ import { Iconx } from './components/Iconx/index';
 import { router, setupRouter } from './router';
 import { setupStore } from './store';
 const app = createApp(App);
-
 app.use(Iconx);
 // Configure vue-query
 // 配置 vue-query

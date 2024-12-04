@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "baseUrl": ".",
-
+    "allowSyntheticDefaultImports":true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -26,5 +26,5 @@
       "#/*": ["src/*"],
     }
   },
-  "include": ["autoResolver", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/*.d.ts"]
+  "include": ["autoResolver", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/*.d.ts", "src/views/components/pdf/PingFangSC-Regular-normal.js"]
 }

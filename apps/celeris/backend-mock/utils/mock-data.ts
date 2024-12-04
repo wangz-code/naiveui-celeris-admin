@@ -258,6 +258,18 @@ const createDemosMenus = () => {
             },
           ],
         },
+        {
+          title: 'routes.components.pdf',
+          path: '/components/pdf',
+          children: [
+            {
+              title: 'routes.components.normal',
+              shouldHideMenu: false,
+              shouldHideInMenu: false,
+              path: '/components/pdf/demo',
+            },
+          ],
+        },
       ],
     },
     {
