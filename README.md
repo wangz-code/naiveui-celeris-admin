@@ -8,12 +8,10 @@
 ## 简介
 
 ## ![index.png](https://raw.githubusercontent.com/WangSunio/img/main/images/index.png)
-
 ## ![detail.png](https://raw.githubusercontent.com/WangSunio/img/main/images/detail.png)
-
-![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/report.png)
-
 ![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/cols.png)
+![report.png](https://raw.githubusercontent.com/WangSunio/img/main/images/pdf.png)
+
 
 ## 源仓库 [celeris](https://github.com/kirklin/celeris-web)
 
@@ -23,6 +21,7 @@
 - 自动导入 api & components
 - nitro 拦截请求模拟测试数据
 - 封装 table异步组件, 支持列拖拽排序 ,缓存配置 ,固定列
+- 增加pdfmake 编辑器, 界面化方便table 编辑
 
 ### 开发
 
