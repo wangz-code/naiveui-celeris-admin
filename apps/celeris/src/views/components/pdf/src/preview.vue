@@ -1,9 +1,3 @@
-<!--
- * @Author: wangqz
- * @Date: 2024-12-03
- * @LastEditTime: 2024-12-04
- * @Description: content
--->
 <style scoped>
 #pdfBox {
   height: 84vh;
@@ -19,7 +13,6 @@
 import pdfMake from 'pdfmake';
 import * as PDFObject from 'pdfobject';
 import { ref } from 'vue';
-import { SyStBold, SyStLight } from '../SC-index';
 import { debounce } from 'lodash-es';
 
 const { docDefinition } = defineProps<{
@@ -27,24 +20,15 @@ const { docDefinition } = defineProps<{
 }>();
 const pdfBox = ref(null);
 const pdfUrl = ref('');
-// 加载字体
-const vfs = {
-  SyStBold,
-  SyStLight,
-};
-const fonts = {
+
+pdfMake.fonts = {
   SySt: {
-    normal: 'SyStLight',
-    // medium: 'SyStMedium',
-    // semiBold: 'SyStSemiBold',
-    bold: 'SyStBold',
+    normal: 'https://raw.githubusercontent.com/WangSunio/img/main/font/SC/SC-Light.otf',
+    bold: 'https://raw.githubusercontent.com/WangSunio/img/main/font/SC/SC-Bold.otf',
   },
 };
-pdfMake.setFonts(fonts);
-pdfMake.addVirtualFileSystem(vfs);
 
 const preview = debounce(() => {
-  console.log('渲染次数 log==>');
   pdfMake.createPdf(toRaw(docDefinition)).getBuffer(function (buffer: ArrayBuffer) {
     URL.revokeObjectURL(pdfUrl.value);
     pdfUrl.value = URL.createObjectURL(new Blob([buffer], { type: 'application/pdf' }));
