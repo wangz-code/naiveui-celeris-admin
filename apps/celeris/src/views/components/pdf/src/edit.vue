@@ -2,229 +2,272 @@
 .row-margin {
   width: 40px;
 }
+.tabs-label {
+  position: absolute;
+  top: 10px;
+  right: -10px;
+}
 </style>
 <template>
   <div>
     <n-flex>
       <n-button @click="preview">预览</n-button>
       <n-button @click="clean">清空</n-button>
-      <!-- <n-button @click="addHeader">+头部</n-button> -->
       <n-button @click="addTable">+表格</n-button>
       <n-button @click="initPdf">初始化</n-button>
-      <!-- <n-button @click="addBaseInfo">+基本信息</n-button> -->
-      <!-- <n-button @click="addGoods">+商品信息</n-button> -->
       <n-button @click="addOther">+其他</n-button>
     </n-flex>
     <n-scrollbar style="max-height: 66vh">
-      <div class="m-r-sm">
-        <div class="m-t-xs" v-for="(item, idx) in docDefinition.content" :key="idx">
-          <n-card v-if="item.table" :title="item.table.tittle">
-            <template #header-extra>
-              <n-flex>
-                <!-- <n-checkbox v-model:checked="item.layout" :checked-value="undefined" unchecked-value="noBorders">表格边框</n-checkbox> -->
-                <n-select size="tiny" style="width: 80px" v-model:value="item.layout" :options="layoutOptions" />
-                <n-button size="tiny" @click="addTable">编辑表格</n-button>
-                <n-button size="tiny" @click="addTableCol(item.table)">增加列</n-button>
-                <n-button size="tiny" @click="addTableRow(item.table)">增加行</n-button>
-                <n-button size="tiny" @click="remove(idx)">删除表格</n-button>
-              </n-flex>
-            </template>
-            <div>
-              <n-flex class="m-b-xs" :size="[5, 1]">
-                <div>列宽</div>
-                <div v-for="(w, wIdx) in item.table.widths">
-                  <n-input-group>
-                    <n-input-group-label size="tiny">列{{ wIdx + 1 }}</n-input-group-label>
-                    <n-input v-model:value="item.table.widths[wIdx]" size="tiny" placeholder="列宽" style="width: 45px" />
-                  </n-input-group>
-                </div>
-                <div>
-                  <n-input-group>
-                    <n-input-group-label size="tiny">表格间距(左上右下)</n-input-group-label>
-                    <n-input-number v-model:value="item.margin[0]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
-                    <n-input-number v-model:value="item.margin[1]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
-                    <n-input-number v-model:value="item.margin[2]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
-                    <n-input-number v-model:value="item.margin[3]" size="tiny" placeholder="0" class="row-margin" :show-button="false" />
-                  </n-input-group>
-                </div>
-              </n-flex>
-              <n-list v-for="(t, tIdx) in item.table.body" :key="tIdx">
-                <n-card size="small" class="m-b-xs">
-                  <template #header>
-                    <n-flex :size="[5, 0]">
-                      <n-tag :bordered="false" type="info" size="small">
-                        第 {{ tIdx + 1 }} 行
-                        <template #icon>
-                          <n-checkbox :checked-value="undefined" unchecked-value="noBorders"></n-checkbox>
-                        </template>
-                      </n-tag>
-                      <n-button size="tiny" @click="removeRow(item.table, tIdx)">删除行</n-button>
-                    </n-flex>
-                  </template>
-
-                  <n-list-item v-for="(body, bIdx) in t" :key="bIdx">
-                    <template #prefix>
-                      <n-checkbox style="width: 60px" :checked-value="undefined" unchecked-value="noBorders">列{{ bIdx + 1 }}</n-checkbox>
-                    </template>
-                    <div>
-                      <div v-if="body.image != undefined">
-                        <n-flex>
-                          <img :src="body.src" width="50" />
-                          <n-button-group>
-                            <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
-                            <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
-                            <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
-                          </n-button-group>
-                          <div>
-                            <n-input-group>
-                              <n-input-group-label size="tiny">宽/高</n-input-group-label>
-                              <n-input-number v-model:value="body.width" size="tiny" placeholder="尺寸" style="width: 80px" />
-                              <n-input-number v-model:value="body.height" size="tiny" placeholder="尺寸" style="width: 80px" />
-                            </n-input-group>
-                          </div>
-                        </n-flex>
-                        <n-input type="text" v-model:value="body.src" />
-                      </div>
-                      <div v-if="body.text != undefined">
-                        <n-flex justify="space-between">
-                          <div>
-                            <n-input v-model:value="body.text" type="text" placeholder="请输入" />
-                          </div>
-                          <n-flex>
-                            <n-checkbox v-model:checked="body.bold">粗体</n-checkbox>
-                            <n-button-group>
-                              <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">字体</n-input-group-label>
-                                <n-input-number v-model:value="body.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                      </div>
-                      <div v-if="body.qr != undefined">
-                        <n-flex justify="space-between">
-                          <!-- {{ body.qr }} -->
-                          <vue-qrcode :value="body.qr" />
-
-                          <n-flex>
-                            <n-button-group>
-                              <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                <n-input-number v-model:value="body.fit" size="tiny" placeholder="尺寸" style="width: 80px" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                        <n-input type="text" v-model:value="body.qr" />
-                      </div>
-                      <div v-if="body.ol != undefined">
-                        <n-card title="列表" size="small">
-                          <template #header-extra>
-                            <n-flex :size="[5, 0]">
-                              <n-button size="tiny">清空</n-button>
-                              <n-button size="tiny">增加一行</n-button>
-                              <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
-                                <n-button size="tiny">设置序号</n-button>
-                              </n-popselect>
-                            </n-flex>
-                          </template>
-                          <n-list>
-                            <n-list-item v-for="(ol, olIdx) in body.ol">
-                              <div>
-                                <n-input type="textarea" v-model:value="body.ol[olIdx]"></n-input>
-                              </div>
-                              <n-flex :size="[5, 0]">
-                                <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
-                                  <n-button size="tiny">切换</n-button>
-                                </n-popselect>
-                                <n-button size="tiny">移除</n-button>
-                              </n-flex>
-                            </n-list-item>
-                          </n-list>
-                        </n-card>
-                      </div>
-                      <div v-if="body.table != undefined">
-                        <n-card title="表格" size="small">
-                          <template #header-extra>
-                            <n-flex :size="[5, 0]">
-                              <n-button size="tiny">清空</n-button>
-                              <n-button size="tiny">增加一行</n-button>
-                              <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
-                                <n-button size="tiny">设置序号</n-button>
-                              </n-popselect>
-                            </n-flex>
-                          </template>
-                          <n-list v-for="(row, rowIdx) in body.table.body">
-                            <n-list-item v-for="(col, cIdx) in row">
-                              <div>
-                                <n-input v-model:value="col.text"></n-input>
-                              </div>
-                              <n-flex :size="[5, 0]">
-                                <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
-                                  <n-button size="tiny">切换</n-button>
-                                </n-popselect>
-                                <n-button size="tiny">移除</n-button>
-                              </n-flex>
-                            </n-list-item>
-                          </n-list>
-                        </n-card>
-                      </div>
-                    </div>
-                    <n-flex class="m-t-xs">
-                      <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
-                        <n-button size="tiny">切换</n-button>
-                      </n-popselect>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">跨列</n-input-group-label>
-                          <n-input-number v-model:value="body.colSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
-                        </n-input-group>
-                      </div>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">跨行</n-input-group-label>
-                          <n-input-number v-model:value="body.rowSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
-                        </n-input-group>
-                      </div>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">间距</n-input-group-label>
-                          <n-input-number v-model:value="body.margin[0]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                          <n-input-number v-model:value="body.margin[1]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                          <n-input-number v-model:value="body.margin[2]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                          <n-input-number v-model:value="body.margin[3]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                        </n-input-group>
-                      </div>
-                      <n-button size="tiny" @click="removeCol(item.table, bIdx)">删除整列</n-button>
-                    </n-flex>
-                  </n-list-item>
-                </n-card>
-              </n-list>
-            </div>
-          </n-card>
-        </div>
+      <div class="tabs-label">
+        <n-tabs placement="right" @update-value="setTabs">
+          <n-tab-pane v-for="(item, idx) in tabs" :key="idx" :name="'t-' + idx" :tab="item"></n-tab-pane>
+        </n-tabs>
       </div>
+      <n-flex :size="[0, 0]">
+        <div class="w-9/10" @click="onDomClick" @keydown="onDomClick">
+          <div class="m-t-xs" v-for="(item, idx) in docDefinition.content" :key="idx">
+            <n-card v-if="item.table" :id="'t-' + idx">
+              <n-flex>
+                <div>
+                  <n-input v-model:value="item.table.tittle" size="small" style="width: 90px"></n-input>
+                </div>
+                <n-flex>
+                  <div>
+                    <n-input-group>
+                      <n-input-group-label size="small">表间距(左上右下)</n-input-group-label>
+                      <n-input-number v-model:value="item.margin[0]" size="small" placeholder="0" class="row-margin" :show-button="false" />
+                      <n-input-number v-model:value="item.margin[1]" size="small" placeholder="0" class="row-margin" :show-button="false" />
+                      <n-input-number v-model:value="item.margin[2]" size="small" placeholder="0" class="row-margin" :show-button="false" />
+                      <n-input-number v-model:value="item.margin[3]" size="small" placeholder="0" class="row-margin" :show-button="false" />
+                    </n-input-group>
+                  </div>
+                  <n-select size="small" style="width: 100px" v-model:value="item.layout" :options="layoutOptions" />
+                  <n-button size="small" @click="addTableCol(item.table)">+列</n-button>
+                  <n-button size="small" @click="addTableRow(item.table)">+行</n-button>
+                  <n-button size="small" @click="remove(idx)">删表</n-button>
+                </n-flex>
+              </n-flex>
+              <div>
+                <n-flex class="m-b-xs m-t-xs" :size="[5, 1]">
+                  <div v-for="(w, wIdx) in item.table.widths">
+                    <n-popover trigger="hover">
+                      <template #trigger>
+                        <n-input-group>
+                          <n-input-group-label size="tiny"> 列{{ wIdx + 1 }} </n-input-group-label>
+                          <n-input-group-label size="tiny">
+                            <span v-if="item.table.widths[wIdx] == '*'">填充</span>
+                            <span v-else-if="item.table.widths[wIdx] == 'auto'">自动</span>
+                            <span v-else> {{ item.table.widths[wIdx] }}</span>
+                          </n-input-group-label>
+                        </n-input-group>
+                      </template>
+                      列宽:
+                      <n-button-group size="tiny">
+                        <n-button tag="n-input" @click="item.table.widths[wIdx] = 'auto'" @blur="preview"> 自动 </n-button>
+                        <n-button tag="n-input" @click="item.table.widths[wIdx] = '*'" @blur="preview"> 填充 </n-button>
+                        <n-input-number v-model:value="item.table.widths[wIdx]" size="tiny" @blur="preview" placeholder="宽度" style="width: 45px" :show-button="false" />
+                      </n-button-group>
+                    </n-popover>
+                  </div>
+                </n-flex>
+                <n-list v-for="(t, tIdx) in item.table.body" :key="tIdx">
+                  <n-card size="small" class="m-b-xs">
+                    <template #header>
+                      <n-flex :size="[5, 0]">
+                        <n-tag :bordered="false" type="info" size="small"> 第 {{ tIdx + 1 }} 行 </n-tag>
+                        <n-button size="tiny" @click="removeRow(item.table, tIdx)">删除行</n-button>
+                      </n-flex>
+                    </template>
+
+                    <n-list-item v-for="(body, bIdx) in t" :key="bIdx">
+                      <template #prefix>
+                        <n-tag :bordered="false" type="default" size="small"> {{ bIdx + 1 }}列 </n-tag>
+                      </template>
+                      <div>
+                        <div v-if="body.image != undefined">
+                          <n-flex justify="space-between" align="end">
+                            <div>
+                              <n-input type="text" v-model:value="body.src" size="small" @update-value="setImg" />
+                            </div>
+                            <n-flex align="end">
+                              <div>
+                                <img :src="body.src" width="50" />
+                              </div>
+                              <n-button-group>
+                                <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                              </n-button-group>
+                              <div>
+                                <n-input-group>
+                                  <n-input-group-label size="tiny">宽/高</n-input-group-label>
+                                  <n-input-number v-model:value="body.width" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
+                                  <n-input-number v-model:value="body.height" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
+                                </n-input-group>
+                              </div>
+                            </n-flex>
+                          </n-flex>
+                        </div>
+                        <div v-if="body.text != undefined">
+                          <n-flex justify="space-between">
+                            <div>
+                              <n-input v-model:value="body.text" size="small" type="text" placeholder="请输入" />
+                            </div>
+                            <n-flex>
+                              <n-checkbox v-model:checked="body.bold">粗体</n-checkbox>
+                              <n-button-group>
+                                <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                              </n-button-group>
+                              <div>
+                                <n-input-group>
+                                  <n-input-group-label size="tiny">字体</n-input-group-label>
+                                  <n-input-number v-model:value="body.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
+                                </n-input-group>
+                              </div>
+                            </n-flex>
+                          </n-flex>
+                        </div>
+                        <div v-if="body.qr != undefined">
+                          <n-flex justify="space-between" align="end">
+                            <div>
+                              <n-input type="text" size="small" v-model:value="body.qr" />
+                            </div>
+                            <n-flex align="end">
+                              <vue-qrcode :value="body.qr" style="width: 50px" />
+                              <n-button-group>
+                                <n-button size="tiny" :type="body.alignment == 'left' ? 'primary' : 'default'" @click="body.alignment = 'left'"> 左 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'center' ? 'primary' : 'default'" @click="body.alignment = 'center'"> 中 </n-button>
+                                <n-button size="tiny" :type="body.alignment == 'right' ? 'primary' : 'default'" @click="body.alignment = 'right'"> 右 </n-button>
+                              </n-button-group>
+                              <div>
+                                <n-input-group>
+                                  <n-input-group-label size="tiny">宽高</n-input-group-label>
+                                  <n-input-number v-model:value="body.fit" size="tiny" placeholder="尺寸" style="width: 80px" />
+                                </n-input-group>
+                              </div>
+                            </n-flex>
+                          </n-flex>
+                        </div>
+                        <div v-if="body.ol != undefined">
+                          <n-card title="列表" size="small">
+                            <template #header-extra>
+                              <n-flex :size="[5, 0]">
+                                <n-button size="tiny">清空</n-button>
+                                <n-button size="tiny">增加一行</n-button>
+                                <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
+                                  <n-button size="tiny">设置序号</n-button>
+                                </n-popselect>
+                              </n-flex>
+                            </template>
+                            <n-list>
+                              <n-list-item v-for="(ol, olIdx) in body.ol">
+                                <div>
+                                  <n-input type="textarea" v-model:value="body.ol[olIdx]"></n-input>
+                                </div>
+                                <n-flex :size="[5, 0]">
+                                  <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                                    <n-button size="tiny">切换</n-button>
+                                  </n-popselect>
+                                  <n-button size="tiny">移除</n-button>
+                                </n-flex>
+                              </n-list-item>
+                            </n-list>
+                          </n-card>
+                        </div>
+                        <div v-if="body.table != undefined">
+                          <n-card title="表格" size="small">
+                            <template #header-extra>
+                              <n-flex :size="[5, 0]">
+                                <n-button size="tiny">清空</n-button>
+                                <n-button size="tiny">增加一行</n-button>
+                                <n-popselect @update:value="setIndex($event, t, bIdx)" :options="indexOptions" trigger="hover">
+                                  <n-button size="tiny">设置序号</n-button>
+                                </n-popselect>
+                              </n-flex>
+                            </template>
+                            <n-list v-for="(row, rowIdx) in body.table.body">
+                              <n-list-item v-for="(col, cIdx) in row">
+                                <div>
+                                  <n-input v-model:value="col.text"></n-input>
+                                </div>
+                                <n-flex :size="[5, 0]">
+                                  <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                                    <n-button size="tiny">切换</n-button>
+                                  </n-popselect>
+                                  <n-button size="tiny">移除</n-button>
+                                </n-flex>
+                              </n-list-item>
+                            </n-list>
+                          </n-card>
+                        </div>
+                      </div>
+                      <n-flex class="m-t-xs">
+                        <n-popselect @update:value="setColType($event, t, bIdx)" :options="options" trigger="hover">
+                          <n-button size="tiny">切换</n-button>
+                        </n-popselect>
+                        <div>
+                          <n-input-group>
+                            <n-input-group-label size="tiny">跨列</n-input-group-label>
+                            <n-input-number v-model:value="body.colSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
+                          </n-input-group>
+                        </div>
+                        <div>
+                          <n-input-group>
+                            <n-input-group-label size="tiny">跨行</n-input-group-label>
+                            <n-input-number v-model:value="body.rowSpan" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
+                          </n-input-group>
+                        </div>
+                        <div>
+                          <n-input-group>
+                            <n-input-group-label size="tiny">行高</n-input-group-label>
+                            <n-input-number v-model:value="body.lineHeight" size="tiny" placeholder="0" style="width: 30px" :show-button="false" />
+                          </n-input-group>
+                        </div>
+                        <div>
+                          <n-input-group>
+                            <n-input-group-label size="tiny">列间距</n-input-group-label>
+                            <n-input-number v-model:value="body.margin[0]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                            <n-input-number v-model:value="body.margin[1]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                            <n-input-number v-model:value="body.margin[2]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                            <n-input-number v-model:value="body.margin[3]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
+                          </n-input-group>
+                        </div>
+                        <n-button size="tiny" @click="removeCol(item.table, bIdx)">删除整列</n-button>
+                      </n-flex>
+                    </n-list-item>
+                  </n-card>
+                </n-list>
+              </div>
+            </n-card>
+          </div>
+        </div>
+      </n-flex>
     </n-scrollbar>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, debounce, isNumber, isString } from 'lodash-es';
+import { NInput } from 'naive-ui';
 import { ref } from 'vue';
 import VueQrcode from 'vue-qrcode';
 const emit = defineEmits(['preview']);
-
-const logo = 'https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png';
+const logo = ref('https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png');
+const docDefinition = ref({
+  content: [] as any[],
+  images: { logo: logo.value },
+  styles: {},
+  defaultStyle: {
+    font: 'SySt',
+    fontSize: 15,
+    bold: false,
+  },
+});
+const setImg = (value) => {
+  docDefinition.value.images.logo = value;
+};
 const options = [
   {
     label: '文本',
@@ -261,6 +304,7 @@ const layoutOptions = [
     value: 'lightHorizontalLines',
   },
 ];
+
 const indexOptions = [
   {
     label: '全边框',
@@ -276,13 +320,20 @@ const indexOptions = [
   },
 ];
 
+const setTabs = (value) => {
+  console.log('value log==>', value);
+  const dom = document.getElementById(value);
+  console.log('dom log==>', dom?.scrollIntoView());
+};
 const setIndex = () => {};
+const tabs = computed(() => docDefinition.value.content.map((item) => item.table.tittle));
 
 const setColType = (type: 'text' | 'image' | 'qr', table, idx) => {
   const item = {
-    text: { text: '文本', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
+    text: { text: '文本', alignment: 'center', lineHeight: 2, fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
     image: {
       image: 'logo',
+      src: logo.value,
       width: 50,
       height: 50,
       alignment: 'left',
@@ -327,7 +378,7 @@ const setColType = (type: 'text' | 'image' | 'qr', table, idx) => {
 const addTable = () => {
   docDefinition.value.content.push({
     table: {
-      tittle: '表格',
+      tittle: '表格' + (docDefinition.value.content.length + 1),
       body: [
         [
           { text: '电子销售单', fontSize: 10, margin: [0, 0, 0, 0], alignment: 'center', bold: true },
@@ -350,7 +401,7 @@ const addHeader = () => {
         [
           {
             image: 'logo',
-            src: logo,
+            src: logo.value,
             width: 50,
             height: 50,
             alignment: 'left',
@@ -464,7 +515,7 @@ const addOther = () => {
   const other = [
     {
       table: {
-        tittle: '表格',
+        tittle: '销售单金额',
         body: [
           [
             { text: '销售单金额：', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
@@ -482,7 +533,7 @@ const addOther = () => {
     },
     {
       table: {
-        tittle: '表格',
+        tittle: '销售单备注协议',
         body: [
           [
             { text: '销售单备注：', alignment: 'center', fontSize: 10, bold: true, lineHeight: 3.5, margin: [0, 0, 0, 0] },
@@ -562,25 +613,11 @@ const addOther = () => {
   docDefinition.value.content = docDefinition.value.content.concat(other);
   preview();
 };
-const docDefinition = ref({
-  content: [] as any[],
-  images: { logo },
-  styles: {},
-  defaultStyle: {
-    font: 'SySt',
-    fontSize: 15,
-    bold: false,
-  },
-});
 
 const addTableCol = (table) => {
-  console.log('table log==>', table);
-
   for (const item of table.body) {
     item.push({ text: '文本', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] });
   }
-  // console.log(' e log==>', table);
-  // t.push({ text: '文本', alignment: 'center', fontSize: 10, bold: true });
   table.widths.push('*');
 };
 
@@ -602,6 +639,8 @@ const addTableRow = (table) => {
 const preview = () => {
   emit('preview', cloneDeep(toRaw(docDefinition.value)));
 };
+// 延迟触发,否则v-model会丢失数据
+const onDomClick = debounce(preview, 1000);
 
 const initPdf = () => {
   addHeader();
@@ -609,5 +648,4 @@ const initPdf = () => {
   addGoods();
   addOther();
 };
-onMounted(() => {});
 </script>

@@ -13,7 +13,7 @@
 import pdfMake from 'pdfmake';
 import * as PDFObject from 'pdfobject';
 import { ref } from 'vue';
-import { debounce } from 'lodash-es';
+import { debounce, eq } from 'lodash-es';
 
 const { docDefinition } = defineProps<{
   docDefinition: any;
@@ -34,9 +34,8 @@ const preview = debounce(() => {
     pdfUrl.value = URL.createObjectURL(new Blob([buffer], { type: 'application/pdf' }));
     PDFObject.embed(pdfUrl.value, pdfBox.value, {});
   });
-}, 500);
+}, 1000);
 
 defineExpose({ preview });
-// watch(() => docDefinition.content, preview, { deep: true });
 onMounted(preview);
 </script>
