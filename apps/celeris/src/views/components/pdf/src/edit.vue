@@ -222,8 +222,9 @@
 import { cloneDeep } from 'lodash-es';
 import { ref } from 'vue';
 import VueQrcode from 'vue-qrcode';
-import { dog as logo } from '../dog';
 const emit = defineEmits(['preview']);
+
+const logo = 'https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png';
 const options = [
   {
     label: '文本',
@@ -281,8 +282,7 @@ const setColType = (type: 'text' | 'image' | 'qr', table, idx) => {
   const item = {
     text: { text: '文本', alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 0] },
     image: {
-      image: logo,
-      src: logo,
+      image: 'logo',
       width: 50,
       height: 50,
       alignment: 'left',
@@ -349,7 +349,7 @@ const addHeader = () => {
       body: [
         [
           {
-            image: logo,
+            image: 'logo',
             src: logo,
             width: 50,
             height: 50,
@@ -564,6 +564,7 @@ const addOther = () => {
 };
 const docDefinition = ref({
   content: [] as any[],
+  images: { logo },
   styles: {},
   defaultStyle: {
     font: 'SySt',
