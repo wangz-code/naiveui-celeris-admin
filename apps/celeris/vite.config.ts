@@ -15,10 +15,11 @@ export default createViteConfig({
     build: {
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            if (id.includes(bigFile[0])) return 'large-chunk-SC-Bold';
-            if (id.includes(bigFile[1])) return 'large-chunk-SC-Light';
-          },
+          // 大文件单独打包
+          // manualChunks(id) {
+          //   if (id.includes(bigFile[0])) return 'large-chunk-SC-Bold';
+          //   if (id.includes(bigFile[1])) return 'large-chunk-SC-Light';
+          // },
           //https://github.com/rollup/rollup/blob/master/src/utils/sanitizeFileName.ts
           sanitizeFileName(name) {
             // eslint-disable-next-line no-control-regex  无效字符会导致gitpages 加载失败
