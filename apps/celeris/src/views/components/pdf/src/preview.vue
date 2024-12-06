@@ -13,11 +13,7 @@
 import pdfMake from 'pdfmake';
 import * as PDFObject from 'pdfobject';
 import { ref } from 'vue';
-import { debounce, eq } from 'lodash-es';
 
-const { docDefinition } = defineProps<{
-  docDefinition: any;
-}>();
 const pdfBox = ref(null);
 const pdfUrl = ref('');
 
@@ -28,14 +24,13 @@ pdfMake.fonts = {
   },
 };
 
-const preview = debounce(() => {
-  pdfMake.createPdf(toRaw(docDefinition)).getBuffer(function (buffer: ArrayBuffer) {
+const preview = (docDefinition: any) => {
+  pdfMake.createPdf(docDefinition).getBuffer(function (buffer: ArrayBuffer) {
     URL.revokeObjectURL(pdfUrl.value);
     pdfUrl.value = URL.createObjectURL(new Blob([buffer], { type: 'application/pdf' }));
     PDFObject.embed(pdfUrl.value, pdfBox.value, {});
   });
-}, 1000);
+};
 
 defineExpose({ preview });
-onMounted(preview);
 </script>
