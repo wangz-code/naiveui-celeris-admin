@@ -414,6 +414,9 @@ importers:
 
   apps/celeris:
     dependencies:
+      '@chenfengyuan/vue-qrcode':
+        specifier: ^2.0.0
+        version: 2.0.0(qrcode@1.5.4)(vue@3.5.12(typescript@5.6.3))
       '@kirklin/logger':
         specifier: 'catalog:'
         version: 0.0.2
@@ -537,9 +540,6 @@ importers:
       vue-i18n:
         specifier: 'catalog:'
         version: 10.0.4(vue@3.5.12(typescript@5.6.3))
-      vue-qrcode:
-        specifier: ^2.2.2
-        version: 2.2.2(qrcode@1.5.4)(vue@3.5.12(typescript@5.6.3))
       vue-router:
         specifier: 'catalog:'
         version: 4.4.5(vue@3.5.12(typescript@5.6.3))
@@ -1225,6 +1225,12 @@ packages:
   '@babel/types@7.26.0':
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
+
+  '@chenfengyuan/vue-qrcode@2.0.0':
+    resolution: {integrity: sha512-33Cfr0zjbc3Dd8d5b1IgzXRAgXH0c2Gv19VI4snS25V/x9Z41eg769tC+Us1x+vqgQQhgD5YUjLnkpkrQfeMSw==}
+    peerDependencies:
+      qrcode: ^1.5.0
+      vue: ^3.0.0
 
   '@cloudflare/kv-asset-handler@0.3.4':
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
@@ -2380,7 +2386,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
-      vue: ^3.5.13
+      vue: ^3.0.0
 
   '@vitejs/plugin-vue@5.1.5':
     resolution: {integrity: sha512-dlnib73G05CDBAUR/YpuZcQQ47fpjihnnNouAAqN62z+oqSsWJ+kh52GRzIxpkgFG3q11eXK7Di7RMmoCwISZA==}
@@ -2394,7 +2400,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
-      vue: ^3.5.13
+      vue: ^3.2.25
 
   '@vitest/expect@2.1.4':
     resolution: {integrity: sha512-DOETT0Oh1avie/D/o2sgMHGrzYUFFo3zqESB2Hn70z6QB1HrS2IQ9z5DfyTqU8sg4Bpu13zZe9V4+UTNQlUeQA==}
@@ -5008,9 +5014,6 @@ packages:
   tslib@2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
 
-  tslib@2.8.1:
-    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
-
   tsx@4.19.2:
     resolution: {integrity: sha512-pOUl6Vo2LUq/bSa8S5q7b91cgNSjctn9ugq/+Mvow99qW6x/UZYwzxy/3NmqoT66eHYfCVvFvACC58UBPFf28g==}
     engines: {node: '>=18.0.0'}
@@ -5433,7 +5436,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
+      vue: ^3.5.13
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
@@ -5466,16 +5469,10 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  vue-qrcode@2.2.2:
-    resolution: {integrity: sha512-SbrXq/mSb1g2tbDyXPe9gy9KiMYsvxWKRErlpij1BqiFoHwQckheZV63CTw6yRLLUVG2RXAVlX+APkpdCK7SQQ==}
-    peerDependencies:
-      qrcode: ^1.0.0
-      vue: ^2.7.0 || ^3.0.0
-
   vue-router@4.4.5:
     resolution: {integrity: sha512-4fKZygS8cH1yCyuabAXGUAsyi1b2/o/OKgu/RUb+znIYOxPRxdkytJEx+0wGcpBE1pX6vUgh5jwWOKRGvuA/7Q==}
     peerDependencies:
-      vue: ^3.5.13
+      vue: ^3.2.0
 
   vue-tsc@2.1.10:
     resolution: {integrity: sha512-RBNSfaaRHcN5uqVqJSZh++Gy/YUzryuv9u1aFWhsammDJXNtUiJMNoJ747lZcQ68wUQFx6E73y4FY3D8E7FGMA==}
@@ -6406,6 +6403,11 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
+
+  '@chenfengyuan/vue-qrcode@2.0.0(qrcode@1.5.4)(vue@3.5.12(typescript@5.6.3))':
+    dependencies:
+      qrcode: 1.5.4
+      vue: 3.5.12(typescript@5.6.3)
 
   '@cloudflare/kv-asset-handler@0.3.4':
     dependencies:
@@ -10368,8 +10370,6 @@ snapshots:
 
   tslib@2.3.0: {}
 
-  tslib@2.8.1: {}
-
   tsx@4.19.2:
     dependencies:
       esbuild: 0.23.1
@@ -10860,12 +10860,6 @@ snapshots:
       '@intlify/core-base': 10.0.4
       '@intlify/shared': 10.0.4
       '@vue/devtools-api': 6.6.4
-      vue: 3.5.12(typescript@5.6.3)
-
-  vue-qrcode@2.2.2(qrcode@1.5.4)(vue@3.5.12(typescript@5.6.3)):
-    dependencies:
-      qrcode: 1.5.4
-      tslib: 2.8.1
       vue: 3.5.12(typescript@5.6.3)
 
   vue-router@4.4.5(vue@3.5.12(typescript@5.6.3)):

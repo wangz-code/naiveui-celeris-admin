@@ -1,52 +1,10 @@
-<style scoped>
-.tabs-label {
-  position: absolute;
-  top: 80px;
-  left: 0px;
-  z-index: 100;
-  width: 6em;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.custom-tab {
-  height: 200px;
-}
-
-.content-box {
-  padding-left: 6em
-}
-</style>
 <template>
-  <div class="w-full">
-    <n-flex>
-      <n-button @click="preview">预览</n-button>
-      <n-button @click="clean">清空</n-button>
-      <n-button @click="addTable">+表格</n-button>
-      <n-dropdown trigger="hover" :options="copyOptions" @select="copyTable">
-        <n-button>+复制一份</n-button>
-      </n-dropdown>
-      <n-button @click="addMore">+测试多页</n-button>
-      <n-button @click="initPdf">默认模板</n-button>
-      <n-dropdown trigger="hover" :options="blockOptions" @select="addBlock">
-        <n-button>+常用模块</n-button>
-      </n-dropdown>
-    </n-flex>
-    <div class="tabs-label">
-      <n-tabs placement="right" v-model:value="activeTable" @update-value="setTabs" style="height: 70vh">
-        <n-tab v-for="(item, idx) in tabs" :key="idx" :name="'t-' + idx" :tab="item" />
-      </n-tabs>
-    </div>
-    <n-scrollbar ref="scroll" class="m-t-xs w-full" style="max-height: 70vh;">
-      <!-- <edit-background :doc="docDefinition"></edit-background> -->
-      <div class="content-box" v-for="(content, cIdx) in docDefinition.content" :key="cIdx">
-        <edit-table v-if="content.table" :value="content"></edit-table>
-      </div>
+  <div>
+    <n-scrollbar ref="scroll" class="m-t-xs" :x-scrollable="false" style="max-height: 70vh; margin-left: 6em">
+      <n-flex :size="[0, 0]">
+        {{ doc.background }}
 
-
-
-      <!-- <n-flex :size="[0, 0]">
-        <div class="content-box" v-for="(item, idx) in docDefinition.content" :key="idx">
-          <edit-table v-if="item.table" :value="item"></edit-table>
+        <div class="m-t-lg" v-for="(item, idx) in docDefinition.content" :key="idx">
           <n-card v-if="item.table" :id="'t-' + idx" class="b-primary" hoverable @click="onDomClick">
             <n-flex :size="[2, 5]">
               <div>
@@ -375,7 +333,7 @@
             </div>
           </n-card>
         </div>
-      </n-flex> -->
+      </n-flex>
     </n-scrollbar>
   </div>
 </template>
@@ -385,13 +343,36 @@ import { Tabler3DCubeSphere, Trash } from '@vicons/tabler';
 import { cloneDeep, debounce, isNumber, isObject, isString, keyBy } from 'lodash-es';
 import { NInput, NTab } from 'naive-ui';
 import { ref } from 'vue';
-// import VueQrcode from 'vue-qrcode';
+import VueQrcode from 'vue-qrcode';
 import { lineTpl } from './tpl';
 import { buildUUID } from '#/utils';
-import EditBackground from './edit-background.vue';
-import EditTable from './edit-table.vue';
-import { docDefinition, mergeDoc, logo } from './mix';
 const emit = defineEmits(['preview']);
+
+const { doc } = defineProps<{
+  doc: {
+    background: any[];
+    pageMargins: number[];
+  };
+}>();
+const logo = ref('https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png');
+const docDefinition = ref({
+  content: [] as any[],
+  images: { logo: logo.value },
+  styles: {},
+  defaultStyle: {
+    font: 'SySt',
+    fontSize: 15,
+    bold: false,
+  },
+  footer: function (currentPage, pageCount) {
+    return {
+      text: '第' + currentPage.toString() + '页 / 共' + pageCount + '页',
+      alignment: 'center',
+      fontSize: 10,
+    };
+  },
+});
+
 let copyVal = null as any;
 const copyTable = (num) => {
   console.log('num log==>', num);
@@ -495,7 +476,6 @@ const colPub = () => {
     colSpan: 1,
     rowSpan: 1,
     margin: [0, 0, 0, 0],
-    lineHeight:1,
     border: [true, true, true, true],
   };
 };
@@ -553,7 +533,7 @@ const addTable = () => {
     layout: '',
     margin: [0, -1, 0, 0],
   });
-  mergeDoc({ content: docDefinition.value.content });
+
   preview(uuid);
 };
 
@@ -930,6 +910,10 @@ docDefinition.value.header = function (currentPage, pageCount, pageSize) {
     // });
     bakCurrentPage = currentPage;
   }
+  console.log('pageCount log==>', pageCount);
+  console.log('currentPage log==>', currentPage);
+  console.log('pageSize log==>', pageSize);
+
   return [];
 };
 onMounted(() => {

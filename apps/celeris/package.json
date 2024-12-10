@@ -20,6 +20,7 @@
     "#/*": "./src/*"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^2.0.0",
     "@kirklin/logger": "catalog:",
     "@kirklin/palette": "catalog:",
     "@tanstack/query-persist-client-core": "catalog:",
@@ -61,7 +62,6 @@
     "vue-draggable-plus": "catalog:",
     "vue-echarts": "catalog:",
     "vue-i18n": "catalog:",
-    "vue-qrcode": "^2.2.2",
     "vue-router": "catalog:"
   },
   "devDependencies": {
