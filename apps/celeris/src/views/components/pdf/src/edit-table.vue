@@ -36,7 +36,7 @@
                 <n-input-number v-for="(_, mIdx) in table.margin" v-model:value="table.margin[mIdx]" size="small" class="row-margin" :show-button="false" />
               </n-input-group>
             </template>
-            <span>左 上 右 下</span>
+            <span>{{ position.join(' ') }}</span>
           </n-popover>
         </div>
         <n-select size="small" style="width: 80px" v-model:value="table.layout" :options="layoutOptions" />
@@ -99,148 +99,22 @@
                       <n-tag :bordered="false" type="default" size="small"> {{ colIdx + 1 }}列</n-tag>
                     </template>
                     <div>
-                      <div v-if="col.image != undefined">
-                        <n-flex justify="space-between" align="end">
-                          <div>
-                            <n-input type="text" v-model:value="col.src" size="small" />
-                          </div>
-                          <n-flex align="end">
-                            <div>
-                              <img :src="col.src" width="50" />
-                            </div>
-                            <n-button-group>
-                              <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                <n-input-number v-model:value="col.width" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                                <n-input-number v-model:value="col.height" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                      </div>
-                      <div v-if="col.text != undefined">
-                        <n-flex justify="space-between">
-                          <div>
-                            <n-input v-model:value="col.text" size="small" type="text" placeholder="请输入" />
-                          </div>
-                          <n-flex>
-                            <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
-                            <n-button-group>
-                              <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">字体</n-input-group-label>
-                                <n-input-number v-model:value="col.fontSize" size="tiny" placeholder="字体大小" style="width: 70px" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                      </div>
-                      <div v-if="col.qr != undefined">
-                        <n-flex justify="space-between" align="end">
-                          <div>
-                            <n-input type="text" size="small" v-model:value="col.qr" />
-                          </div>
-                          <n-flex align="end">
-                            <vue-qrcode :value="col.qr" :options="{ width: 50 }"></vue-qrcode>
-                            <n-button-group>
-                              <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                <n-input-number v-model:value="col.fit" size="tiny" placeholder="尺寸" style="width: 80px" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                      </div>
+                      <edit-image v-if="isString(col.image)" v-model:col="cols[colIdx]" />
+                      <edit-text v-if="isString(col.text)" v-model:col="cols[colIdx]" />
+                      <edit-qrcode v-if="isString(col.qr)" v-model:col="cols[colIdx]" />
+                      <edit-svg v-if="isString(col.svg)" v-model:col="cols[colIdx]" />
                       <div v-if="col.columns != undefined">
                         <n-card size="small">
-                          <div>
-                            <n-flex justify="space-between" size="small">
-                              <div>
-                                <n-tag :bordered="false" type="info" size="small">组合</n-tag>
-                              </div>
-                              <n-flex size="small" justify="space-around">
-                                <div>
-                                  <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
-                                </div>
-                                <div>
-                                  <n-button-group>
-                                    <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                                    <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                                    <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                                  </n-button-group>
-                                </div>
-                                <div>
-                                  <n-input-group>
-                                    <n-input-group-label size="tiny">字体</n-input-group-label>
-                                    <n-input-number v-model:value="col.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
-                                  </n-input-group>
-                                </div>
-                                <div>
-                                  <n-button size="tiny" @click="col.columns = []">清空</n-button>
-                                </div>
-                                <div>
-                                  <n-button size="tiny" @click="addText(col.columns)">增加一条</n-button>
-                                </div>
-                              </n-flex>
+                          <n-flex justify="space-between" size="small" align="end">
+                            <n-tag :bordered="false" type="info" size="small">组合</n-tag>
+                            <n-flex size="small" justify="space-around">
+                              <n-button size="tiny" @click="col.columns = []">清空</n-button>
+                              <n-button size="tiny" @click="addText(col.columns)">增加一条</n-button>
                             </n-flex>
-                          </div>
+                          </n-flex>
                           <div v-for="(column, coIdx) in col.columns" class="m-t-xs">
-                            <div v-if="column.text != undefined">
-                              <n-flex justify="space-between">
-                                <div>
-                                  <n-input v-model:value="column.text" size="small" type="text" placeholder="请输入" />
-                                </div>
-                                <n-flex>
-                                  <n-checkbox v-model:checked="column.bold">粗体</n-checkbox>
-                                  <n-button-group>
-                                    <n-button size="tiny" :type="column.alignment == 'left' ? 'primary' : 'default'" @click="column.alignment = 'left'"> 左 </n-button>
-                                    <n-button size="tiny" :type="column.alignment == 'center' ? 'primary' : 'default'" @click="column.alignment = 'center'"> 中 </n-button>
-                                    <n-button size="tiny" :type="column.alignment == 'right' ? 'primary' : 'default'" @click="column.alignment = 'right'"> 右 </n-button>
-                                  </n-button-group>
-                                  <div>
-                                    <n-input-group>
-                                      <n-input-group-label size="tiny">字体</n-input-group-label>
-                                      <n-input-number v-model:value="column.fontSize" size="tiny" placeholder="字体大小" style="width: 70px" />
-                                    </n-input-group>
-                                  </div>
-                                </n-flex>
-                              </n-flex>
-                            </div>
-                            <div v-if="column.svg != undefined">
-                              <n-flex justify="space-between" align="end">
-                                <div>
-                                  <n-input type="text" v-model:value="column.svg" size="small" />
-                                </div>
-                                <n-flex align="end">
-                                  <n-button-group>
-                                    <n-button size="tiny" :type="column.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                                    <n-button size="tiny" :type="column.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                                    <n-button size="tiny" :type="column.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                                  </n-button-group>
-                                  <div>
-                                    <n-input-group>
-                                      <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                      <n-input-number v-model:value="column.width" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                                      <n-input-number v-model:value="column.height" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                                    </n-input-group>
-                                  </div>
-                                </n-flex>
-                              </n-flex>
-                            </div>
+                            <edit-text v-if="column.text" v-model:col="col.columns[coIdx]" />
+                            <edit-svg v-if="isString(column.svg)" v-model:col="col.columns[coIdx]" />
                             <n-popselect @update:value="setColType($event, col.columns, coIdx)" :options="columnColTypeOpts" trigger="hover">
                               <n-button size="tiny">切换</n-button>
                             </n-popselect>
@@ -248,37 +122,11 @@
                           </div>
                         </n-card>
                       </div>
-                      <div v-if="col.svg != undefined">
-                        <n-flex justify="space-between" align="end">
-                          <div>
-                            <n-input type="text" v-model:value="col.svg" size="small" />
-                          </div>
-                          <n-flex align="end">
-                            <div>
-                              <!-- <img :src="col.src" width="50" /> -->
-                            </div>
-                            <n-button-group>
-                              <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                              <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                            </n-button-group>
-                            <div>
-                              <n-input-group>
-                                <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                <n-input-number v-model:value="col.width" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                                <n-input-number v-model:value="col.height" size="tiny" placeholder="尺寸" style="width: 40px" :show-button="false" />
-                              </n-input-group>
-                            </div>
-                          </n-flex>
-                        </n-flex>
-                      </div>
                       <div v-if="col.ol != undefined">
                         <n-card size="small">
                           <div>
-                            <n-flex justify="space-between" :size="[5, 0]">
-                              <div>
-                                <!-- <n-tag :bordered="false" type="info" size="small"> 列表</n-tag> -->
-                              </div>
+                            <n-flex justify="space-between" :size="[0, 10]">
+                              <div><n-tag :bordered="false" type="info" size="small">列表</n-tag></div>
                               <n-flex size="small" justify="space-around">
                                 <div>
                                   <n-select size="tiny" style="width: 80px" v-model:value="col.type" :options="listTypeOptions" />
@@ -286,7 +134,7 @@
                                 <div>
                                   <n-popover trigger="hover" v-if="col.type != 'none'">
                                     <template #trigger>
-                                      <n-button size="tiny"> 分割符{{ col.separator }} </n-button>
+                                      <n-button size="tiny">分割符{{ col.separator }}</n-button>
                                     </template>
                                     <n-button-group size="small">
                                       <n-button @click="col.separator = ['(', ')']" @blur="preview"> (1.) </n-button>
@@ -295,28 +143,11 @@
                                     </n-button-group>
                                   </n-popover>
                                 </div>
-                                <div>
-                                  <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
-                                </div>
-                                <div>
-                                  <n-button-group>
-                                    <n-button size="tiny" :type="col.alignment == 'left' ? 'primary' : 'default'" @click="col.alignment = 'left'"> 左 </n-button>
-                                    <n-button size="tiny" :type="col.alignment == 'center' ? 'primary' : 'default'" @click="col.alignment = 'center'"> 中 </n-button>
-                                    <n-button size="tiny" :type="col.alignment == 'right' ? 'primary' : 'default'" @click="col.alignment = 'right'"> 右 </n-button>
-                                  </n-button-group>
-                                </div>
-                                <div>
-                                  <n-input-group>
-                                    <n-input-group-label size="tiny">字体</n-input-group-label>
-                                    <n-input-number v-model:value="col.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
-                                  </n-input-group>
-                                </div>
-                                <div>
-                                  <n-button size="tiny" @click="col.ol = []">清空</n-button>
-                                </div>
-                                <div>
-                                  <n-button size="tiny" @click="col.ol.push('')">增加一条</n-button>
-                                </div>
+                                <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
+                                <alignment v-model:alignment="col.alignment"></alignment>
+                                <fontsize v-model:alignment="col.fontSize"></fontsize>
+                                <n-button size="tiny" @click="col.ol = []">清空</n-button>
+                                <n-button size="tiny" @click="col.ol.push('')">+增加</n-button>
                               </n-flex>
                             </n-flex>
                           </div>
@@ -326,65 +157,14 @@
                                 <n-badge type="info" :value="olIdx + 1" :max="15" />
                               </template>
                               <div class="m-b-1">
-                                <n-input v-if="isString(ol)" type="textarea" rows="2" v-model:value="col.ol[olIdx]"></n-input>
-                                <n-flex v-if="ol.text != undefined" justify="space-between">
-                                  <div>
-                                    <n-input v-model:value="ol.text" size="small" type="text" placeholder="请输入" />
-                                  </div>
-                                  <n-flex>
-                                    <n-checkbox v-model:checked="ol.bold">粗体</n-checkbox>
-                                    <n-button-group>
-                                      <n-button size="tiny" :type="ol.alignment == 'left' ? 'primary' : 'default'" @click="ol.alignment = 'left'"> 左 </n-button>
-                                      <n-button size="tiny" :type="ol.alignment == 'center' ? 'primary' : 'default'" @click="ol.alignment = 'center'"> 中 </n-button>
-                                      <n-button size="tiny" :type="ol.alignment == 'right' ? 'primary' : 'default'" @click="ol.alignment = 'right'"> 右 </n-button>
-                                    </n-button-group>
-                                    <div>
-                                      <n-input-group>
-                                        <n-input-group-label size="tiny">字体</n-input-group-label>
-                                        <n-input-number v-model:value="ol.fontSize" size="tiny" placeholder="字体大小" style="width: 80px" />
-                                      </n-input-group>
-                                    </div>
-                                    <div>
-                                      <n-popover trigger="hover">
-                                        <template #trigger>
-                                          <n-input-group>
-                                            <n-input-group-label size="tiny">间距</n-input-group-label>
-                                            <n-input-number v-model:value="ol.margin[0]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                                            <n-input-number v-model:value="ol.margin[1]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                                            <n-input-number v-model:value="ol.margin[2]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                                            <n-input-number v-model:value="ol.margin[3]" size="tiny" placeholder="0" style="width: 40px" :show-button="false" />
-                                          </n-input-group>
-                                        </template>
-                                        <span>左 上 右 下</span>
-                                      </n-popover>
-                                    </div>
-                                  </n-flex>
-                                </n-flex>
-                                <n-flex v-if="ol.qr != undefined" justify="space-between" align="end">
-                                  <div>
-                                    <n-input type="text" size="small" v-model:value="ol.qr" />
-                                  </div>
-                                  <n-flex align="end">
-                                    <vue-qrcode :value="col.qr" :options="{ width: 50 }"></vue-qrcode>
-                                    <n-button-group>
-                                      <n-button size="tiny" :type="ol.alignment == 'left' ? 'primary' : 'default'" @click="ol.alignment = 'left'"> 左 </n-button>
-                                      <n-button size="tiny" :type="ol.alignment == 'center' ? 'primary' : 'default'" @click="ol.alignment = 'center'"> 中 </n-button>
-                                      <n-button size="tiny" :type="ol.alignment == 'right' ? 'primary' : 'default'" @click="ol.alignment = 'right'"> 右 </n-button>
-                                    </n-button-group>
-                                    <div>
-                                      <n-input-group>
-                                        <n-input-group-label size="tiny">宽高</n-input-group-label>
-                                        <n-input-number v-model:value="ol.fit" size="tiny" placeholder="尺寸" style="width: 80px" />
-                                      </n-input-group>
-                                    </div>
-                                  </n-flex>
-                                </n-flex>
+                                <n-input v-if="isString(ol)" type="textarea" rows="1" v-model:value="col.ol[olIdx]"></n-input>
+                                <edit-text v-if="isString(ol.text)" v-model:col="col.ol[olIdx]" full-input show-margin />
+                                <edit-qrcode v-if="isString(ol.qr)" v-model:col="col.ol[olIdx]" />
                               </div>
                               <n-flex :size="[5, 0]">
                                 <n-popselect @update:value="setColType($event, col.ol, olIdx)" :options="listColTypeOpts" trigger="hover">
                                   <n-button size="tiny">切换</n-button>
                                 </n-popselect>
-
                                 <n-button size="tiny" @click="col.ol.splice(olIdx, 1)">移除</n-button>
                               </n-flex>
                             </n-list-item>
@@ -469,9 +249,14 @@
 import { Tabler3DCubeSphere, Trash } from '@vicons/tabler';
 import { cloneDeep, isNumber, isObject, isString } from 'lodash-es';
 import { NInput } from 'naive-ui';
+import EditImage from './edit-image.vue';
+import EditQrcode from './edit-qrcode.vue';
+import EditSvg from './edit-svg.vue';
+import EditText from './edit-text.vue';
 import { getDoc, logo, mergeDoc, preview } from './mix';
 import { TableCol, TableData } from './type';
-import VueQrcode from '@chenfengyuan/vue-qrcode';
+import Alignment from './alignment.vue';
+import Fontsize from './fontsize.vue';
 const emit = defineEmits(['update']);
 const { value: table } = defineProps<{ value: TableCol }>();
 watch(
@@ -498,7 +283,7 @@ const options = [
     value: 'ol',
   },
   {
-    label: '图标',
+    label: 'Svg图标',
     value: 'svg',
   },
   {
@@ -517,6 +302,10 @@ const columnColTypeOpts = [
   },
 ];
 const listColTypeOpts = [
+  {
+    label: '列表文字',
+    value: 'string',
+  },
   {
     label: '文本',
     value: 'text',
@@ -594,7 +383,7 @@ const setColType = (type: 'text' | 'image' | 'qr', cols: any[], colsIdx: number)
     },
     svg: {
       svg: '',
-      alignment: 'center',
+      ...colPub(),
       width: 20,
       height: 20,
     },
@@ -605,6 +394,7 @@ const setColType = (type: 'text' | 'image' | 'qr', cols: any[], colsIdx: number)
         { ...textPub(), text: '文本' },
       ],
     },
+    string: '',
   };
   cols[colsIdx] = item[type];
 };

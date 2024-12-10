@@ -7,10 +7,20 @@ export interface ColPub {
   border: boolean[];
 }
 export interface TextCol extends ColPub {
+  text: string;
   fontSize: 10;
 }
+export interface SvgCol extends ColPub {
+  svg: string;
+  width: number;
+  height: number;
+}
+export interface QrcodeCol extends ColPub {
+  qr: string;
+  fit: number;
+}
 export interface ImageCol extends ColPub {
-  image: 'logo';
+  image: string;
   src: string;
   width: 50;
   height: 50;
