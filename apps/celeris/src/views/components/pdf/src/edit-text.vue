@@ -1,16 +1,15 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-12-10
- * @LastEditTime: 2024-12-10
+ * @LastEditTime: 2024-12-11
  * @Description: content
 -->
 <template>
-  <n-flex justify="space-between">
-    <n-input v-if="fullInput" v-model:value="col.text" size="small" type="text" />
-    <div v-else>
+  <n-flex justify="space-between" :size="[0, 5]">
+    <div :class="fullInput ? 'w-full' : 'w-1/2'">
       <n-input v-model:value="col.text" size="small" type="text" />
     </div>
-    <n-flex>
+    <n-flex :class="fullInput ? 'w-full' : 'w-1/2'" justify="end">
       <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
       <alignment v-model:alignment="col.alignment"></alignment>
       <fontsize v-model:fontsize="col.fontSize"></fontsize>

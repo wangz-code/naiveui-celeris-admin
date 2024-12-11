@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-12-10
- * @LastEditTime: 2024-12-10
+ * @LastEditTime: 2024-12-11
  * @Description: content
 -->
 <style scoped>
@@ -16,7 +16,7 @@
 }
 </style>
 <template>
-  <n-card :id="table.uuid" size="small" class="b-primary" hoverable>
+  <n-card size="small" class="b-primary m-b-2" hoverable>
     <n-flex :size="[2, 5]">
       <div>
         <n-input v-model:value="table.table.tittle" size="small" style="width: 110px">
@@ -49,7 +49,7 @@
       </n-flex>
     </n-flex>
     <n-flex class="m-b-xs m-t-xs" :size="[3, 0]">
-      <div v-for="(w, wIdx) in table.table.widths">
+      <div v-for="(_, wIdx) in table.table.widths">
         <n-popover trigger="hover">
           <template #trigger>
             <n-input-group>
@@ -70,195 +70,123 @@
         </n-popover>
       </div>
     </n-flex>
-    <div style="max-width: 675px">
-      <n-tabs size="small" type="line" animated v-model:value="table.table.tabs">
-        <n-tab-pane v-for="(cols, colsIdx) in table.table.body" :key="colsIdx" :name="colsIdx" :tab="colsIdx + 1 + '行'">
-          <div>
-            <n-list>
-              <n-card size="small">
-                <template #header>
-                  <n-flex justify="space-between" :size="[5, 0]">
-                    <div>
-                      <n-tag :bordered="false" type="info" size="small"> 第 {{ colsIdx + 1 }} 行</n-tag>
-                    </div>
-                    <n-flex>
-                      <n-button size="tiny" @click="batRowAction(table.table, colsIdx, 'cleanBorder')"> 批量去边框 </n-button>
-                      <n-button size="tiny" @click="batRowAction(table.table, colsIdx, 'addBold')"> 批量加粗 </n-button>
-                      <n-button size="tiny" @click="removeRow(table.table, colsIdx)">
-                        <template #icon>
-                          <n-icon :component="Trash"></n-icon>
-                        </template>
-                        删行
-                      </n-button>
-                    </n-flex>
+    <n-tabs size="small" type="line" animated v-model:value="table.table.tabs">
+      <n-tab-pane v-for="(cols, colsIdx) in table.table.body" :key="colsIdx" :name="colsIdx" :tab="colsIdx + 1 + '行'">
+        <div>
+          <n-list>
+            <n-card size="small">
+              <template #header>
+                <n-flex justify="space-between" :size="[5, 0]">
+                  <div>
+                    <n-tag :bordered="false" type="info" size="small"> 第 {{ colsIdx + 1 }} 行</n-tag>
+                  </div>
+                  <n-flex>
+                    <n-button size="tiny" @click="batRowAction(table.table, colsIdx, 'cleanBorder')"> 批量去边框 </n-button>
+                    <n-button size="tiny" @click="batRowAction(table.table, colsIdx, 'addBold')"> 批量加粗 </n-button>
+                    <n-button size="tiny" @click="removeRow(table.table, colsIdx)">
+                      <template #icon>
+                        <n-icon :component="Trash"></n-icon>
+                      </template>
+                      删行
+                    </n-button>
                   </n-flex>
-                </template>
-                <div v-for="(col, colIdx) in cols" :key="colIdx">
-                  <n-list-item v-if="col.show == undefined || col.show">
-                    <template #prefix>
-                      <n-tag :bordered="false" type="default" size="small"> {{ colIdx + 1 }}列</n-tag>
-                    </template>
+                </n-flex>
+              </template>
+              <div v-for="(col, colIdx) in cols" :key="colIdx">
+                <n-list-item v-if="col.show == undefined || col.show">
+                  <template #prefix>
+                    <n-tag :bordered="false" type="default" size="small"> {{ colIdx + 1 }}列</n-tag>
+                  </template>
+                  <div>
+                    <edit-image v-if="isString(col.image)" v-model:col="cols[colIdx]" />
+                    <edit-text v-if="isString(col.text)" v-model:col="cols[colIdx]" />
+                    <edit-qrcode v-if="isString(col.qr)" v-model:col="cols[colIdx]" />
+                    <edit-svg v-if="isString(col.svg)" v-model:col="cols[colIdx]" />
+                    <edit-columns v-if="isArray(col.columns)" v-model:col="cols[colIdx]" />
+                    <edit-ol v-if="isArray(col.ol)" v-model:col="cols[colIdx]" />
+                  </div>
+                  <n-flex :size="[5, 2]" class="m-t-xs">
+                    <n-popselect @update:value="setColType($event, cols, colIdx)" :options="options" trigger="hover">
+                      <n-button size="tiny">切换</n-button>
+                    </n-popselect>
                     <div>
-                      <edit-image v-if="isString(col.image)" v-model:col="cols[colIdx]" />
-                      <edit-text v-if="isString(col.text)" v-model:col="cols[colIdx]" />
-                      <edit-qrcode v-if="isString(col.qr)" v-model:col="cols[colIdx]" />
-                      <edit-svg v-if="isString(col.svg)" v-model:col="cols[colIdx]" />
-                      <div v-if="col.columns != undefined">
-                        <n-card size="small">
-                          <n-flex justify="space-between" size="small" align="end">
-                            <n-tag :bordered="false" type="info" size="small">组合</n-tag>
-                            <n-flex size="small" justify="space-around">
-                              <n-button size="tiny" @click="col.columns = []">清空</n-button>
-                              <n-button size="tiny" @click="addText(col.columns)">增加一条</n-button>
-                            </n-flex>
-                          </n-flex>
-                          <div v-for="(column, coIdx) in col.columns" class="m-t-xs">
-                            <edit-text v-if="column.text" v-model:col="col.columns[coIdx]" />
-                            <edit-svg v-if="isString(column.svg)" v-model:col="col.columns[coIdx]" />
-                            <n-popselect @update:value="setColType($event, col.columns, coIdx)" :options="columnColTypeOpts" trigger="hover">
-                              <n-button size="tiny">切换</n-button>
-                            </n-popselect>
-                            <n-button size="tiny" @click="col.columns.splice(coIdx, 1)">移除</n-button>
-                          </div>
-                        </n-card>
-                      </div>
-                      <div v-if="col.ol != undefined">
-                        <n-card size="small">
-                          <div>
-                            <n-flex justify="space-between" :size="[0, 10]">
-                              <div><n-tag :bordered="false" type="info" size="small">列表</n-tag></div>
-                              <n-flex size="small" justify="space-around">
-                                <div>
-                                  <n-select size="tiny" style="width: 80px" v-model:value="col.type" :options="listTypeOptions" />
-                                </div>
-                                <div>
-                                  <n-popover trigger="hover" v-if="col.type != 'none'">
-                                    <template #trigger>
-                                      <n-button size="tiny">分割符{{ col.separator }}</n-button>
-                                    </template>
-                                    <n-button-group size="small">
-                                      <n-button @click="col.separator = ['(', ')']" @blur="preview"> (1.) </n-button>
-                                      <n-button @click="col.separator = ')'" @blur="preview"> 1.) </n-button>
-                                      <n-input v-model:value="col.separator" size="tiny" @blur="preview" placeholder="输入" style="width: 50px" />
-                                    </n-button-group>
-                                  </n-popover>
-                                </div>
-                                <n-checkbox v-model:checked="col.bold">粗体</n-checkbox>
-                                <alignment v-model:alignment="col.alignment"></alignment>
-                                <fontsize v-model:alignment="col.fontSize"></fontsize>
-                                <n-button size="tiny" @click="col.ol = []">清空</n-button>
-                                <n-button size="tiny" @click="col.ol.push('')">+增加</n-button>
-                              </n-flex>
-                            </n-flex>
-                          </div>
-                          <n-list>
-                            <n-list-item v-for="(ol, olIdx) in col.ol">
-                              <template #prefix>
-                                <n-badge type="info" :value="olIdx + 1" :max="15" />
-                              </template>
-                              <div class="m-b-1">
-                                <n-input v-if="isString(ol)" type="textarea" rows="1" v-model:value="col.ol[olIdx]"></n-input>
-                                <edit-text v-if="isString(ol.text)" v-model:col="col.ol[olIdx]" full-input show-margin />
-                                <edit-qrcode v-if="isString(ol.qr)" v-model:col="col.ol[olIdx]" />
-                              </div>
-                              <n-flex :size="[5, 0]">
-                                <n-popselect @update:value="setColType($event, col.ol, olIdx)" :options="listColTypeOpts" trigger="hover">
-                                  <n-button size="tiny">切换</n-button>
-                                </n-popselect>
-                                <n-button size="tiny" @click="col.ol.splice(olIdx, 1)">移除</n-button>
-                              </n-flex>
-                            </n-list-item>
-                          </n-list>
-                        </n-card>
-                      </div>
+                      <n-input-group>
+                        <n-input-group-label size="tiny">跨列</n-input-group-label>
+                        <n-input-number
+                          v-model:value="col.colSpan"
+                          :max="cols.length"
+                          :min="1"
+                          :show-button="false"
+                          size="tiny"
+                          placeholder="0"
+                          class="min-num-input"
+                          @update-value="setColSpan($event, cols, colIdx)"
+                        />
+                      </n-input-group>
                     </div>
-                    <n-flex :size="[5, 2]" class="m-t-xs">
-                      <n-popselect @update:value="setColType($event, cols, colIdx)" :options="options" trigger="hover">
-                        <n-button size="tiny">切换</n-button>
-                      </n-popselect>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">跨列</n-input-group-label>
-                          <n-input-number
-                            v-model:value="col.colSpan"
-                            :max="cols.length"
-                            :min="1"
-                            :show-button="false"
-                            size="tiny"
-                            placeholder="0"
-                            class="min-num-input"
-                            @update-value="setColSpan($event, cols, colIdx)"
-                          />
-                        </n-input-group>
-                      </div>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">跨行</n-input-group-label>
-                          <n-input-number v-model:value="col.rowSpan" :max="table.table.body.length" :min="1" :show-button="false" class="min-num-input" size="tiny" />
-                        </n-input-group>
-                      </div>
-                      <div>
-                        <n-input-group>
-                          <n-input-group-label size="tiny">行高</n-input-group-label>
-                          <n-input-number v-model:value="col.lineHeight" size="tiny" placeholder="" class="min-num-input" :show-button="false" />
-                        </n-input-group>
-                      </div>
-                      <div>
-                        <n-popover trigger="hover">
-                          <template #trigger>
-                            <n-input-group>
-                              <n-input-group-label size="tiny">列间距</n-input-group-label>
-                              <n-input-number v-for="(_, colIdx) in col.margin" v-model:value="col.margin[colIdx]" size="tiny" style="width: 40px" :show-button="false" />
-                            </n-input-group>
-                          </template>
-                          <span>左 上 右 下</span>
-                        </n-popover>
-                      </div>
-                      <div>
-                        <n-popover trigger="hover">
-                          <template #trigger>
-                            <n-button size="tiny">边框</n-button>
-                          </template>
-                          <n-flex :size="[5, 0]">
-                            自定义:<n-checkbox v-for="(_, bIndex) in col.border" v-model:checked="col.border[bIndex]" @update-checked="preview">
-                              {{ position[bIndex] }}
-                            </n-checkbox>
-                          </n-flex>
-                          <n-flex :size="[5, 0]">
-                            仅保留:
-                            <n-button size="tiny" @click="setBorder('lr', col)">左右</n-button>
-                            <n-button size="tiny" @click="setBorder('tb', col)">上下</n-button>
-                          </n-flex>
-                        </n-popover>
-                      </div>
-                      <n-button size="tiny" @click="removeCol(table.table, colIdx)">删列</n-button>
-                    </n-flex>
-                    <n-divider style="margin: 0.5rem 0px" />
-                  </n-list-item>
-                </div>
-              </n-card>
-            </n-list>
-          </div>
-        </n-tab-pane>
-      </n-tabs>
-    </div>
+                    <div>
+                      <n-input-group>
+                        <n-input-group-label size="tiny">跨行</n-input-group-label>
+                        <n-input-number v-model:value="col.rowSpan" :max="table.table.body.length" :min="1" :show-button="false" class="min-num-input" size="tiny" />
+                      </n-input-group>
+                    </div>
+                    <div>
+                      <n-input-group>
+                        <n-input-group-label size="tiny">行高</n-input-group-label>
+                        <n-input-number v-model:value="col.lineHeight" size="tiny" placeholder="" class="min-num-input" :show-button="false" />
+                      </n-input-group>
+                    </div>
+                    <div>
+                      <n-popover trigger="hover">
+                        <template #trigger>
+                          <n-input-group>
+                            <n-input-group-label size="tiny">列间距</n-input-group-label>
+                            <n-input-number v-for="(_, colIdx) in col.margin" v-model:value="col.margin[colIdx]" size="tiny" style="width: 40px" :show-button="false" />
+                          </n-input-group>
+                        </template>
+                        <span>左 上 右 下</span>
+                      </n-popover>
+                    </div>
+                    <div>
+                      <n-popover trigger="hover">
+                        <template #trigger>
+                          <n-button size="tiny">边框</n-button>
+                        </template>
+                        <n-flex :size="[10, 0]" class="m-b-1">
+                          <n-checkbox v-for="(_, bIndex) in col.border" v-model:checked="col.border[bIndex]" @update-checked="preview">
+                            {{ position[bIndex] }}
+                          </n-checkbox>
+                        </n-flex>
+                        <n-flex :size="[10, 0]">
+                          <n-button size="tiny" @click="setBorder('lr', col)">左右</n-button>
+                          <n-button size="tiny" @click="setBorder('tb', col)">上下</n-button>
+                          <n-button size="tiny" @click="setBorder('none', col)">无框</n-button>
+                          <n-button size="tiny" @click="setBorder('all', col)">全框</n-button>
+                        </n-flex>
+                      </n-popover>
+                    </div>
+                    <n-button size="tiny" @click="removeCol(table.table, colIdx)">删列</n-button>
+                  </n-flex>
+                  <n-divider v-if="colIdx != cols.length - 1" style="margin: 0.5rem 0px" />
+                </n-list-item>
+              </div>
+            </n-card>
+          </n-list>
+        </div>
+      </n-tab-pane>
+    </n-tabs>
   </n-card>
 </template>
 
 <script lang="ts" setup>
 import { Tabler3DCubeSphere, Trash } from '@vicons/tabler';
-import { cloneDeep, isNumber, isObject, isString } from 'lodash-es';
+import { cloneDeep, isArray, isNumber, isObject, isString } from 'lodash-es';
 import { NInput } from 'naive-ui';
-import EditImage from './edit-image.vue';
-import EditQrcode from './edit-qrcode.vue';
-import EditSvg from './edit-svg.vue';
-import EditText from './edit-text.vue';
-import { getDoc, logo, mergeDoc, preview } from './mix';
+import { EditColumns, EditImage, EditOl, EditQrcode, EditSvg, EditText } from './index';
+import { getDoc, mergeDoc, preview, setColType, textPub } from './mix';
 import { TableCol, TableData } from './type';
-import Alignment from './alignment.vue';
-import Fontsize from './fontsize.vue';
 const emit = defineEmits(['update']);
-const { value: table } = defineProps<{ value: TableCol }>();
+const { doc: table, field } = defineProps<{ doc: TableCol; field: 'content' | 'background' }>();
 watch(
   () => table,
   () => preview(),
@@ -291,30 +219,7 @@ const options = [
     value: 'columns',
   },
 ];
-const columnColTypeOpts = [
-  {
-    label: '文本',
-    value: 'text',
-  },
-  {
-    label: '图标',
-    value: 'svg',
-  },
-];
-const listColTypeOpts = [
-  {
-    label: '列表文字',
-    value: 'string',
-  },
-  {
-    label: '文本',
-    value: 'text',
-  },
-  {
-    label: '二维码',
-    value: 'qr',
-  },
-];
+
 const layoutOptions = [
   {
     label: '全框',
@@ -329,86 +234,19 @@ const layoutOptions = [
     value: 'lightHorizontalLines',
   },
 ];
-const listTypeOptions = [
-  {
-    label: '无序',
-    value: 'none',
-  },
-  {
-    label: '数字',
-    value: '',
-  },
-  {
-    label: 'abc',
-    value: 'lower-alpha',
-  },
-  {
-    label: 'ABC',
-    value: 'upper-alpha',
-  },
-];
-const colPub = () => {
-  return {
-    alignment: 'center',
-    bold: false,
-    colSpan: 1,
-    rowSpan: 1,
-    margin: [0, 0, 0, 0],
-    border: [true, true, true, true],
-  };
-};
-const textPub = () => {
-  return {
-    fontSize: 10,
-    ...colPub(),
-  };
-};
-const position = ['左', '上', '右', '下'];
-const setColType = (type: 'text' | 'image' | 'qr', cols: any[], colsIdx: number) => {
-  const item = {
-    text: { ...textPub(), text: '文本' },
-    image: {
-      ...colPub(),
-      image: 'logo',
-      src: logo.value,
-      width: 50,
-      height: 50,
-    },
-    qr: { qr: '二维码', fit: 80, ...colPub() },
-    ol: {
-      ...textPub(),
-      ol: ['列表内容。'],
-      alignment: 'left',
-      type: '',
-    },
-    svg: {
-      svg: '',
-      ...colPub(),
-      width: 20,
-      height: 20,
-    },
-    columns: {
-      ...colPub(),
-      columns: [
-        { ...textPub(), text: '文本' },
-        { ...textPub(), text: '文本' },
-      ],
-    },
-    string: '',
-  };
-  cols[colsIdx] = item[type];
-};
 
-const addText = (coloum: any[]) => {
-  coloum.push({ ...textPub(), text: '文本' });
-};
+const position = ['左', '上', '右', '下'];
 
 const remove = () => {
-  const content = getDoc().content;
-  const idx = content.findIndex((item) => item.uuid == table.uuid);
+  if (!field) {
+    console.error('未配置字段key :field=content ');
+    return;
+  }
+  const docData = getDoc()[field];
+  const idx = docData.findIndex((item) => item.uuid == table.uuid);
   if (idx != -1) {
-    content.splice(idx, 1);
-    mergeDoc({ content });
+    docData.splice(idx, 1);
+    mergeDoc({ [field]: docData });
   }
 };
 
@@ -489,8 +327,10 @@ const setColSpan = (colSpan: number | null, cols: any[], idx: number) => {
   }
 };
 
-const setBorder = (type: 'lr' | 'tb', table: TableData) => {
+const setBorder = (type: 'lr' | 'tb' | 'none' | 'all', table: TableData) => {
   if (type == 'lr') table.border = [true, false, true, false];
   if (type == 'tb') table.border = [false, true, false, true];
+  if (type == 'all') table.border = [true, true, true, true];
+  if (type == 'none') table.border = [false, false, false, false];
 };
 </script>

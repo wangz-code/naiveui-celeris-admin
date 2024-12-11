@@ -10,6 +10,16 @@ export interface TextCol extends ColPub {
   text: string;
   fontSize: 10;
 }
+
+export interface ColumnstCol extends ColPub {
+  columns: Array<TextCol & SvgCol>;
+}
+export type OlItem = string & TextCol & QrcodeCol;
+export interface OlCol extends TextCol {
+  separator: string[] | string;
+  ol: Array<OlItem>;
+  type: '' | 'none' | 'lower-alpha' | 'upper-alpha';
+}
 export interface SvgCol extends ColPub {
   svg: string;
   width: number;

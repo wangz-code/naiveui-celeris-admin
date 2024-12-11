@@ -1,7 +1,9 @@
-import { cloneDeep, debounce, merge, throttle } from 'lodash-es';
+import { debounce, merge } from 'lodash-es';
 export const logo = ref('https://raw.githubusercontent.com/WangSunio/img/main/images/celeris.png');
 
 export const docDefinition = ref({
+  pageMargins: [20, 40, 20, 40],
+  background: [] as any[],
   content: [] as any[],
   images: { logo: logo.value },
   styles: {},
@@ -20,6 +22,56 @@ export const docDefinition = ref({
 });
 export const previewRef = ref();
 
+export const colPub = () => {
+  return {
+    alignment: 'center',
+    bold: false,
+    colSpan: 1,
+    rowSpan: 1,
+    margin: [0, 0, 0, 0],
+    border: [true, true, true, true],
+  };
+};
+export const textPub = () => {
+  return {
+    fontSize: 10,
+    ...colPub(),
+  };
+};
+export const setColType = (type: 'text' | 'image' | 'qr', cols: any[], colsIdx: number) => {
+  const item = {
+    text: { ...textPub(), text: '文本' },
+    image: {
+      ...colPub(),
+      image: 'logo',
+      src: logo.value,
+      width: 50,
+      height: 50,
+    },
+    qr: { qr: '二维码', fit: 80, ...colPub() },
+    ol: {
+      ...textPub(),
+      ol: ['列表内容。'],
+      alignment: 'left',
+      type: '',
+    },
+    svg: {
+      svg: '',
+      ...colPub(),
+      width: 20,
+      height: 20,
+    },
+    columns: {
+      ...colPub(),
+      columns: [
+        { ...textPub(), text: '文本' },
+        { ...textPub(), text: '文本' },
+      ],
+    },
+    string: '',
+  };
+  cols[colsIdx] = item[type];
+};
 /**
  *
  * @param key string
