@@ -45,6 +45,7 @@
         <n-dropdown trigger="hover" :options="makeOpt(table.table)" @select="addTableRow(table.table, $event)">
           <n-button size="small">复制x行</n-button>
         </n-dropdown>
+        <n-button size="small" @click="addTableRow(table.table, table.table.body.length - 1)">复制尾行</n-button>
         <n-button size="small" @click="remove()">删表</n-button>
       </n-flex>
     </n-flex>

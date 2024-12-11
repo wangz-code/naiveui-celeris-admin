@@ -59,15 +59,6 @@ import { docDefinition, logo, mergeDoc, textPub, colPub } from './mix';
 const emit = defineEmits(['preview']);
 
 let copyVal = null as any;
-const copyTable = (num: number) => {
-  if (copyVal == null) copyVal = docDefinition.value.content;
-  const res = [];
-  for (let i = 0; i < num; i++) {
-    res.push(...cloneDeep(copyVal)!);
-  }
-  docDefinition.value.content.push(...res);
-  preview();
-};
 
 const blockOptions = [
   {
@@ -95,6 +86,16 @@ const setTabs = (value: string) => {
   document.getElementById(value)?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
 };
 const tabs = computed(() => docDefinition.value.content.map((item) => item.table.tittle));
+
+const copyTable = (num: number) => {
+  if (copyVal == null) copyVal = docDefinition.value.content;
+  const res = [];
+  for (let i = 0; i < num; i++) {
+    res.push(...cloneDeep(copyVal)!);
+  }
+  docDefinition.value.content.push(...res);
+  preview();
+};
 
 const addTable = (field: 'content' | 'background') => {
   const uuid = buildUUID();
@@ -364,7 +365,6 @@ const addOther = () => {
 
 const clean = (field: 'content' | 'background') => {
   docDefinition.value[field] = [];
-
   if (field == 'background') docDefinition.value.pageMargins = [20, 20, 20, 20];
   preview();
 };
@@ -470,25 +470,25 @@ const addBackground = () => {
 };
 
 const preview = debounce((uuid?: string) => {
-  if (uuid) {
+  uuid &&
     nextTick(() => {
       const index = docDefinition.value.content.findIndex((item) => item.uuid == uuid);
       activeTable.value = 't-' + index;
       setTabs(activeTable.value);
     });
-  }
   copyVal = cloneDeep(toRaw(docDefinition.value).content);
-  emit('preview', cloneDeep(toRaw(docDefinition.value)));
+  emit('preview');
 }, 500);
 
 const methods = { addHeader, addBaseInfo, addGoods, addOther, addBackground };
-type MK = keyof typeof methods;
-const addBlock = (value: MK) => methods[value]();
-const initPdf = () => {
-  for (const k in methods) {
-    methods[k as MK]();
-  }
-};
 
+const addBlock = (value: keyof typeof methods) => methods[value]();
+
+const initPdf = () => {
+  addHeader();
+  addBaseInfo();
+  addGoods();
+  addOther();
+};
 onMounted(() => preview());
 </script>
