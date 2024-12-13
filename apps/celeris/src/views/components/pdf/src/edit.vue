@@ -1,3 +1,8 @@
+<style scoped>
+.b-primary {
+  border: 1px var(--primary-color) solid;
+}
+</style>
 <template>
   <div class="w-full">
     <n-tabs placement="top">
@@ -7,6 +12,7 @@
             <n-button @click="() => preview()">预览</n-button>
             <n-button @click="clean('content')">清空</n-button>
             <n-button @click="addTable('content')">+表格</n-button>
+            <n-button @click="addLine('content')">+线</n-button>
             <n-dropdown trigger="hover" :options="copyOptions" @select="copyTable">
               <n-button>+复制一份</n-button>
             </n-dropdown>
@@ -22,7 +28,8 @@
         </n-card>
         <n-scrollbar ref="scroll" class="m-t-xs w-full" style="max-height: 70vh">
           <div class="m-r-2" v-for="(content, cIdx) in docDefinition.content" :key="cIdx">
-            <edit-table v-if="content.table" :id="'t-' + cIdx" field="content" :doc="content"></edit-table>
+            <edit-table v-if="content.table" class="b-primary m-b-2" :id="'t-' + cIdx" field="content" :doc="content"></edit-table>
+            <edit-canvas v-if="content.canvas" class="b-primary m-b-2" :id="'t-' + cIdx" field="content" :col="content"></edit-canvas>
           </div>
           <n-back-top right="35%" />
         </n-scrollbar>
@@ -54,7 +61,7 @@ import { buildUUID } from '#/utils';
 import { cloneDeep, debounce } from 'lodash-es';
 import { NTab } from 'naive-ui';
 import { ref } from 'vue';
-import { EditTable } from './index';
+import { EditTable, EditCanvas } from './index';
 import { docDefinition, logo, mergeDoc, textPub, colPub } from './mix';
 const emit = defineEmits(['preview']);
 
@@ -85,7 +92,7 @@ const scroll = ref(null);
 const setTabs = (value: string) => {
   document.getElementById(value)?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
 };
-const tabs = computed(() => docDefinition.value.content.map((item) => item.table.tittle));
+const tabs = computed(() => docDefinition.value.content.map((item) => item.tittle));
 
 const copyTable = (num: number) => {
   if (copyVal == null) copyVal = docDefinition.value.content;
@@ -102,8 +109,8 @@ const addTable = (field: 'content' | 'background') => {
   const data = docDefinition.value[field];
   data.push({
     uuid,
+    tittle: '表格' + (docDefinition.value.content.length + 1),
     table: {
-      tittle: '表格' + (docDefinition.value.content.length + 1),
       body: [
         [
           { text: '电子销售单', ...textPub() },
@@ -114,6 +121,31 @@ const addTable = (field: 'content' | 'background') => {
       widths: ['*', '*', '*'],
     },
     layout: '',
+    margin: [0, -1, 0, 0],
+  });
+  mergeDoc({ [field]: data });
+  preview(uuid);
+};
+
+const addLine = (field: 'content' | 'background') => {
+  const uuid = buildUUID();
+  const data = docDefinition.value[field];
+
+  data.push({
+    uuid,
+    tittle: '线',
+    canvas: [
+      {
+        type: 'line',
+        x1: -40,
+        y1: 0,
+        x2: 560,
+        y2: 0,
+        lineWidth: 1,
+        lineColor: 'black',
+        dash: { length: 5, space: 3 }, // 设置虚线的长度和间隔
+      },
+    ],
     margin: [0, -1, 0, 0],
   });
   mergeDoc({ [field]: data });

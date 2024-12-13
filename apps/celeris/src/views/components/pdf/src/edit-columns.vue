@@ -10,8 +10,9 @@
     <n-list>
       <n-list-item v-for="(column, coIdx) in col.columns">
         <div class="m-b-1">
-          <edit-text v-if="isString(column.text)" v-model:col="col.columns[coIdx]" />
+          <edit-text v-if="isString(column.text)"  showMargin v-model:col="col.columns[coIdx]" />
           <edit-svg v-if="isString(column.svg)" v-model:col="col.columns[coIdx]" />
+          <edit-canvas v-if="isArray(column.canvas)" v-model:col="col.columns[coIdx]" size="tiny" />
         </div>
         <n-popselect @update:value="setColType($event, col.columns, coIdx)" :options="columnColTypeOpts" trigger="hover">
           <n-button size="tiny">切换</n-button>
@@ -23,8 +24,8 @@
 </template>
 
 <script lang="ts" setup>
-import { isString } from 'lodash-es';
-import { EditSvg, EditText } from './index';
+import { isArray, isString } from 'lodash-es';
+import { EditSvg, EditText, EditCanvas } from './index';
 import { setColType, textPub } from './mix';
 import { ColumnstCol } from './type';
 
@@ -37,6 +38,10 @@ const columnColTypeOpts = [
   {
     label: '图标',
     value: 'svg',
+  },
+  {
+    label: '矩形',
+    value: 'rect',
   },
 ];
 const addText = (coloum: any[]) => {

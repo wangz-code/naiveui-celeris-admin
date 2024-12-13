@@ -1,7 +1,7 @@
 <!--
  * @Author: wangqz
  * @Date: 2024-12-10
- * @LastEditTime: 2024-12-11
+ * @LastEditTime: 2024-12-13
  * @Description: content
 -->
 <style scoped>
@@ -11,15 +11,13 @@
 .min-num-input {
   width: 30px;
 }
-.b-primary {
-  border: 1px var(--primary-color) solid;
-}
+
 </style>
 <template>
-  <n-card size="small" class="b-primary m-b-2" hoverable>
+  <n-card size="small" hoverable>
     <n-flex :size="[2, 5]">
       <div>
-        <n-input v-model:value="table.table.tittle" size="small" style="width: 110px">
+        <n-input v-model:value="table.tittle" size="small" style="width: 110px">
           <template #prefix>
             <n-icon size="20" color="var(--primary-color)">
               <Tabler3DCubeSphere />
@@ -256,6 +254,7 @@ const removeRow = (table: TableData, idx: number) => {
   table.tabs = idx - 1 > 0 ? idx - 1 : 0;
   if (!table.body.length) table.widths = [];
 };
+
 const batRowAction = (table: TableData, idx: number, action: 'cleanBorder' | 'addBold') => {
   const cols = table.body[idx];
   for (const col of cols) {

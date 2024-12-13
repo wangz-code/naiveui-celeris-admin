@@ -68,6 +68,21 @@ export const setColType = (type: 'text' | 'image' | 'qr', cols: any[], colsIdx: 
         { ...textPub(), text: '文本' },
       ],
     },
+    rect: {
+      tittle: '矩形',
+      canvas: [
+        {
+          type: 'rect',
+          x: 0,
+          y: 0, // y 坐标自下而上
+          w: 20, // 矩形宽度
+          h: 20, // 矩形高度
+          lineColor: 'black', // 边框颜色
+          lineWidth: 2, // 边框宽度
+        },
+      ],
+      margin: [0, 0, 0, 0],
+    },
     string: '',
   };
   cols[colsIdx] = item[type];

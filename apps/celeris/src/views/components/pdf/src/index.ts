@@ -1,3 +1,4 @@
+export { default as EditCanvas } from './edit-canvas.vue';
 export { default as Alignment } from './alignment.vue';
 export { default as Fontsize } from './fontsize.vue';
 export { default as Cover } from './cover.vue';

@@ -12,7 +12,7 @@ export interface TextCol extends ColPub {
 }
 
 export interface ColumnstCol extends ColPub {
-  columns: Array<TextCol & SvgCol>;
+  columns: Array<TextCol & SvgCol & CanvasCol>;
 }
 export type OlItem = string & TextCol & QrcodeCol;
 export interface OlCol extends TextCol {
@@ -36,16 +36,43 @@ export interface ImageCol extends ColPub {
   height: 50;
 }
 export interface TableData extends ColPub {
-  tittle?: string;
   tabs?: number;
   body: any[][];
   widths: Array<string | number>;
 }
 export interface TableCol {
+  tittle?: string;
   table: TableData;
   uuid?: string;
   margin: [0, 0, 0, 0];
   layout: '' | 'noBorders' | 'lightHorizontalLines';
+}
+
+export interface CanvasLine {
+  dash: { length: number; space: number } | undefined;
+  lineColor: string;
+  lineWidth: number;
+  type: 'line' | 'rect';
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
+}
+
+export interface CanvasRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  lineColor: string;
+  lineWidth: number;
+  type: 'rect';
+}
+export interface CanvasCol {
+  tittle?: string;
+  canvas: Array<CanvasRect | CanvasLine>;
+  uuid?: string;
+  margin: [0, 0, 0, 0];
 }
 export interface DocContent {}
 
