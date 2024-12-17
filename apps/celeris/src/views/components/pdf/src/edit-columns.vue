@@ -10,7 +10,7 @@
     <n-list>
       <n-list-item v-for="(column, coIdx) in col.columns">
         <div class="m-b-1">
-          <edit-text v-if="isString(column.text)"  showMargin v-model:col="col.columns[coIdx]" />
+          <edit-text v-if="isString(column.text)"   v-model:col="col.columns[coIdx]" show-margin />
           <edit-svg v-if="isString(column.svg)" v-model:col="col.columns[coIdx]" />
           <edit-canvas v-if="isArray(column.canvas)" v-model:col="col.columns[coIdx]" size="tiny" />
         </div>

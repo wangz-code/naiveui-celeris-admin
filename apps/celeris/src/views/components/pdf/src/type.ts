@@ -1,3 +1,5 @@
+import { type } from 'os';
+
 export interface ColPub {
   alignment: 'center' | 'left' | 'right';
   bold: false;
@@ -38,8 +40,10 @@ export interface ImageCol extends ColPub {
 export interface TableData extends ColPub {
   tabs?: number;
   body: any[][];
-  widths: Array<string | number>;
+  widths: Array<string|number>;
 }
+
+
 export interface TableCol {
   tittle?: string;
   table: TableData;

@@ -62,7 +62,7 @@ import { cloneDeep, debounce } from 'lodash-es';
 import { NTab } from 'naive-ui';
 import { ref } from 'vue';
 import { EditTable, EditCanvas } from './index';
-import { docDefinition, logo, mergeDoc, textPub, colPub } from './mix';
+import { docDefinition, logo, mergeDoc, textPub, colPub, getDoc } from './mix';
 const emit = defineEmits(['preview']);
 
 let copyVal = null as any;
@@ -81,8 +81,12 @@ const blockOptions = [
     key: 'addGoods',
   },
   {
-    label: '+ 其他',
+    label: '+ 协议等',
     key: 'addOther',
+  },
+  {
+    label: '+ 收款单',
+    key: 'addCash',
   },
 ];
 
@@ -95,7 +99,7 @@ const setTabs = (value: string) => {
 const tabs = computed(() => docDefinition.value.content.map((item) => item.tittle));
 
 const copyTable = (num: number) => {
-  if (copyVal == null) copyVal = docDefinition.value.content;
+  if (copyVal == null) copyVal = getDoc();
   const res = [];
   for (let i = 0; i < num; i++) {
     res.push(...cloneDeep(copyVal)!);
@@ -395,6 +399,57 @@ const addOther = () => {
   preview(uuid);
 };
 
+const addCash = () => {
+  // docDefinition.value.content
+
+  const cash = [
+    {
+      uuid: buildUUID(),
+      tittle: '表格',
+      table: {
+        body: [
+          [
+            { text: '电子销售单', fontSize: 10, alignment: 'center', bold: false, colSpan: 1, rowSpan: 1, margin: [0, 0, 0, 0], border: [true, true, true, true] },
+            { text: '电子销售单', fontSize: 10, alignment: 'center', bold: false, colSpan: 1, rowSpan: 1, margin: [0, 0, 0, 0], border: [true, true, true, true] },
+            { text: '电子销售单', fontSize: 10, alignment: 'center', bold: false, colSpan: 1, rowSpan: 1, margin: [0, 0, 0, 0], border: [true, true, true, true] },
+            { text: '第一联 . 顾客联', alignment: 'center', fontSize: 8, bold: true, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 4, border: [false, false, false, false] },
+          ],
+          [
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+          ],
+          [
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+          ],
+          [
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '电子销售单', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+            { text: '', alignment: 'center', fontSize: 10, bold: false, margin: [0, 0, 0, 0], colSpan: 1, rowSpan: 1 },
+          ],
+        ],
+        widths: ['*', '*', '*', 10],
+        tabs: 0,
+      },
+      layout: '',
+      margin: [0, -1, -10, 0],
+    },
+    {
+      uuid: buildUUID(),
+      tittle: '线',
+      canvas: [{ type: 'line', x1: -40, y1: 0, x2: 560, y2: 0, lineWidth: 1, lineColor: 'black', dash: { length: 5, space: 3 } }],
+      margin: [0, 10, 0, 0],
+    },
+  ];
+  docDefinition.value.content.push(...cash)
+  preview();
+};
+
 const clean = (field: 'content' | 'background') => {
   docDefinition.value[field] = [];
   if (field == 'background') docDefinition.value.pageMargins = [20, 20, 20, 20];
@@ -512,7 +567,7 @@ const preview = debounce((uuid?: string) => {
   emit('preview');
 }, 500);
 
-const methods = { addHeader, addBaseInfo, addGoods, addOther, addBackground };
+const methods = { addHeader, addBaseInfo, addGoods, addOther, addBackground, addCash };
 
 const addBlock = (value: keyof typeof methods) => methods[value]();
 
